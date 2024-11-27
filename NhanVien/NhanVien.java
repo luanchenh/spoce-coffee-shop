@@ -91,7 +91,7 @@ public abstract class NhanVien {
     public void setInfo() {
         Scanner sc = new Scanner(System.in);
         String str;
-        System.out.println("-------Nhập thông tin cơ bản của nhân viên-------");
+        System.out.println("-------Nhập thông tin cho class Employee-------");
         // Mã nhân viên tư phát sinh
         System.out.println("---Nhân viên bạn đang cài đặt thông tin có mã nhân viên là: NV"+ maSoNhanVien);
         this.id = "NV" + maSoNhanVien;
