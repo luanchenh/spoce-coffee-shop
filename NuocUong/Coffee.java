@@ -3,6 +3,6 @@
  */
 package NuocUong;
 
-public class CaPhe {
+public class Coffee {
     
 }
