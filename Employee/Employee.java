@@ -181,7 +181,7 @@ public abstract class Employee {
               +"Tuổi: "+ this.age +"\n"
               +"Số điện thoại: "+ this.numberPhone +"\n"
               +"Email: "+ this.email +"\n"
-              +"Địa chỉ: "+ this.address;
+              +"Địa chỉ: "+ this.address +"\n";
     }
     abstract double tinhLuongThang();
 

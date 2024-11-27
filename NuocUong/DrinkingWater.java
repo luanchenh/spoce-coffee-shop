@@ -49,7 +49,7 @@ public class DrinkingWater  {
             System.out.println("---Tên nước uống; ");
             str = sc.nextLine().trim();
             if (Function.isEmpty(str)) {
-                System.out.println("Bạn chưa nhập thông tin vui lòng nhập lại");
+                System.out.println("Bạn chưa nhập thông tin");
             }
             else {
                 this.nameWater = Function.normalizeName(str);
@@ -58,6 +58,13 @@ public class DrinkingWater  {
         }
         System.out.println("-------Nhập thông tin idWater và nameWater thành công !-------");
 
+    }
+
+    @Override
+    public String toString() {
+        return "-------------------------------------------------------------\n"
+              +"Mã nước: "+ this.idWater +"\n"
+              +"Tên nước uống: "+ this.nameWater +"\n";
     }
 
 }

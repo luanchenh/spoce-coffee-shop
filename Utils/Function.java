@@ -3,6 +3,7 @@
  */
 package Utils;
 
+import java.util.regex.Pattern;
 
 public class Function {
 
@@ -11,12 +12,10 @@ public class Function {
     }
 
     public static boolean isTrueNumber(String number) {
-        for (int i = 0; i < number.length(); i++) {
-            if (!Character.isDigit(number.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
+        return number.matches("[0-9]+");
+    }
+    public static boolean isDoubleNumber(String number) {
+        return number.matches("-?\\d+(\\.\\d+)?");
     }
 
     public static boolean isHasSpace(String value) {
@@ -29,7 +28,8 @@ public class Function {
     }
 
     public static boolean isTrueEmail(String email) {
-        return true;
+        String emailRegex = "^[a-zA-Z0-9._]+@[a-zA-Z0-9.]+\\.[a-zA-Z]{2,}$";
+        return Pattern.matches(emailRegex, email);
     }
 
     public static boolean isTrueDate(String date) {
@@ -86,7 +86,11 @@ public class Function {
     }
 
     public static boolean hasVietnameseAccent(String value) {
-        return value.matches(".*[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯẠ-ỹ].*");
+        String regex = "^[a-zA-Z]+$";
+        return value != null && value.matches(regex);
+
     }
+
+
 
 }
