@@ -57,7 +57,7 @@ public class Table {
 
         // Nhập vị trí của bàn
         while (true) {
-            System.out.print("---Nhập vị trí của bàn: ");
+            System.out.println("---Nhập vị trí của bàn: ");
             System.out.println("1: khu A");
             System.out.println("2: khu B");
             System.out.println("3: khu C");
@@ -82,7 +82,7 @@ public class Table {
 
         // Nhập loại bàn (2, 4, 8 chỗ)
         while (true) {
-            System.out.print("---Nhập loại của bàn: ");
+            System.out.println("---Nhập loại của bàn: ");
             System.out.println("1: 2 chỗ");
             System.out.println("2: 4 chỗ");
             System.out.println("3: 8 chỗ");
@@ -113,7 +113,7 @@ public class Table {
         System.out.println("---Thông tin của bàn:");
         System.out.println("ID: " + this.tableID);
         System.out.println("Vị trí: " + "Khu " + this.tablePosition);
-        System.out.println("Loại bàn: " + this.tableID + " chỗ");
+        System.out.println("Loại bàn: " + this.tableType + " chỗ");
         if (this.tableStatus.compareTo("true") == 0) {
             System.out.println("Tình trạng: Đang trống");
         } else if (this.tableStatus.compareTo("false") == 0) {
