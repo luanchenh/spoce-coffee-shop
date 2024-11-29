@@ -5,108 +5,115 @@ import java.util.Scanner;
 
 public class Table {
     private String tableID; // ID của bàn được sinh tự động và có dạng B1, B2, B3,...
-    private String tablePosition; // Vị trí của bàn, có các giá trị A, B, C
+    private String tableName; // Tên của bàn. Ví dụ : Bàn ngoài trời, Bàn phòng máy lạnh,...
     private String tableType; // Loại bàn (số chỗ của bàn) có các giá trị 2, 4, 8
-    private String tableStatus; // Trạng thái của bàn có các giá trị true (bàn đang trống), false (bàn đang được sử dụng)
-    public static int numOfTable = 0; // Số lượng bàn trong cửa hàng
+    private boolean tableStatus; // Trạng thái của bàn có các giá trị true (bàn đang trống), false (bàn đang được sử dụng)
+    private static int numOfTable = 0; // Số lượng bàn trong cửa hàng
 
     public Table() {
         numOfTable++;
         this.tableID = "B" + numOfTable;
     }
 
-    public Table(String tablePosition, String tableType) {
+    public Table(String tableName, String tableType) {
         numOfTable++;
         this.tableID = "B" + numOfTable;
-        this.tablePosition = tablePosition;
+        this.tableName = tableName;
         this.tableType = tableType;
-        this.tableStatus = "true";
+        this.tableStatus = true;
     }
 
     public String getTableID() {
         return this.tableID;
     }
 
-    public String getTablePosition() {
-        return this.tablePosition;
+    public String getTableName() {
+        return this.tableName;
     }
 
     public String getTableType() {
         return this.tableType;
     }
 
-    public String getTableStatus() {
+    public boolean getTableStatus() {
         return this.tableStatus;
     }
 
-    public void setTablePosition(String tablePosition) {
-        this.tablePosition = tablePosition;
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
     public void setTableType(String tableType) {
         this.tableType = tableType;
     }
 
-    public void setTableStatus(String tableStatus) {
+    public void setTableStatus(boolean tableStatus) {
         this.tableStatus = tableStatus;
     }
 
     public void setInfo() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("------Nhập thông tin cho class Table------");
+        System.out.println("[SetInfo] Thêm thông tin cho [Bàn] có ID: " + this.tableID);
 
-        // Nhập vị trí của bàn
-        while (true) {
-            System.out.println("---Nhập vị trí của bàn: ");
-            System.out.println("1: khu A");
-            System.out.println("2: khu B");
-            System.out.println("3: khu C");
+        // Nhập tên của bàn
+        while (true) { 
             String str = sc.nextLine();
-            if (str.compareTo("") == 0) {
-                System.out.println("Vị trí của bàn không được rỗng");
-            } else {
-                if (str.compareTo("1") == 0) {
-                    this.tablePosition = "A";
-                    break;
-                } else if (str.compareTo("2") == 0) {
-                    this.tablePosition = "B";
-                    break;
-                } else if (str.compareTo("3") == 0) {
-                    this.tablePosition = "C";
-                    break;
-                }
+            System.out.print("[Input] Nhập tên cho bàn: ");
 
-                System.out.println("Vị trí bàn không đúng");
+            if (Function.isEmpty(str)) {
+                System.out.println("[Warning] Tên bàn không được rỗng!");
+                continue;
             }
+
+            if (Function.isTrueNumber(str)) {
+                System.out.println("[Warning] Tên bàn không được là số!");
+                continue;
+            }
+
+            this.tableName = Function.normalizeName(str);
+            break;
         }
+
 
         // Nhập loại bàn (2, 4, 8 chỗ)
         while (true) {
-            System.out.println("---Nhập loại của bàn: ");
-            System.out.println("1: 2 chỗ");
-            System.out.println("2: 4 chỗ");
-            System.out.println("3: 8 chỗ");
+            System.out.print("[Input] Nhập loại của bàn: ");
+            System.out.println("[1]. 2 chỗ");
+            System.out.println("[2]. 4 chỗ");
+            System.out.println("[3]. 8 chỗ");
             String str = sc.nextLine();
-            if (str.compareTo("") == 0) {
-                System.out.println("Loại của bàn không được rỗng");
-            } else {
-                if (str.compareTo("1") == 0) {
-                    this.tableType = "2";
-                    break;
-                } else if (str.compareTo("2") == 0) {
-                    this.tableType = "4";
-                    break;
-                } else if (str.compareTo("3") == 0) {
-                    this.tableType = "8";
-                    break;
-                }
-
-                System.out.println("Loại bàn không đúng");
+            
+            if (Function.isEmpty(str)) {
+                System.out.println("[Warning] Loại của bàn không được rỗng!");
+                continue;
             }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("[Warning] Lựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.tableType = "2";
+                break;
+
+                case "2":
+                this.tableType = "4";
+                break;
+
+                case "3":
+                this.tableType = "8";
+                break;
+
+                default:
+                System.out.println("[Warning] Lựa chọn không hợp lệ!");
+            }
+            break;
         }
 
         // Bàn khi mới tạo thì tình trạng bàn sẽ có giá trị true (Đang trống)
-        this.tableStatus = "true";
+        this.tableStatus = true;
     }
 
     public void displayInfo() {

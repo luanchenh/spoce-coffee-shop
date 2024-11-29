@@ -26,7 +26,7 @@ public class MilkTea extends DrinkingWater {
     public MilkTea() {
         idMilkTea++;
         this.setIdWater("TS" + idMilkTea);
-        this.setIdWater("");
+        this.setNameWater("");
         this.sizePrice = new LinkedHashMap<>();
         this.topping = new ArrayList<>();
         this.isColdIce = false;
