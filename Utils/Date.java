@@ -4,7 +4,8 @@
 package Utils;
 
 import java.util.Scanner;
-
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @SuppressWarnings("resource")
 public class Date {
@@ -72,6 +73,10 @@ public class Date {
                String.format("%04d", Integer.parseInt(this.year));
     }
 
-    
+    public int calcAge() {
+        LocalDate date1 = LocalDate.now();
+        LocalDate date2 = LocalDate.of(Integer.parseInt(this.year), Integer.parseInt(this.month), Integer.parseInt(this.day));
+        return (int)ChronoUnit.YEARS.between(date2, date1);
+    }
 }
 
