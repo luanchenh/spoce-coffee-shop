@@ -117,116 +117,170 @@ public class Table {
     }
 
     public void displayInfo() {
-        System.out.println("---Thông tin của bàn:");
-        System.out.println("ID: " + this.tableID);
-        System.out.println("Vị trí: " + "Khu " + this.tablePosition);
-        System.out.println("Loại bàn: " + this.tableType + " chỗ");
-        if (this.tableStatus.compareTo("true") == 0) {
-            System.out.println("Tình trạng: Đang trống");
-        } else if (this.tableStatus.compareTo("false") == 0) {
-            System.out.println("Tình trạng: Đang được sử dụng");
+        System.out.println("========== [Thông tin bàn] ==========");
+        System.out.println("[ID]: " + this.tableID);
+        System.out.println("[Tên bàn]: " + this.tableName);
+        System.out.println("[Loại bàn]: " + this.tableType + " chỗ");
+        if (this.tableStatus) {
+            System.out.println("[Tình trạng]: Đang trống");
+        } else {
+            System.out.println("[Tình trạng]: Đang được sử dụng");
         }
     }
 
     public void modifyInfo() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("------SỬA THÔNG TIN CỦA BÀN------");
+        System.out.println("========== [Sửa thông tin bàn] ==========");
+        loop:
         while (true) { 
-            System.out.println("   Bạn có các lựa chọn:          ");
-            System.out.println("     1: Sửa 1 thông tin          ");         
-            System.out.println("     2: Sửa tất cả thông tin     ");
-            System.out.println("     3: Quay lại                 ");
-            System.out.println("---------------------------------");
-            System.out.print("Mời bạn nhập:                    ");
+            System.out.println("[1]: Sửa 1 thông tin");         
+            System.out.println("[2]: Sửa tất cả thông tin");
+            System.out.println("[3]: Quay lại");
+            System.out.print("[Input] Mời bạn chọn: ");
             String select = sc.nextLine();
 
-            while (Function.isEmpty(select)) {
-                System.out.println("Thông tin nhập không được rỗng   ");
-                System.out.print("Mời bạn nhập lại:                ");
-                select = sc.nextLine();
+            if (Function.isEmpty(select)) {
+                System.out.println("[Warning] Lựa chọn không được rỗng!");
+                continue loop;
             }
 
-            while (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0) {
-                System.out.println("Thông tin nhập không đúng        ");
-                System.out.print("Mời bạn nhập lại:                ");
-                select = sc.nextLine();
+            if (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0) {
+                System.out.println("[Warning] Lựa chọn không hợp lệ!");
+                continue loop;
             }
 
             if (select.compareTo("1") == 0) {
-                System.out.println("   Bạn có các lựa chọn:          ");
-                System.out.println("     1: Vị trí bàn               ");   
-                System.out.println("     2: Loại bàn                 ");   
-                System.out.println("     3: Tình trạng bàn           ");   
-                System.out.println("     4: Quay lại                 ");
-                System.out.println("---------------------------------");
-                System.out.print("Mời bạn nhập: ");
-                select = sc.nextLine();
-
-                while (Function.isEmpty(select)) {
-                    System.out.println("Thông tin nhập không được rỗng   ");
-                    System.out.print("Mời bạn nhập lại:                ");
+                loop1:
+                while (true) {
+                    System.out.println("[1]: Tên bàn");   
+                    System.out.println("[2]: Loại bàn");   
+                    System.out.println("[3]: Tình trạng bàn");   
+                    System.out.println("[4]: Quay lại");
+                    System.out.print("[Input] Mời bạn chọn: ");
                     select = sc.nextLine();
+
+                    if (Function.isEmpty(select)) {
+                        System.out.println("[Warning] Lựa chọn không được rỗng!");
+                        continue loop1;
+                    }
+            
+                    if (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0 && select.compareTo("4") != 0) {
+                        System.out.println("[Warning] Lựa chọn không hợp lệ!");
+                        continue loop1;
+                    }
+
+                    if (select.compareTo("1") == 0) {
+                        loop2:
+                        while (true) {
+                            System.out.print("[Input] Mời bạn nhập: ");
+                            select = sc.nextLine();
+
+                            if (Function.isEmpty(select)) {
+                                System.out.println("[Warning] Tên bàn không được rỗng!");
+                                continue loop2;
+                            }
+
+                            this.tableName = Function.normalizeName(select);
+                            break loop;
+                        }
+                    } else if (select.compareTo("2") == 0) {
+                        loop2:
+                        while (true) {
+                            System.out.println("[1]: 2 chỗ");
+                            System.out.println("[2]: 4 chỗ");
+                            System.out.println("[3]: 8 chỗ");
+                            System.out.print("[Input] Mời bạn nhập: ");
+                            select = sc.nextLine();
+
+                            if (Function.isEmpty(select)) {
+                                System.out.println("[Warning] Lựa chọn không được rỗng!");
+                                continue loop2;
+                            }
+            
+                            if (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0) {
+                                System.out.println("[Warning] Lựa chọn không hợp lệ!");
+                                continue loop2;
+                            }
+            
+                            switch (select) {
+                                case "1":
+                                this.tableType = "2";
+                                break;
+            
+                                case "2":
+                                this.tableType = "4";
+                                break;
+            
+                                case "3":
+                                this.tableType = "8";
+                                break;
+                            }
+                            break loop;
+                        }
+                    } else if (select.compareTo("3") == 0) {
+                        loop2:
+                        while (true) {
+                            System.out.println("[1]: Trống");
+                            System.out.println("[2]: Đang được sử dụng");
+                            System.out.print("[Input] Mời bạn nhập: ");
+                            select = sc.nextLine();
+
+                            while (Function.isEmpty(select)) {
+                                System.out.println("[Warning] Lựa chọn không được rỗng!");
+                                continue loop2;
+                            }
+                
+                            while (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0) {
+                                System.out.println("[Warning] Lựa chọn không hợp lệ!");
+                                continue loop2;
+                            }
+                
+                            switch (select) {
+                                case "1":
+                                this.tableStatus = true;
+                                break;
+                    
+                                case "2":
+                                this.tableStatus = false;
+                                break;
+                            }
+                            break loop;
+                        }
+                    } else if (select.compareTo("4") == 0) {
+                        continue loop;
+                    }
                 }
-        
-                while (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0 && select.compareTo("4") != 0) {
-                    System.out.println("Thông tin nhập không đúng        ");
-                    System.out.print("Mời bạn nhập lại:                ");
+            } else if (select.compareTo("2") == 0) {
+                loop1:
+                while (true) {
+                    System.out.print("[Input] Mời bạn nhập tên bàn: ");
                     select = sc.nextLine();
+
+                    if (Function.isEmpty(select)) {
+                        System.out.println("[Warning] Tên bàn không được rỗng!");
+                        continue loop1;
+                    }
+
+                    this.tableName = Function.normalizeName(select);
+                    break loop1;
                 }
 
-                if (select.compareTo("1") == 0) {
-                    System.out.println("---Nhập vị trí của bàn:          ");
-                    System.out.println("1: khu A                         ");
-                    System.out.println("2: khu B                         ");
-                    System.out.println("3: khu C                         ");
-                    System.out.println("---------------------------------");
-                    System.out.print("Mời bạn nhập:                    ");
+                loop1:
+                while (true) {
+                    System.out.println("[1]: 2 chỗ");
+                    System.out.println("[2]: 4 chỗ");
+                    System.out.println("[3]: 8 chỗ");
+                    System.out.print("[Input] Mời bạn nhập loại bàn: ");
                     select = sc.nextLine();
 
-                    while (Function.isEmpty(select)) {
-                        System.out.println("Thông tin nhập không được rỗng   ");
-                        System.out.print("Mời bạn nhập lại:                ");
-                        select = sc.nextLine();
-                    }
-
-                    while (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0) {
-                        System.out.println("Thông tin nhập không đúng        ");
-                        System.out.print("Mời bạn nhập lại:                ");
-                        select = sc.nextLine();
-                    }
-
-                    switch (select) {
-                        case "1":
-                        this.tablePosition = "A";
-                        break;
-
-                        case "2":
-                        this.tablePosition = "B";
-                        break;
-
-                        case "3":
-                        this.tablePosition = "C";
-                        break;
-                    }
-                    break;
-                } else if (select.compareTo("2") == 0) {
-                    System.out.print("---Nhập loại của bàn:            ");
-                    System.out.println("1: 2 chỗ                         ");
-                    System.out.println("2: 4 chỗ                         ");
-                    System.out.println("3: 8 chỗ                         ");
-                    System.out.println("---------------------------------");
-                    System.out.print("Mời bạn nhập:                    ");
-
-                    while (Function.isEmpty(select)) {
-                        System.out.println("Thông tin nhập không được rỗng   ");
-                        System.out.print("Mời bạn nhập lại:                ");
-                        select = sc.nextLine();
+                    if (Function.isEmpty(select)) {
+                        System.out.println("[Warning] Lựa chọn không được rỗng!");
+                        continue loop1;
                     }
     
-                    while (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0) {
-                        System.out.println("Thông tin nhập không đúng        ");
-                        System.out.print("Mời bạn nhập lại:                ");
-                        select = sc.nextLine();
+                    if (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0) {
+                        System.out.println("[Warning] Lựa chọn không hợp lệ!");
+                        continue loop1;
                     }
     
                     switch (select) {
@@ -242,49 +296,51 @@ public class Table {
                         this.tableType = "8";
                         break;
                     }
-                } else if (select.compareTo("3") == 0) {
-                    System.out.print("---Nhập tình trạng của bàn:      ");
-                    System.out.println("1: Trống                         ");
-                    System.out.println("2: Đang được sử dụng             ");
-                    System.out.println("---------------------------------");
-                    System.out.print("Mời bạn nhập:                    ");
+                    break loop1;
+                }
+
+                loop1:
+                while (true) { 
+                    System.out.println("[1]: Trống");
+                    System.out.println("[2]: Đang được sử dụng");
+                    System.out.print("[Input] Mời bạn nhập: ");
+                    select = sc.nextLine();
 
                     while (Function.isEmpty(select)) {
-                        System.out.println("Thông tin nhập không được rỗng   ");
-                        System.out.print("Mời bạn nhập lại:                ");
-                        select = sc.nextLine();
+                        System.out.println("[Warning] Lựa chọn không được rỗng!");
+                        continue loop1;
                     }
         
                     while (select.compareTo("1") != 0 && select.compareTo("2") != 0 && select.compareTo("3") != 0) {
-                        System.out.println("Thông tin nhập không đúng        ");
-                        System.out.print("Mời bạn nhập lại:                ");
-                        select = sc.nextLine();
+                        System.out.println("[Warning] Lựa chọn không hợp lệ!");
+                        continue loop1;
                     }
         
                     switch (select) {
-                    case "1":
-                    this.tableStatus = "true";
-                    break;
-        
-                    case "2":
-                    this.tableType = "false";
-                    break;
+                        case "1":
+                        this.tableStatus = true;
+                        break;
+            
+                        case "2":
+                        this.tableStatus = false;
+                        break;
                     }
-                } else if (select.compareTo("4") == 0) {
-                    continue;
+                    break loop1;
                 }
+
+                break loop;
+            } else if (select.compareTo("3") == 0) {
+                break loop;
             }
-        
         }
     }
 
     public static void main(String[] args) {
         Table t1 = new Table();
-        System.out.println(t1.tablePosition);
+        System.out.println(t1.tableName);
 
         t1.modifyInfo();
 
-        System.out.println(t1.tablePosition);
-
+        System.out.println(t1.tableName);
     }
 }
