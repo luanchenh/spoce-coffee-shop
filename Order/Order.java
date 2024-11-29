@@ -1,28 +1,37 @@
 package Order;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import NuocUong.DrinkingWater;
+
+import File.NuocUong.DrinkingWater;
+import NuocUong.QLDrinking;
+import Topping.Topping;
 
 public class Order {
 
     private String orderID;
     private String customerPhone;
-    private Date orderDate;
+    private LocalDate orderDate;
+    private QLDrinking drinkList;
     private double totalAmount;
-    private DrinkingWater car; // món đặt
+    private ArrayList<Topping> topping;  // List of Topping items
     private String payment;
 
     public Order() {
+        this.drinkList = new QLDrinking();
+        this.topping = new ArrayList<Topping>();  // Initialize the topping list
     }
 
-    public Order(String orderID, String customerPhone, Date orderDate, DrinkingWater cart, String payment) {
+    public Order(String orderID, String customerPhone, Date orderDate, QLDrinking drinkList, ArrayList<Topping> topping, String payment) {
         this.orderID = orderID;
         this.customerPhone = customerPhone;
-        this.orderDate = orderDate;
-        this.cart = cart;
+        this.orderDate = LocalDate.now();
+        this.drinkList = drinkList;
+        this.topping = topping;
         this.payment = payment;
-        this.totalAmount = calculateTotal(); 
+        this.totalAmount = calculateTotal();
     }
 
     public String getOrderID() {
@@ -41,11 +50,11 @@ public class Order {
         this.customerPhone = customerPhone;
     }
 
-    public Date getOrderDate() {
+    public LocalDate getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDate orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -53,13 +62,26 @@ public class Order {
         return totalAmount;
     }
 
-    public DrinkingWater getCart() {
-        return cart;
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
-    public void setCart(DrinkingWater cart) {
-        this.cart = cart;
-        this.totalAmount = calculateTotal(); 
+    public QLDrinking getDrinkList() {
+        return drinkList;
+    }
+
+    public void setDrinkList(QLDrinking drinkList) {
+        this.drinkList = drinkList;
+        this.totalAmount = calculateTotal();
+    }
+
+    public ArrayList<Topping> getTopping() {
+        return topping;
+    }
+
+    public void setTopping(ArrayList<Topping> topping) {
+        this.topping = topping;
+        this.totalAmount = calculateTotal();
     }
 
     public String getPayment() {
@@ -79,13 +101,13 @@ public class Order {
         System.out.print("Nhập số điện thoại khách hàng: ");
         this.customerPhone = scanner.nextLine();
 
-        this.orderDate = new Date(); 
+        this.orderDate = LocalDate.now();
         System.out.print("Nhập phương thức thanh toán (Tiền mặt/Chuyển khoản): ");
         this.payment = scanner.nextLine();
 
         System.out.println("Nhập thông tin giỏ hàng:");
-        this.cart = new DrinkingWater();
-        this.cart.setInfo();
+        this.drinkList = new QLDrinking();
+        this.drinkList.setInfo();  // Giả sử setInfo() là phương thức nhập thông tin giỏ hàng
 
         this.totalAmount = calculateTotal();
     }
@@ -99,7 +121,16 @@ public class Order {
         System.out.println("Tổng giá trị: " + totalAmount);
 
         System.out.println("Thông tin giỏ hàng:");
-        // cart.displayInfo();
+        drinkList.displayInfo();  // Giả sử displayInfo() là phương thức hiển thị thông tin giỏ hàng
+
+        System.out.println("Thông tin topping:");
+        if (topping != null && !topping.isEmpty()) {
+            for (Topping top : topping) {
+                top.displayTopping();  // Hiển thị thông tin các topping trong giỏ hàng
+            }
+        } else {
+            System.out.println("Không có topping trong đơn hàng.");
+        }
     }
 
     public void modifyInfo() {
@@ -107,16 +138,28 @@ public class Order {
 
         System.out.print("Cập nhật số điện thoại khách hàng (hiện tại: " + customerPhone + "): ");
         this.customerPhone = scanner.nextLine();
+        
         System.out.print("Cập nhật phương thức thanh toán (hiện tại: " + payment + "): ");
         this.payment = scanner.nextLine();
+
         System.out.println("Cập nhật giỏ hàng:");
-        // thiếu cập nhật giỏ hàng
-        this.totalAmount = calculateTotal();
+        this.drinkList.setInfo();  
+        this.totalAmount = calculateTotal();  
     }
 
     public double calculateTotal() {
-        // cập nhật phương thức sau
-        return 1.0;
+        double total = 0.0;
+
+       
+        for (DrinkingWater drink : drinkList.getDrinks()) {
+            total += drink.getPrice();  
+        }
+
+        // Tính thêm các topping nếu có
+        for (Topping toppingItem : topping) {
+            total += toppingItem.getPriceTopping();  
+        }
+
+        return total;
     }
 }
-
