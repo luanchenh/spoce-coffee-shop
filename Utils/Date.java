@@ -3,9 +3,9 @@
  */
 package Utils;
 
-import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Scanner;
 
 @SuppressWarnings("resource")
 public class Date {
@@ -77,6 +77,31 @@ public class Date {
         LocalDate date1 = LocalDate.now();
         LocalDate date2 = LocalDate.of(Integer.parseInt(this.year), Integer.parseInt(this.month), Integer.parseInt(this.day));
         return (int)ChronoUnit.YEARS.between(date2, date1);
+    }
+
+    public boolean isValidDate() {
+        int day = Integer.parseInt(this.day);
+        int month = Integer.parseInt(this.month);
+        int year = Integer.parseInt(this.year);
+
+        int[] arrDay;
+
+        boolean isLeapYear = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+        if (isLeapYear) {
+            arrDay = new int[]{31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        } else {
+            arrDay = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        }
+
+        if (!(month >= 1 && month <= 12)) {
+            return false;
+        }
+
+        if (!(day >= 1 && day <= arrDay[month - 1])) {
+            return false;
+        }
+
+        return true;
     }
 }
 

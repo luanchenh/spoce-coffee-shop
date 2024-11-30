@@ -91,6 +91,7 @@ public class Function {
 
     }
 
-
-
+    public static boolean isNotNegative(int num) {
+        return num >= 0;
+    }
 }
