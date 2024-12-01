@@ -104,6 +104,4 @@ public class Function {
         return result + " VNĐ";
     }
 
-
-
 }
