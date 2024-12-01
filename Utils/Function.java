@@ -91,6 +91,19 @@ public class Function {
 
     }
 
+    public static String formatMoney(String money) {
+        String result = "";
+        int count = 0;
+        for (int i = money.length() - 1; i >= 0; i--) {
+            result = money.charAt(i) + result;
+            count++;
+            if (count % 3 == 0 && i != 0) {
+                result = "." + result;
+            }
+        }
+        return result + " VNĐ";
+    }
+
 
 
 }
