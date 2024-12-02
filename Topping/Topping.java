@@ -4,6 +4,8 @@
 package Topping;
 import Utils.INhap;
 import Utils.IXuat;
+import java.io.File;
+import java.util.Scanner;
 import Utils.Function;
 
 public class Topping implements INhap, IXuat{
@@ -11,8 +13,21 @@ public class Topping implements INhap, IXuat{
     private String name;
     private int price;
 
-    private static int countID = 0;
+    private static int countID = readIDTopping();
 
+    public static int readIDTopping() {
+        int result = 0;
+        File toppingFile = new File("../File/topping.txt");
+        try(Scanner rd = new Scanner(toppingFile)) {
+            while(rd.hasNextLine()) {
+                result++;
+                rd.nextLine();
+            }
+        } catch(Exception e) {
+            System.out.println("Lỗi: "+ e.getMessage());
+        }
+        return result;
+    }
     public Topping() {
         countID++;
         this.id = "TP" + countID;
@@ -26,8 +41,30 @@ public class Topping implements INhap, IXuat{
         this.price = price;
     }
 
+    // Getter - Setter
+    public String getId() {
+        return this.id;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public int getPrice() {
+        return this.price;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
     @Override
     public void xuatThongTin() {
+        System.out.println("===========================================================");
         System.out.println("ID Topping: "+ this.id);
         System.out.println("Tên Topping: "+ this.name);
         System.out.println("Giá tiền: "+ Function.formatMoney(this.price + ""));
@@ -35,10 +72,58 @@ public class Topping implements INhap, IXuat{
 
     @Override
     public void nhapThongTin() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        int number;
+        System.out.println("[Notice] ID topping hiện tại: " + this.id);
+        while (true) {
+            System.out.print("Nhập tên đồ uống: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("Vui lòng không để trống !");
+            }
+            else {
+                if (Function.isTrueNumber(str)) {
+                    System.out.println("Tên topping không được là số !");
+                }
+                else {
+                    this.name = str;
+                    break;
+                }
+            }
+        }
+        System.out.println("[Notice] Tên topping hiện tại: "+ this.name);
+        while (true) {
+            System.out.print("Nhập giá của topping: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("Vui lòng không để trống !");
+            }
+            else {
+                if (!Function.isTrueNumber(str)) {
+                    System.out.println("Giá phải là số !");
+                }
+                else {
+                    number = Integer.parseInt(str);
+                    if (Function.isTrueNumber(str)) {
+                        number = Integer.parseInt(str);
+                        this.price = number;
+                        break;
+                    }
+                }
+            }
+        }
     }
+
+    
+
 
     public String makeString() {
         return this.id +"|"+ this.name +"|"+ this.price;
+    }
+
+    public void menuInfo() {
+        System.out.printf("%-5s %-25s %-10s\n", this.id, Function.normalizeName(this.name), Function.formatMoney(this.price + ""));
     }
 
 }

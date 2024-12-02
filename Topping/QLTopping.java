@@ -22,6 +22,7 @@ public class QLTopping implements IXuat{
         this.toppingList = toppingList;
     }
 
+    // Init để đọc file lưu dữ liệu vào đây
     public void Init() {
         try(Scanner rd = new Scanner(toppingFile)) {
             while (rd.hasNextLine()) {
@@ -42,16 +43,46 @@ public class QLTopping implements IXuat{
         }
     }
 
+    public boolean addNewTopping(Topping topping) {
+        this.toppingList.add(topping);
+        return true;
+    }
+
+    public boolean removeTopping(Topping topping) {
+        for (Topping tp : this.toppingList) {
+            if (tp.getId().equals(topping.getId())) {
+                this.toppingList.remove(topping);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+
+    // Menu table
+    public void menuTable() {
+        System.out.println("====================[Danh sách topping]====================");
+        System.out.printf("%-5s %-25s %-10s\n", "Mã", "Tên topping", "Giá (VND)\n");
+        for (Topping tp : this.toppingList) {
+            tp.menuInfo();
+        }
+    }
+
+
+    // Override
     @Override
     public void xuatThongTin() {
         for (Topping tp : this.toppingList) {
-        System.out.println(tp.makeString());
+            tp.xuatThongTin();
         }
     }
 
     public static void main(String[] args) {
         QLTopping list = new QLTopping();
         list.Init();
-        list.xuatThongTin();
+        list.menuTable();
     }
 }
