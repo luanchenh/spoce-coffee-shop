@@ -4,6 +4,7 @@
 package Topping;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,6 +23,8 @@ public class QLTopping implements IXuat{
         this.toppingList = toppingList;
     }
 
+
+    // ========================================[Xử lí File]========================================
     // Init để đọc file lưu dữ liệu vào đây
     public void Init() {
         try(Scanner rd = new Scanner(toppingFile)) {
@@ -38,11 +41,25 @@ public class QLTopping implements IXuat{
                 }
             }
             System.out.println("Đọc thành công !");
+            rd.close();
         } catch(Exception e) {
             System.out.println("Lỗi "+ e.getMessage());
         }
     }
 
+    public void writeAll() {
+        try(FileWriter writer = new FileWriter(toppingFile, false)) {
+            for (Topping tp : this.toppingList) {
+                writer.append(tp.makeString() +"\n");
+            }
+            writer.flush();
+        } catch(Exception e) {
+            System.out.println("Lỗi: "+ e.getMessage());
+        }
+    }
+
+
+    // ========================================[Function]========================================
     public boolean addNewTopping(Topping topping) {
         this.toppingList.add(topping);
         return true;
@@ -58,11 +75,45 @@ public class QLTopping implements IXuat{
         return false;
     }
 
+    public boolean toppingInList(Topping topping) {
+        for (Topping tp : this.toppingList) {
+            if (tp.getId().equals(topping.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public void writeToppingIntoFile(Topping topping) {
+        if (!toppingInList(topping)) {
+            try(FileWriter writer = new FileWriter(toppingFile, true)) {
+                if (topping != null) {
+                    String line = topping.makeString();
+                    writer.append(line +"\n");
+                    if (addNewTopping(topping)) {
+                        System.out.println("Thêm topping mới vào thành công");
+                    }
+                    else {
+                        System.out.println("Thêm topping mới thất bại");
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Lỗi: "+ e.getMessage());
+            }
+        }
+        else {
+            System.out.println("Topping đã tồn tại !");
+        }
+    }
 
 
 
 
-    // Menu table
+
+
+
+    // ========================================[Menu topping table]========================================
     public void menuTable() {
         System.out.println("====================[Danh sách topping]====================");
         System.out.printf("%-5s %-25s %-10s\n", "Mã", "Tên topping", "Giá (VND)\n");
@@ -72,7 +123,7 @@ public class QLTopping implements IXuat{
     }
 
 
-    // Override
+    // ========================================[Override Method]========================================
     @Override
     public void xuatThongTin() {
         for (Topping tp : this.toppingList) {
@@ -83,6 +134,9 @@ public class QLTopping implements IXuat{
     public static void main(String[] args) {
         QLTopping list = new QLTopping();
         list.Init();
+        Topping a = new Topping();
+        a.nhapThongTin();
+        list.writeToppingIntoFile(a);
         list.menuTable();
     }
 }

@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.Scanner;
 import Utils.Function;
 
+@SuppressWarnings("resource")
 public class Topping implements INhap, IXuat{
     private String id;
     private String name;
@@ -17,15 +18,17 @@ public class Topping implements INhap, IXuat{
 
     public static int readIDTopping() {
         int result = 0;
+        String lastLine = "";
         File toppingFile = new File("../File/topping.txt");
         try(Scanner rd = new Scanner(toppingFile)) {
             while(rd.hasNextLine()) {
-                result++;
-                rd.nextLine();
+                lastLine = rd.nextLine();
             }
         } catch(Exception e) {
             System.out.println("Lỗi: "+ e.getMessage());
         }
+        String[] lineSplit = lastLine.split("\\|");
+        result = Integer.parseInt(lineSplit[0].substring(2));
         return result;
     }
     public Topping() {
@@ -62,6 +65,8 @@ public class Topping implements INhap, IXuat{
         this.price = price;
     }
 
+
+    // ========================================[Override Method]========================================
     @Override
     public void xuatThongTin() {
         System.out.println("===========================================================");
@@ -115,13 +120,18 @@ public class Topping implements INhap, IXuat{
         }
     }
 
-    
+    // ========================================[Function]========================================
+
+    // Hàm sửa thông tin
+    public void suaThongTin() {
+    }
 
 
+    // Tạo chuỗi để lưu file
     public String makeString() {
         return this.id +"|"+ this.name +"|"+ this.price;
     }
-
+    // Hàm để hiện thông tin theo fomat khi in trong menu
     public void menuInfo() {
         System.out.printf("%-5s %-25s %-10s\n", this.id, Function.normalizeName(this.name), Function.formatMoney(this.price + ""));
     }
