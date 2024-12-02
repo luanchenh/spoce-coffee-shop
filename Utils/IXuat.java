@@ -3,6 +3,6 @@
  */
 package Utils;
 
-public interface InnerIXuat {
+public interface IXuat {
     void xuatThongTin();
 }
