@@ -1,6 +1,0 @@
-/**
- *
- */
-public class QLCustomer {
-    
-}
