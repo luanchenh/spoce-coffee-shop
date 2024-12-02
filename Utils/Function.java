@@ -7,18 +7,22 @@ import java.util.regex.Pattern;
 
 public class Function {
 
-    public static boolean isEmpty(String value) {
+    public static boolean isEmpty(String str) {
+        String value = str.trim();
         return value.equals("");
     }
 
     public static boolean isTrueNumber(String number) {
-        return number.matches("[0-9]+");
+        String value = number.trim();
+        return value.matches("[0-9]+");
     }
     public static boolean isDoubleNumber(String number) {
-        return number.matches("-?\\d+(\\.\\d+)?");
+        String value = number.trim();
+        return value.matches("-?\\d+(\\.\\d+)?");
     }
 
-    public static boolean isHasSpace(String value) {
+    public static boolean isHasSpace(String str) {
+        String value = str.trim();
         for (int i = 0; i < value.length(); i++) {
             if (value.charAt(i) == ' ') {
                 return true;
@@ -28,12 +32,14 @@ public class Function {
     }
 
     public static boolean isTrueEmail(String email) {
+        String value = email.trim();
         String emailRegex = "^[a-zA-Z0-9._]+@[a-zA-Z0-9.]+\\.[a-zA-Z]{2,}$";
-        return Pattern.matches(emailRegex, email);
+        return Pattern.matches(emailRegex, value);
     }
 
     public static boolean isTrueDate(String date) {
-        String[] index = date.split("/");
+        String value = date.trim();
+        String[] index = value.split("/");
         if (index.length < 2)
             return false;
         else {
@@ -73,8 +79,9 @@ public class Function {
     }
 
     public static String normalizeName(String name) {
+        String value = name.trim();
         String result = "";
-        String[] arrName = name.split("\\s+");
+        String[] arrName = value.split("\\s+");
         for (String str : arrName) {
             result += str.toUpperCase().charAt(0);
             for (int i = 1; i < str.length(); i++) {
@@ -85,17 +92,19 @@ public class Function {
         return result.trim();
     }
 
-    public static boolean hasVietnameseAccent(String value) {
+    public static boolean hasVietnameseAccent(String str) {
+        String value = str.trim();
         String regex = "^[a-zA-Z]+$";
         return value != null && value.matches(regex);
 
     }
 
     public static String formatMoney(String money) {
+        String value = money.trim();
         String result = "";
         int count = 0;
-        for (int i = money.length() - 1; i >= 0; i--) {
-            result = money.charAt(i) + result;
+        for (int i = value.length() - 1; i >= 0; i--) {
+            result = value.charAt(i) + result;
             count++;
             if (count % 3 == 0 && i != 0) {
                 result = "." + result;
