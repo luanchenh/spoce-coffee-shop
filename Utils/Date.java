@@ -73,6 +73,13 @@ public class Date {
                String.format("%04d", Integer.parseInt(this.year));
     }
 
+    public void getLocalDate() {
+        LocalDate now = LocalDate.now();
+        this.day = Integer.toString(now.getDayOfMonth());
+        this.month = Integer.toString(now.getMonthValue());
+        this.year = Integer.toString(now.getYear());
+    }
+
     public int calcAge() {
         LocalDate date1 = LocalDate.now();
         LocalDate date2 = LocalDate.of(Integer.parseInt(this.year), Integer.parseInt(this.month), Integer.parseInt(this.day));
@@ -103,5 +110,6 @@ public class Date {
 
         return true;
     }
+
 }
 
