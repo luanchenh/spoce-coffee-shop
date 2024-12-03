@@ -23,6 +23,11 @@ public class QLTopping implements IXuat{
         this.toppingList = toppingList;
     }
 
+    // Getter
+    public ArrayList<Topping> getToppingList() {
+        return toppingList;
+    }
+
 
     // ========================================[Xử lí File]========================================
     // Init để đọc file lưu dữ liệu vào đây
@@ -75,7 +80,7 @@ public class QLTopping implements IXuat{
         return false;
     }
 
-    public boolean toppingInList(Topping topping) {
+    public boolean IDtoppingInList(Topping topping) {
         for (Topping tp : this.toppingList) {
             if (tp.getId().equals(topping.getId())) {
                 return true;
@@ -84,9 +89,18 @@ public class QLTopping implements IXuat{
         return false;
     }
 
+    public boolean toppingInList(Topping topping) {
+        for (Topping tp : this.toppingList) {
+            if (tp.equals(topping)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public void writeToppingIntoFile(Topping topping) {
-        if (!toppingInList(topping)) {
+        if (!IDtoppingInList(topping)) {
             try(FileWriter writer = new FileWriter(toppingFile, true)) {
                 if (topping != null) {
                     String line = topping.makeString();

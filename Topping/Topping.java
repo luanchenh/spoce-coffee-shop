@@ -119,6 +119,14 @@ public class Topping implements INhap, IXuat{
             }
         }
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true; // Cùng tham chiếu
+        if (obj == null || getClass() != obj.getClass()) return false; // Kiểm tra null và cùng lớp
+
+        Topping other = (Topping) obj;
+        return this.name.equals(other.name) && this.price == other.price && this.id == other.id; // So sánh các thuộc tính
+    }
 
     // ========================================[Function]========================================
 
@@ -134,6 +142,67 @@ public class Topping implements INhap, IXuat{
     // Hàm để hiện thông tin theo fomat khi in trong menu
     public void menuInfo() {
         System.out.printf("%-5s %-25s %-10s\n", this.id, Function.normalizeName(this.name), Function.formatMoney(this.price + ""));
+    }
+
+    public Topping createTopping() {
+        Topping tp = new Topping();
+        Scanner sc = new Scanner(System.in);
+        String str;
+        int number;
+        while (true) {
+            System.out.print("Nhập số của topping: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("Vui lòng không để trống");
+            } else {
+                if (Function.isTrueNumber(str)) {
+                    tp.setId("TP"+ str);
+                    break;
+                } else {
+                    System.out.println("ID bạn nhập phải là số !");
+                }
+            }
+        }
+        System.out.println("ID bạn vừa nhập là: "+ tp.getId());
+        while (true) {
+            System.out.print("Nhập tên đồ uống: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("Vui lòng không để trống !");
+            }
+            else {
+                if (Function.isTrueNumber(str)) {
+                    System.out.println("Tên topping không được là số !");
+                }
+                else {
+                    tp.setName(str);;
+                    break;
+                }
+            }
+        }
+        System.out.println("[Notice] Tên topping hiện tại: "+ tp.getName());
+        while (true) {
+            System.out.print("Nhập giá của topping: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("Vui lòng không để trống !");
+            }
+            else {
+                if (!Function.isTrueNumber(str)) {
+                    System.out.println("Giá phải là số !");
+                }
+                else {
+                    number = Integer.parseInt(str);
+                    if (Function.isTrueNumber(str)) {
+                        number = Integer.parseInt(str);
+                        tp.setPrice(number);
+                        break;
+                    }
+                }
+            }
+        }
+        System.out.println("[Notice] Giá của topping hiện tại là: "+ Function.formatMoney(tp.getPrice() + ""));
+        return tp;
     }
 
 }

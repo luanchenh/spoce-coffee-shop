@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import Utils.Function;
+import Topping.QLTopping;
+import Topping.Topping;
 
 @SuppressWarnings("resource")
 public abstract class NuocUong implements INhap {
@@ -32,6 +34,13 @@ public abstract class NuocUong implements INhap {
     }
     File toppingFile = new File("../File/topping.txt");
 
+    // Constructor không tham số
+    public NuocUong() {
+        this.sizePrice = new HashMap<>();
+        this.topping = new ArrayList<>();
+    }
+
+    // Constructor biết được loại nước uống
     public NuocUong(String drinkType) {
         this.sizePrice = new HashMap<>();
         this.topping = new ArrayList<>();
@@ -52,6 +61,7 @@ public abstract class NuocUong implements INhap {
         }
     }
 
+    // Constructor biết full tham số
     public NuocUong(String id, String name, Map<String, Integer> sizePrice, ArrayList<String> topping, String drinkType,
             boolean isCold, boolean isHot, boolean isMilk, boolean isSugar) {
         this.id = id;
@@ -65,6 +75,7 @@ public abstract class NuocUong implements INhap {
         this.isSugar = isSugar;
     }
 
+    // Kiểm tra thêm được hay xoá được sản phẩm hay không
     public boolean addTopping(String idTopping) {
         this.topping.add(idTopping);
         return true;
@@ -265,7 +276,8 @@ public abstract class NuocUong implements INhap {
                     } else {
                         number = Integer.parseInt(str);
                         this.sizePrice.put(entry.getKey(), number);
-                        System.out.println("[Notice] Giá cho size "+ entry.getKey() + " là: "+ Function.formatMoney(number + ""));
+                        System.out.println("[Notice] Giá cho size " + entry.getKey() + " là: "
+                                + Function.formatMoney(number + ""));
                         break;
                     }
                 }
@@ -293,49 +305,49 @@ public abstract class NuocUong implements INhap {
                 }
             }
         }
-        while (true) {
-            System.out.print("Nhập số lượng topping: ");
-            str = sc.nextLine();
-            if (Function.isEmpty(str)) {
-                System.out.println("Vui lòng không để trống !");
-            } else {
-                if (Function.isTrueNumber(str)) {
-                    number = Integer.parseInt(str);
-                    System.out.println("[Notice] Loại đồ uống " + this.drinkType + " có " + number + " topping");
-                    break;
+        if (action) {
+            while (true) {
+                System.out.print("Nhập số lượng topping: ");
+                str = sc.nextLine();
+                if (Function.isEmpty(str)) {
+                    System.out.println("Vui lòng không để trống !");
                 } else {
-                    System.out.println("Vui lòng nhập số và số phải lớn hơn 0");
+                    if (Function.isTrueNumber(str)) {
+                        number = Integer.parseInt(str);
+                        System.out.println("[Notice] Loại đồ uống " + this.drinkType + " có " + number + " topping");
+                        action = false;
+                        break;
+                    } else {
+                        System.out.println("Vui lòng nhập số và số phải lớn hơn 0");
+                    }
                 }
             }
         }
-        while (true) {
-            try (Scanner rd = new Scanner(toppingFile)) {
-                System.out.println("====================[Danh sách topping]====================");
-                System.out.printf("%-10s %-20s %-10s\n", "Mã", "Tên topping", "Giá (VND)");
-                while (rd.hasNextLine()) {
-                    String line = rd.nextLine();
-                    String[] toppingSplit = line.split("|");
-                    if (toppingSplit.length == 3) {
-                        String id = toppingSplit[0];
-                        String name = toppingSplit[1];
-                        String price = toppingSplit[2];
 
-                        System.out.printf("%-10s %-20s %-10s\n", id, Function.normalizeName(name),
-                                Function.formatMoney(price));
-                    }
-                }
+        if (action == false && number > 0) {
+            QLTopping list = new QLTopping();
+            list.Init();
+            for (int i = 0; i < number; i++) {
                 while (true) {
-                    System.out.print("Nhập mã topping: ");
+                    list.menuTable();
+                    System.out.print("Nhập mã loại topping thứ [" + i + 1 + "]: ");
                     str = sc.nextLine();
                     if (Function.isEmpty(str)) {
                         System.out.println("Vui lòng không để trống !");
                     } else {
-
+                        for (Topping tp : list.getToppingList()) {
+                            if (str.equalsIgnoreCase(tp.getId())) {
+                                if (this.addTopping(str)) {
+                                    System.out
+                                            .println("Thêm mã topping: " + str + " vào danh sách topping thành công !");
+                                    break;
+                                } else {
+                                    System.out.println("Mã không tồn tại !");
+                                }
+                            }
+                        }
                     }
                 }
-
-            } catch (Exception e) {
-                System.out.println("Lỗi: " + e.getMessage());
             }
         }
 
