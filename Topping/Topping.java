@@ -2,11 +2,11 @@
  *
  */
 package Topping;
+import Utils.Function;
 import Utils.INhap;
 import Utils.IXuat;
 import java.io.File;
 import java.util.Scanner;
-import Utils.Function;
 
 @SuppressWarnings("resource")
 public class Topping implements INhap, IXuat{
@@ -150,7 +150,7 @@ public class Topping implements INhap, IXuat{
         String str;
         int number;
         while (true) {
-            System.out.print("Nhập số của topping: ");
+            System.out.print("Nhập ID của topping: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("Vui lòng không để trống");

@@ -353,6 +353,110 @@ public abstract class NuocUong implements INhap {
 
     }
 
+    public NuocUong createNuocUong() {
+        NuocUong nuocUong = null;
+        Scanner sc = new Scanner(System.in);
+        String str;
+        int number;
+    
+        // Chọn loại đồ uống
+        while (true) {
+            System.out.println("Chọn loại đồ uống:");
+            System.out.println("1. Trà sữa (TS)");
+            System.out.println("2. Cà phê (CF)");
+            System.out.println("3. Sinh tố (ST)");
+            System.out.println("4. Nước trái cây (TC)");
+            System.out.print("Nhập lựa chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("Vui lòng không để trống!");
+            } else if (!Function.isTrueNumber(str)) {
+                System.out.println("Vui lòng nhập số hợp lệ!");
+            } else {
+                number = Integer.parseInt(str);
+                if (number < 1 || number > 4) {
+                    System.out.println("Vui lòng chọn trong phạm vi từ 1 đến 4!");
+                } else {
+                    String drinkType = "";
+                    switch (number) {
+                        case 1 -> drinkType = "TS";
+                        case 2 -> drinkType = "CF";
+                        case 3 -> drinkType = "ST";
+                        case 4 -> drinkType = "TC";
+                    }
+                    nuocUong = new NuocUong(drinkType) {};
+                    break;
+                }
+            }
+        }
+
+        while (true) {
+            System.out.print("Nhập tên đồ uống: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("Vui lòng không để trống!");
+            } else if (Function.isTrueNumber(str)) {
+                System.out.println("Tên đồ uống không được là số!");
+            } else {
+                nuocUong.name = str;
+                break;
+            }
+        }
+        System.out.println("[Notice] Tên đồ uống hiện tại: " + nuocUong.name);
+    
+        // Nhập giá cho các size
+        Map<String, Integer> sizePrice = new HashMap<>();
+        System.out.println("Nhập giá cho từng size (S, M, L):");
+        String[] sizes = {"S", "M", "L"};
+        for (String size : sizes) {
+            while (true) {
+                System.out.print("Nhập giá cho size " + size + ": ");
+                str = sc.nextLine();
+                if (Function.isEmpty(str)) {
+                    System.out.println("Vui lòng không để trống!");
+                } else if (!Function.isTrueNumber(str)) {
+                    System.out.println("Giá phải là số!");
+                } else {
+                    sizePrice.put(size, Integer.parseInt(str));
+                    break;
+                }
+            }
+        }
+        nuocUong.sizePrice = sizePrice;
+    
+        // Cài đặt thuộc tính nóng, lạnh, thêm sữa, thêm đường
+        nuocUong.isCold = askYesNo("Đồ uống có uống lạnh được không?");
+        nuocUong.isHot = askYesNo("Đồ uống có uống nóng được không?");
+        nuocUong.isMilk = askYesNo("Đồ uống có thêm sữa được không?");
+        nuocUong.isSugar = askYesNo("Đồ uống có thêm đường được không?");
+    
+        System.out.println("[Notice] Đồ uống đã được tạo thành công!");
+        return nuocUong;
+    }
+
+    private boolean askYesNo(String luaChon) {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            System.out.println(luaCHon);
+            System.out.println("1. Có");
+            System.out.println("2. Không");
+            System.out.print("Nhập lựa chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("Vui lòng không để trống!");
+            } else if (!Function.isTrueNumber(str)) {
+                System.out.println("Vui lòng nhập số 1 hoặc 2!");
+            } else if (str.equals("1")) {
+                return true;
+            } else if (str.equals("2")) {
+                return false;
+            } else {
+                System.out.println("Lựa chọn không hợp lệ!");
+            }
+        }
+    }
+    
     // Abstract method
     abstract void suaThongTin();
 

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class NhanVienQuanLy extends Nhanvien {
     private List<Nhanvien> danhSachNhanVien;
-    private List<HoaDon> danhSachHoaDon;// chưa tạo hóa đơn
+    private List<HoaDon> danhSachHoaDon;// chưa tạo hóa đơn 
 
     public NhanVienQuanLy() {
         super();
@@ -21,27 +21,22 @@ public class NhanVienQuanLy extends Nhanvien {
         this.danhSachHoaDon = new ArrayList<>();
     }
 
-    // Thêm nhân viên vào danh sách quản lý
     public void themNhanVien(Nhanvien nhanVien) {
         danhSachNhanVien.add(nhanVien);
     }
 
-    // Xóa nhân viên khỏi danh sách quản lý
     public void xoaNhanVien(String maNhanVien) {
         danhSachNhanVien.removeIf(nv -> nv.getMaNhanVien().equals(maNhanVien));
     }
 
-    // Lấy danh sách nhân viên
     public List<Nhanvien> danhSachNhanVien() {
         return danhSachNhanVien;
     }
 
-    // Lấy số lượng nhân viên
     public int soLuongNhanVien() {
         return danhSachNhanVien.size();
     }
-
-    // Lấy danh sách hóa đơn (giả sử lớp HoaDon có sẵn)
+    // chưa khởi tạo class HoaDon
     public List<HoaDon> danhSachHoaDon() {
         return danhSachHoaDon;
     }
@@ -54,16 +49,15 @@ public class NhanVienQuanLy extends Nhanvien {
         }
         return tongDoanhThu;
     }
-
-    // Tính thưởng dựa trên doanh thu
+    //Hàm tính thưởng tự định nghĩa
     public double tinhThuong() {
         double doanhThu = tinhTongDoanhThu();
-        if (doanhThu > 500000000) {
-            return 1000000; // Thưởng 1 triệu nếu doanh thu > 500 triệu
-        } else if (doanhThu > 300000000) {
-            return 500000; // Thưởng 500k nếu doanh thu > 300 triệu
+        if (doanhThu > 50000000) {
+            return 1000000; // Thưởng 1 triệu nếu doanh thu > 50 triệu
+        } else if (doanhThu > 30000000) {
+            return 500000; // Thưởng 500k nếu doanh thu > 30 triệu
         }
-        return 0; // Không thưởng nếu doanh thu <= 300 triệu
+        return 0; 
     }
 
     // Thống kê và báo cáo
@@ -81,12 +75,12 @@ public class NhanVienQuanLy extends Nhanvien {
 
     @Override
     public void suaThongTin() {
-        // Logic sửa thông tin quản lý nếu cần
+        
     }
 
     @Override
     public double tinhLuong() {
-        double luongCoBan = 7000000; // Giả sử lương cơ bản là 7 triệu
-        return luongCoBan + tinhThuong(); // Lương cơ bản + thưởng doanh thu
+        double luongCoBan = 7000000; 
+        return luongCoBan + tinhThuong(); 
     }
 }

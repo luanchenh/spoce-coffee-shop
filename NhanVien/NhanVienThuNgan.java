@@ -83,7 +83,7 @@ public void suaThongTin() {
     String diaChiMoi = scanner.nextLine();
     if (!diaChiMoi.isEmpty()) {
         Address newAddress = new Address(); 
-        newAddress.setAddress(diaChiMoi);
+        newAddress.setInfo();
         setDiaChi(newAddress);
     }
 

@@ -1,9 +1,15 @@
 package ThucDon;
+import NuocUong.NuocUong;
+import NuocUong.QLNuocUong;
+import Topping.Topping;
 import java.util.ArrayList;
 import java.util.Scanner;
-public class ThucDon implements Inhap, Ixuat {
+import Utils.*;
+public class ThucDon implements INhap, IXuat {
+    // private ArrayList<NuocUong> danhSachNuocUong;
     private ArrayList<NuocUong> danhSachNuocUong;
     private ArrayList<Topping> danhSachTopping;
+    // private QLNuocUong danhSachLNuocUong;
 
     public ThucDon() {
         this.danhSachNuocUong = new ArrayList<>();
@@ -18,11 +24,9 @@ public class ThucDon implements Inhap, Ixuat {
         System.out.print("Số lượng nước uống: ");
         int soLuongNuoc = Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < soLuongNuoc; i++) {
-            System.out.print("Tên nước uống " + (i + 1) + ": ");
-            String tenNuoc = scanner.nextLine();
-            System.out.print("Giá nước uống " + (i + 1) + ": ");
-            double giaNuoc = Double.parseDouble(scanner.nextLine());
-            danhSachNuocUong.add(new NuocUong(tenNuoc, giaNuoc));
+            NuocUong a = null;
+            
+        //    ///////////////////////////
         }
 
         System.out.println("Nhập danh sách topping:");
@@ -30,11 +34,9 @@ public class ThucDon implements Inhap, Ixuat {
         System.out.print("Số lượng topping: ");
         int soLuongTopping = Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < soLuongTopping; i++) {
-            System.out.print("Tên topping " + (i + 1) + ": ");
-            String tenTopping = scanner.nextLine();
-            System.out.print("Giá topping " + (i + 1) + ": ");
-            double giaTopping = Double.parseDouble(scanner.nextLine());
-            danhSachTopping.add(new Topping(tenTopping, giaTopping));
+            Topping a = null;
+            a.createTopping();
+            danhSachTopping.add(a);
         }
     }
 
@@ -65,5 +67,15 @@ public class ThucDon implements Inhap, Ixuat {
 
     public ArrayList<Topping> getDanhSachTopping() {
         return danhSachTopping;
+    }
+
+    @Override
+    public void nhapThongTin() {
+        //
+    }
+
+    @Override
+    public void xuatThongTin() {
+       //
     }
 }
