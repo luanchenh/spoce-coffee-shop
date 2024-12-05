@@ -70,4 +70,8 @@ public class Address {
     public String toString() {
         return "Số nhà: "+ this.houseNumer +", Phường: "+ this.wardName +", Quận: "+ this.cityName +", Tỉnh: "+ this.province.getCityName();
     }
+
+    public String makeString() {
+        return this.houseNumer + "|" + this.wardName + "|" + this.cityName + "|" + this.province.makeString();
+    }
 }

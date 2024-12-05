@@ -25,6 +25,11 @@ public class KHMangDi extends KhachHang {
         this.diaChi = diaChi;
     }
 
+    public KHMangDi(String customerID, String customerName, boolean isMember, MemberCard memberCard, Address diaChi) {
+        super(customerID, customerName, isMember, memberCard);
+        this.diaChi = diaChi;
+    }
+
     // Getter
     public Address getAddress() {
         return this.diaChi;
@@ -437,6 +442,23 @@ public class KHMangDi extends KhachHang {
 
             break loop2; // while
         }
+    }
+
+    @Override
+    public String makeString() {
+        StringBuilder str = new StringBuilder();
+        str.append("1|");
+        str.append(this.customerID).append("|");
+        str.append(this.customerName).append("|");
+
+        String memberStatus = this.isMember ? "1" : "0";
+        str.append(memberStatus).append("|");
+        if (this.isMember) {
+            str.append(this.memberCard.makeString()).append("|");
+        }
+
+        str.append(this.diaChi.makeString());
+        return str.toString();
     }
 }
 

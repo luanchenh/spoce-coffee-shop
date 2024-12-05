@@ -36,7 +36,7 @@ public class Province {
     }
 
     public void printInfoProvince() {
-        File cityFile = new File("../File/TinhThanh.txt");
+        File cityFile = new File("../File/tinhthanh.txt");
         try (BufferedReader reader = new BufferedReader(new FileReader(cityFile))) {
             int breakLine = 0;
             String line;
@@ -51,12 +51,12 @@ public class Province {
         }
     }
     public String getInfoProvince(int number) {
-        File cityFile = new File("../File/TinhThanh.txt");
+        File cityFile = new File("../File/tinhthanh.txt");
         String result = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(cityFile))) {
             String line = "";
             while ((line = reader.readLine()) != null) {
-                String[] index = line.split(" - ");
+                String[] index = line.split("\\|");
                 if (Integer.parseInt(index[0]) == number) {
                     result = line;
                     break;
@@ -79,7 +79,7 @@ public class Province {
             if (Function.isTrueNumber(str)) {
                 int number = Integer.parseInt(str);
                 if (number > 0 && number < 64) {
-                    String result[] = getInfoProvince(number).split(" - ");
+                    String result[] = getInfoProvince(number).split("\\|");
                     this.provinceCode = result[0];
                     this.provinceName = result[1];
                     break;
@@ -94,6 +94,10 @@ public class Province {
     @Override
     public String toString() {
         return "Mã tỉnh: "+ this.provinceCode +", Tên tỉnh thành: "+ this.provinceName;
+    }
+
+    public String makeString() {
+        return this.provinceCode + "|" + this.provinceName;
     }
 
 }

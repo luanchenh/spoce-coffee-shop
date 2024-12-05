@@ -25,6 +25,14 @@ public class MemberCard implements INhap, IXuat {
         this.endDate = new Date(this.startDate.getDay(), this.startDate.getMonth(), Integer.toString(Integer.parseInt(this.startDate.getYear()) + 1));
     }
 
+    public MemberCard(String cardID, Date birthday, Date startDate, Date endDate, int point) {
+        this.cardID = cardID;
+        this.birthday = birthday;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.point = point;
+    }
+
     public String getCardID() {
         return this.cardID;
     }
@@ -165,11 +173,14 @@ public class MemberCard implements INhap, IXuat {
 
     @Override
     public void xuatThongTin() {
-        if (this != null) {
-            System.out.println("Mã thành viên: " + this.cardID);
-            System.out.println("Ngày sinh: " + this.birthday.toString());
-            System.out.println("Điểm tích lũy: " + this.point);
-            System.out.println("Thời hạn đổi điểm: " + this.startDate.toString() + " - " + this.endDate.toString());
-        }
+        System.out.println("Mã thành viên: " + this.cardID);
+        System.out.println("Ngày sinh: " + this.birthday.toString());
+        System.out.println("Điểm tích lũy: " + this.point);
+        System.out.println("Thời hạn đổi điểm: " + this.startDate.toString() + " - " + this.endDate.toString());
+    }
+
+    // Phương thức tạo chuỗi để ghi vào file
+    public String makeString() {
+        return this.cardID + "|" + this.birthday.getDay() + "|" + this.birthday.getMonth() + "|" + this.birthday.getYear() + "|" + this.startDate.getDay() + "|" + this.startDate.getMonth() + "|" + this.startDate.getYear() + "|" + this.endDate.getDay() + "|" + this.endDate.getMonth() + "|" + this.endDate.getYear() + "|" + this.point;
     }
 }
