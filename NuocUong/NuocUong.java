@@ -27,11 +27,34 @@ public abstract class NuocUong implements INhap, IXuat {
     // Map để quản lý số thứ tự theo loại nước uống
     private static final Map<String, Integer> typeCounter = new HashMap<>();
     static {
+        int totalTS = 0;
+        int totalCF = 0;
+        int totalST = 0;
+        int totalTC = 0;
+        File waterFile = new File("../File/water.txt");
+        try (Scanner rd = new Scanner(waterFile)) {
+            String line = rd.nextLine();
+            String value = line.substring(0, 3);
+            if (value.equalsIgnoreCase("TS")) {
+                totalTS += 1;
+            }
+            else if (value.equalsIgnoreCase("CF")) {
+                totalCF += 1;
+            }
+            else if (value.equalsIgnoreCase("ST")) {
+                totalST += 1;
+            }
+            else if (value.equalsIgnoreCase("TC")) {
+                totalTC += 1;
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi: "+ e.getMessage());
+        }
         // Khởi tạo số thứ tự ban đầu cho từng loại
-        typeCounter.put("TS", 0);
-        typeCounter.put("CF", 0);
-        typeCounter.put("ST", 0);
-        typeCounter.put("TC", 0);
+        typeCounter.put("TS", totalTS);
+        typeCounter.put("CF", totalCF);
+        typeCounter.put("ST", totalST);
+        typeCounter.put("TC", totalTC);
     }
     // Đường dẫn File để get ID tự động cho nước uống
     File toppingFile = new File("../File/topping.txt");

@@ -99,6 +99,10 @@ public class QLNuocUong {
     public static void main(String[] args) {
         QLNuocUong list = new QLNuocUong();
         list.Init();
+        NuocUong a = null;
+        a = new Coffee("CF");
+        a.nhapThongTin();
+        list.getWaterList().add(a);
         for (NuocUong nu : list.getWaterList()) {
             nu.xuatThongTin();
         }
