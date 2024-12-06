@@ -4,10 +4,11 @@ import Utils.Address;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import HoaDon.HoaDon;
 
 public class NhanVienQuanLy extends Nhanvien {
     private List<Nhanvien> danhSachNhanVien;
-    private List<HoaDon> danhSachHoaDon;// chưa tạo hóa đơn 
+    private List<HoaDon> danhSachHoaDon;// chưa tạo hóa đơn
 
     public NhanVienQuanLy() {
         super();
@@ -57,7 +58,7 @@ public class NhanVienQuanLy extends Nhanvien {
         } else if (doanhThu > 30000000) {
             return 500000; // Thưởng 500k nếu doanh thu > 30 triệu
         }
-        return 0; 
+        return 0;
     }
 
     // Thống kê và báo cáo
@@ -75,12 +76,12 @@ public class NhanVienQuanLy extends Nhanvien {
 
     @Override
     public void suaThongTin() {
-        
+
     }
 
     @Override
     public double tinhLuong() {
-        double luongCoBan = 7000000; 
-        return luongCoBan + tinhThuong(); 
+        double luongCoBan = 7000000;
+        return luongCoBan + tinhThuong();
     }
 }

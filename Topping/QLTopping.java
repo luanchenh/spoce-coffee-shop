@@ -129,8 +129,8 @@ public class QLTopping implements IXuat{
 
     // ========================================[Menu topping table]========================================
     public void menuTable() {
-        System.out.println("====================[Danh sách topping]====================");
-        System.out.printf("%-5s %-25s %-10s\n", "Mã", "Tên topping", "Giá (VND)\n");
+        System.out.println("\t====================[Danh sách topping]====================");
+        System.out.printf("\t%-5s %-25s %-10s\n", "Mã", "Tên topping", "Giá (VND)\n");
         for (Topping tp : this.toppingList) {
             tp.menuInfo();
         }
@@ -148,9 +148,6 @@ public class QLTopping implements IXuat{
     public static void main(String[] args) {
         QLTopping list = new QLTopping();
         list.Init();
-        Topping a = new Topping();
-        a.nhapThongTin();
-        list.writeToppingIntoFile(a);
         list.menuTable();
     }
 }

@@ -266,7 +266,7 @@ public abstract class NuocUong implements INhap {
         }
         System.out.println("[Notice] Tên đồ uống hiện tại: " + this.name);
         while (true) {
-            System.out.print("Đồ uống có uống lạnh được không ?");
+            System.out.print("Đồ uống có điều chỉnh lạnh được không ?");
             System.out.println("1. [Yes]: Có");
             System.out.println("2. [No]: Không");
             System.out.print("Nhập lựa chọn: ");
@@ -285,7 +285,7 @@ public abstract class NuocUong implements INhap {
                 }
             }
         }
-        System.out.println("[Notice] Đồ uống uống lạnh được không: " + this.isCold);
+        System.out.println("[Notice] Đồ uống điều chỉnh độ nóng được không: " + this.isCold);
         while (true) {
             System.out.print("Đồ uống có uống nóng được không ?");
             System.out.println("1. [Yes]: Có");
@@ -307,7 +307,7 @@ public abstract class NuocUong implements INhap {
             }
         }
         while (true) {
-            System.out.println("Đồ uống có thêm sữa được không ?");
+            System.out.println("Đồ uống có điều chỉnh sữa được không ?");
             System.out.println("1. [Yes]: Có");
             System.out.println("2. [No]: Không");
             System.out.print("Nhập lựa chọn: ");
@@ -327,7 +327,7 @@ public abstract class NuocUong implements INhap {
             }
         }
         while (true) {
-            System.out.println("Đồ uống có thêm đường được không ?");
+            System.out.println("Đồ uống có thêm điều chỉnh được không ?");
             System.out.println("1. [Yes]: Có");
             System.out.println("2. [No]: Không");
             System.out.print("Nhập lựa chọn: ");
@@ -494,10 +494,29 @@ public abstract class NuocUong implements INhap {
 
     // Abstract method
     public void suaThongTin() {
-        
+
     }
 
-
-
+    // Tạo chuỗi để lưu file
+    // TS1|Trà sữa khúc bạch|true|fasle|false|true|15000,20000,30000|TP1,TP2
+    public String makeString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.id).append("|");
+        sb.append(this.name).append("|");
+        sb.append(this.isCold).append("|");
+        sb.append(this.isHot).append("|");
+        sb.append(this.isMilk).append("|");
+        sb.append(this.isSugar).append("|");
+        for (Map.Entry<String, Integer> entry : this.sizePrice.entrySet()) {
+            sb.append(entry.getValue()).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("|");
+        for (String tp : this.topping) {
+            sb.append(tp).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
 
 }

@@ -74,7 +74,7 @@ public class MemberCard implements INhap, IXuat {
         Scanner sc = new Scanner(System.in);
         String str;
         System.out.println("Thông tin thành viên");
-        
+
         System.out.println("Thông tin ngày sinh của khách hàng");
 
         loop:
@@ -144,7 +144,7 @@ public class MemberCard implements INhap, IXuat {
             }
         }
 
-        while (true) { 
+        while (true) {
             System.out.print("Nhập điểm tích lũy: ");
             str = sc.nextLine();
 
@@ -171,5 +171,9 @@ public class MemberCard implements INhap, IXuat {
             System.out.println("Điểm tích lũy: " + this.point);
             System.out.println("Thời hạn đổi điểm: " + this.startDate.toString() + " - " + this.endDate.toString());
         }
+    }
+
+    public String makeString() {
+        return this.cardID +"|"+ this.birthday.toString() +"|"+ this.point +"|"+ this.startDate.toString() +"|"+ this.endDate.toString();
     }
 }
