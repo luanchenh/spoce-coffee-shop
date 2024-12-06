@@ -194,7 +194,6 @@ public class KHMangDi extends KhachHang {
             System.out.println("\t==========================================================================================");
             System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
-            System.out.println();
             if (Function.isEmpty(str)) {
                 System.out.println("\tLựa chọn không được rỗng!");
                 continue;

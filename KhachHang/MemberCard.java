@@ -185,6 +185,12 @@ public class MemberCard implements INhap, IXuat {
         }
     }
 
+    // Phương thức dùng để tích điểm từ giá trị đơn hàng
+    public void point(int money) {
+        int points = money / 1000;
+        this.point = points;
+    }
+
     @Override
     public void xuatThongTin() {
         // System.out.println("Mã thành viên: " + this.cardID);

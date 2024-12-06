@@ -102,4 +102,16 @@ public abstract class KhachHang {
 
     // Phương thức trừu tượng để tạo chuỗi ghi vào file
     public abstract String makeString();
+
+    // Phương thức dùng để hủy gói thành viên 
+    public void cancelMembership() {
+        if (this.isMember) {
+            this.isMember = false;
+            this.memberCard = null;
+            MemberCard.numOfMember--;
+            System.out.println("\tHủy thành viên thành công!");
+        } else {
+            System.out.println("\tKhách hàng hiện không phải là thành viên!");
+        }
+    }
 }

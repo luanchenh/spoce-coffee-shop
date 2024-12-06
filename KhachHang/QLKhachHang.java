@@ -125,16 +125,16 @@ public class QLKhachHang implements IXuat {
     }
 
     // Phương thức để xóa một khách hàng khỏi Array List
-    public boolean removeCustomer(KhachHang customerToBeRemoved) {
-        for (KhachHang kh : this.customerList) {
-            if (kh.getCustomerID().compareTo(customerToBeRemoved.getCustomerID()) == 0) {
-                this.customerList.remove(kh);
-                this.writeAll();
-                return true;
-            }
-        }
-        return false;
-    }
+    // public boolean removeCustomer() {
+    //     for (KhachHang kh : this.customerList) {
+    //         if (kh.getCustomerID().compareTo(customerToBeRemoved.getCustomerID()) == 0) {
+    //             this.customerList.remove(kh);
+    //             this.writeAll();
+    //             return true;
+    //         }
+    //     }
+    //     return false;
+    // }
 
     // Phương thức để in ra các khách hàng trong mảng
     @Override
@@ -148,6 +148,8 @@ public class QLKhachHang implements IXuat {
     public void modifyCustomer() {
         Scanner sc = new Scanner(System.in);
         String str;
+
+        this.xuatThongTin();
 
         while (true) {
             // System.out.println("\nBạn muốn sửa thông tin khách hàng theo ID hay theo tên?");
@@ -193,6 +195,7 @@ public class QLKhachHang implements IXuat {
 
                     if (!isDone) {
                         System.out.println("\tKhông tìm thấy khách hàng!\n");
+                        continue;
                     } else {
                         this.writeAll();
                     }
@@ -229,6 +232,7 @@ public class QLKhachHang implements IXuat {
 
                     if (!isDone) {
                         System.out.println("\tKhông tìm thấy khách hàng!");
+                        continue;
                     } else {
                         this.writeAll();
                     }
@@ -245,11 +249,13 @@ public class QLKhachHang implements IXuat {
             break;
         }
     }
+
+
+    
     public static void main(String[] args) {
         QLKhachHang ql = new QLKhachHang();
         ql.init();
         ql.modifyCustomer();
-        ql.xuatThongTin();
     }
 
 

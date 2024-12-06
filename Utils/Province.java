@@ -40,12 +40,20 @@ public class Province {
         try (BufferedReader reader = new BufferedReader(new FileReader(cityFile))) {
             int breakLine = 0;
             String line;
+            System.out.println("\n\t=============================================================================================================================");
+            System.out.printf("\t| %-122s|%n", "Chọn tỉnh thành");
+            System.out.printf("\t| ");
             while ((line = reader.readLine()) != null) {
-                System.out.printf("%-25s", line); // Căn trái với chiều dài 25 ký tự
                 breakLine++;
-                if (breakLine % 5 == 0) System.out.println("");
+                if (breakLine % 5 == 0) {
+                    System.out.printf("%-22s|", line); // Căn trái với chiều dài 25 ký tự
+                } else {
+                    System.out.printf("%-25s", line); // Căn trái với chiều dài 25 ký tự
+                }
+                if (breakLine % 5 == 0) System.out.printf("\n\t| ");
             }
-            System.out.println("");
+            System.out.printf("%-47s|", "");
+            System.out.println("\n\t=============================================================================================================================");
         } catch (Exception e) {
             System.out.println("Lỗi: "+ e.getLocalizedMessage());
         }
@@ -73,8 +81,8 @@ public class Province {
         Scanner sc = new Scanner(System.in);
         printInfoProvince();
         while (true) {
-            System.out.println("-------Chọn tỉnh thành-------");
-            System.out.print("=> Vui lòng nhập mã tỉnh bạn muốn chọn: ");
+            
+            System.out.print("\t=> Vui lòng nhập mã tỉnh bạn muốn chọn: ");
             String str = sc.nextLine().trim();
             if (Function.isTrueNumber(str)) {
                 int number = Integer.parseInt(str);
@@ -84,11 +92,11 @@ public class Province {
                     this.provinceName = result[1];
                     break;
                 }
-                else System.out.println("Bạn đã nhập ngoài phạm vi cho phép !");
+                else System.out.println("\tBạn đã nhập ngoài phạm vi cho phép !");
             }
-            else System.out.println("Dữ liệu nhập chưa đúng !");
+            else System.out.println("\tDữ liệu nhập chưa đúng !");
         }
-        System.out.println("Chọn tỉnh thành thành công");
+        System.out.println("\tChọn tỉnh thành thành công");
     }
 
     @Override
