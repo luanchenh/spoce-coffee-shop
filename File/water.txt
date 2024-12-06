@@ -1,2 +1,3 @@
-TS1|Trà sữa khúc bạch|true|fasle|false|true|15000,20000,30000|TP1,TP2
-TS2|Trà sữa thần sầu|true|fasle|false|true|20000,25000,28000|TP1,TP5
+TS1|Trà sữa khúc bạch|true|false|false|true|15000,20000,30000|TP1,TP2
+TS2|Trà sữa thần sầu|true|false|false|true|20000,25000,28000|TP1,TP5
+CF1|Cà phê muối|true|true|false|false|12000,15000,18000,20000|
