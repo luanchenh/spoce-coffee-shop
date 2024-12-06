@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class NhanVienThuNgan extends Nhanvien {
     private int soBillDaXuLy;
     private double tongTienDaXuLy;
-    private String caLamViec; // "Sáng", "Chiều", "Buổi tối"
     private int soGioLamThem;
 
 
@@ -15,12 +14,11 @@ public class NhanVienThuNgan extends Nhanvien {
         super();
     }
 
-    public NhanVienThuNgan(Address diaChi, int loaijNhanVien, String maNhanVien, LocalDate ngaySinh, String tenNhanVien,
-                           int soBillDaXuLy, double tongTienDaXuLy, String caLamViec, int soGioLamThem) {
-        super(diaChi, loaijNhanVien, maNhanVien, ngaySinh, tenNhanVien);
+    public NhanVienThuNgan(Address diaChi, int loaiNhanVien, String maNhanVien, LocalDate ngaySinh, String tenNhanVien, String chiNhanh, String caLamViec,
+                           int soBillDaXuLy, double tongTienDaXuLy, int soGioLamThem) {
+        super(diaChi, loaiNhanVien, maNhanVien, ngaySinh, tenNhanVien, chiNhanh, caLamViec);
         this.soBillDaXuLy = soBillDaXuLy;
         this.tongTienDaXuLy = tongTienDaXuLy;
-        this.caLamViec = caLamViec;
         this.soGioLamThem = soGioLamThem;
     }
 
@@ -40,14 +38,6 @@ public class NhanVienThuNgan extends Nhanvien {
         this.tongTienDaXuLy = tongTienDaXuLy;
     }
 
-    public String getCaLamViec() {
-        return caLamViec;
-    }
-
-    public void setCaLamViec(String caLamViec) {
-        this.caLamViec = caLamViec;
-    }
-
     public int getSoGioLamThem() {
         return soGioLamThem;
     }
@@ -55,7 +45,24 @@ public class NhanVienThuNgan extends Nhanvien {
     public void setSoGioLamThem(int soGioLamThem) {
         this.soGioLamThem = soGioLamThem;
     }
+    @Override
+    public void nhapThongTin() {
+        Scanner scanner = new Scanner(System.in);
+    
+        System.out.println("Nhập thông tin nhân viên thu ngân:");
 
+        super.nhapThongTin();
+        System.out.print("Nhập số bill đã xử lý: ");
+        setSoBillDaXuLy(Integer.parseInt(scanner.nextLine()));
+    
+        System.out.print("Nhập tổng tiền đã xử lý: ");
+        setTongTienDaXuLy(Double.parseDouble(scanner.nextLine()));    
+        System.out.print("Nhập số giờ làm thêm: ");
+        setSoGioLamThem(Integer.parseInt(scanner.nextLine()));
+    
+        System.out.println("Nhập thông tin nhân viên thu ngân hoàn tất.");
+    }
+    
     @Override
 public void suaThongTin() {
     Scanner scanner = new Scanner(System.in);
@@ -124,7 +131,7 @@ public void suaThongTin() {
         }
 
         // Phụ cấp tiền ăn tối nếu làm ca buổi tối
-        if ("Buổi tối".equalsIgnoreCase(caLamViec)) {
+        if ("Buổi tối".equalsIgnoreCase(super.getCaLamViec())) {
             tienThuong += 20000;
         }
 
