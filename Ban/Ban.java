@@ -139,11 +139,11 @@ public class Ban implements INhap, IXuat {
     // Phương thức để xuất thông tin bàn
     @Override
     public void xuatThongTin() {
-        System.out.println("===========================================================");
-        System.out.println("ID của bàn: " + this.tableID);
-        System.out.println("Số lượng chỗ ngồi: " + this.numOfCustomersOfTable);
+        System.out.println("Thông tin bàn");
+        System.out.println("    ID của bàn: " + this.tableID);
+        System.out.println("    Số lượng chỗ ngồi: " + this.numOfCustomersOfTable);
         String tableStatus = this.status ? "Đã có người ngồi" : "Đang trống";
-        System.out.println("Tình trạng: " + tableStatus);
+        System.out.println("    Tình trạng: " + tableStatus);
     }
 
 
@@ -291,5 +291,80 @@ public class Ban implements INhap, IXuat {
         System.out.printf("%-5s %-25s %-10s\n", this.tableID, seats, status);
     }
 
+    public static Ban findTable(int numOfCustomers) {
+        Ban table = null;
+        QLBan ql = new QLBan();
+        ql.init();
+
+        if (numOfCustomers >= 1 && numOfCustomers <= 2) {
+            for (Ban ban : ql.tableList) {
+                if (ban.getCustomerPerTable() == 2 && !ban.getTableStatus()) {
+                    table = ban;
+                    ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                    break;
+                }
+            }
+
+            if (table == null) {
+                for (Ban ban : ql.tableList) {
+                    if (ban.getCustomerPerTable() == 4 && !ban.getTableStatus()) {
+                        table = ban;
+                        ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                        break;
+                    }
+                }
+            }
+
+            if (table == null) {
+                for (Ban ban : ql.tableList) {
+                    if (ban.getCustomerPerTable() == 8 && !ban.getTableStatus()) {
+                        table = ban;
+                        ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                        break;
+                    }
+                }
+            }
+        } else if (numOfCustomers >= 3 && numOfCustomers <= 4) {
+            for (Ban ban : ql.tableList) {
+                if (ban.getCustomerPerTable() == 4 && !ban.getTableStatus()) {
+                    table = ban;
+                    ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                    break;
+                }
+            }
+
+            if (table == null) {
+                for (Ban ban : ql.tableList) {
+                    if (ban.getCustomerPerTable() == 8 && !ban.getTableStatus()) {
+                        table = ban;
+                        ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                        break;
+                    }
+                }
+            }
+        } else if (numOfCustomers >= 5 && numOfCustomers <= 8) {
+            for (Ban ban : ql.tableList) {
+                if (ban.getCustomerPerTable() == 8 && !ban.getTableStatus()) {
+                    table = ban;
+                    ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                    break;
+                }
+            }
+        }
+
+        ql.writeAll();
+        return table;
+    }
+
+    public void cancelTable() {
+        QLBan ql = new QLBan();
+        for (Ban ban : ql.tableList) {
+            if (ban.getTableID().equals(this.tableID)) {
+                ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(false);
+                break;
+            }
+        }
+        ql.writeAll();
+    }
 }
 

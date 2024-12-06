@@ -113,6 +113,7 @@ public class QLKhachHang implements IXuat {
 
             kh.nhapThongTin();
             this.customerList.add(kh);
+            this.writeAll();
             System.out.println("\n===== Thêm khách hàng thành công! =====\n");
             break;
         }
@@ -123,6 +124,7 @@ public class QLKhachHang implements IXuat {
         for (KhachHang kh : this.customerList) {
             if (kh.getCustomerID().compareTo(customerToBeRemoved.getCustomerID()) == 0) {
                 this.customerList.remove(kh);
+                this.writeAll();
                 return true;
             }
         }
@@ -137,15 +139,106 @@ public class QLKhachHang implements IXuat {
         }
     }
 
-    // public void modifyCustomer() {
-    //     Scanner sc = new Scanner(System.in);
+    // Hàm để sửa thông tin khách hàng
+    public void modifyCustomer() {
+        Scanner sc = new Scanner(System.in);
+        String str;
 
-    // }
+        while (true) {
+            System.out.println("\nBạn muốn sửa thông tin khách hàng theo ID hay theo tên?");
+            System.out.println("1. ID");
+            System.out.println("2. Tên khách hàng");
+            System.out.print("Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("Lựa chọn không được rỗng!\n");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("Lựa chọn phải là số!\n");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                while (true) { 
+                    boolean isDone = false;
+                    System.out.print("\nMời bạn nhập ID khách hàng: ");
+                    str = sc.nextLine();
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("ID không được rỗng!\n");
+                        continue;
+                    }
+
+                    for (KhachHang kh : this.customerList) {
+                        if (kh.getCustomerID().equals(str)) {
+                            kh.suaThongTin();
+                            isDone = true;
+                            break;
+                        }
+                    }
+
+                    if (!isDone) {
+                        System.out.println("Không tìm thấy khách hàng!\n");
+                    } else {
+                        this.writeAll();
+                    }
+
+                    break;
+                }
+                break;
+
+                case "2":
+                while (true) { 
+                    boolean isDone = false;
+                    System.out.print("\nMời bạn nhập tên khách hàng: ");
+                    str = sc.nextLine();
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("Tên khách hàng không được rỗng!\n");
+                        continue;
+                    }
+
+                    if (Function.isTrueNumber(str)) {
+                        System.out.println("Tên khách hàng không được là số!\n");
+                        continue;
+                    }
+
+                    str = Function.normalizeName(str);
+
+                    for (KhachHang kh : this.customerList) {
+                        if (kh.getCustomerName().equals(str)) {
+                            kh.suaThongTin();
+                            isDone = true;
+                            break;
+                        }
+                    }
+
+                    if (!isDone) {
+                        System.out.println("Không tìm thấy khách hàng!\n");
+                    } else {
+                        this.writeAll();
+                    }
+
+                    break;
+                }
+                break;
+
+                default:
+                System.out.println("Lựa chọn không hợp lệ!\n");
+                continue;
+            }
+
+            break;
+        }
+    }
     public static void main(String[] args) {
         QLKhachHang ql = new QLKhachHang();
         ql.init();
-        ql.addCustomer();
-        ql.writeAll();
+        ql.modifyCustomer();
         ql.xuatThongTin();
     }
 

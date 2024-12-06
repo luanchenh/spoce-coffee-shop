@@ -14,7 +14,20 @@ public class MemberCard implements INhap, IXuat {
     private Date endDate;
     private int point;
 
-    private static int numOfMember = 0;
+    public static int numOfMember = getNumberOfMemberFromFile();
+
+    public static int getNumberOfMemberFromFile() {
+        QLKhachHang ql = new QLKhachHang();
+        ql.init();
+        int members = 0;
+        for (KhachHang kh : ql.customerList) {
+            if (kh.IsMember()) {
+                members++;
+            }
+        }
+
+        return members;
+    }
 
     public MemberCard() {
         this.cardID = "MB" + ++numOfMember;

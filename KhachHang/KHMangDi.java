@@ -48,16 +48,16 @@ public class KHMangDi extends KhachHang {
 
         System.out.println("[Notice] ID khách hàng hiện tại: " + this.customerID);
         while (true) { 
-            System.out.print("Nhập tên khách hàng: ");
+            System.out.print("\nNhập tên khách hàng: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Tên khách hàng không được rỗng!");
+                System.out.println("Tên khách hàng không được rỗng!\n");
                 continue;
             }
 
             if (Function.isTrueNumber(str)) {
-                System.out.println("Tên khách hàng không được là số!");
+                System.out.println("Tên khách hàng không được là số!\n");
                 continue;
             }
 
@@ -67,19 +67,19 @@ public class KHMangDi extends KhachHang {
 
         loop:
         while (true) { 
-            System.out.println("Trạng thái thành viên");
+            System.out.println("\nTrạng thái thành viên");
             System.out.println("1. Khách hàng là thành viên");
             System.out.println("2. Khách hàng không là thành viên");
             System.out.print("Nhập trạng thái thành viên của khách hàng: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Trạng thái thành viên không được rỗng!");
+                System.out.println("Trạng thái thành viên không được rỗng!\n");
                 continue loop;
             }
 
             if (!Function.isTrueNumber(str)) {
-                System.out.println("Dữ liệu nhập vào phải là số!");
+                System.out.println("Dữ liệu nhập vào phải là số!\n");
                 continue loop;
             }
 
@@ -100,20 +100,20 @@ public class KHMangDi extends KhachHang {
                 break;
 
                 default:
-                System.out.println("Dữ liệu nhập không đúng!");
+                System.out.println("Dữ liệu nhập không đúng!\n");
                 continue loop;
             }
 
             break loop;
         }
 
-        System.out.println("Địa chỉ của khách hàng");
+        System.out.println("\nĐịa chỉ của khách hàng");
         while (true) {
             System.out.print("Nhập số nhà và tên đường: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Số nhà và tên đường không được rỗng!");
+                System.out.println("Số nhà và tên đường không được rỗng!\n");
                 continue;
             }
 
@@ -122,11 +122,11 @@ public class KHMangDi extends KhachHang {
         }
 
         while (true) {
-            System.out.print("Nhập phường/xã: ");
+            System.out.print("\nNhập phường/xã: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Phường/xã không được rỗng!");
+                System.out.println("Phường/xã không được rỗng!\n");
                 continue;
             }
 
@@ -135,11 +135,11 @@ public class KHMangDi extends KhachHang {
         }
 
         while (true) {
-            System.out.print("Nhập quận/huyện: ");
+            System.out.print("\nNhập quận/huyện: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Quận/huyện không được rỗng!");
+                System.out.println("Quận/huyện không được rỗng!\n");
                 continue;
             }
 
@@ -162,6 +162,7 @@ public class KHMangDi extends KhachHang {
             this.memberCard.xuatThongTin();
         }
         System.out.println("Địa chỉ: " + this.diaChi.toString());
+        System.out.println();
     }
 
     // Hàm để sửa thông tin khách hàng
@@ -172,7 +173,7 @@ public class KHMangDi extends KhachHang {
 
         loop2:
         while (true) { 
-            System.out.println("Sửa thông tin khách hàng mang đi có ID: " + this.customerID);
+            System.out.println("\nSửa thông tin khách hàng mang đi có ID: " + this.customerID);
             System.out.println("1. Tên khách hàng");
             System.out.println("2. Trạng thái thành viên");
             System.out.println("3. Địa chỉ");
@@ -180,22 +181,22 @@ public class KHMangDi extends KhachHang {
             System.out.print("Nhập lựa chọn: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
-                System.out.println("Lựa chọn không được rỗng!");
+                System.out.println("Lựa chọn không được rỗng!\n");
                 continue;
             }
 
             if (!Function.isTrueNumber(str)) {
-                System.out.println("Lựa chọn phải là số!");
+                System.out.println("Lựa chọn phải là số!\n");
                 continue;
             }
 
             switch (Integer.parseInt(str)) {
                 case 1:
                 while (true) {
-                    System.out.print("Nhập tên của khách hàng: ");
+                    System.out.print("\nNhập tên của khách hàng: ");
                     str = sc.nextLine();
                     if (Function.isEmpty(str)) {
-                        System.out.println("Tên khách hàng không được rỗng!");
+                        System.out.println("Tên khách hàng không được rỗng!\n");
                         continue;
                     }
                     this.customerName = str.trim();
@@ -206,43 +207,45 @@ public class KHMangDi extends KhachHang {
                 case 2:
                 if (this.isMember) {
                     while (true) {
+                        System.out.println("\nTrạng thái thành viên:");
                         System.out.println("1. Hủy thành viên");
                         System.out.println("2. Sửa thông tin thành viên");
                         System.out.print("Nhập lựa chọn: ");
                         str = sc.nextLine();
 
                         if (Function.isEmpty(str)) {
-                            System.out.println("Lựa chọn không được rỗng!");
+                            System.out.println("Lựa chọn không được rỗng!\n");
                             continue;
                         }
             
                         if (!Function.isTrueNumber(str)) {
-                            System.out.println("Lựa chọn phải là số!");
+                            System.out.println("Lựa chọn phải là số!\n");
                             continue;
                         }
 
                         switch (Integer.parseInt(str)) {
                             case 1:
-                            this.isMember = false;
-                            this.memberCard = null;
-                            System.out.println("Đã hủy thành viên thành công!");
+                            this.isMember = false; // chuyển trạng thái thành viên về false sau khi hủy
+                            this.memberCard = null; // trỏ về null để hủy thông tin thành viên
+                            MemberCard.numOfMember--; // giảm số lượng thành viên đi một sau khi hủy thành viên
+                            System.out.println("Đã hủy thành viên thành công!\n");
                             break;
 
                             case 2:
                             while (true) { 
-                                System.out.println("Sửa thông tin thành viên");
+                                System.out.println("\nSửa thông tin thành viên");
                                 System.out.println("1. Ngày tháng năm sinh");
                                 System.out.println("2. Điểm tích lũy");
                                 System.out.print("Nhập lựa chọn: ");
                                 str = sc.nextLine();
 
                                 if (Function.isEmpty(str)) {
-                                    System.out.println("Lựa chọn không được rỗng!");
+                                    System.out.println("Lựa chọn không được rỗng!\n");
                                     continue;
                                 }
                     
                                 if (!Function.isTrueNumber(str)) {
-                                    System.out.println("Lựa chọn phải là số!");
+                                    System.out.println("Lựa chọn phải là số!\n");
                                     continue;
                                 }
 
@@ -252,16 +255,17 @@ public class KHMangDi extends KhachHang {
                                     while (true) {
                                         loop1:
                                         while (true) {
+                                            System.out.println("\nSửa ngày tháng năm sinh");
                                             System.out.print("Mời nhập ngày: ");
                                             str = sc.nextLine();
                             
                                             if (Function.isEmpty(str)) {
-                                                System.out.println("Ngày sinh không được rỗng!");
+                                                System.out.println("Ngày sinh không được rỗng!\n");
                                                 continue loop1;
                                             }
                             
                                             if (!Function.isTrueNumber(str)) {
-                                                System.out.println("Ngày sinh phải là số!");
+                                                System.out.println("Ngày sinh phải là số!\n");
                                                 continue loop1;
                                             }
                             
@@ -271,16 +275,16 @@ public class KHMangDi extends KhachHang {
                             
                                         loop1:
                                         while (true) {
-                                            System.out.print("Mời nhập tháng: ");
+                                            System.out.print("\nMời nhập tháng: ");
                                             str = sc.nextLine();
                             
                                             if (Function.isEmpty(str)) {
-                                                System.out.println("Tháng sinh không được rỗng!");
+                                                System.out.println("Tháng sinh không được rỗng!\n");
                                                 continue loop1;
                                             }
                             
                                             if (!Function.isTrueNumber(str)) {
-                                                System.out.println("Tháng sinh phải là số!");
+                                                System.out.println("Tháng sinh phải là số!\n");
                                                 continue loop1;
                                             }
                             
@@ -290,16 +294,16 @@ public class KHMangDi extends KhachHang {
                             
                                         loop1:
                                         while (true) {
-                                            System.out.print("Mời nhập năm: ");
+                                            System.out.print("\nMời nhập năm: ");
                                             str = sc.nextLine();
                             
                                             if (Function.isEmpty(str)) {
-                                                System.out.println("Năm sinh không được rỗng!");
+                                                System.out.println("Năm sinh không được rỗng!\n");
                                                 continue loop1;
                                             }
                             
                                             if (!Function.isTrueNumber(str)) {
-                                                System.out.println("Năm sinh phải là số!");
+                                                System.out.println("Năm sinh phải là số!\n");
                                                 continue loop1;
                                             }
                             
@@ -308,7 +312,7 @@ public class KHMangDi extends KhachHang {
                                         }
                             
                                         if (!this.memberCard.getBirthDay().isValidDate()) {
-                                            System.out.println("Dữ liệu ngày không hợp lệ!");
+                                            System.out.println("Dữ liệu ngày không hợp lệ!\n");
                                             continue loop;
                                         } else {
                                             break loop;
@@ -318,21 +322,21 @@ public class KHMangDi extends KhachHang {
 
                                     case 2:
                                     while (true) {
-                                        System.out.print("Nhập điểm tích lũy: ");
+                                        System.out.print("\nNhập điểm tích lũy: ");
                                         str = sc.nextLine();
 
                                         if (Function.isEmpty(str)) {
-                                            System.out.println("Điểm tích lũy không được rỗng!");
+                                            System.out.println("Điểm tích lũy không được rỗng!\n");
                                             continue;
                                         }
                         
                                         if (!Function.isTrueNumber(str)) {
-                                            System.out.println("Điểm tích lũy phải là số!");
+                                            System.out.println("Điểm tích lũy phải là số!\n");
                                             continue;
                                         }
 
                                         if (Integer.parseInt(str) < 0) {
-                                            System.out.println("Điểm tích lũy không được có giá trị âm!");
+                                            System.out.println("Điểm tích lũy không được có giá trị âm!\n");
                                             continue;
                                         }
                                         this.memberCard.setPoint(Integer.parseInt(str));
@@ -341,7 +345,7 @@ public class KHMangDi extends KhachHang {
                                     break;
 
                                     default: 
-                                    System.out.println("Lựa chọn không hợp lệ!");
+                                    System.out.println("Lựa chọn không hợp lệ!\n");
                                     continue;
                                 }
                                 break; // while
@@ -349,34 +353,36 @@ public class KHMangDi extends KhachHang {
                             break; // switch
 
                             default:
-                            System.out.println("Lựa chọn không hợp lệ!");
+                            System.out.println("Lựa chọn không hợp lệ!\n");
                             continue;
                         }
                         break; // while
                     }
                 } else {
                     while (true) {
+                        System.out.println("\nSửa thông tin thành viên");
                         System.out.println("1. Đăng kí trở thành thành viên");
                         System.out.println("2. Quay lại");
                         System.out.print("Nhập lựa chọn: ");
                         str = sc.nextLine();
 
                         if (Function.isEmpty(str)) {
-                            System.out.println("Lựa chọn không được rỗng!");
+                            System.out.println("Lựa chọn không được rỗng!\n");
                             continue;
                         }
             
                         if (!Function.isTrueNumber(str)) {
-                            System.out.println("Lựa chọn phải là số!");
+                            System.out.println("Lựa chọn phải là số!\n");
                             continue;
                         }
 
                         switch (Integer.parseInt(str)) {
                             case 1:
-                            this.isMember = true;
-                            this.memberCard = new MemberCard();
-                            this.memberCard.nhapThongTin();
-                            System.out.println("Đăng kí thành viên thành công!");
+                            this.isMember = true; // chuyển trạng thái thành viên về true sau khi đăng kí thành viên
+                            this.memberCard = new MemberCard(); // cấp phát vùng nhớ membercard để lưu thông tin thành viên
+                            this.memberCard.nhapThongTin(); // gọi hàm để nhập thông tin thành viên
+                            MemberCard.numOfMember++; // sau đó cập nhật số lượng thành viên tăng lên 1 sau khi đăng kí thành viên
+                            System.out.println("Đăng kí thành viên thành công!\n");
                             break; // switch
 
                             case 2:
@@ -392,11 +398,11 @@ public class KHMangDi extends KhachHang {
 
                 case 3:
                 while (true) {
-                    System.out.print("Nhập số nhà và tên đường: ");
+                    System.out.print("\nNhập số nhà và tên đường: ");
                     str = sc.nextLine();
 
                     if (Function.isEmpty(str)) {
-                        System.out.println("Số nhà và tên đường không được rỗng!");
+                        System.out.println("Số nhà và tên đường không được rỗng!\n");
                         continue;
                     }
 
@@ -405,11 +411,11 @@ public class KHMangDi extends KhachHang {
                 }
 
                 while (true) {
-                    System.out.print("Nhập phường/xã: ");
+                    System.out.print("\nNhập phường/xã: ");
                     str = sc.nextLine();
 
                     if (Function.isEmpty(str)) {
-                        System.out.println("Phường/xã không được rỗng!");
+                        System.out.println("Phường/xã không được rỗng!\n");
                         continue;
                     }
 
@@ -418,11 +424,11 @@ public class KHMangDi extends KhachHang {
                 }
 
                 while (true) {
-                    System.out.print("Nhập quận/huyện: ");
+                    System.out.print("\nNhập quận/huyện: ");
                     str = sc.nextLine();
 
                     if (Function.isEmpty(str)) {
-                        System.out.println("Quận/huyện không được rỗng!");
+                        System.out.println("Quận/huyện không được rỗng!\n");
                         continue;
                     }
 
@@ -447,7 +453,7 @@ public class KHMangDi extends KhachHang {
     @Override
     public String makeString() {
         StringBuilder str = new StringBuilder();
-        str.append("1|");
+        str.append("1|"); // 1 đại diện cho khách hàng mang đi
         str.append(this.customerID).append("|");
         str.append(this.customerName).append("|");
 
