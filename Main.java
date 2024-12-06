@@ -9,7 +9,7 @@ public class Main {
 
         // In tiêu đề bảng
         System.out.println("\t==========================================================================================");
-        System.out.printf("\t| %-87s |%n", "HỆ THỐNG NƯỚC UỐNG SPOCE COFFE SHOP");
+        System.out.printf("\t| %-87s |%n", "HỆ THỐNG NƯỚC UỐNG SPOCE COFFEE SHOP");
         System.out.println("\t==========================================================================================");
 
         // In các chức năng

@@ -76,24 +76,29 @@ public class QLKhachHang implements IXuat {
         KhachHang kh = null;    
 
         while (true) { 
-            System.out.println("Chọn loại khách hàng");
-            System.out.println("1. Khách hàng mang đi");
-            System.out.println("2. Khách hàng dùng tại chỗ");
-            System.out.print("Nhập lựa chọn: ");
+            System.out.println("\n\t==========================================================================================");
+            // System.out.println("\tChọn loại khách hàng");
+            // System.out.println("1. Khách hàng mang đi");
+            // System.out.println("2. Khách hàng dùng tại chỗ");
+            System.out.printf("\t| %-87s |%n", "Chọn loại khách hàng:");
+            System.out.printf("\t| %-5s %-81s |%n", "1.", "Khách hàng mang đi");
+            System.out.printf("\t| %-5s %-81s |%n", "2.", "Khách hàng dùng tại chỗ");
+            System.out.println("\t==========================================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Lựa chọn không được rỗng!");
+                System.out.println("\tLựa chọn không được rỗng!");
                 continue;
             }
 
             if (!Function.isTrueNumber(str)) {
-                System.out.println("Lựa chọn phải là số!");
+                System.out.println("\tLựa chọn phải là số!");
                 continue;
             }
 
             if (Integer.parseInt(str) < 0) {
-                System.out.println("Lựa chọn không được có giá trị âm!");
+                System.out.println("\tLựa chọn không được có giá trị âm!");
                 continue;
             }
 
@@ -107,26 +112,117 @@ public class QLKhachHang implements IXuat {
                 break;
 
                 default:
-                System.out.println("Lựa chọn không hợp lệ!");
+                System.out.println("\tLựa chọn không hợp lệ!");
                 continue;
             }
 
             kh.nhapThongTin();
             this.customerList.add(kh);
-            System.out.println("\n===== Thêm khách hàng thành công! =====\n");
+            this.writeAll();
+            System.out.println("\tThêm khách hàng thành công!");
             break;
         }
     }
 
     // Phương thức để xóa một khách hàng khỏi Array List
-    public boolean removeCustomer(KhachHang customerToBeRemoved) {
-        for (KhachHang kh : this.customerList) {
-            if (kh.getCustomerID().compareTo(customerToBeRemoved.getCustomerID()) == 0) {
-                this.customerList.remove(kh);
-                return true;
+    public void removeCustomer() {
+        this.xuatThongTin();
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            System.out.println("\n\t==========================================================================================");
+            System.out.printf("\t| %-87s |%n", "Bạn muốn xóa khách hàng theo ID hay theo tên?");
+            System.out.printf("\t| %-5s %-81s |%n", "1.", "ID");
+            System.out.printf("\t| %-5s %-81s |%n", "2.", "Tên khách hàng");
+            System.out.println("\t==========================================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được rỗng!");
+                continue;
             }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                while (true) { 
+                    boolean isDone = false;
+                    System.out.print("\n\t=> Mời bạn nhập ID khách hàng: ");
+                    str = sc.nextLine();
+    
+                    if (Function.isEmpty(str)) {
+                        System.out.println("\tID không được rỗng!");
+                        continue;
+                    }
+    
+                    for (KhachHang kh : this.customerList) {
+                        if (kh.getCustomerID().equals(str)) {
+                            this.customerList.remove(kh);
+                            isDone = true;
+                            break;
+                        }
+                    }
+    
+                    if (!isDone) {
+                        System.out.println("\tKhông tìm thấy khách hàng!\n");
+                        continue;
+                    } else {
+                        this.writeAll();
+                    }
+                    break;
+                }
+                break;
+
+                case "2":
+                while (true) { 
+                    boolean isDone = false;
+                    System.out.print("\n\t=> Mời bạn nhập tên khách hàng: ");
+                    str = sc.nextLine();
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("\tTên khách hàng không được rỗng!");
+                        continue;
+                    }
+
+                    if (Function.isTrueNumber(str)) {
+                        System.out.println("\tTên khách hàng không được là số!");
+                        continue;
+                    }
+
+                    str = Function.normalizeName(str);
+
+                    for (KhachHang kh : this.customerList) {
+                        if (kh.getCustomerName().equals(str)) {
+                            this.customerList.remove(kh);
+                            isDone = true;
+                            break;
+                        }
+                    }
+
+                    if (!isDone) {
+                        System.out.println("\tKhông tìm thấy khách hàng!");
+                        continue;
+                    } else {
+                        this.writeAll();
+                    }
+
+                    break;
+                }
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                continue;
+            }
+
+            break;
         }
-        return false;
     }
 
     // Phương thức để in ra các khách hàng trong mảng
@@ -137,16 +233,118 @@ public class QLKhachHang implements IXuat {
         }
     }
 
-    // public void modifyCustomer() {
-    //     Scanner sc = new Scanner(System.in);
+    // Hàm để sửa thông tin khách hàng
+    public void modifyCustomer() {
+        Scanner sc = new Scanner(System.in);
+        String str;
 
-    // }
+        this.xuatThongTin();
+
+        while (true) {
+            // System.out.println("\nBạn muốn sửa thông tin khách hàng theo ID hay theo tên?");
+            // System.out.println("1. ID");
+            // System.out.println("2. Tên khách hàng");
+            System.out.println("\n\t==========================================================================================");
+            System.out.printf("\t| %-87s |%n", "Bạn muốn sửa thông tin khách hàng theo ID hay theo tên?");
+            System.out.printf("\t| %-5s %-81s |%n", "1.", "ID");
+            System.out.printf("\t| %-5s %-81s |%n", "2.", "Tên khách hàng");
+            System.out.println("\t==========================================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được rỗng!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                while (true) { 
+                    boolean isDone = false;
+                    System.out.print("\n\t=> Mời bạn nhập ID khách hàng: ");
+                    str = sc.nextLine();
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("\tID không được rỗng!");
+                        continue;
+                    }
+
+                    for (KhachHang kh : this.customerList) {
+                        if (kh.getCustomerID().equals(str)) {
+                            kh.suaThongTin();
+                            isDone = true;
+                            break;
+                        }
+                    }
+
+                    if (!isDone) {
+                        System.out.println("\tKhông tìm thấy khách hàng!\n");
+                        continue;
+                    } else {
+                        this.writeAll();
+                    }
+
+                    break;
+                }
+                break;
+
+                case "2":
+                while (true) { 
+                    boolean isDone = false;
+                    System.out.print("\n\t=> Mời bạn nhập tên khách hàng: ");
+                    str = sc.nextLine();
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("\tTên khách hàng không được rỗng!");
+                        continue;
+                    }
+
+                    if (Function.isTrueNumber(str)) {
+                        System.out.println("\tTên khách hàng không được là số!");
+                        continue;
+                    }
+
+                    str = Function.normalizeName(str);
+
+                    for (KhachHang kh : this.customerList) {
+                        if (kh.getCustomerName().equals(str)) {
+                            kh.suaThongTin();
+                            isDone = true;
+                            break;
+                        }
+                    }
+
+                    if (!isDone) {
+                        System.out.println("\tKhông tìm thấy khách hàng!");
+                        continue;
+                    } else {
+                        this.writeAll();
+                    }
+
+                    break;
+                }
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                continue;
+            }
+
+            break;
+        }
+    }
+
+
+    
     public static void main(String[] args) {
         QLKhachHang ql = new QLKhachHang();
         ql.init();
-        ql.addCustomer();
-        ql.writeAll();
-        ql.xuatThongTin();
+        ql.removeCustomer();
     }
 
 

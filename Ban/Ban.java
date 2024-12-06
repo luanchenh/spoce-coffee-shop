@@ -11,7 +11,7 @@ public class Ban implements INhap, IXuat {
     private int numOfCustomersOfTable; // Số lượng người bàn có thể chứa (2,4,8 chỗ)
     private boolean status; // Tình trạng bàn: true là có người ngồi, false là chưa có người ngồi
 
-    private static int numOfTables = readNumberOfTablesFromFile(); // Số lượng bàn trong quán sẽ được đọc từ file
+    public static int numOfTables = readNumberOfTablesFromFile(); // Số lượng bàn trong quán sẽ được đọc từ file
 
     // Phương thức khởi tạo phi tham số
     // ID của bàn sẽ được gán tự động và tình trạng bàn mặc định sẽ là chưa có người ngồi (false)
@@ -139,11 +139,17 @@ public class Ban implements INhap, IXuat {
     // Phương thức để xuất thông tin bàn
     @Override
     public void xuatThongTin() {
-        System.out.println("===========================================================");
-        System.out.println("ID của bàn: " + this.tableID);
-        System.out.println("Số lượng chỗ ngồi: " + this.numOfCustomersOfTable);
+        // System.out.println("Thông tin bàn");
+        // System.out.println("    ID của bàn: " + this.tableID);
+        // System.out.println("    Số lượng chỗ ngồi: " + this.numOfCustomersOfTable);
+        // String tableStatus = this.status ? "Đã có người ngồi" : "Đang trống";
+        // System.out.println("    Tình trạng: " + tableStatus);
+
+        System.out.printf("\t| %-23s %-93s |%n", "Thông tin bàn", "");
+        System.out.printf("\t|     %-19s %-93s |%n", "ID của bàn:", this.tableID);
+        System.out.printf("\t|     %-19s %-93s |%n", "Số lượng chỗ ngồi:", this.numOfCustomersOfTable);
         String tableStatus = this.status ? "Đã có người ngồi" : "Đang trống";
-        System.out.println("Tình trạng: " + tableStatus);
+        System.out.printf("\t|     %-19s %-93s |%n", "Tình trạng:", tableStatus);
     }
 
 
@@ -283,13 +289,91 @@ public class Ban implements INhap, IXuat {
     public void printString() {
         String seats = this.numOfCustomersOfTable + " chỗ";
         String status;
-        if (this.status) {
+        if (!this.status) {
             status = "Trống";
         } else {
             status = "Đã có người ngồi";
         }
-        System.out.printf("%-5s %-25s %-10s\n", this.tableID, seats, status);
+        System.out.printf("\t| %-25s %-25s %-25s |\n", this.tableID, seats, status);
     }
 
+    // Phương thức dùng để tìm ra bàn phù hợp với số lượng khách đồng thời cập nhật vào file
+    public static Ban findTable(int numOfCustomers) {
+        Ban table = null;
+        QLBan ql = new QLBan();
+        ql.init();
+
+        if (numOfCustomers >= 1 && numOfCustomers <= 2) {
+            for (Ban ban : ql.tableList) {
+                if (ban.getCustomerPerTable() == 2 && !ban.getTableStatus()) {
+                    table = ban;
+                    ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                    break;
+                }
+            }
+
+            if (table == null) {
+                for (Ban ban : ql.tableList) {
+                    if (ban.getCustomerPerTable() == 4 && !ban.getTableStatus()) {
+                        table = ban;
+                        ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                        break;
+                    }
+                }
+            }
+
+            if (table == null) {
+                for (Ban ban : ql.tableList) {
+                    if (ban.getCustomerPerTable() == 8 && !ban.getTableStatus()) {
+                        table = ban;
+                        ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                        break;
+                    }
+                }
+            }
+        } else if (numOfCustomers >= 3 && numOfCustomers <= 4) {
+            for (Ban ban : ql.tableList) {
+                if (ban.getCustomerPerTable() == 4 && !ban.getTableStatus()) {
+                    table = ban;
+                    ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                    break;
+                }
+            }
+
+            if (table == null) {
+                for (Ban ban : ql.tableList) {
+                    if (ban.getCustomerPerTable() == 8 && !ban.getTableStatus()) {
+                        table = ban;
+                        ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                        break;
+                    }
+                }
+            }
+        } else if (numOfCustomers >= 5 && numOfCustomers <= 8) {
+            for (Ban ban : ql.tableList) {
+                if (ban.getCustomerPerTable() == 8 && !ban.getTableStatus()) {
+                    table = ban;
+                    ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(true);
+                    break;
+                }
+            }
+        }
+
+        ql.writeAll();
+        return table;
+    }
+
+    // Phương thức dùng để hủy 1 bàn (chuyển trạng thái từ "đang được sử dụng" sang "trống") và cập nhật vào file
+    public void cancelTable() {
+        QLBan ql = new QLBan();
+        ql.init();
+        for (Ban ban : ql.tableList) {
+            if (ban.getTableID().equals(this.tableID)) {
+                ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(false);
+                break;
+            }
+        }
+        ql.writeAll();
+    }
 }
 

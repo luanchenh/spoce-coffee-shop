@@ -85,11 +85,12 @@ public class QLBan implements IXuat {
 
     // Phương thức dùng để in ra danh sách bàn
     public void printTableList() {
-        System.out.println("====================[Danh sách bàn]====================");
-        System.out.printf("%-5s %-25s %-10s\n", "Mã bàn", "Số chỗ ngồi", "Tình trạng\n");
+        System.out.println("\t=================================[Danh sách bàn]=================================");
+        System.out.printf("\t| %-25s %-25s %-25s |\n", "Mã bàn", "Số chỗ ngồi", "Tình trạng");
         for (Ban table : this.tableList) {
             table.printString();
         }
+        System.out.println("\t=================================================================================");
     }
 
     @Override
@@ -100,6 +101,8 @@ public class QLBan implements IXuat {
     }
 
     public static void main(String[] args) {
-
+        QLBan ql = new QLBan();
+        ql.init();
+        ql.printTableList();
     }
 }
