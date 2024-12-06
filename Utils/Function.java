@@ -113,4 +113,8 @@ public class Function {
         return result + " VNĐ";
     }
 
+    public static int getNumberFromCustomerID(String customerID) {
+        String str = customerID.substring(2);
+        return Integer.parseInt(str);
+    }
 }

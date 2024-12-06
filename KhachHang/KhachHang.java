@@ -1,5 +1,6 @@
 package KhachHang;
 
+import Utils.Function;
 import java.io.File;
 import java.util.Scanner;
 
@@ -9,32 +10,11 @@ public abstract class KhachHang {
     protected boolean isMember;
     protected MemberCard memberCard;
 
-    protected static int numOfCustomer = getNumberOfCustomerFromFile();
-
-    public static int getNumberOfCustomerFromFile() {
-        File customerFile = new File("../File/customer.txt");
-        String str = null;
-        try (Scanner sc = new Scanner(customerFile)) {
-            while (sc.hasNextLine()) {
-                str = sc.nextLine();
-            }
-        } catch (Exception e) {
-            System.out.println("Lỗi: " + e.getMessage());
-        }
-        int num;
-        if (str == null) {
-            num = 0;
-        } else {
-            String[] arr = str.split("\\|");
-            num = Integer.parseInt(arr[1].substring(2));
-        }
-
-        return num;
-    }
+    public static int numOfCustomer = getNumberOfCustomerFromFile();
 
     // Hàm khởi tạo phi tham số
     public KhachHang() {
-        this.customerID = "KH" + ++numOfCustomer;
+        this.customerID = makeCustomerID();
         this.isMember = false;
         this.memberCard = null;
     }
@@ -48,7 +28,7 @@ public abstract class KhachHang {
 
     // Hàm khởi tạo với tên khách hàng, trạng thái thành viên và thông tin thành viên (MemberCard)
     public KhachHang(String customerName, boolean isMember, MemberCard memberCard) {
-        this.customerID = "KH" + ++numOfCustomer;
+        this.customerID = makeCustomerID();
         this.customerName = customerName;
         this.isMember = isMember;
         this.memberCard = memberCard;
@@ -113,5 +93,35 @@ public abstract class KhachHang {
         } else {
             System.out.println("\tKhách hàng hiện không phải là thành viên!");
         }
+    }
+
+    // Phương thức dùng để đọc số lượng khách hàng từ file
+    public static int getNumberOfCustomerFromFile() {
+        File customerFile = new File("../File/customer.txt");
+        int num = 0;
+        try (Scanner sc = new Scanner(customerFile)) {
+            while (sc.hasNextLine()) {
+                num++;
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+
+        return num;
+    }
+
+    public static String makeCustomerID() {
+        QLKhachHang ql = new QLKhachHang();
+        ql.init();
+        int idNumber = 1;
+        for (KhachHang kh : ql.customerList) {
+            if (Function.getNumberFromCustomerID(kh.getCustomerID()) == idNumber) {
+                idNumber++;
+            } else {
+                break;
+            }
+        }
+
+        return "KH" + idNumber;
     }
 }
