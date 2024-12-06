@@ -1,15 +1,31 @@
 package KhachHang;
 
-import Utils.INhap;
-import Utils.IXuat;
+import java.io.File;
+import java.util.Scanner;
 
-public abstract class KhachHang implements INhap, IXuat {
+public abstract class KhachHang {
     protected String customerID;
     protected String customerName;
     protected boolean isMember;
     protected MemberCard memberCard;
 
-    protected static int numOfCustomer = 0;
+    protected static int numOfCustomer = getNumberOfCustomerFromFile();
+
+    public static int getNumberOfCustomerFromFile() {
+        File customerFile = new File("../File/customer.txt");
+        String str = null;
+        try (Scanner sc = new Scanner(customerFile)) {
+            while (sc.hasNextLine()) {
+                str = sc.nextLine();
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+
+        String[] arr = str.split("\\|");
+        int num = Integer.parseInt(arr[1].substring(2));
+        return num;
+    }
 
     // Hàm khởi tạo phi tham số
     public KhachHang() {
@@ -28,6 +44,13 @@ public abstract class KhachHang implements INhap, IXuat {
     // Hàm khởi tạo với tên khách hàng, trạng thái thành viên và thông tin thành viên (MemberCard)
     public KhachHang(String customerName, boolean isMember, MemberCard memberCard) {
         this.customerID = "KH" + ++numOfCustomer;
+        this.customerName = customerName;
+        this.isMember = isMember;
+        this.memberCard = memberCard;
+    }
+
+    public KhachHang(String customerID, String customerName, boolean isMember, MemberCard memberCard) {
+        this.customerID = customerID;
         this.customerName = customerName;
         this.isMember = isMember;
         this.memberCard = memberCard;
@@ -72,4 +95,6 @@ public abstract class KhachHang implements INhap, IXuat {
     // Phương thức trừu tượng để xuất thông tin
     public abstract void xuatThongTin();
 
+    // Phương thức trừu tượng để tạo chuỗi ghi vào file
+    public abstract String makeString();
 }

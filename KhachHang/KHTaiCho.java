@@ -1,11 +1,8 @@
 package KhachHang;
 
-import Utils.Function;
-import Utils.INhap;
-import Utils.IXuat;
-import Utils.Date;
-import java.util.Scanner;
 import Ban.Ban;
+import Utils.Function;
+import java.util.Scanner;
 
 public class KHTaiCho extends KhachHang {
     private int dineInCustomer; // số lượng khách
@@ -27,6 +24,12 @@ public class KHTaiCho extends KhachHang {
     public KHTaiCho(String customerName, boolean isMember, MemberCard memberCard, int dineInCustomer) {
         super(customerName, isMember, memberCard);
         this.dineInCustomer = dineInCustomer;
+        this.table = null;
+    }
+
+    public KHTaiCho(String customerID, String customerName, boolean isMember, MemberCard memberCard) {
+        super(customerID, customerName, isMember, memberCard);
+        this.dineInCustomer = 0;
         this.table = null;
     }
 
@@ -139,6 +142,9 @@ public class KHTaiCho extends KhachHang {
             this.dineInCustomer = Integer.parseInt(str);
             break;
         }
+    
+        // Tìm ra bàn phù hợp
+        // this.table = findTable(this.dineInCustomer);
     }
 
     // Hàm xuất thông tin của khách hàng dùng tại chỗ
@@ -155,6 +161,8 @@ public class KHTaiCho extends KhachHang {
         System.out.println("Số lượng khách dùng tại chỗ: " + this.dineInCustomer);
         if (this.table != null) {
             this.table.xuatThongTin();
+        } else {
+            System.out.println("Thông tin bàn: Chưa có bàn phù hợp");
         }
     }
 
@@ -419,5 +427,20 @@ public class KHTaiCho extends KhachHang {
 
             break; // while
         }
+    }
+
+    @Override
+    public String makeString() {
+        StringBuilder str = new StringBuilder();
+        str.append("0|");
+        str.append(this.customerID).append("|");
+        str.append(this.customerName).append("|");
+
+        String memberStatus = this.isMember ? "1" : "0";
+        str.append(memberStatus).append("|");
+        if (this.isMember) {
+            str.append(this.memberCard.makeString()).append("|");
+        }
+        return str.toString();
     }
 }

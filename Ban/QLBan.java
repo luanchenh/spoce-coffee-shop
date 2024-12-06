@@ -1,13 +1,13 @@
 package Ban;
 
+import Utils.IXuat;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import Utils.IXuat;
 
 public class QLBan implements IXuat {
-    ArrayList<Ban> tableList;
+    public ArrayList<Ban> tableList;
 
     public QLBan() {
         this.tableList = new ArrayList<>();
@@ -46,7 +46,7 @@ public class QLBan implements IXuat {
     public void writeAll() {
         try (FileWriter writer = new FileWriter("../File/table.txt", false)) {
             for (Ban ban : this.tableList) {
-                writer.append(ban.makeString() + "\n");
+                writer.write(ban.makeString() + "\n");
             }
             writer.flush();
         } catch (Exception e) {
@@ -100,10 +100,6 @@ public class QLBan implements IXuat {
     }
 
     public static void main(String[] args) {
-        QLBan ql = new QLBan();
-        ql.init();
-        ql.addTable();
-        ql.xuatThongTin();
-        ql.writeAll();
+
     }
 }

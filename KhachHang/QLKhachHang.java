@@ -1,12 +1,17 @@
 package KhachHang;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import Utils.Address;
+import Utils.Date;
 import Utils.Function;
 import Utils.IXuat;
+import Utils.Province;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class QLKhachHang implements IXuat {
-    ArrayList<KhachHang> customerList; // Array List để lưu các khách hàng
+    public ArrayList<KhachHang> customerList; // Array List để lưu các khách hàng
 
     // Phương thức khởi tạo phi tham số sẽ cấp phát bộ nhớ cho ArrayList
     public QLKhachHang() {
@@ -18,11 +23,57 @@ public class QLKhachHang implements IXuat {
         this.customerList = customerList;
     }
 
+    // Phương thức để nhập dữ liệu từ file vào Array List
+    public void init() {
+        File customerFile = new File("../File/customer.txt");
+        try (Scanner sc = new Scanner(customerFile)) {
+            while (sc.hasNextLine()) {
+                KhachHang kh = null;
+                String str = sc.nextLine();
+                String[] arr = str.split("\\|");
+                MemberCard card = null;
+                boolean status = false;
+                if (arr[3].equals("1")) {
+                    card = new MemberCard(arr[4], new Date(arr[5], arr[6], arr[7]), new Date(arr[8], arr[9], arr[10]), new Date(arr[11], arr[12], arr[13]), Integer.parseInt(arr[14]));
+                    status = true;
+                }
+
+                if (arr[0].equals("0")) {
+                    kh = new KHTaiCho(arr[1], arr[2], status, card);
+                } else {
+                    Address address;
+                    if (status) {
+                        address = new Address(arr[15], arr[16], arr[17], new Province(arr[18], arr[19]));
+                    } else {
+                        address = new Address(arr[4], arr[5], arr[6], new Province(arr[7], arr[8]));
+                    }
+                    kh = new KHMangDi(arr[1], arr[2], status, card, address);
+                }
+
+                this.customerList.add(kh);
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+
+    // Phương thức để ghi dữ liệu từ mảng vào file
+    public void writeAll() {
+        try (FileWriter writer = new FileWriter("../File/customer.txt", false)) {
+            for (KhachHang kh : this.customerList) {
+                writer.write(kh.makeString() + "\n");
+            }
+            writer.flush();
+        } catch (Exception e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+
     // Phương thức để thêm một khách hàng vào Array List
-    public boolean addCustomer() {
+    public void addCustomer() {
         Scanner sc = new Scanner(System.in);
         String str;
-        KhachHang kh = null;
+        KhachHang kh = null;    
 
         while (true) { 
             System.out.println("Chọn loại khách hàng");
@@ -62,9 +113,9 @@ public class QLKhachHang implements IXuat {
 
             kh.nhapThongTin();
             this.customerList.add(kh);
+            System.out.println("\n===== Thêm khách hàng thành công! =====\n");
             break;
         }
-        return true;
     }
 
     // Phương thức để xóa một khách hàng khỏi Array List
@@ -86,10 +137,15 @@ public class QLKhachHang implements IXuat {
         }
     }
 
+    // public void modifyCustomer() {
+    //     Scanner sc = new Scanner(System.in);
+
+    // }
     public static void main(String[] args) {
         QLKhachHang ql = new QLKhachHang();
+        ql.init();
         ql.addCustomer();
-        ql.customerList.get(0).suaThongTin();
+        ql.writeAll();
         ql.xuatThongTin();
     }
 

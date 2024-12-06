@@ -1,10 +1,10 @@
 package Ban;
 
+import Utils.Function;
 import Utils.INhap;
 import Utils.IXuat;
 import java.io.File;
 import java.util.Scanner;
-import Utils.Function;
 
 public class Ban implements INhap, IXuat {
     private String tableID; // ID của bàn (B1, B2, B3)
@@ -290,4 +290,6 @@ public class Ban implements INhap, IXuat {
         }
         System.out.printf("%-5s %-25s %-10s\n", this.tableID, seats, status);
     }
+
 }
+
