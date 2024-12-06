@@ -94,24 +94,25 @@ public class MemberCard implements INhap, IXuat {
     public void nhapThongTin() {
         Scanner sc = new Scanner(System.in);
         String str;
-        System.out.println("Thông tin thành viên");
+        System.out.println("\n\t[Notice] Thông tin thành viên");
 
-        System.out.println("Thông tin ngày sinh của khách hàng");
+        
 
         loop:
         while (true) {
+            System.out.println("\tThông tin ngày sinh của khách hàng");
             loop1:
             while (true) {
-                System.out.print("Mời nhập ngày: ");
+                System.out.print("\t=> Mời nhập ngày: ");
                 str = sc.nextLine();
 
                 if (Function.isEmpty(str)) {
-                    System.out.println("Ngày sinh không được rỗng!");
+                    System.out.println("\tNgày sinh không được rỗng!\n");
                     continue loop1;
                 }
 
                 if (!Function.isTrueNumber(str)) {
-                    System.out.println("Ngày sinh phải là số!");
+                    System.out.println("\tNgày sinh phải là số!\n");
                     continue loop1;
                 }
 
@@ -121,16 +122,16 @@ public class MemberCard implements INhap, IXuat {
 
             loop1:
             while (true) {
-                System.out.print("Mời nhập tháng: ");
+                System.out.print("\n\t=> Mời nhập tháng: ");
                 str = sc.nextLine();
 
                 if (Function.isEmpty(str)) {
-                    System.out.println("Tháng sinh không được rỗng!");
+                    System.out.println("\tTháng sinh không được rỗng!\n");
                     continue loop1;
                 }
 
                 if (!Function.isTrueNumber(str)) {
-                    System.out.println("Tháng sinh phải là số!");
+                    System.out.println("\tTháng sinh phải là số!\n");
                     continue loop1;
                 }
 
@@ -140,16 +141,16 @@ public class MemberCard implements INhap, IXuat {
 
             loop1:
             while (true) {
-                System.out.print("Mời nhập năm: ");
+                System.out.print("\n\t=> Mời nhập năm: ");
                 str = sc.nextLine();
 
                 if (Function.isEmpty(str)) {
-                    System.out.println("Năm sinh không được rỗng!");
+                    System.out.println("\tNăm sinh không được rỗng!\n");
                     continue loop1;
                 }
 
                 if (!Function.isTrueNumber(str)) {
-                    System.out.println("Năm sinh phải là số!");
+                    System.out.println("\tNăm sinh phải là số!\n");
                     continue loop1;
                 }
 
@@ -158,7 +159,7 @@ public class MemberCard implements INhap, IXuat {
             }
 
             if (!this.birthday.isValidDate()) {
-                System.out.println("Dữ liệu ngày không hợp lệ!");
+                System.out.println("\tDữ liệu ngày không hợp lệ!\n");
                 continue loop;
             } else {
                 break loop;
@@ -166,16 +167,16 @@ public class MemberCard implements INhap, IXuat {
         }
 
         while (true) {
-            System.out.print("Nhập điểm tích lũy: ");
+            System.out.print("\n\t=> Nhập điểm tích lũy: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Lựa chọn không được rỗng!");
+                System.out.println("\tLựa chọn không được rỗng!\n");
                 continue;
             }
 
             if (!Function.isTrueNumber(str)) {
-                System.out.println("Lựa chọn phải là số!");
+                System.out.println("\tLựa chọn phải là số!\n");
                 continue;
             }
 
@@ -186,18 +187,18 @@ public class MemberCard implements INhap, IXuat {
 
     @Override
     public void xuatThongTin() {
-        System.out.println("Mã thành viên: " + this.cardID);
-        System.out.println("Ngày sinh: " + this.birthday.toString());
-        System.out.println("Điểm tích lũy: " + this.point);
-        System.out.println("Thời hạn đổi điểm: " + this.startDate.toString() + " - " + this.endDate.toString());
+        // System.out.println("Mã thành viên: " + this.cardID);
+        // System.out.println("Ngày sinh: " + this.birthday.toString());
+        // System.out.println("Điểm tích lũy: " + this.point);
+        // System.out.println("Thời hạn đổi điểm: " + this.startDate.toString() + " - " + this.endDate.toString());
+        System.out.printf("\t| %-23s %-93s |%n", "Mã thành viên:", this.cardID);
+        System.out.printf("\t| %-23s %-93s |%n", "Ngày sinh:", this.birthday.toString());
+        System.out.printf("\t| %-23s %-93s |%n", "Điểm tích lũy:", this.point);
+        System.out.printf("\t| %-23s %-93s |%n", "Thời hạn đổi điểm:", this.startDate.toString() + " - " + this.endDate.toString());
     }
 
     // Phương thức tạo chuỗi để ghi vào file
     public String makeString() {
         return this.cardID + "|" + this.birthday.getDay() + "|" + this.birthday.getMonth() + "|" + this.birthday.getYear() + "|" + this.startDate.getDay() + "|" + this.startDate.getMonth() + "|" + this.startDate.getYear() + "|" + this.endDate.getDay() + "|" + this.endDate.getMonth() + "|" + this.endDate.getYear() + "|" + this.point;
-    }
-
-    public String makeString() {
-        return this.cardID +"|"+ this.birthday.toString() +"|"+ this.point +"|"+ this.startDate.toString() +"|"+ this.endDate.toString();
     }
 }

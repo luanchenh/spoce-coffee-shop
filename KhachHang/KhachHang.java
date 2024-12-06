@@ -21,9 +21,14 @@ public abstract class KhachHang {
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
         }
+        int num;
+        if (str == null) {
+            num = 0;
+        } else {
+            String[] arr = str.split("\\|");
+            num = Integer.parseInt(arr[1].substring(2));
+        }
 
-        String[] arr = str.split("\\|");
-        int num = Integer.parseInt(arr[1].substring(2));
         return num;
     }
 
