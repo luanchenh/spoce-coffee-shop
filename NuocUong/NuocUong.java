@@ -1,6 +1,7 @@
 package NuocUong;
 
 import Utils.INhap;
+import Utils.IXuat;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import Topping.QLTopping;
 import Topping.Topping;
 
 @SuppressWarnings("resource")
-public abstract class NuocUong implements INhap {
+public abstract class NuocUong implements INhap, IXuat {
     protected String id;
     protected String name;
     protected Map<String, Integer> sizePrice;
@@ -83,31 +84,40 @@ public abstract class NuocUong implements INhap {
         this.isSugar = isSugar;
     }
 
-    // ========================================[Getter - Setter]========================================
+    // ========================================[Getter -
+    // Setter]========================================
     public String getId() {
         return id;
     }
+
     public String getName() {
         return name;
     }
+
     public Map<String, Integer> getSizePrice() {
         return sizePrice;
     }
+
     public ArrayList<String> getTopping() {
         return topping;
     }
+
     public String getDrinkType() {
         return drinkType;
     }
+
     public boolean isCold() {
         return isCold;
     }
+
     public boolean isHot() {
         return isHot;
     }
+
     public boolean isMilk() {
         return isMilk;
     }
+
     public boolean isSugar() {
         return isSugar;
     }
@@ -115,33 +125,41 @@ public abstract class NuocUong implements INhap {
     public void setId(String id) {
         this.id = id;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public void setSizePrice(Map<String, Integer> sizePrice) {
         this.sizePrice = sizePrice;
     }
+
     public void setTopping(ArrayList<String> topping) {
         this.topping = topping;
     }
+
     public void setDrinkType(String drinkType) {
         this.drinkType = drinkType;
     }
+
     public void setCold(boolean isCold) {
         this.isCold = isCold;
     }
+
     public void setHot(boolean isHot) {
         this.isHot = isHot;
     }
+
     public void setMilk(boolean isMilk) {
         this.isMilk = isMilk;
     }
+
     public void setSugar(boolean isSugar) {
         this.isSugar = isSugar;
     }
 
-
-    // ========================================[Bolean Method]========================================
+    // ========================================[Bolean
+    // Method]========================================
     // Kiểm tra thêm được hay xoá được sản phẩm hay không
     public boolean addTopping(String idTopping) {
         this.topping.add(idTopping);
@@ -158,7 +176,8 @@ public abstract class NuocUong implements INhap {
             return false;
     }
 
-    // ========================================[Override Method]========================================
+    // ========================================[Override
+    // Method]========================================
     @Override
     public void nhapThongTin() {
         Scanner sc = new Scanner(System.in);
@@ -235,8 +254,7 @@ public abstract class NuocUong implements INhap {
                                         this.id = str;
                                         System.out.println("[Notice] ID đồ uống hiện tại: " + this.id);
                                         break;
-                                    }
-                                    else {
+                                    } else {
                                         System.out.println("Vui lòng nhập số");
                                     }
                                 }
@@ -446,8 +464,7 @@ public abstract class NuocUong implements INhap {
                     str = sc.nextLine();
                     if (Function.isEmpty(str)) {
                         System.out.println("Vui lòng không để trống !");
-                    }
-                    else {
+                    } else {
                         if (Function.isTrueNumber(str)) {
                             String result = "TP" + str;
                             for (Topping tp : list.getToppingList()) {
@@ -458,8 +475,7 @@ public abstract class NuocUong implements INhap {
                                 }
                             }
                             System.out.println("ID không tồn tại !");
-                        }
-                        else {
+                        } else {
                             System.out.println("Vui lòng nhập số !");
                         }
                     }
@@ -467,6 +483,34 @@ public abstract class NuocUong implements INhap {
             }
         }
 
+    }
+
+    @Override
+    public void xuatThongTin() {
+        System.out.println("=======================================");
+        System.out.println("Thông tin sản phẩm nước uống:");
+        System.out.println("ID: " + this.id);
+        System.out.println("Tên đồ uống: " + this.name);
+        System.out.println("Loại đồ uống: " + this.drinkType);
+        System.out.println("Có thể uống lạnh: " + (this.isCold ? "Có" : "Không"));
+        System.out.println("Có thể uống nóng: " + (this.isHot ? "Có" : "Không"));
+        System.out.println("Có sữa: " + (this.isMilk ? "Có" : "Không"));
+        System.out.println("Có đường: " + (this.isSugar ? "Có" : "Không"));
+
+        System.out.println("\nBảng giá theo size:");
+        for (Map.Entry<String, Integer> entry : sizePrice.entrySet()) {
+            System.out.println("- Size " + entry.getKey() + ": " + entry.getValue() + " VND");
+        }
+
+        System.out.println("\nDanh sách topping:");
+        if (topping.isEmpty()) {
+            System.out.println("Không có topping nào.");
+        } else {
+            for (String tp : topping) {
+                System.out.println("- " + tp);
+            }
+        }
+        System.out.println("=======================================");
     }
 
     public boolean askYesNo(String luaChon) {

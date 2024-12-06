@@ -100,7 +100,7 @@ public class QLNuocUong {
         QLNuocUong list = new QLNuocUong();
         list.Init();
         for (NuocUong nu : list.getWaterList()) {
-            System.out.println(nu.makeString());
+            nu.xuatThongTin();
         }
     }
 
