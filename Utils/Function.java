@@ -3,6 +3,7 @@
  */
 package Utils;
 
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Function {
@@ -113,16 +114,9 @@ public class Function {
         return result + " VNĐ";
     }
 
-<<<<<<< HEAD
     public static void clearScreen() {
         System.out.print("\u001b[H\u001b[2J");
         System.out.flush();
     }
 
-=======
-    public static int getNumberFromCustomerID(String customerID) {
-        String str = customerID.substring(2);
-        return Integer.parseInt(str);
-    }
->>>>>>> d94d0e504172d23ed46aca1fc3f760e68f78333c
 }

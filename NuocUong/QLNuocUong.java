@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -31,6 +32,7 @@ public class QLNuocUong {
     }
 
     public void Init() {
+        this.waterList.clear();
         try (Scanner rd = new Scanner(waterFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();
@@ -99,6 +101,51 @@ public class QLNuocUong {
         }
     }
 
+    public void writeFile() {
+        String line;
+        try (FileWriter writer = new FileWriter(waterFile, false)) { // Mở file ở chế độ ghi đè
+            for (NuocUong nu : this.waterList) {
+                line = nu.makeString();
+                writer.append(line);
+                writer.append(System.lineSeparator()); // Thêm dấu xuống hàng
+            }
+            System.out.println("\tCập nhật dữ liệu thành công !");
+            writer.close();
+        } catch (Exception e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
+    }
+
+    // Thêm xoá sản phẩm
+    // Xoá sản phẩm bằng ID
+    public boolean removeByID(String ID) {
+        Iterator<NuocUong> iterator = this.waterList.iterator();
+        while (iterator.hasNext()) {
+            NuocUong nu = iterator.next();
+            if (nu.getId().equalsIgnoreCase(ID)) {
+                iterator.remove(); // Xóa phần tử an toàn
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean removeByName(String name) {
+        final String CONTAINS_NAME = name.toLowerCase();
+        boolean isRemoved = false;
+
+        // Duyệt danh sách và dùng Iterator để xóa an toàn
+        Iterator<NuocUong> iterator = this.waterList.iterator();
+        while (iterator.hasNext()) {
+            NuocUong nu = iterator.next();
+            if (nu.getName().toLowerCase().contains(CONTAINS_NAME)) {
+                iterator.remove();
+                isRemoved = true;
+            }
+        }
+
+        return isRemoved;
+    }
+
     public void addNewWater() {
         Scanner sc = new Scanner(System.in);
         String str;
@@ -152,20 +199,79 @@ public class QLNuocUong {
     public void removeWater() {
         Scanner sc = new Scanner(System.in);
         String str;
+        int number = 0;
         while (true) {
             System.out.println("\tCó các lựa chọn sau để xoá sản phẩm: ");
             System.out.println("\t1. Xoá theo ID");
-            System.out.println("\t2. Xoá theo Tên (Kiểm tra từ đó có chứa. Lưu ý trước khi chọn)");
+            System.out.println("\t2. Xoá theo Tên (sẽ xoá từ đó có chứa chữ. Lưu ý trước khi chọn)");
             System.out.print("\t Nhập lựa chọn: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không để trống !");
+            }
+            else {
+                if (Function.isTrueNumber(str)) {
+                    number = Integer.parseInt(str);
+                    if (number >= 1 && number <= 2) {
+                        if (number == 1) {
+                            number = 1;
+                        }
+                        if (number == 2) {
+                            number = 2;
+                        }
+                        break;
+                    }
+                    else {
+                        System.out.println("\tVui lòng nhập trong khoảng 1 đến 4 !");
+                    }
+                }
+                else {
+                    System.out.println("\tVui lòng nhập số !");
+                }
             }
         }
         // In ra danh sách để cho người dùng có thể xoá
         System.out.println("\tĐịnh dạng chuỗi: ID | TÊN | ISCOLD | ISHOT | ISMILK | ISSUGAR | SIZEPRICE | TOPPING ");
         for (NuocUong nu : this.waterList) {
             System.out.println("\t"+ nu.makeString());
+        }
+        if (number == 1) {
+            while (true) {
+                System.out.print("\t Nhập ID muốn xoá (bao gồm mã loại sản phẩm): ");
+                str = sc.nextLine();
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống !");
+                }
+                else {
+                    if (this.removeByID(str)) {
+                        System.out.println("\tXoá thành công sản phẩm có ID: "+ str);
+                        this.writeFile();
+                        break;
+                    }
+                    else {
+                        System.out.println("\tHệ thống không tồn tại ID: "+ str);
+                        break;
+                    }
+                }
+            }
+        }
+        else if (number == 2) {
+            while (true) {
+                System.out.print("\t Nhập tên hoặc chuỗi muốn xoá (sẽ xoá nếu sản phẩm chứa chuỗi này): ");
+                str = sc.nextLine();
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống !");
+                } else {
+                    if (this.removeByName(str)) {
+                        System.out.println("\tXoá thành công các sản phẩm có tên chứa: " + str);
+                        this.writeFile();
+                        break;
+                    } else {
+                        System.out.println("\tKhông tìm thấy sản phẩm nào có tên chứa: " + str);
+                        break;
+                    }
+                }
+            }
         }
 
     }
@@ -224,6 +330,9 @@ public class QLNuocUong {
                         }
                         if (number == 3) {
                             this.removeWater();
+                        }
+                        if (number == 5) {
+                            this.Init();
                         }
                         if (number == 10) {
                             Function.clearScreen();
