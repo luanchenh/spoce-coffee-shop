@@ -1,6 +1,7 @@
 package NuocUong;
 
 import Utils.INhap;
+import Utils.IXuat;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import Topping.QLTopping;
 import Topping.Topping;
 
 @SuppressWarnings("resource")
-public abstract class NuocUong implements INhap {
+public abstract class NuocUong implements INhap, IXuat {
     protected String id;
     protected String name;
     protected Map<String, Integer> sizePrice;
@@ -26,18 +27,49 @@ public abstract class NuocUong implements INhap {
     // Map để quản lý số thứ tự theo loại nước uống
     private static final Map<String, Integer> typeCounter = new HashMap<>();
     static {
+        int totalTS = 0;
+        int totalCF = 0;
+        int totalST = 0;
+        int totalTC = 0;
+        File waterFile = new File("../File/water.txt");
+        try (Scanner rd = new Scanner(waterFile)) {
+            String line = rd.nextLine();
+            String value = line.substring(0, 3);
+            if (value.equalsIgnoreCase("TS")) {
+                totalTS += 1;
+            }
+            else if (value.equalsIgnoreCase("CF")) {
+                totalCF += 1;
+            }
+            else if (value.equalsIgnoreCase("ST")) {
+                totalST += 1;
+            }
+            else if (value.equalsIgnoreCase("TC")) {
+                totalTC += 1;
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi: "+ e.getMessage());
+        }
         // Khởi tạo số thứ tự ban đầu cho từng loại
-        typeCounter.put("TS", 0);
-        typeCounter.put("CF", 0);
-        typeCounter.put("ST", 0);
-        typeCounter.put("TC", 0);
+        typeCounter.put("TS", totalTS);
+        typeCounter.put("CF", totalCF);
+        typeCounter.put("ST", totalST);
+        typeCounter.put("TC", totalTC);
     }
+    // Đường dẫn File để get ID tự động cho nước uống
     File toppingFile = new File("../File/topping.txt");
 
     // Constructor không tham số
     public NuocUong() {
         this.sizePrice = new HashMap<>();
         this.topping = new ArrayList<>();
+        this.id = "";
+        this.name = "";
+        this.drinkType = "";
+        this.isCold = false;
+        this.isHot = false;
+        this.isMilk = false;
+        this.isSugar = false;
     }
 
     // Constructor biết được loại nước uống
@@ -53,7 +85,7 @@ public abstract class NuocUong implements INhap {
 
         // Tăng số thứ tự cho loại nước uống
         if (typeCounter.containsKey(drinkType)) {
-            int currentCount = typeCounter.get(drinkType) + 1;
+            int currentCount = typeCounter.get(drinkType);
             typeCounter.put(drinkType, currentCount);
             this.id = drinkType + currentCount; // Tạo ID theo loại
         } else {
@@ -75,6 +107,82 @@ public abstract class NuocUong implements INhap {
         this.isSugar = isSugar;
     }
 
+    // ========================================[Getter -
+    // Setter]========================================
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Map<String, Integer> getSizePrice() {
+        return sizePrice;
+    }
+
+    public ArrayList<String> getTopping() {
+        return topping;
+    }
+
+    public String getDrinkType() {
+        return drinkType;
+    }
+
+    public boolean isCold() {
+        return isCold;
+    }
+
+    public boolean isHot() {
+        return isHot;
+    }
+
+    public boolean isMilk() {
+        return isMilk;
+    }
+
+    public boolean isSugar() {
+        return isSugar;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSizePrice(Map<String, Integer> sizePrice) {
+        this.sizePrice = sizePrice;
+    }
+
+    public void setTopping(ArrayList<String> topping) {
+        this.topping = topping;
+    }
+
+    public void setDrinkType(String drinkType) {
+        this.drinkType = drinkType;
+    }
+
+    public void setCold(boolean isCold) {
+        this.isCold = isCold;
+    }
+
+    public void setHot(boolean isHot) {
+        this.isHot = isHot;
+    }
+
+    public void setMilk(boolean isMilk) {
+        this.isMilk = isMilk;
+    }
+
+    public void setSugar(boolean isSugar) {
+        this.isSugar = isSugar;
+    }
+
+    // ========================================[Bolean
+    // Method]========================================
     // Kiểm tra thêm được hay xoá được sản phẩm hay không
     public boolean addTopping(String idTopping) {
         this.topping.add(idTopping);
@@ -91,53 +199,98 @@ public abstract class NuocUong implements INhap {
             return false;
     }
 
+    // ========================================[Override
+    // Method]========================================
     @Override
     public void nhapThongTin() {
         Scanner sc = new Scanner(System.in);
         String str;
-        int number;
+        int number = 0;
         boolean action;
-        while (true) {
-            for (Map.Entry<String, Integer> entry : typeCounter.entrySet()) {
-                if (entry.getKey().equals("TS")) {
-                    System.out.println("1. [Trà sữa] " + entry.getKey() + "-" + entry.getValue());
-                } else if (entry.getKey().equals("CF")) {
-                    System.out.println("2. [Cà phê] " + entry.getKey() + "-" + entry.getValue());
-                } else if (entry.getKey().equals("ST")) {
-                    System.out.println("3. [Sinh tố] " + entry.getKey() + "-" + entry.getValue());
-                } else if (entry.getKey().equals("TC")) {
-                    System.out.println("4. [Nước trái cây] " + entry.getKey() + "-" + entry.getValue());
+        if (this.drinkType.equals("")) {
+            while (true) {
+                for (Map.Entry<String, Integer> entry : typeCounter.entrySet()) {
+                    if (entry.getKey().equals("TS")) {
+                        System.out.println("1. [Trà sữa] " + entry.getKey() + "-" + entry.getValue());
+                    } else if (entry.getKey().equals("CF")) {
+                        System.out.println("2. [Cà phê] " + entry.getKey() + "-" + entry.getValue());
+                    } else if (entry.getKey().equals("ST")) {
+                        System.out.println("3. [Sinh tố] " + entry.getKey() + "-" + entry.getValue());
+                    } else if (entry.getKey().equals("TC")) {
+                        System.out.println("4. [Nước trái cây] " + entry.getKey() + "-" + entry.getValue());
+                    }
                 }
-            }
-            System.out.print("Chọn loại đồ uống: ");
-            str = sc.nextLine();
-            if (Function.isEmpty(str)) {
-                System.out.println("Vui lòng không để trống !");
-                continue;
-            } else {
-                if (Function.isTrueNumber(str)) {
-                    System.out.println("Loại đồ uống phải là số !");
+                System.out.print("Chọn loại đồ uống: ");
+                str = sc.nextLine();
+                if (Function.isEmpty(str)) {
+                    System.out.println("Vui lòng không để trống !");
+                    continue;
                 } else {
-                    number = Integer.parseInt(str);
-                    if (number < 1 || number > 4) {
-                        System.out.println("Vui lòng chọn trong khoảng phạm vi từ 1 đến 4 !");
-                    } else {
-                        if (number == 1) {
-                            this.drinkType = "TS";
-                        } else if (number == 2) {
-                            this.drinkType = "CF";
-                        } else if (number == 3) {
-                            this.drinkType = "ST";
-                        } else if (number == 4) {
-                            this.drinkType = "TC";
+                    if (Function.isTrueNumber(str)) {
+                        number = Integer.parseInt(str);
+                        if (number < 1 || number > 4) {
+                            System.out.println("Vui lòng chọn trong khoảng phạm vi từ 1 đến 4 !");
+                        } else {
+                            if (number == 1) {
+                                this.drinkType = "TS";
+                            } else if (number == 2) {
+                                this.drinkType = "CF";
+                            } else if (number == 3) {
+                                this.drinkType = "ST";
+                            } else if (number == 4) {
+                                this.drinkType = "TC";
+                            }
+                            break;
                         }
-                        break;
+                    } else {
+                        System.out.println("Vui lòng nhập số !");
                     }
                 }
             }
         }
-        this.id = this.drinkType + (typeCounter.get(this.drinkType) + 1);
-        System.out.println("[Notice] ID đồ uống hiện tại: " + this.id);
+        System.out.println("[Notice] Loại đồ uống hiện tại: " + this.drinkType);
+        while (true) {
+            System.out.println("Bạn muốn nhập ID hay tạo ID tự động ?");
+            System.out.println("1. [Tự động]");
+            System.out.println("2. [Nhập ID]");
+            System.out.print("Nhập lựa chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("Vui lòng không để trống !");
+            } else {
+                if (Function.isTrueNumber(str)) {
+                    if (str.equals("1")) {
+                        if (typeCounter.containsKey(this.drinkType)) {
+                            int currentCount = typeCounter.get(this.drinkType) + 1;
+                            typeCounter.put(this.drinkType, currentCount);
+                            this.id = this.drinkType + currentCount;
+                            System.out.println("[Notice] ID đồ uống hiện tại: " + this.id);
+                            break;
+                        } else if (str.equals("2")) {
+                            while (true) {
+                                System.out.print("Nhập ID: ");
+                                str = sc.nextLine();
+                                if (Function.isEmpty(str)) {
+                                    System.out.println("Vui lòng không để trống !");
+                                } else {
+                                    if (Function.isTrueNumber(str)) {
+                                        this.id = str;
+                                        System.out.println("[Notice] ID đồ uống hiện tại: " + this.id);
+                                        break;
+                                    } else {
+                                        System.out.println("Vui lòng nhập số");
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        System.out.println("Vui lòng nhập 1 hoặc 2 !");
+                    }
+                } else {
+                    System.out.println("Vui lòng nhập số !");
+                }
+            }
+        }
         while (true) {
             System.out.print("Nhập tên đồ uống: ");
             str = sc.nextLine();
@@ -154,7 +307,7 @@ public abstract class NuocUong implements INhap {
         }
         System.out.println("[Notice] Tên đồ uống hiện tại: " + this.name);
         while (true) {
-            System.out.print("Đồ uống có uống lạnh được không ?");
+            System.out.print("Đồ uống có điều chỉnh lạnh được không ?");
             System.out.println("1. [Yes]: Có");
             System.out.println("2. [No]: Không");
             System.out.print("Nhập lựa chọn: ");
@@ -173,7 +326,7 @@ public abstract class NuocUong implements INhap {
                 }
             }
         }
-        System.out.println("[Notice] Đồ uống uống lạnh được không: " + this.isCold);
+        System.out.println("[Notice] Đồ uống điều chỉnh độ nóng được không: " + this.isCold);
         while (true) {
             System.out.print("Đồ uống có uống nóng được không ?");
             System.out.println("1. [Yes]: Có");
@@ -195,7 +348,7 @@ public abstract class NuocUong implements INhap {
             }
         }
         while (true) {
-            System.out.println("Đồ uống có thêm sữa được không ?");
+            System.out.println("Đồ uống có điều chỉnh sữa được không ?");
             System.out.println("1. [Yes]: Có");
             System.out.println("2. [No]: Không");
             System.out.print("Nhập lựa chọn: ");
@@ -215,7 +368,7 @@ public abstract class NuocUong implements INhap {
             }
         }
         while (true) {
-            System.out.println("Đồ uống có thêm đường được không ?");
+            System.out.println("Đồ uống có thêm điều chỉnh được không ?");
             System.out.println("1. [Yes]: Có");
             System.out.println("2. [No]: Không");
             System.out.print("Nhập lựa chọn: ");
@@ -324,27 +477,29 @@ public abstract class NuocUong implements INhap {
             }
         }
 
-        if (action == false && number > 0) {
+        if (number > 0) {
             QLTopping list = new QLTopping();
             list.Init();
             for (int i = 0; i < number; i++) {
                 while (true) {
                     list.menuTable();
-                    System.out.print("Nhập mã loại topping thứ [" + i + 1 + "]: ");
+                    System.out.println("Nhập ID topping thứ " + (i + 1) + "(Nhập số): ");
                     str = sc.nextLine();
                     if (Function.isEmpty(str)) {
                         System.out.println("Vui lòng không để trống !");
                     } else {
-                        for (Topping tp : list.getToppingList()) {
-                            if (str.equalsIgnoreCase(tp.getId())) {
-                                if (this.addTopping(str)) {
-                                    System.out
-                                            .println("Thêm mã topping: " + str + " vào danh sách topping thành công !");
+                        if (Function.isTrueNumber(str)) {
+                            String result = "TP" + str;
+                            for (Topping tp : list.getToppingList()) {
+                                if (tp.getId().equals(result)) {
+                                    this.topping.add(result);
+                                    System.out.println("[Notice] Topping " + tp.getName() + " đã được thêm vào");
                                     break;
-                                } else {
-                                    System.out.println("Mã không tồn tại !");
                                 }
                             }
+                            System.out.println("ID không tồn tại !");
+                        } else {
+                            System.out.println("Vui lòng nhập số !");
                         }
                     }
                 }
@@ -353,92 +508,39 @@ public abstract class NuocUong implements INhap {
 
     }
 
-    public NuocUong createNuocUong() {
-        NuocUong nuocUong = null;
-        Scanner sc = new Scanner(System.in);
-        String str;
-        int number;
-    
-        // Chọn loại đồ uống
-        while (true) {
-            System.out.println("Chọn loại đồ uống:");
-            System.out.println("1. Trà sữa (TS)");
-            System.out.println("2. Cà phê (CF)");
-            System.out.println("3. Sinh tố (ST)");
-            System.out.println("4. Nước trái cây (TC)");
-            System.out.print("Nhập lựa chọn: ");
-            str = sc.nextLine();
-            if (Function.isEmpty(str)) {
-                System.out.println("Vui lòng không để trống!");
-            } else if (!Function.isTrueNumber(str)) {
-                System.out.println("Vui lòng nhập số hợp lệ!");
-            } else {
-                number = Integer.parseInt(str);
-                if (number < 1 || number > 4) {
-                    System.out.println("Vui lòng chọn trong phạm vi từ 1 đến 4!");
-                } else {
-                    String drinkType = "";
-                    switch (number) {
-                        case 1 -> drinkType = "TS";
-                        case 2 -> drinkType = "CF";
-                        case 3 -> drinkType = "ST";
-                        case 4 -> drinkType = "TC";
-                    }
-                    nuocUong = new NuocUong(drinkType) {};
-                    break;
-                }
-            }
+    @Override
+    public void xuatThongTin() {
+        System.out.println("=======================================");
+        System.out.println("Thông tin sản phẩm nước uống:");
+        System.out.println("ID: " + this.id);
+        System.out.println("Tên đồ uống: " + this.name);
+        System.out.println("Loại đồ uống: " + this.drinkType);
+        System.out.println("Có thể uống lạnh: " + (this.isCold ? "Có" : "Không"));
+        System.out.println("Có thể uống nóng: " + (this.isHot ? "Có" : "Không"));
+        System.out.println("Có sữa: " + (this.isMilk ? "Có" : "Không"));
+        System.out.println("Có đường: " + (this.isSugar ? "Có" : "Không"));
+
+        System.out.println("\nBảng giá theo size:");
+        for (Map.Entry<String, Integer> entry : sizePrice.entrySet()) {
+            System.out.println("- Size " + entry.getKey() + ": " + entry.getValue() + " VND");
         }
 
-        while (true) {
-            System.out.print("Nhập tên đồ uống: ");
-            str = sc.nextLine();
-            if (Function.isEmpty(str)) {
-                System.out.println("Vui lòng không để trống!");
-            } else if (Function.isTrueNumber(str)) {
-                System.out.println("Tên đồ uống không được là số!");
-            } else {
-                nuocUong.name = str;
-                break;
+        System.out.println("\nDanh sách topping:");
+        if (topping.isEmpty()) {
+            System.out.println("Không có topping nào.");
+        } else {
+            for (String tp : topping) {
+                System.out.println("- " + tp);
             }
         }
-        System.out.println("[Notice] Tên đồ uống hiện tại: " + nuocUong.name);
-    
-        // Nhập giá cho các size
-        Map<String, Integer> sizePrice = new HashMap<>();
-        System.out.println("Nhập giá cho từng size (S, M, L):");
-        String[] sizes = {"S", "M", "L"};
-        for (String size : sizes) {
-            while (true) {
-                System.out.print("Nhập giá cho size " + size + ": ");
-                str = sc.nextLine();
-                if (Function.isEmpty(str)) {
-                    System.out.println("Vui lòng không để trống!");
-                } else if (!Function.isTrueNumber(str)) {
-                    System.out.println("Giá phải là số!");
-                } else {
-                    sizePrice.put(size, Integer.parseInt(str));
-                    break;
-                }
-            }
-        }
-        nuocUong.sizePrice = sizePrice;
-    
-        // Cài đặt thuộc tính nóng, lạnh, thêm sữa, thêm đường
-        nuocUong.isCold = askYesNo("Đồ uống có uống lạnh được không?");
-        nuocUong.isHot = askYesNo("Đồ uống có uống nóng được không?");
-        nuocUong.isMilk = askYesNo("Đồ uống có thêm sữa được không?");
-        nuocUong.isSugar = askYesNo("Đồ uống có thêm đường được không?");
-    
-        System.out.println("[Notice] Đồ uống đã được tạo thành công!");
-        return nuocUong;
+        System.out.println("=======================================");
     }
 
-    private boolean askYesNo(String luaChon) {
+    public boolean askYesNo(String luaChon) {
         Scanner sc = new Scanner(System.in);
         String str;
         while (true) {
-            System.out.println(luaCHon);
+            System.out.println(luaChon);
             System.out.println("1. Có");
             System.out.println("2. Không");
             System.out.print("Nhập lựa chọn: ");
@@ -456,8 +558,32 @@ public abstract class NuocUong implements INhap {
             }
         }
     }
-    
+
     // Abstract method
-    abstract void suaThongTin();
+    public void suaThongTin() {
+
+    }
+
+    // Tạo chuỗi để lưu file
+    // TS1|Trà sữa khúc bạch|true|fasle|false|true|15000,20000,30000|TP1,TP2
+    public String makeString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.id).append("|");
+        sb.append(this.name).append("|");
+        sb.append(this.isCold).append("|");
+        sb.append(this.isHot).append("|");
+        sb.append(this.isMilk).append("|");
+        sb.append(this.isSugar).append("|");
+        for (Map.Entry<String, Integer> entry : this.sizePrice.entrySet()) {
+            sb.append(entry.getValue()).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        sb.append("|");
+        for (String tp : this.topping) {
+            sb.append(tp).append(",");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        return sb.toString();
+    }
 
 }

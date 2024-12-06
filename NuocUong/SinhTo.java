@@ -1,17 +1,10 @@
-/**
- *
- */
 package NuocUong;
 
-public class SinhTo extends NuocUong{
 
-    public SinhTo() {
-        super();
-    }
+public class SinhTo extends NuocUong {
 
-    @Override
-    void suaThongTin() {
-
+    public SinhTo(String drinkType) {
+        super(drinkType);
     }
 
 }

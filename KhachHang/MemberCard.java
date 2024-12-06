@@ -95,7 +95,7 @@ public class MemberCard implements INhap, IXuat {
         Scanner sc = new Scanner(System.in);
         String str;
         System.out.println("Thông tin thành viên");
-        
+
         System.out.println("Thông tin ngày sinh của khách hàng");
 
         loop:
@@ -165,7 +165,7 @@ public class MemberCard implements INhap, IXuat {
             }
         }
 
-        while (true) { 
+        while (true) {
             System.out.print("Nhập điểm tích lũy: ");
             str = sc.nextLine();
 
@@ -195,5 +195,9 @@ public class MemberCard implements INhap, IXuat {
     // Phương thức tạo chuỗi để ghi vào file
     public String makeString() {
         return this.cardID + "|" + this.birthday.getDay() + "|" + this.birthday.getMonth() + "|" + this.birthday.getYear() + "|" + this.startDate.getDay() + "|" + this.startDate.getMonth() + "|" + this.startDate.getYear() + "|" + this.endDate.getDay() + "|" + this.endDate.getMonth() + "|" + this.endDate.getYear() + "|" + this.point;
+    }
+
+    public String makeString() {
+        return this.cardID +"|"+ this.birthday.toString() +"|"+ this.point +"|"+ this.startDate.toString() +"|"+ this.endDate.toString();
     }
 }

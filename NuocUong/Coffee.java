@@ -1,16 +1,10 @@
-/**
- *
- */
 package NuocUong;
 
-public class Coffee extends NuocUong{
 
-    public Coffee() {
-        super();
-    }
+public class Coffee extends NuocUong  {
 
-    @Override
-    void suaThongTin() {
+    public Coffee(String drinkType) {
+        super(drinkType);
     }
 
 }

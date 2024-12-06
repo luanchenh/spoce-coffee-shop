@@ -1,17 +1,10 @@
-/**
- *
- */
 package NuocUong;
 
-public class NuocTraiCay extends NuocUong{
 
-    public NuocTraiCay() {
-        super();
-    }
+public class NuocTraiCay extends NuocUong  {
 
-    @Override
-    void suaThongTin() {
-
+    public NuocTraiCay(String drinkType) {
+        super(drinkType);
     }
 
 }

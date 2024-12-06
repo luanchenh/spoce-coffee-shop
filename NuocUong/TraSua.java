@@ -1,18 +1,10 @@
-/**
- *
- */
 package NuocUong;
+
+
 
 public class TraSua extends NuocUong {
 
-
-    public TraSua() {
-        super();
+    public TraSua(String drinkType) {
+        super(drinkType);
     }
-
-    @Override
-    void suaThongTin() {
-
-    }
-
 }
