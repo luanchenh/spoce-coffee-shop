@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 @SuppressWarnings("unused")
-public class NhanVienQuanLy extends NhanVien implements INhap, IXuat {
+public class NhanVienQuanLy extends Nhanvien implements INhap, IXuat {
     private List<Nhanvien> danhSachNhanVien;
     private List<HoaDon> danhSachHoaDon;
     private String chiNhanh; // CN1, CN2, CN3

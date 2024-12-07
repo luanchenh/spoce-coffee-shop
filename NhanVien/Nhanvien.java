@@ -12,7 +12,7 @@ import Utils.Function;
 import Utils.Date;
 
 @SuppressWarnings("resource")
-public abstract class NhanVien {
+public abstract class Nhanvien {
     protected String maNhanVien;
     protected String tenNhanVien;
     protected int tuoi;
@@ -60,7 +60,7 @@ public abstract class NhanVien {
     }
 
     // Constructor không tham số
-    public NhanVien() {
+    public Nhanvien() {
         this.diaChi = new Address();
         this.ngaySinh = new Date();
         this.loaiNhanVien = "";
@@ -72,7 +72,7 @@ public abstract class NhanVien {
 
     // Constructor biết loại nhân viên
     // NVPC - NVTN - NVQL
-    public NhanVien(String loaiNhanVien) {
+    public Nhanvien(String loaiNhanVien) {
         this.diaChi = new Address();
         this.ngaySinh = new Date();
         this.tenNhanVien = "";
@@ -90,7 +90,7 @@ public abstract class NhanVien {
     }
 
     // Constructor biết full tham số
-    public NhanVien(String maNhanVien, String tenNhanVien, int tuoi, Date ngaySinh, Address diaChi, String loaiNhanVien,
+    public Nhanvien(String maNhanVien, String tenNhanVien, int tuoi, Date ngaySinh, Address diaChi, String loaiNhanVien,
             String caLamViec) {
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
