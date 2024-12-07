@@ -4,6 +4,7 @@
 package Utils;
 
 import java.util.Scanner;
+import Utils.Function;
 
 @SuppressWarnings("resource")
 public class Address {
@@ -50,28 +51,53 @@ public class Address {
 
     public void setInfo() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập số nhà: "); this.houseNumer = sc.nextLine().trim();
-        System.out.print("Nhập phường/xã: "); this.wardName = sc.nextLine().trim();
-        System.out.print("Nhập thành quận/huyện: "); this.cityName = sc.nextLine().trim();
-        this.province.setInfo();
+        String str;
+        // Nhập số nhà
+        while (true) {
+            System.out.print("\tNhập số nhà: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tDữ liệu không được để trống !");
+            } else {
+                if (Function.isTrueNumber(str)) {
+                    this.houseNumer = str;
+                    break;
+                } else {
+                    System.out.println("\tDữ liệu nhập vào không phải là số !");
+                }
+            }
+        }
+        while (true) {
+            System.out.print("\tNhập tên phường: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tDữ liệu không được để trống !");
+            } else {
+                this.wardName = str;
+                break;
+            }
+        }
+        while (true) {
+            System.out.print("\tNhập quận: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tDữ liệu không được để trống !");
+            } else {
+                this.cityName = str;
+                break;
+            }
+        }
 
-        if (Function.isEmpty(cityName) || Function.isEmpty(wardName) || Function.isEmpty(cityName)) {
-            System.out.println("Dữ liệu nhập còn thiếu sót, nhập lại dữ liệu !");
-            setInfo();
-        }
-        else {
-            System.out.println("Nhập dữ liệu địa chỉ thành công !");
-        }
+        this.province.setInfo();
     }
-    public String appendString() {
-        return this.houseNumer +";"+ this.wardName +";"+ this.cityName +";"+ this.province.getCityCode();
+
+    public String makeString() {
+        return this.houseNumer +","+ this.wardName +","+ this.cityName +","+ this.province.getCityCode();
     }
     @Override
     public String toString() {
         return "Số nhà: "+ this.houseNumer +", Phường: "+ this.wardName +", Quận: "+ this.cityName +", Tỉnh: "+ this.province.getCityName();
     }
 
-    public String makeString() {
-        return this.houseNumer + "|" + this.wardName + "|" + this.cityName + "|" + this.province.makeString();
-    }
+
 }

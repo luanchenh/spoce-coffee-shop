@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Scanner;
 
+@SuppressWarnings("resource")
 public class Province {
     private String provinceCode;
     private String provinceName;
@@ -40,20 +41,21 @@ public class Province {
         try (BufferedReader reader = new BufferedReader(new FileReader(cityFile))) {
             int breakLine = 0;
             String line;
-            System.out.println("\n\t=============================================================================================================================");
-            System.out.printf("\t| %-122s|%n", "Chọn tỉnh thành");
+            System.out.println("\t+=========================================================================================================================+");
+            System.out.printf("\t| %-120s|%n", "Chọn tỉnh thành");
             System.out.printf("\t| ");
             while ((line = reader.readLine()) != null) {
                 breakLine++;
                 if (breakLine % 5 == 0) {
-                    System.out.printf("%-22s|", line); // Căn trái với chiều dài 25 ký tự
+                    System.out.printf("%-20s|", line); // Căn phải với chiều dài 25 ký tự
                 } else {
                     System.out.printf("%-25s", line); // Căn trái với chiều dài 25 ký tự
                 }
                 if (breakLine % 5 == 0) System.out.printf("\n\t| ");
             }
-            System.out.printf("%-47s|", "");
-            System.out.println("\n\t=============================================================================================================================");
+            System.out.printf("%-45s|", "");
+            System.out.println();
+            System.out.println("\t+=========================================================================================================================+");
         } catch (Exception e) {
             System.out.println("Lỗi: "+ e.getLocalizedMessage());
         }
@@ -72,16 +74,14 @@ public class Province {
             }
         }
         catch (Exception e) {
-            System.out.println("Lỗi: "+ e.getLocalizedMessage());
+            System.out.println("\tLỗi: "+ e.getLocalizedMessage());
         }
         return result;
     }
     public void setInfo() {
-        @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         printInfoProvince();
         while (true) {
-            
             System.out.print("\t=> Vui lòng nhập mã tỉnh bạn muốn chọn: ");
             String str = sc.nextLine().trim();
             if (Function.isTrueNumber(str)) {
@@ -107,5 +107,6 @@ public class Province {
     public String makeString() {
         return this.provinceCode + "|" + this.provinceName;
     }
+
 
 }

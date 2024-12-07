@@ -101,7 +101,7 @@ public abstract class NuocUong implements INhap, IXuat {
 
         // Tăng số thứ tự cho loại nước uống
         if (typeCounter.containsKey(drinkType)) {
-            int currentCount = typeCounter.get(drinkType);
+            int currentCount = typeCounter.get(drinkType) + 1;
             typeCounter.put(drinkType, currentCount);
             this.id = drinkType + currentCount; // Tạo ID theo loại
         } else {
@@ -782,8 +782,8 @@ public abstract class NuocUong implements INhap, IXuat {
                                             this.sizePrice.put(entry.getKey(), number);
                                             System.out.println("\t[Notice] Giá mới cho size " + entry.getKey() + " là: "
                                                     + Function.formatMoney(number + ""));
-                                            updated = true; // Đánh dấu là đã cập nhật thành công
-                                            break; // Thoát vòng lặp để tiếp tục với size tiếp theo
+                                            updated = true;
+                                            break;
                                         } else {
                                             System.out.println("\tGiá phải lớn hơn 0 !");
                                         }

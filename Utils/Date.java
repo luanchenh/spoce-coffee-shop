@@ -45,24 +45,63 @@ public class Date {
 
     public void setInfo() {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập ngày: "); this.day = sc.nextLine().trim();
-        System.out.print("Nhập tháng: "); this.month = sc.nextLine().trim();
-        System.out.print("Nhập năm: "); this.year = sc.nextLine().trim();
-        if (!Function.isEmpty(this.day) && !Function.isEmpty(this.month) && !Function.isEmpty(this.year) && Function.isTrueNumber(this.day) && Function.isTrueNumber(this.month) && Function.isTrueNumber(this.year)) {
-            System.out.println("Nhập dữ liệu ngày/tháng/năm thành công !");
-        }
-        if (Function.isEmpty(this.day) || Function.isEmpty(this.month) || Function.isEmpty(this.year)) {
-            System.out.println("Bạn chưa nhập 1 trong 3 dữ liệu");
-            setInfo();
-        }
-        if (!Function.isTrueNumber(this.day) || !Function.isTrueNumber(this.month) || !Function.isTrueNumber(this.year)) {
-            System.out.println("Dữ liệu phải là số");
-            setInfo();
-        }
-        String result = this.toString();
-        if (Function.isTrueDate(result) == false) {
-            System.out.println("Nhập sai vui lòng nhập lại");
-            setInfo();
+        String str;
+        while (true) {
+            while (true) {
+                System.out.print("\tNhập ngày: ");
+                str = sc.nextLine();
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống !");
+                }
+                else {
+                    if (Function.isTrueNumber(str)) {
+                        this.day = str;
+                        break;
+                    }
+                    else {
+                        System.out.println("\tDữ liệu ngày phải là số !");
+                    }
+                }
+            }
+            while (true) {
+                System.out.print("\tNhập tháng: ");
+                str = sc.nextLine();
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống !");
+                }
+                else {
+                    if (Function.isTrueNumber(str)) {
+                        this.month = str;
+                        break;
+                    }
+                    else {
+                        System.out.println("\tDữ liệu tháng phải là số !");
+                    }
+                }
+            }
+            while (true) {
+                System.out.print("\tNhập năm: ");
+                str = sc.nextLine();
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống !");
+                }
+                else {
+                    if (Function.isTrueNumber(str)) {
+                        this.year = str;
+                        break;
+                    }
+                    else {
+                        System.out.println("\tDữ liệu năm phải là số !");
+                    }
+                }
+            }
+            if (Function.isTrueDate(this.toString())) {
+                return;
+            }
+            else {
+                System.out.println("\tDữ liệu nhập chưa đúng !");
+            }
+
         }
     }
 
