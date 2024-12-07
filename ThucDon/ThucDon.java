@@ -1,15 +1,14 @@
 package ThucDon;
 import NuocUong.NuocUong;
-import NuocUong.QLNuocUong;
 import Topping.Topping;
+import Utils.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import Utils.*;
 public class ThucDon implements INhap, IXuat {
-    // private ArrayList<NuocUong> danhSachNuocUong;
+
     private ArrayList<NuocUong> danhSachNuocUong;
     private ArrayList<Topping> danhSachTopping;
-    // private QLNuocUong danhSachLNuocUong;
+
 
     public ThucDon() {
         this.danhSachNuocUong = new ArrayList<>();
@@ -25,8 +24,6 @@ public class ThucDon implements INhap, IXuat {
         int soLuongNuoc = Integer.parseInt(scanner.nextLine());
         for (int i = 0; i < soLuongNuoc; i++) {
             NuocUong a = null;
-            
-        //    ///////////////////////////
         }
 
         System.out.println("Nhập danh sách topping:");
@@ -69,6 +66,8 @@ public class ThucDon implements INhap, IXuat {
         return danhSachTopping;
     }
 
+
+    
     @Override
     public void nhapThongTin() {
         //
