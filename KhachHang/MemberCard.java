@@ -4,6 +4,7 @@ import Utils.Date;
 import Utils.Function;
 import Utils.INhap;
 import Utils.IXuat;
+import java.io.File;
 import java.util.Scanner;
 
 @SuppressWarnings("resource")
@@ -17,20 +18,25 @@ public class MemberCard implements INhap, IXuat {
     public static int numOfMember = getNumberOfMemberFromFile();
 
     public static int getNumberOfMemberFromFile() {
-        QLKhachHang ql = new QLKhachHang();
-        ql.init();
-        int members = 0;
-        for (KhachHang kh : ql.customerList) {
-            if (kh.IsMember()) {
-                members++;
+        int count = 0;
+        File customerFile = new File("../File/customer.txt");
+        try (Scanner sc = new Scanner(customerFile)) {
+            while (sc.hasNextLine()) {
+                String str = sc.nextLine();
+                String[] arr = str.split("\\|");
+                if (arr[3].equals("1")) {
+                    count++;
+                }
             }
+        } catch (Exception e) {
+            System.out.println("Lỗi: " + e.getMessage());
         }
 
-        return members;
+        return count;
     }
 
     public MemberCard() {
-        this.cardID = "MB" + ++numOfMember;
+        this.cardID = makeMemberID();
         this.point = 0;
         this.birthday = new Date();
         this.startDate = new Date();
@@ -206,5 +212,29 @@ public class MemberCard implements INhap, IXuat {
     // Phương thức tạo chuỗi để ghi vào file
     public String makeString() {
         return this.cardID + "|" + this.birthday.getDay() + "|" + this.birthday.getMonth() + "|" + this.birthday.getYear() + "|" + this.startDate.getDay() + "|" + this.startDate.getMonth() + "|" + this.startDate.getYear() + "|" + this.endDate.getDay() + "|" + this.endDate.getMonth() + "|" + this.endDate.getYear() + "|" + this.point;
+    }
+
+    public static String makeMemberID() {
+        QLKhachHang ql = new QLKhachHang();
+        ql.init();
+        int idNumber = 1;
+        boolean isValid = false;
+
+        while (!isValid) { 
+            boolean isSame = false;
+            for (KhachHang kh : ql.customerList) {
+                if (kh.IsMember() && Function.getNumberFromCustomerID(kh.getMemberCard().getCardID()) == idNumber) {
+                    isSame = true;
+                    idNumber++;
+                    break;
+                }
+            }
+
+            if (!isSame) {
+                isValid = true;
+            }
+        }
+
+        return "MB" + idNumber;
     }
 }
