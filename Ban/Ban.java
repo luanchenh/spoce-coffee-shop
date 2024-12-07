@@ -16,13 +16,13 @@ public class Ban implements INhap, IXuat {
     // Phương thức khởi tạo phi tham số
     // ID của bàn sẽ được gán tự động và tình trạng bàn mặc định sẽ là chưa có người ngồi (false)
     public Ban() {
-        this.tableID = "B" + ++numOfTables;
+        this.tableID = makeTableID();
         this.status = false;
     }
 
     // Phương thức khởi tạo với số chỗ ngồi của bàn
     public Ban(int numOfCustomersOfTable) {
-        this.tableID = "B" + ++numOfTables;
+        this.tableID = makeTableID();
         this.numOfCustomersOfTable = numOfCustomersOfTable;
         this.status = false;
     }
@@ -62,22 +62,22 @@ public class Ban implements INhap, IXuat {
         Scanner sc = new Scanner(System.in);
         String str;
 
-        System.out.println("Nhập thông tin bàn có ID: " + this.tableID);
+        System.out.println("\tNhập thông tin bàn có ID: " + this.tableID);
         while (true) { 
-            System.out.println("Số chỗ ngồi của bàn");
-            System.out.println("1. 2 chỗ");
-            System.out.println("2. 4 chỗ");
-            System.out.println("3. 8 chỗ");
-            System.out.print("Nhập lựa chọn: ");
+            System.out.println("\n\tSố chỗ ngồi của bàn");
+            System.out.println("\t1. 2 chỗ");
+            System.out.println("\t2. 4 chỗ");
+            System.out.println("\t3. 8 chỗ");
+            System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Lựa chọn không được rỗng!");
+                System.out.println("\tLựa chọn không được rỗng!");
                 continue;
             }
 
             if (!Function.isTrueNumber(str)) {
-                System.out.println("Lựa chọn phải là số!");
+                System.out.println("\tLựa chọn phải là số!");
                 continue;
             }
 
@@ -95,7 +95,7 @@ public class Ban implements INhap, IXuat {
                 break;
 
                 default:
-                System.out.println("Lựa chọn không hợp lệ!");
+                System.out.println("\tLựa chọn không hợp lệ!");
                 continue;
             }
 
@@ -103,19 +103,19 @@ public class Ban implements INhap, IXuat {
         }
 
         while (true) {
-            System.out.println("Tình trạng của bàn");
-            System.out.println("1. Đang trống");
-            System.out.println("2. Đã có người ngồi");
-            System.out.print("Nhập lựa chọn: ");
+            System.out.println("\n\tTình trạng của bàn");
+            System.out.println("\t1. Đang trống");
+            System.out.println("\t2. Đã có người ngồi");
+            System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Lựa chọn không được rỗng!");
+                System.out.println("\tLựa chọn không được rỗng!");
                 continue;
             }
 
             if (!Function.isTrueNumber(str)) {
-                System.out.println("Lựa chọn phải là số!");
+                System.out.println("\tLựa chọn phải là số!");
                 continue;
             }
 
@@ -129,7 +129,7 @@ public class Ban implements INhap, IXuat {
                 break;
 
                 default:
-                System.out.println("Lựa chọn không hợp lệ!");
+                System.out.println("\tLựa chọn không hợp lệ!");
                 continue;
             }
             break;
@@ -152,6 +152,14 @@ public class Ban implements INhap, IXuat {
         System.out.printf("\t|     %-19s %-93s |%n", "Tình trạng:", tableStatus);
     }
 
+    public void xuatThongTin1Ban() {
+        System.out.println("\t=========================================================================================================================");
+        System.out.printf("\t| %-23s %-93s |%n", "ID của bàn:", this.tableID);
+        System.out.printf("\t| %-23s %-93s |%n", "Số lượng chỗ ngồi:", this.numOfCustomersOfTable);
+        String tableStatus = this.status ? "Đã có người ngồi" : "Đang trống";
+        System.out.printf("\t| %-23s %-93s |%n", "Tình trạng:", tableStatus);
+        System.out.println("\t=========================================================================================================================");
+    }
 
     // Phương thức để sửa thông tin của bàn
     public void suaThongTin() {
@@ -159,38 +167,39 @@ public class Ban implements INhap, IXuat {
         String str;
 
         while (true) {
-            System.out.println("Sửa thông tin bàn có ID: " + this.tableID);
-            System.out.println("1. Số lượng chỗ ngồi");
-            System.out.println("2. Tình trạng");
-            System.out.println("3. Quay lại");
-            System.out.print("Nhập lựa chọn: ");
+            System.out.println("\n\tSửa thông tin bàn có ID: " + this.tableID);
+            System.out.println("\t1. Số lượng chỗ ngồi");
+            System.out.println("\t2. Tình trạng");
+            System.out.println("\t3. Quay lại");
+            System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
-                System.out.println("Lựa chọn không được rỗng!");
+                System.out.println("\tLựa chọn không được rỗng!");
                 continue;
             }
 
             if (!Function.isTrueNumber(str)) {
-                System.out.println("Lựa chọn phải là số!");
+                System.out.println("\tLựa chọn phải là số!");
                 continue;
             }
 
             switch (Integer.parseInt(str)) {
                 case 2:
                 while (true) { 
-                    System.out.println("1. Đang trống");
-                    System.out.println("2. Đã có người ngồi");
-                    System.out.print("Nhập lựa chọn: ");
+                    System.out.println("\n\tTình trạng bàn:");
+                    System.out.println("\t1. Đang trống");
+                    System.out.println("\t2. Đã có người ngồi");
+                    System.out.print("\t=> Nhập lựa chọn: ");
                     str = sc.nextLine();
         
                     if (Function.isEmpty(str)) {
-                        System.out.println("Lựa chọn không được rỗng!");
+                        System.out.println("\tLựa chọn không được rỗng!");
                         continue;
                     }
         
                     if (!Function.isTrueNumber(str)) {
-                        System.out.println("Lựa chọn phải là số!");
+                        System.out.println("\tLựa chọn phải là số!");
                         continue;
                     }
 
@@ -204,7 +213,7 @@ public class Ban implements INhap, IXuat {
                         break;
 
                         default:
-                        System.out.println("Lựa chọn không hợp lệ");
+                        System.out.println("\tLựa chọn không hợp lệ");
                         continue;
                     }
                     break;
@@ -213,19 +222,20 @@ public class Ban implements INhap, IXuat {
 
                 case 1:
                 while (true) {
-                    System.out.println("1. 2 chỗ");
-                    System.out.println("2. 4 chỗ");
-                    System.out.println("3. 8 chỗ");
-                    System.out.print("Nhập lựa chọn: ");
+                    System.out.println("\n\tSố chỗ ngồi:");
+                    System.out.println("\t1. 2 chỗ");
+                    System.out.println("\t2. 4 chỗ");
+                    System.out.println("\t3. 8 chỗ");
+                    System.out.print("\t=> Nhập lựa chọn: ");
                     str = sc.nextLine();
         
                     if (Function.isEmpty(str)) {
-                        System.out.println("Lựa chọn không được rỗng!");
+                        System.out.println("\tLựa chọn không được rỗng!");
                         continue;
                     }
         
                     if (!Function.isTrueNumber(str)) {
-                        System.out.println("Lựa chọn phải là số!");
+                        System.out.println("\tLựa chọn phải là số!");
                         continue;
                     }
 
@@ -243,7 +253,7 @@ public class Ban implements INhap, IXuat {
                         break;
 
                         default:
-                        System.out.println("Lựa chọn không hợp lệ");
+                        System.out.println("\tLựa chọn không hợp lệ");
                         continue;
                     }
                     break;
@@ -374,6 +384,30 @@ public class Ban implements INhap, IXuat {
             }
         }
         ql.writeAll();
+    }
+
+    public static String makeTableID() {
+        QLBan ql = new QLBan();
+        ql.init();
+        int idNumber = 1;
+        boolean isValid = false;
+
+        while (!isValid) {
+            boolean isSame = false;
+            for (Ban ban : ql.tableList) {
+                if (Function.getNumberFromTableID(ban.getTableID()) == idNumber) {
+                    idNumber++;
+                    isSame = true;
+                    break;
+                }
+            }
+
+            if (!isSame) {
+                isValid = true;
+            }
+        }
+
+        return "B" + idNumber;
     }
 }
 

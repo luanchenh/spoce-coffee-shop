@@ -21,7 +21,7 @@ public abstract class KhachHang {
 
     // Hàm khởi tạo với tên khách hàng
     public KhachHang(String customerName) {
-        this.customerName = customerName;
+        this.customerName = makeCustomerID();
         this.isMember = false;
         this.memberCard = null;
     }
@@ -99,8 +99,10 @@ public abstract class KhachHang {
     public static int getNumberOfCustomerFromFile() {
         File customerFile = new File("../File/customer.txt");
         int num = 0;
+        String str;
         try (Scanner sc = new Scanner(customerFile)) {
             while (sc.hasNextLine()) {
+                str = sc.nextLine();
                 num++;
             }
         } catch (Exception e) {
@@ -114,11 +116,20 @@ public abstract class KhachHang {
         QLKhachHang ql = new QLKhachHang();
         ql.init();
         int idNumber = 1;
-        for (KhachHang kh : ql.customerList) {
-            if (Function.getNumberFromCustomerID(kh.getCustomerID()) == idNumber) {
-                idNumber++;
-            } else {
-                break;
+        boolean isValid = false;
+
+        while (!isValid) { 
+            boolean isSame = false;
+            for (KhachHang kh : ql.customerList) {
+                if (Function.getNumberFromCustomerID(kh.customerID) == idNumber) {
+                    isSame = true;
+                    idNumber++;
+                    break;
+                }
+            }
+
+            if (!isSame) {
+                isValid = true;
             }
         }
 

@@ -1,5 +1,6 @@
 package Ban;
 
+import Utils.Function;
 import Utils.IXuat;
 import java.io.File;
 import java.io.FileWriter;
@@ -55,22 +56,47 @@ public class QLBan implements IXuat {
     }
 
     // Phương thức dùng để thêm 1 bàn mới vào Array List
-    public boolean addTable() {
+    public void addTable() {
         Ban ban = new Ban();
         ban.nhapThongTin();
         this.tableList.add(ban);
-        return true;
+        this.writeAll();
+        System.out.println("\tThêm bàn thành công!");
     }
 
     // Phương thức dùng để xóa 1 bàn ra khỏi Array List
-    public boolean removeTable(Ban tableToBeRemoved) {
-        for (Ban table : this.tableList) {
-            if (table.getTableID().compareTo(tableToBeRemoved.getTableID()) == 0) {
-                this.tableList.remove(table);
-                return true;
+    public void removeTable() {
+        this.printTableList();
+        Scanner sc = new Scanner(System.in);
+        String str;
+        boolean isDone = false;
+
+        while (true) {
+            System.out.print("\n\t=> Nhập ID bàn muốn xóa: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tID bàn không được rỗng!");
+                continue;
             }
+
+            for (Ban ban : this.tableList) {
+                if (ban.getTableID().equalsIgnoreCase(str)) {
+                    this.tableList.remove(ban);
+                    System.out.println("\tXóa bàn thành công!");
+                    isDone = true;
+                    break;
+                }
+            }
+
+            if (!isDone) {
+                System.out.println("\tKhông tìm thấy bàn!");
+            } else {
+                this.writeAll();
+            }
+
+            break;
         }
-        return false;
     }
 
     // Phương thức để kiểm tra ID bàn đã tồn tại hay chưa (Nếu đã tồn tại thì trả về true, chưa có thì trả về false)
@@ -100,9 +126,219 @@ public class QLBan implements IXuat {
         }
     }
 
+    // Phương thức để chỉnh sửa thông tin của bàn
+    public void modifyTable() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        boolean isDone = false;
+
+        this.printTableList();
+
+        while (true) {
+            System.out.print("\n\t=> Mời nhập ID bàn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tID bàn không được rỗng!");
+                continue;
+            }
+
+            for (Ban ban : this.tableList) {
+                if (ban.getTableID().equalsIgnoreCase(str)) {
+                    ban.suaThongTin();
+                    isDone = true;
+                    break;
+                }
+            }
+
+            if (!isDone) {
+                System.out.println("\tKhông tìm thấy bàn!");
+            } else {
+                this.writeAll();
+            }
+
+            break;
+        }
+    }
+
+    // Phương thức để đặt lại dữ liệu của array list
+    public void resetList() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) { 
+            System.out.println("\n\tBạn có chắc chắn muốn xoá toàn bộ danh sách không?");
+            System.out.println("\t1. Có");
+            System.out.println("\t2. Không");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được rỗng!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.tableList.clear();
+                System.out.println("\tLàm mới danh sách thành công!");
+                break;
+
+                case "2":
+                System.out.println("\tHủy bỏ làm mới danh sách!");
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                continue;
+            }
+
+            break;
+        }
+    } 
+
+    // Phương thức để in ra số bàn trong quán
+    public void countTable() {
+        System.out.println("\tSố lượng bàn: " + this.tableList.size());
+    }
+
+    // Phương thức để tìm bàn và in ra thông tin
+    public void findTable() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        Ban ban = null;
+
+        while (true) {
+            System.out.print("\n\tMời nhập ID bàn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tID bàn không được rỗng");
+                continue;
+            }
+
+            for (Ban table : this.tableList) {
+                if (table.getTableID().equalsIgnoreCase(str)) {
+                    ban = table;
+                    break;
+                }
+            }
+
+            if (ban == null) {
+                System.out.println("\tKhông tìm thấy bàn nào có ID: " + str);
+            } else {
+                System.out.println("\tKết quả tìm kiếm: ");
+                ban.xuatThongTin1Ban();
+            }
+
+            break;
+        }
+    }
+
+    public void menuQLBan() {
+        Function.clearScreen();
+        this.init();
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) { 
+            // In tiêu đề
+            System.out.println("\t==================================[ Menu Quản Lý Bàn ]==================================");
+
+            // In tiêu đề các cột
+            System.out.printf("\t| %-4s | %-77s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------------------|");
+
+            // In danh sách các lựa chọn
+            System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách bàn");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một bàn (Tự động lưu vào File)");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một bàn (Tự động load vào File)");
+            System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin bàn");
+            System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại bàn vào File từ danh sách");
+            System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại bàn vào danh sách từ File");
+            System.out.printf("\t| %-4s | %-77s |%n", "7", "Làm mới danh sách bàn (Reset dữ liệu nhưng không load vào File)");
+            System.out.printf("\t| %-4s | %-77s |%n", "8", "In ra số lượng bàn trong quán");
+            System.out.printf("\t| %-4s | %-77s |%n", "9", "Tìm kiếm bàn");
+            System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
+            System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản lý");
+
+            // In dòng kẻ dưới cùng
+            System.out.println("\t========================================================================================");
+            System.out.print("\t[Manage] Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được rỗng!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.printTableList();
+                continue;
+
+                case "2":
+                this.addTable();
+                continue;
+
+                case "3":
+                this.removeTable();
+                continue;
+
+                case "4":
+                this.modifyTable();
+                continue;
+
+                case "5":
+                this.writeAll();
+                continue;
+
+                case "6":
+                this.init();
+                continue;
+
+                case "7":
+                this.resetList();
+                continue;
+
+                case "8":
+                this.countTable();
+                continue;
+
+                case "9":
+                this.findTable();
+                continue;
+
+                case "10":
+                Function.clearScreen();
+                continue;
+
+                case "11":
+                Function.clearScreen();
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                continue;
+            }
+            break;
+        }
+    }
+
+
     public static void main(String[] args) {
         QLBan ql = new QLBan();
-        ql.init();
-        ql.printTableList();
+        ql.menuQLBan();
     }
 }

@@ -118,4 +118,13 @@ public class Function {
         System.out.flush();
     }
 
+    public static int getNumberFromCustomerID(String customerID) {
+        String str = customerID.substring(2);
+        return Integer.parseInt(str);
+    }
+
+    public static int getNumberFromTableID(String customerID) {
+        String str = customerID.substring(1);
+        return Integer.parseInt(str);
+    }
 }

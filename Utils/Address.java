@@ -6,7 +6,6 @@ package Utils;
 import java.util.Scanner;
 import Utils.Function;
 
-@SuppressWarnings("resource")
 public class Address {
     private String houseNumer;
     private String wardName;

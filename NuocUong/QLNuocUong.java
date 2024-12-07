@@ -3,6 +3,7 @@
  */
 package NuocUong;
 
+import Utils.Function;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -10,8 +11,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
-
-import Utils.Function;
 
 @SuppressWarnings("resource")
 public class QLNuocUong {
