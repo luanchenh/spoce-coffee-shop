@@ -43,14 +43,16 @@ public class QLKhachHang implements IXuat {
                     kh = new KHTaiCho(arr[1], arr[2], status, card);
                 } else {
                     Address address;
+                    String[] addressArr;
                     if (status) {
-                        address = new Address(arr[15], arr[16], arr[17], new Province(arr[18], arr[19]));
+                        addressArr = arr[15].split(",");
                         // System.out.println(address.getHouseNumer() + " " + address.getWardName() + " " + address.getCityName());
                     } else {
-                        address = new Address(arr[4], arr[5], arr[6], new Province(arr[7], arr[8]));
+                        addressArr = arr[4].split(",");
                         // System.out.println(address.getHouseNumer() + " " + address.getWardName() + " " + address.getCityName());
                         // System.out.println(address.getProvince().getCityCode() + " " + address.getProvince().getCityName());
                     }
+                    address = new Address(addressArr[0], addressArr[1], addressArr[2], new Province(addressArr[3], Province.getProvinceNameFromID(addressArr[3])));
                     // System.out.println(address.getHouseNumer() + " " + address.getWardName() + " " + address.getCityName());
                     // System.out.println(address.getProvince().getCityCode() + " " + address.getProvince().getCityName());
                     // System.out.println(card.getCardID()+" "+card.getBirthDay().toString()+" "+card.getStartDate().toString()+" "+card.getEndDate().toString()+ " "+card.getPoint());

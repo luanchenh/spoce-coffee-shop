@@ -204,7 +204,30 @@ public class QLBan implements IXuat {
 
     // Phương thức để in ra số bàn trong quán
     public void countTable() {
-        System.out.println("\tSố lượng bàn: " + this.tableList.size());
+        int twoSeatTable = 0;
+        int fourSeatTable = 0;
+        int eightSeatTable = 0;
+
+        for (Ban ban : this.tableList) {
+            switch (ban.getCustomerPerTable()) {
+                case 2:
+                twoSeatTable++;
+                break;
+
+                case 4:
+                fourSeatTable++;
+                break;
+
+                case 8:
+                eightSeatTable++;
+                break;
+            }
+        }
+
+        System.out.println("\tTổng số lượng bàn: " + this.tableList.size());
+        System.out.printf("\t%-5s %-10s%n", "", "Số lượng bàn 2 chỗ: " + twoSeatTable);
+        System.out.printf("\t%-5s %-10s%n", "", "Số lượng bàn 4 chỗ: " + fourSeatTable);
+        System.out.printf("\t%-5s %-10s%n", "", "Số lượng bàn 8 chỗ: " + eightSeatTable);
     }
 
     // Phương thức để tìm bàn và in ra thông tin

@@ -108,5 +108,22 @@ public class Province {
         return this.provinceCode + "|" + this.provinceName;
     }
 
+    public static String getProvinceNameFromID(String provinceID) {
+        String result = null;
+        File cityFile = new File("../File/tinhthanh.txt");
+        try (Scanner sc = new Scanner(cityFile)) {
+            while (sc.hasNextLine()) {
+                String str = sc.nextLine();
+                String[] arr = str.split("\\|");
+                if (arr[0].equals(provinceID)) {
+                    result = arr[1];
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Lỗi: " + e.getMessage());
+        }
 
+        return result;
+    }
 }
