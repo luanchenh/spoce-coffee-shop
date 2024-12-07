@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import Utils.Function;
+
 @SuppressWarnings("resource")
 public class QLNuocUong {
     ArrayList<NuocUong> waterList;
@@ -129,6 +130,7 @@ public class QLNuocUong {
         }
         return false;
     }
+
     public boolean removeByName(String name) {
         final String CONTAINS_NAME = name.toLowerCase();
         boolean isRemoved = false;
@@ -208,8 +210,7 @@ public class QLNuocUong {
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không để trống !");
-            }
-            else {
+            } else {
                 if (Function.isTrueNumber(str)) {
                     number = Integer.parseInt(str);
                     if (number >= 1 && number <= 2) {
@@ -220,12 +221,10 @@ public class QLNuocUong {
                             number = 2;
                         }
                         break;
-                    }
-                    else {
+                    } else {
                         System.out.println("\tVui lòng nhập trong khoảng 1 đến 4 !");
                     }
-                }
-                else {
+                } else {
                     System.out.println("\tVui lòng nhập số !");
                 }
             }
@@ -233,7 +232,7 @@ public class QLNuocUong {
         // In ra danh sách để cho người dùng có thể xoá
         System.out.println("\tĐịnh dạng chuỗi: ID | TÊN | ISCOLD | ISHOT | ISMILK | ISSUGAR | SIZEPRICE | TOPPING ");
         for (NuocUong nu : this.waterList) {
-            System.out.println("\t"+ nu.makeString());
+            System.out.println("\t" + nu.makeString());
         }
         if (number == 1) {
             while (true) {
@@ -241,21 +240,18 @@ public class QLNuocUong {
                 str = sc.nextLine();
                 if (Function.isEmpty(str)) {
                     System.out.println("\tVui lòng không để trống !");
-                }
-                else {
+                } else {
                     if (this.removeByID(str)) {
-                        System.out.println("\tXoá thành công sản phẩm có ID: "+ str);
+                        System.out.println("\tXoá thành công sản phẩm có ID: " + str);
                         this.writeFile();
                         break;
-                    }
-                    else {
-                        System.out.println("\tHệ thống không tồn tại ID: "+ str);
+                    } else {
+                        System.out.println("\tHệ thống không tồn tại ID: " + str);
                         break;
                     }
                 }
             }
-        }
-        else if (number == 2) {
+        } else if (number == 2) {
             while (true) {
                 System.out.print("\t Nhập tên hoặc chuỗi muốn xoá (sẽ xoá nếu sản phẩm chứa chuỗi này): ");
                 str = sc.nextLine();
@@ -275,6 +271,200 @@ public class QLNuocUong {
         }
 
     }
+
+    public void clearList() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            System.out.println("\tBạn có chắc chắn muốn xoá toàn bộ danh sách không ?");
+            System.out.println("\t1. Có");
+            System.out.println("\t2. Không");
+            System.out.print("\tNhập lựa chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống !");
+            } else {
+                if (Function.isTrueNumber(str)) {
+                    int number = Integer.parseInt(str);
+                    if (number >= 1 && number <= 2) {
+                        if (number == 1) {
+                            this.waterList.clear();
+                            System.out.println("\tXoá danh sách thành công !");
+                            break;
+                        }
+                        if (number == 2) {
+                            System.out.println("\tHủy bỏ xoá danh sách !");
+                            break;
+                        }
+                    } else {
+                        System.out.println("\tVui lòng chọn trong khoảng 1 đến 2 !");
+                    }
+                } else {
+                    System.out.println("\tVui lòng nhập số !");
+                }
+            }
+        }
+    }
+
+    public void listItem() {
+        int totalCoffee = 0;
+        int totalTraSua = 0;
+        int totalSinhTo = 0;
+        int totalNuocTraiCay = 0;
+        for (NuocUong nu : this.waterList) {
+            if (nu instanceof Coffee) {
+                totalCoffee++;
+            }
+            if (nu instanceof TraSua) {
+                totalTraSua++;
+            }
+            if (nu instanceof SinhTo) {
+                totalSinhTo++;
+            }
+            if (nu instanceof NuocTraiCay) {
+                totalNuocTraiCay++;
+            }
+        }
+        System.out.println("\tSố loại nước uống: ");
+        System.out.println("\t1. Coffee: " + totalCoffee);
+        System.out.println("\t2. Trà sữa: " + totalTraSua);
+        System.out.println("\t3. Sinh tố: " + totalSinhTo);
+        System.out.println("\t4. Nước trái cây: " + totalNuocTraiCay);
+    }
+
+    public void findWater() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        String result = "";
+        NuocUong temp = null;
+        while (true) {
+            System.out.println("\tTìm kiếm sản phẩm theo: ");
+            System.out.println("\t1. Tìm kiếm theo ID");
+            System.out.println("\t2. Tìm kiếm theo Tên");
+            System.out.println("\t3. Tìm kiếm theo giá");
+            System.out.println("\t4. Tìm kiếm theo loại");
+            System.out.println("\t5. Thoát");
+            System.out.print("\tNhập lựa chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống !");
+            }
+            else {
+                if (Function.isTrueNumber(str)) {
+                    int number = Integer.parseInt(str);
+                    if (number >= 1 && number <= 5) {
+                        // Tìm kiếm theo ID
+                        if (number == 1) {
+                            System.out.print("\tNhập ID muốn tìm (bao gồm mã): ");
+                            str = sc.nextLine();
+                            for (NuocUong nu : this.waterList) {
+                                if (nu.getId().equalsIgnoreCase(str)) {
+                                    temp = nu;
+                                    result = temp.makeString();
+                                    break;
+                                }
+                            }
+                            if (Function.isEmpty(result)) {
+                                System.out.println("\tKhông tìm thấy sản phẩm nào có ID: " + str);
+                            } else {
+                                System.out.println("\tKết quả tìm kiếm: ");
+                                temp.xuatThongTin();
+                            }
+                        }
+                        // Tìm kiếm theo Tên (Có thể rỗng)
+                        if (number == 2) {
+                            System.out.print("\tNhập tên muốn tìm: ");
+                            str = sc.nextLine();
+                            for (NuocUong nu : this.waterList) {
+                                if (nu.getName().equalsIgnoreCase(str)) {
+                                    temp = nu;
+                                    result = nu.makeString();
+                                    break;
+                                }
+                            }
+                            if (Function.isEmpty(result)) {
+                                System.out.println("\tKhông tìm thấy sản phẩm nào có tên: " + str);
+                            } else {
+                                System.out.println("\tKết quả tìm kiếm: ");
+                                temp.xuatThongTin();
+                            }
+                        }
+                        // Tìm kiếm theo giá
+                        if (number == 3) {
+                            System.out.print("\tNhập giá muốn tìm: ");
+                            str = sc.nextLine();
+                            for (NuocUong nu : this.waterList) {
+                                if (nu.getSizePrice().containsValue(Integer.parseInt(str))) {
+                                    nu.xuatThongTin();
+                                    result = nu.makeString();
+                                }
+                            }
+                            if (Function.isEmpty(result)) {
+                                System.out.println("\tKhông tìm thấy sản phẩm nào có giá: " + str);
+                            }
+                        }
+                        // Tìm kiếm theo loại
+                        if (number == 4) {
+                            System.out.println("\tCác loại nước uống: ");
+                            System.out.println("\t1. Coffee mã loại [CF]");
+                            System.out.println("\t2. Trà sữa mã loại [TS]");
+                            System.out.println("\t3. Sinh tố mã loại [ST]");
+                            System.out.println("\t4. Nước trái cây mã loại [TC]");
+                            System.out.print("\tNhập loại muốn tìm: ");
+                            str = sc.nextLine();
+                            for (NuocUong nu : this.waterList) {
+                                if (nu.getDrinkType().equalsIgnoreCase(str)) {
+                                    nu.xuatThongTin();
+                                    result = nu.makeString();
+                                }
+                            }
+                            if (Function.isEmpty(result)) {
+                                System.out.println("\tKhông tìm thấy sản phẩm nào có loại: " + str);
+                            }
+                        }
+                        if (number == 5) {
+                            System.out.println("\tThoát tìm kiếm !");
+                            Function.clearScreen();
+                            break;
+                        }
+                    } else {
+                        System.out.println("\tVui lòng chọn trong khoảng 1 đến 4 !");
+                    }
+                } else {
+                    System.out.println("\tVui lòng nhập số !");
+                }
+            }
+        }
+    }
+
+    public void modifyInfo()  {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        boolean action = false;
+        this.inDanhSach();
+        while (true) {
+            System.out.print("\tNhập mã ID bạn muốn sửa: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống !");
+            } else {
+                for (NuocUong nu : this.waterList) {
+                    if (nu.getId().equalsIgnoreCase(str)) {
+                        action = true;
+                        nu.suaThongTin();
+                        break;
+                    }
+                }
+                if (!action) {
+                    System.out.println("\tKhông tìm thấy ID: " + str);
+                }
+                break;
+            }
+        }
+        // Ghi lại vào file
+        this.writeFile();
+    }
+
     public void inDanhSach() {
         for (NuocUong nu : this.waterList) {
             nu.xuatThongTin();
@@ -283,7 +473,7 @@ public class QLNuocUong {
 
     public void menuQLNuocUong() {
         Function.clearScreen();
-        this.Init();
+        this.Init(); // Khởi tạo dữ liệu
         Scanner sc = new Scanner(System.in);
         String str;
 
@@ -317,8 +507,7 @@ public class QLNuocUong {
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không để trống !");
-            }
-            else {
+            } else {
                 if (Function.isTrueNumber(str)) {
                     int number = Integer.parseInt(str);
                     if (number >= 1 && number <= 11) {
@@ -331,8 +520,23 @@ public class QLNuocUong {
                         if (number == 3) {
                             this.removeWater();
                         }
+                        if (number == 4) {
+                            this.modifyInfo();
+                        }
                         if (number == 5) {
                             this.Init();
+                        }
+                        if (number == 6) {
+                            this.writeFile();
+                        }
+                        if (number == 7) {
+                            this.clearList();
+                        }
+                        if (number == 8) {
+                            this.listItem();
+                        }
+                        if (number == 9) {
+                            this.findWater();
                         }
                         if (number == 10) {
                             Function.clearScreen();
@@ -342,12 +546,10 @@ public class QLNuocUong {
                             Function.clearScreen();
                             break;
                         }
-                    }
-                    else {
+                    } else {
                         System.out.println("\tVui lòng chọn trong khoảng 1 đến 11 !");
                     }
-                }
-                else {
+                } else {
                     System.out.println("\tVui lòng nhập số !");
                 }
             }

@@ -586,6 +586,13 @@ public abstract class NuocUong implements INhap, IXuat {
                                 System.out.println("\tSửa giá cho Size thất bại !");
                             }
                         }
+                        if (number == 3) {
+                            if (this.suaTrangThai()) {
+                                System.out.println("\tSửa trạng thái sản phẩm thành công !");
+                            } else {
+                                System.out.println("\tSửa trạng thái sản phẩm thất bại !");
+                            }
+                        }
                         break;
                     } else {
                         System.out.println("\tVui lòng nhập trong khoảng 1 đến 4 !");
@@ -615,6 +622,99 @@ public abstract class NuocUong implements INhap, IXuat {
             }
         }
         return updated;
+    }
+
+    public void modifyToppingList() {
+        Scanner sc = new Scanner(System.in);
+        QLTopping list = new QLTopping();
+        list.Init();
+        String str;
+        int number = 0;
+        QLTopping qlTopping = new QLTopping();
+        qlTopping.Init();
+        while(true) {
+            System.out.println("\tBạn muốn thêm hay xoá topping ?");
+            System.out.println("\t1. Thêm topping");
+            System.out.println("\t2. Xoá topping");
+            System.out.println("\t3. Xoá tất cả topping");
+            System.out.print("\tNhập lựa chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println(("\tVui lòng không để trống !"));
+            }
+            else {
+                if (Function.isTrueNumber(str)) {
+                    number = Integer.parseInt(str);
+                    if (number >= 1 && number <= 3) {
+                        if (number == 1) {
+                            while (true) {
+                                list.menuTable();
+                                System.out.print("\tNhập ID topping cần thêm: ");
+                                str = sc.nextLine();
+                                if (Function.isEmpty(str)) {
+                                    System.out.println("\tVui lòng không để trống !");
+                                } else {
+                                    if (Function.isTrueNumber(str)) {
+                                        String result = "TP" + str;
+                                        for (Topping tp : list.getToppingList()) {
+                                            if (tp.getId().equals(result)) {
+                                                this.topping.add(result);
+                                                System.out.println("\t[Notice] Topping " + tp.getName() + " đã được thêm vào");
+                                                break;
+                                            }
+                                        }
+                                        break;
+                                    } else {
+                                        System.out.println("\tVui lòng nhập số !");
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                        if (number == 2) {
+                            while (true) {
+                                System.out.println("\tDanh sách topping hiện tại: ");
+                                for (String tp : this.topping) {
+                                    for (Topping topping : qlTopping.getToppingList()) {
+                                        if (topping.getId().equals(tp)) {
+                                            System.out.println("\t" + topping.getId() + " - " + topping.getName());
+                                        }
+                                    }
+                                }
+                                System.out.print("\tNhập ID topping cần xoá: ");
+                                str = sc.nextLine();
+                                if (Function.isEmpty(str)) {
+                                    System.out.println("\tVui lòng không để trống !");
+                                } else {
+                                    if (Function.isTrueNumber(str)) {
+                                        String result = "TP" + str;
+                                        if (this.topping.contains(result)) {
+                                            this.topping.remove(result);
+                                            System.out.println("\t[Notice] Topping " + result + " đã được xoá");
+                                        } else {
+                                            System.out.println("\tID không tồn tại trong danh sách topping !");
+                                        }
+                                        break;
+                                    } else {
+                                        System.out.println("\tVui lòng nhập số !");
+                                    }
+                                }
+                            }
+                            break;
+                        }
+                        if (number == 3) {
+                            this.topping.clear();
+                            System.out.println("\t[Notice] Đã xoá tất cả topping !");
+                            break;
+                        }
+                    }
+                    else {
+                        System.out.println("\tVui lòng nhập trong khoảng 1 đến 3 !");
+                    }
+                }
+            }
+        }
+
     }
 
     public boolean suaGiaSize(Scanner sc) {
@@ -702,6 +802,101 @@ public abstract class NuocUong implements INhap, IXuat {
         }
 
         return updated; // Trả về true nếu đã cập nhật giá thành công, false nếu không
+    }
+
+    public boolean askYesNo() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            System.out.println("\t1. [Yes]: Có");
+            System.out.println("\t2. [No]: Không");
+            System.out.print("\tNhập lựa chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống !");
+            } else {
+                if (str.equals("1")) {
+                    return true;
+                } else if (str.equals("2")) {
+                    return false;
+                } else {
+                    System.out.println("\tVui lòng nhập 1 hoặc 2 !");
+                }
+            }
+        }
+    }
+
+    public boolean suaTrangThai() {
+        Scanner sc  = new Scanner(System.in);
+        boolean updated = false;
+        while (true) {
+            System.out.println("\t Bạn muốn sửa trạng thái nào của sản phẩm ?");
+            System.out.println("\t1. Sửa trạng thái có thể chỉnh đá");
+            System.out.println("\t2. Sửa trạng thái có thể chỉnh nóng");
+            System.out.println("\t3. Sửa trạng thái có thể chỉnh sữa");
+            System.out.println("\t4. Sửa trạng thái có thể chỉnh đường");
+            System.out.print("\tNhập lựa chọn: ");
+            String str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống !");
+            } else {
+                if (Function.isTrueNumber(str)) {
+                    int number = Integer.parseInt(str);
+                    if (number >= 1 && number <= 4) {
+                        if (number == 1) {
+                            while (true) {
+                                System.out.println("\tTrạng thái hiện tại của chỉnh đá: " + (this.isCold ? "Có" : "Không"));
+                                if (this.askYesNo()) {
+                                    this.isCold = !this.isCold;
+                                    System.out.println("\t[Notice] Trạng thái chỉnh đá: " + (this.isCold ? "Có" : "Không"));
+                                    updated = true;
+                                }
+                                break;
+                            }
+                        }
+                        if (number == 2) {
+                            while (true) {
+                                System.out.println("\tTrạng thái hiện tại của chỉnh nóng: " + (this.isHot ? "Có" : "Không"));
+                                if (this.askYesNo()) {
+                                    this.isHot = !this.isHot;
+                                    System.out.println("\t[Notice] Trạng thái chỉnh nóng: " + (this.isHot ? "Có" : "Không"));
+                                    updated = true;
+                                }
+                                break;
+                            }
+                        }
+                        if (number == 3) {
+                            while (true) {
+                                System.out.println("\tTrạng thái hiện tại của chỉnh sữa: " + (this.isMilk ? "Có" : "Không"));
+                                if (this.askYesNo()) {
+                                    this.isMilk = !this.isMilk;
+                                    System.out.println("\t[Notice] Trạng thái chỉnh sữa: " + (this.isMilk ? "Có" : "Không"));
+                                    updated = true;
+                                }
+                                break;
+                            }
+                        }
+                        if (number == 4) {
+                            while (true) {
+                                System.out.println("\tTrạng thái hiện tại của chỉnh đường: " + (this.isSugar ? "Có" : "Không"));
+                                if (this.askYesNo()) {
+                                    this.isSugar = !this.isSugar;
+                                    System.out.println("\t[Notice] Trạng thái chỉnh đường: " + (this.isSugar ? "Có" : "Không"));
+                                    updated = true;
+                                }
+                                break;
+                            }
+                        }
+                        break;
+                    } else {
+                        System.out.println("\tVui lòng nhập trong khoảng 1 đến 4 !");
+                    }
+                } else {
+                    System.out.println("\tVui lòng nhập số !");
+                }
+            }
+        }
+        return updated;
     }
 
     // Tạo chuỗi để lưu file
