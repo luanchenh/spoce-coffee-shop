@@ -2,12 +2,13 @@ package NhanVien;
 
 import Utils.Address;
 import Utils.Function;
-import java.time.LocalDate;
+
 import java.util.Scanner;
 import Utils.INhap;
 import Utils.IXuat;
 import Utils.Date;
 
+@SuppressWarnings("resource")
 public class NhanVienPhaChe extends NhanVien implements INhap, IXuat {
     private int soDonDaPhaChe;
     private int soGioLamThem;
@@ -44,18 +45,9 @@ public class NhanVienPhaChe extends NhanVien implements INhap, IXuat {
     }
     @Override
     public void nhapThongTin() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Nhập thông tin nhân viên pha chế:");
-
+        Scanner sc = new Scanner(System.in);
         super.nhapThongTin();
-        System.out.print("Nhập số đơn đã pha chế: ");
-        setSoDonDaPhaChe(Integer.parseInt(scanner.nextLine()));
 
-        System.out.print("Nhập số giờ làm thêm: ");
-        setSoGioLamThem(Integer.parseInt(scanner.nextLine()));
-
-        System.out.println("Nhập thông tin nhân viên hoàn tất.");
     }
 
 
@@ -63,25 +55,18 @@ public class NhanVienPhaChe extends NhanVien implements INhap, IXuat {
 
 
     // Override Method
-    @Override
-    public void suaThongTin() {
-
-    }
 
     @Override
-    public double tinhLuong() {
-        double luongLamThem = soGioLamThem * 20000;
-
-        double tienThuong = (soDonDaPhaChe > 50) ? 100000 : 0;
-        if ("Buổi tối".equalsIgnoreCase(super.getCaLamViec())) {
-            tienThuong += 20000;
-        }
-
-        return luongLamThem + tienThuong;
+    public void tinhLuong() {
     }
     @Override
     public void xuatThongTin() {
 
+    }
+
+    @Override
+    void modifyInfo() {
+        
     }
 }
 

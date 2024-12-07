@@ -1,140 +1,31 @@
 package NhanVien;
 
-import Utils.Address;
+
+import Utils.INhap;
+import Utils.IXuat;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 
-public class NhanVienThuNgan extends Nhanvien {
+@SuppressWarnings("unused")
+public class NhanVienThuNgan extends NhanVien implements INhap, IXuat {
     private int soBillDaXuLy;
     private double tongTienDaXuLy;
     private int soGioLamThem;
 
+    @Override
+    public void xuatThongTin() {
 
-    public NhanVienThuNgan() {
-        super();
-    }
-
-    public NhanVienThuNgan(Address diaChi, int loaiNhanVien, String maNhanVien, LocalDate ngaySinh, String tenNhanVien, String chiNhanh, String caLamViec,
-                           int soBillDaXuLy, double tongTienDaXuLy, int soGioLamThem) {
-        super(diaChi, loaiNhanVien, maNhanVien, ngaySinh, tenNhanVien, chiNhanh, caLamViec);
-        this.soBillDaXuLy = soBillDaXuLy;
-        this.tongTienDaXuLy = tongTienDaXuLy;
-        this.soGioLamThem = soGioLamThem;
-    }
-
-    public int getSoBillDaXuLy() {
-        return soBillDaXuLy;
-    }
-
-    public void setSoBillDaXuLy(int soBillDaXuLy) {
-        this.soBillDaXuLy = soBillDaXuLy;
-    }
-
-    public double getTongTienDaXuLy() {
-        return tongTienDaXuLy;
-    }
-
-    public void setTongTienDaXuLy(double tongTienDaXuLy) {
-        this.tongTienDaXuLy = tongTienDaXuLy;
-    }
-
-    public int getSoGioLamThem() {
-        return soGioLamThem;
-    }
-
-    public void setSoGioLamThem(int soGioLamThem) {
-        this.soGioLamThem = soGioLamThem;
     }
     @Override
-    public void nhapThongTin() {
-        Scanner scanner = new Scanner(System.in);
-    
-        System.out.println("Nhập thông tin nhân viên thu ngân:");
+    public void tinhLuong() {
 
-        super.nhapThongTin();
-        System.out.print("Nhập số bill đã xử lý: ");
-        setSoBillDaXuLy(Integer.parseInt(scanner.nextLine()));
-    
-        System.out.print("Nhập tổng tiền đã xử lý: ");
-        setTongTienDaXuLy(Double.parseDouble(scanner.nextLine()));    
-        System.out.print("Nhập số giờ làm thêm: ");
-        setSoGioLamThem(Integer.parseInt(scanner.nextLine()));
-    
-        System.out.println("Nhập thông tin nhân viên thu ngân hoàn tất.");
     }
-    
     @Override
-public void suaThongTin() {
-    Scanner scanner = new Scanner(System.in);
-    System.out.println("Sửa thông tin nhân viên thu ngân:");
+    void modifyInfo() {
 
-    System.out.print("Nhập mã nhân viên mới: ");
-    String maNhanVienMoi = scanner.nextLine();
-    if (!maNhanVienMoi.isEmpty()) {
-        setMaNhanVien(maNhanVienMoi);
     }
 
-    System.out.print("Nhập tên nhân viên mới: ");
-    String tenNhanVienMoi = scanner.nextLine();
-    if (!tenNhanVienMoi.isEmpty()) {
-        setTenNhanVien(tenNhanVienMoi);
-    }
 
-    System.out.print("Nhập ngày sinh mới (yyyy-MM-dd): ");
-    String ngaySinhMoi = scanner.nextLine();
-    if (!ngaySinhMoi.isEmpty()) {
-        setNgaySinh(LocalDate.parse(ngaySinhMoi));
-    }
 
-    System.out.print("Nhập địa chỉ mới: ");
-    String diaChiMoi = scanner.nextLine();
-    if (!diaChiMoi.isEmpty()) {
-        Address newAddress = new Address(); 
-        newAddress.setInfo();
-        setDiaChi(newAddress);
-    }
-
-    System.out.print("Nhập số bill đã xử lý mới: ");
-    int soBillMoi = Integer.parseInt(scanner.nextLine());
-    if (soBillMoi >= 0) {
-        setSoBillDaXuLy(soBillMoi);
-    }
-
-    System.out.print("Nhập tổng tiền đã xử lý mới: ");
-    double tongTienMoi = Double.parseDouble(scanner.nextLine());
-    if (tongTienMoi >= 0) {
-        setTongTienDaXuLy(tongTienMoi);
-    }
-
-    System.out.print("Nhập ca làm việc mới (Sáng/Chiều/Buổi tối): ");
-    String caMoi = scanner.nextLine();
-    if (!caMoi.isEmpty()) {
-        setCaLamViec(caMoi);
-    }
-
-    System.out.print("Nhập số giờ làm thêm mới: ");
-    int gioLamThemMoi = Integer.parseInt(scanner.nextLine());
-    if (gioLamThemMoi >= 0) {
-        setSoGioLamThem(gioLamThemMoi);
-    }
-
-    System.out.println("Thông tin nhân viên đã được cập nhật.");
-}
-
-    @Override
-    public double tinhLuong() {
-        double luongLamThem = soGioLamThem * 20000;
-        double tienThuong = 0;
-
-        if (this.soBillDaXuLy > 100) {
-            tienThuong += 100000;
-        }
-
-        // Phụ cấp tiền ăn tối nếu làm ca buổi tối
-        if ("Buổi tối".equalsIgnoreCase(super.getCaLamViec())) {
-            tienThuong += 20000;
-        }
-
-        return  luongLamThem + tienThuong;
-    }
 }

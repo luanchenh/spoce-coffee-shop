@@ -101,7 +101,7 @@ public abstract class NuocUong implements INhap, IXuat {
 
         // Tăng số thứ tự cho loại nước uống
         if (typeCounter.containsKey(drinkType)) {
-            int currentCount = typeCounter.get(drinkType) + 1;
+            int currentCount = typeCounter.get(drinkType);
             typeCounter.put(drinkType, currentCount);
             this.id = drinkType + currentCount; // Tạo ID theo loại
         } else {
