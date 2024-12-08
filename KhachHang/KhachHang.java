@@ -83,7 +83,7 @@ public abstract class KhachHang {
     // Phương thức trừu tượng để tạo chuỗi ghi vào file
     public abstract String makeString();
 
-    // Phương thức dùng để hủy gói thành viên 
+    // Phương thức dùng để hủy gói thành viên
     public void cancelMembership() {
         if (this.isMember) {
             this.isMember = false;
@@ -103,7 +103,9 @@ public abstract class KhachHang {
         try (Scanner sc = new Scanner(customerFile)) {
             while (sc.hasNextLine()) {
                 str = sc.nextLine();
-                num++;
+                String[] parts = str.split("\\|");
+                String idValue = parts[1];
+                num = Math.max(num, Integer.parseInt(idValue.substring(2)));
             }
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
@@ -118,7 +120,7 @@ public abstract class KhachHang {
         int idNumber = 1;
         boolean isValid = false;
 
-        while (!isValid) { 
+        while (!isValid) {
             boolean isSame = false;
             for (KhachHang kh : ql.customerList) {
                 if (Function.getNumberFromCustomerID(kh.customerID) == idNumber) {

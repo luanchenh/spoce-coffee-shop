@@ -102,7 +102,7 @@ public class MemberCard implements INhap, IXuat {
         String str;
         System.out.println("\n\t[Notice] Thông tin thành viên");
 
-        
+
 
         loop:
         while (true) {
@@ -172,23 +172,7 @@ public class MemberCard implements INhap, IXuat {
             }
         }
 
-        while (true) {
-            System.out.print("\n\t=> Nhập điểm tích lũy: ");
-            str = sc.nextLine();
-
-            if (Function.isEmpty(str)) {
-                System.out.println("\tLựa chọn không được rỗng!\n");
-                continue;
-            }
-
-            if (!Function.isTrueNumber(str)) {
-                System.out.println("\tLựa chọn phải là số!\n");
-                continue;
-            }
-
-            this.point = Integer.parseInt(str);
-            break;
-        }
+        this.point = 0; // Khởi tạo điểm tích luỹ bằng 0
     }
 
     // Phương thức dùng để tích điểm từ giá trị đơn hàng
@@ -220,7 +204,7 @@ public class MemberCard implements INhap, IXuat {
         int idNumber = 1;
         boolean isValid = false;
 
-        while (!isValid) { 
+        while (!isValid) {
             boolean isSame = false;
             for (KhachHang kh : ql.customerList) {
                 if (kh.IsMember() && Function.getNumberFromCustomerID(kh.getMemberCard().getCardID()) == idNumber) {
