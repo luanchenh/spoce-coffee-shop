@@ -73,6 +73,14 @@ public void nhapThongTin() {
 
     System.out.println("\t[Notice] Nhập thông tin nhân viên pha chế hoàn tất.");
 }
+
+    public void addGioLamThem(int soGioLamThem) {
+        this.soGioLamThem += soGioLamThem;
+    }
+    public void addDonDaPhaChe(int soDonDaPhaChe) {
+        this.soDonDaPhaChe += soDonDaPhaChe;
+    }
+
     // Override Method
 
     @Override
@@ -80,7 +88,15 @@ public void nhapThongTin() {
     }
     @Override
     public void xuatThongTin() {
-
+        System.out.println("\tLương cơ bản: " + Function.formatMoney("2000000"));
+        // Nếu ca tối thì cấp cơ bản
+        System.out.println("\tPhụ cấp ca: " + (this.caLamViec.equals("EVENING") ? Function.formatMoney("500000") : Function.formatMoney("0")));
+        // Nếu số đơn đã pha chế lớn hơn 100 thì thưởng 1 triệu
+        System.out.println("\tThưởng số đơn: " + (this.soDonDaPhaChe > 100 ? Function.formatMoney("1000000") : Function.formatMoney("0")));
+        // Số giờ lamg thêm + 50
+        System.out.println("\tThưởng giờ làm thêm: " + Function.formatMoney(String.valueOf(this.soGioLamThem * 50000)));
+        // Tổng lương
+        System.out.println("\tTổng lương: " + Function.formatMoney(String.valueOf(2000000 + (this.caLamViec.equals("EVENING") ? 500000 : 0) + (this.soDonDaPhaChe > 100 ? 1000000 : 0) + (this.soGioLamThem * 50000))));
     }
 
     @Override
@@ -98,7 +114,9 @@ public void nhapThongTin() {
         System.out.println("\t5. Ca làm việc");
         System.out.println("\t6. Số đơn đã pha chế");
         System.out.println("\t7. Số giờ làm thêm");
-        System.out.println("\t8. Thoát");
+        System.out.println("\t8. Thêm số giờ làm thêm");
+        System.out.println("\t9. Thêm số đơn đã pha chế");
+        System.out.println("\t10. Thoát");
         System.out.print("\tNhập lựa chọn: ");
         str = sc.nextLine();
 
@@ -182,6 +200,26 @@ public void nhapThongTin() {
                     }
                     break;
                 case 8:
+                    System.out.print("\tNhập số giờ làm thêm cần thêm: ");
+                    str = sc.nextLine();
+                    if (Function.isTrueNumber(str)) {
+                        this.soGioLamThem += Integer.parseInt(str);
+                        System.out.println("\t[Notice] Số giờ làm thêm đã được cập nhật.");
+                    } else {
+                        System.out.println("\tVui lòng nhập số!");
+                    }
+                    break;
+                case 9:
+                    System.out.print("\tNhập số đơn đã pha chế cần thêm: ");
+                    str = sc.nextLine();
+                    if (Function.isTrueNumber(str)) {
+                        this.soDonDaPhaChe += Integer.parseInt(str);
+                        System.out.println("\t[Notice] Số đơn đã pha chế đã được cập nhật.");
+                    } else {
+                        System.out.println("\tVui lòng nhập số!");
+                    }
+                    break;
+                case 10:
                     System.out.println("\tThoát chỉnh sửa.");
                     return;
                 default:

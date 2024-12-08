@@ -38,7 +38,7 @@ public class QLHoaDon {
     public void writeAll() {
         try (FileWriter writer = new FileWriter("../File/hoadon.txt", false)) {
             for (HoaDon bill : this.billList) {
-                writer.write(bill.makeString()).append("\n");
+                // writer.write(bill.makeString()).append("\n");
             }
             writer.flush();
         } catch (Exception e) {
@@ -61,62 +61,62 @@ public class QLHoaDon {
         Date startDate = new Date();
         Date endDate = new Date();
 
-        while (true) { 
+        while (true) {
             while (true) {
-                while (true) { 
+                while (true) {
                     System.out.print("\n\t=> Nhập ngày bắt đầu: ");
                     str = sc.nextLine();
-        
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tNgày bắt đầu không được rỗng!");
                         continue;
                     }
-        
+
                     if (!Function.isTrueNumber(str)) {
                         System.out.println("\tNgày bắt đầu phải là số!");
                         continue;
                     }
-    
+
                     startDate.setDay(str);
                     break;
                 }
-    
-                while (true) { 
+
+                while (true) {
                     System.out.print("\n\t=> Nhập tháng bắt đầu: ");
                     str = sc.nextLine();
-        
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tTháng bắt đầu không được rỗng!");
                         continue;
                     }
-        
+
                     if (!Function.isTrueNumber(str)) {
                         System.out.println("\tTháng bắt đầu phải là số!");
                         continue;
                     }
-    
+
                     startDate.setMonth(str);
                     break;
                 }
-    
-                while (true) { 
+
+                while (true) {
                     System.out.print("\n\t=> Nhập năm bắt đầu: ");
                     str = sc.nextLine();
-        
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tNăm bắt đầu không được rỗng!");
                         continue;
                     }
-        
+
                     if (!Function.isTrueNumber(str)) {
                         System.out.println("\tNăm bắt đầu phải là số!");
                         continue;
                     }
-    
+
                     startDate.setYear(str);
                     break;
                 }
-    
+
                 if (startDate.isValidDate()) {
                     break;
                 } else {
@@ -124,61 +124,61 @@ public class QLHoaDon {
                 }
             }
 
-            while (true) { 
-                while (true) { 
+            while (true) {
+                while (true) {
                     System.out.print("\n\t=> Nhập ngày kết thúc: ");
                     str = sc.nextLine();
-        
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tNgày kết thúc không được rỗng!");
                         continue;
                     }
-        
+
                     if (!Function.isTrueNumber(str)) {
                         System.out.println("\tNgày kết thúc phải là số!");
                         continue;
                     }
-    
+
                     endDate.setDay(str);
                     break;
                 }
-    
-                while (true) { 
+
+                while (true) {
                     System.out.print("\n\t=> Nhập tháng kết thúc: ");
                     str = sc.nextLine();
-        
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tTháng kết thúc không được rỗng!");
                         continue;
                     }
-        
+
                     if (!Function.isTrueNumber(str)) {
                         System.out.println("\tTháng kết thúc phải là số!");
                         continue;
                     }
-    
+
                     endDate.setMonth(str);
                     break;
                 }
-    
-                while (true) { 
+
+                while (true) {
                     System.out.print("\n\t=> Nhập năm kết thúc: ");
                     str = sc.nextLine();
-        
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tNăm kết thúc không được rỗng!");
                         continue;
                     }
-        
+
                     if (!Function.isTrueNumber(str)) {
                         System.out.println("\tNăm kết thúc phải là số!");
                         continue;
                     }
-    
+
                     endDate.setYear(str);
                     break;
                 }
-    
+
                 if (endDate.isValidDate()) {
                     break;
                 } else {
