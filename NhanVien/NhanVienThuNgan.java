@@ -5,6 +5,8 @@ import Utils.IXuat;
 import Utils.Address;
 import Utils.Date;
 import Utils.Function;
+import Utils.INhap;
+import Utils.IXuat;
 import java.util.Scanner;
 
 @SuppressWarnings("resource")
@@ -272,5 +274,4 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
             }
         }
     }
-
 }

@@ -1,17 +1,20 @@
 package HoaDon;
 
+import KhachHang.KHMangDi;
+import KhachHang.KHTaiCho;
+import KhachHang.KhachHang;
+import NhanVien.NhanVienThuNgan;
 import ThucDon.ThucDon;
 import Utils.IXuat;
-
 import java.io.File;
-import java.util.Date;
-import NhanVien.NhanVienThuNgan;
+import Utils.Date;
 import java.util.Scanner;
 
 @SuppressWarnings("unused")
 public class HoaDon implements IXuat {
     private String maHoaDon;
     private NhanVienThuNgan nhanVien;
+    private KhachHang khachHang;
     private ThucDon thucDon;
     private Date ngayTaoHoaDon;
     private String trangThaiHoaDon;
@@ -20,13 +23,12 @@ public class HoaDon implements IXuat {
     private double tienThua;
 
 
-
     // Get mã tự động
     private static int countBill = 0;
     static {
         int totalBillCode = 0;
         File hoaDonFile = new File("../File/hoadon.txt");
-        try(Scanner rd = new Scanner(hoaDonFile)) {
+        try (Scanner rd = new Scanner(hoaDonFile)) {
             while (rd.hasNextLine()) {
                 totalBillCode++;
                 rd.nextLine();
@@ -41,6 +43,7 @@ public class HoaDon implements IXuat {
         this.maHoaDon =  "HD" + (countBill++);
         this.thucDon = new ThucDon();
         this.ngayTaoHoaDon = new Date(); // Mặc định là ngày hiện tại
+        this.ngayTaoHoaDon.getLocalDate();
         this.nhanVien = new NhanVienThuNgan();
     }
 
@@ -158,6 +161,7 @@ public class HoaDon implements IXuat {
         System.out.printf("\tMã hóa đơn        : %s%n", this.maHoaDon);
         System.out.printf("\tNgày tạo hóa đơn  : %s%n", this.ngayTaoHoaDon);
         System.out.printf("\tTrạng thái hóa đơn: %s%n", this.trangThaiHoaDon);
+        System.out.println("\t Tên khách hàng   : " + this.khachHang.getCustomerName());
         System.out.println("\t----------------------------------------");
         System.out.println("\t         CHI TIẾT THỰC ĐƠN              ");
         System.out.println("\t----------------------------------------");
@@ -166,9 +170,32 @@ public class HoaDon implements IXuat {
         System.out.printf("\tTổng tiền         : %.0f VNĐ%n", this.tongTien);
         System.out.printf("\tTiền khách đưa    : %.0f VNĐ%n", this.tienKhachDua);
         System.out.printf("\tTiền thừa         : %.0f VNĐ%n", this.tienThua);
-        
+
         System.out.println("\t         CẢM ƠN QUÝ KHÁCH!              ");
         System.out.println("\t========================================");
+    }
+
+    public String makeString() {
+        StringBuilder str = new StringBuilder();
+        str.append(this.maHoaDon).append("|");
+        str.append(this.nhanVien.getMaNhanVien()).append("|");
+        str.append(this.khachHang.getCustomerID()).append("|");
+
+        if (this.khachHang instanceof KHTaiCho && ((KHTaiCho) this.khachHang).getTable() != null) {
+            str.append("1|").append(((KHTaiCho) this.khachHang).getTable().getTableID()).append("|");
+        } else {
+            str.append("0|0|");
+        }
+
+        str.append(this.trangThaiHoaDon).append("|");
+
+        // CÒN LƯU NƯỚC UỐNG VÀ TOPPING KHÁCH HÀNG CHỌN
+
+        return str.toString();
+    }
+
+    public void inRaTrangThai() {
+        System.out.printf("\t| %-10s %-10s %20s |%n", this.maHoaDon, this.ngayTaoHoaDon.toString(), this.trangThaiHoaDon);
     }
 }
 

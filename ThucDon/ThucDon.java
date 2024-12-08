@@ -8,7 +8,6 @@ public class ThucDon implements IXuat {
     private ArrayList<NuocUong> danhSachNuocUong;
     private ArrayList<ArrayList<Topping>> danhSachTopping;
 
-
     public ThucDon() {
         this.danhSachNuocUong = new ArrayList<>();
         this.danhSachTopping = new ArrayList<>();
