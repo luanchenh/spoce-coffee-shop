@@ -5,16 +5,10 @@ import Ban.QLBan;
 import KhachHang.KHMangDi;
 import KhachHang.KHTaiCho;
 import KhachHang.KhachHang;
-<<<<<<< HEAD
-=======
 import KhachHang.MemberCard;
-import Utils.Date;
-import Utils.Function;
-import NuocUong.QLNuocUong;
-import Ban.QLBan;
->>>>>>> 4e27c6374db352c07cf7d62c9695fe9f3ebb784f
 import KhachHang.QLKhachHang;
 import NuocUong.QLNuocUong;
+import Utils.Date;
 import Utils.Function;
 import java.io.File;
 import java.util.Scanner;
@@ -68,13 +62,9 @@ public class NguoiDung {
         return temp;
     }
 
-<<<<<<< HEAD
     // public static void choseMenu() {
     //     Scanner sc = new Scanner(System.in);
     //     String str;
-=======
-    public static void writeNewUser() {
->>>>>>> 4e27c6374db352c07cf7d62c9695fe9f3ebb784f
 
     //     while (true) {
     //         Function.clearScreen();
@@ -92,7 +82,6 @@ public class NguoiDung {
     //     }
     // }
 
-<<<<<<< HEAD
     public static void selectCustomer() {
 
     }
@@ -394,8 +383,6 @@ public class NguoiDung {
         }
     }
 
-=======
->>>>>>> 4e27c6374db352c07cf7d62c9695fe9f3ebb784f
     public static void Menu() {
         Scanner sc = new Scanner(System.in);
         int number = 0;
@@ -419,131 +406,32 @@ public class NguoiDung {
                     number = Integer.parseInt(str);
                     if (number >= 1 && number <= 3) {
                         if (number == 1) {
-                            break;
+                            selectOne();
+                            continue;
                         } else if (number == 2) {
-                            break;
+                            selectTwo();
+                            continue;
                         } else if (number == 3) {
                             // Thoát
                             System.out.println("\tCảm ơn bạn đã sử dụng dịch vụ của chúng tôi !");
                             break;
                         } else {
                             System.out.println("\tVui lòng chọn từ 1 đến 3 !");
+                            continue;
                         }
                     } else {
                         System.out.println("\tVui lòng chọn từ 1 đến 2 !");
+                        continue;
                     }
                 } else {
                     System.out.println("\tVui lòng nhập số !");
-                }
-            }
-        }
-        if (number == 1) {
-            KhachHang temp = null;
-        }
-        if (number == 2) {
-            Account account = new Account("1");
-            account.nhapThongTin();
-            System.out.println("\tĐăng ký thành công !");
-            while (true) {
-                System.out.println(
-                        "\t===================================[Trang người dùng]====================================");
-                System.out.printf("\t| %-87s |%n", "Chọn chức năng:");
-                System.out.println("\t1. Người dùng dùng tại chỗ");
-                System.out.println("\t2. Người dùng dùng mang đi");
-                System.out.println("\t3. Thoát chương trình");
-                System.out.println(
-                        "\t==========================================================================================");
-                System.out.print("\tNhập lựa chọn của bạn: ");
-                str = sc.nextLine();
-                if (Function.isEmpty(str)) {
-                    System.out.println("\tVui lòng không để trống !");
-                } else {
-                    if (Function.isTrueNumber(str)) {
-                        number = Integer.parseInt(str);
-                        if (number >= 1 && number <= 3) {
-                            if (number == 1) {
-                                break;
-                            } else if (number == 2) {
-                                break;
-                            } else if (number == 3) {
-                                // Thoát
-                                System.out.println("\tCảm ơn bạn đã sử dụng dịch vụ của chúng tôi !");
-                                break;
-                            } else {
-                                System.out.println("\tVui lòng chọn từ 1 đến 3 !");
-                            }
-                        } else {
-                            System.out.println("\tVui lòng chọn từ 1 đến 2 !");
-                        }
-                    } else {
-                        System.out.println("\tVui lòng nhập số !");
-                    }
+                    continue;
                 }
             }
         }
     }
 
     public static void main(String[] args) {
-
-        Scanner sc = new Scanner(System.in);
-        String str;
-        while (true) {
-            Function.clearScreen();
-            System.out.println(
-                    "\t===================================[Trang người dùng]====================================");
-            System.out.printf("\t| %-87s |%n", "Chọn chức năng:");
-            System.out.printf("\t| %-5s %-81s |%n", "1.", "Đăng nhập tài khoản đã có");
-            System.out.printf("\t| %-5s %-81s |%n", "2.", "Đăng ký nếu chưa có tài khoản");
-            System.out.printf("\t| %-5s %-81s |%n", "3.", "Thoát chương trình");
-            System.out.println(
-                    "\t==========================================================================================");
-            System.out.print("\tNhập lựa chọn của bạn: ");
-            str = sc.nextLine();
-            if (Function.isEmpty(str)) {
-                System.out.println("\tVui lòng không để trống !");
-            } else {
-                if (Function.isTrueNumber(str)) {
-                    int number = Integer.parseInt(str);
-                    if (number >= 1 && number <= 3) {
-                        if (number == 1) {
-                            Account account = new Account("1");
-                            account.Login();
-                            IDLink = account.checkLogin();
-                            if (IDLink != "") {
-                                System.out.println("\tĐăng nhập thành công !");
-                                KhachHang kh = getInfoCustomer();
-                                if (kh != null) {
-                                    kh.xuatThongTin();
-                                } else {
-                                    System.out.println("\tKhông tìm thấy khách hàng với ID: " + IDLink);
-                                }
-                                break;
-                            } else {
-                                System.out.println("\tĐăng nhập thất bại, đăng nhập lại ! !");
-                                try {
-                                    Thread.sleep(2500);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        } else if (number == 2) {
-                            Account account = new Account("1");
-                            account.nhapThongTin();
-
-                        } else if (number == 3) {
-                            // Thoát
-                            System.out.println("\tCảm ơn bạn đã sử dụng dịch vụ của chúng tôi !");
-                            break;
-                        } else {
-                            System.out.println("\tVui lòng chọn từ 1 đến 3 !");
-                        }
-                    } else {
-                        System.out.println("\tVui lòng chọn từ 1 đến 2 !");
-                    }
-                } else {
-                    System.out.println("\tVui lòng nhập số !");
-                }
-            }
-        }
+        Menu();
     }
 }

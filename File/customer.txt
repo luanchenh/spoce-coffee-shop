@@ -1,9 +1,5 @@
 1|KH1|Nguyen Nam Duong|0|null
-1|KH2|Nguyen Hong Anh|1|MB1|14|2|2005|8|12|2024|8|12|2025|0
+0|KH2|Nguyen Hong Anh|1|MB1|14|2|2005|8|12|2024|8|12|2025|0
 0|KH3|Nguyen Van Lam|0|null
-<<<<<<< HEAD
 1|KH4|Chenh Tien Luan|1|MB2|2|4|2005|8|12|2024|8|12|2025|0
 0|KH7|Chenh Tien Loc|0|null
-=======
-    
->>>>>>> 4e27c6374db352c07cf7d62c9695fe9f3ebb784f
