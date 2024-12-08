@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+@SuppressWarnings("resource")
 public class QLKhachHang implements IXuat {
     public ArrayList<KhachHang> customerList; // Array List để lưu các khách hàng
 
@@ -34,7 +35,7 @@ public class QLKhachHang implements IXuat {
                 // System.out.println(arr[0]+" "+arr[1]+" "+arr[2]+" "+arr[3]+" "+arr[4]+" "+arr[5]+" "+arr[6]+" "+arr[7]+" "+arr[8]);
                 MemberCard card = null;
                 boolean status = false;
-                if (arr[3].compareTo("1") == 0) { 
+                if (arr[3].compareTo("1") == 0) {
                     card = new MemberCard(arr[4], new Date(arr[5], arr[6], arr[7]), new Date(arr[8], arr[9], arr[10]), new Date(arr[11], arr[12], arr[13]), Integer.parseInt(arr[14]));
                     status = true;
                 }
@@ -84,9 +85,9 @@ public class QLKhachHang implements IXuat {
     public void addCustomer() {
         Scanner sc = new Scanner(System.in);
         String str;
-        KhachHang kh = null;    
+        KhachHang kh = null;
 
-        while (true) { 
+        while (true) {
             System.out.println("\n\t==========================================================================================");
             // System.out.println("\tChọn loại khách hàng");
             // System.out.println("1. Khách hàng mang đi");
@@ -162,16 +163,16 @@ public class QLKhachHang implements IXuat {
 
             switch (str) {
                 case "1":
-                while (true) { 
+                while (true) {
                     boolean isDone = false;
                     System.out.print("\n\t=> Mời bạn nhập ID khách hàng: ");
                     str = sc.nextLine();
-    
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tID không được rỗng!");
                         continue;
                     }
-    
+
                     for (KhachHang kh : this.customerList) {
                         if (kh.getCustomerID().equals(str)) {
                             this.customerList.remove(kh);
@@ -179,7 +180,7 @@ public class QLKhachHang implements IXuat {
                             break;
                         }
                     }
-    
+
                     if (!isDone) {
                         System.out.println("\tKhông tìm thấy khách hàng!\n");
                         continue;
@@ -192,7 +193,7 @@ public class QLKhachHang implements IXuat {
                 break;
 
                 case "2":
-                while (true) { 
+                while (true) {
                     boolean isDone = false;
                     System.out.print("\n\t=> Mời bạn nhập tên khách hàng: ");
                     str = sc.nextLine();
@@ -277,7 +278,7 @@ public class QLKhachHang implements IXuat {
 
             switch (str) {
                 case "1":
-                while (true) { 
+                while (true) {
                     boolean isDone = false;
                     System.out.print("\n\t=> Mời bạn nhập ID khách hàng: ");
                     str = sc.nextLine();
@@ -307,7 +308,7 @@ public class QLKhachHang implements IXuat {
                 break;
 
                 case "2":
-                while (true) { 
+                while (true) {
                     boolean isDone = false;
                     System.out.print("\n\t=> Mời bạn nhập tên khách hàng: ");
                     str = sc.nextLine();
@@ -356,7 +357,7 @@ public class QLKhachHang implements IXuat {
         Scanner sc = new Scanner(System.in);
         String str;
 
-        while (true) { 
+        while (true) {
             System.out.println("\n\tBạn có chắc chắn muốn xoá toàn bộ danh sách không?");
             System.out.println("\t1. Có");
             System.out.println("\t2. Không");
@@ -411,7 +412,7 @@ public class QLKhachHang implements IXuat {
         Scanner sc = new Scanner(System.in);
         String str;
 
-        while (true) { 
+        while (true) {
             System.out.println("\tTìm kiếm khách hàng theo: ");
             System.out.println("\t1. Tìm kiếm theo ID");
             System.out.println("\t2. Tìm kiếm theo Tên");
@@ -431,7 +432,7 @@ public class QLKhachHang implements IXuat {
 
             switch (str) {
                 case "1":
-                while (true) { 
+                while (true) {
                     System.out.print("\tNhập ID muốn tìm (bao gồm mã): ");
                     str = sc.nextLine();
 
@@ -447,23 +448,23 @@ public class QLKhachHang implements IXuat {
                             break;
                         }
                     }
-    
+
                     if (khachhang == null) {
                         System.out.println("\tKhông tìm thấy khách hàng nào có ID: " + str);
                     } else {
                         System.out.println("\tKết quả tìm kiếm: ");
                         khachhang.xuatThongTin();
                     }
-                    
+
                     break;
                 }
                 break;
 
                 case "2":
-                while (true) { 
+                while (true) {
                     System.out.print("\tNhập tên muốn tìm: ");
                     str = sc.nextLine();
-    
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tTên không được rỗng!");
                         continue;
@@ -591,7 +592,7 @@ public class QLKhachHang implements IXuat {
         }
 
     }
-    
+
     public static void main(String[] args) {
         QLKhachHang ql = new QLKhachHang();
         ql.menuQLKhachHang();

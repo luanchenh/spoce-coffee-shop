@@ -6,17 +6,17 @@ import Utils.IXuat;
 import Utils.Address;
 import Utils.Date;
 import Utils.Function;
-import java.time.LocalDate;
 import java.util.Scanner;
 
-@SuppressWarnings("unused")
+
+@SuppressWarnings("resource")
 public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
     private int soBillDaXuLy;
     private double tongTienDaXuLy;
     private int soGioLamThem;
 
-    
-    
+
+
 
     public NhanVienThuNgan() {
         super("NVTN");
@@ -105,10 +105,10 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
             }
         }
         System.out.println("\t[Notice] Số giờ làm thêm: " + this.soGioLamThem);
-    
+
         System.out.println("\t[Notice] Nhập thông tin nhân viên thu ngân hoàn tất.");
     }
-    
+
     @Override
     public void xuatThongTin() {
 
