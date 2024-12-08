@@ -922,4 +922,13 @@ public abstract class NuocUong implements INhap, IXuat {
         return sb.toString();
     }
 
+
+    public void showMenu() {
+        System.out.println("\t Tên sản phẩm: " + this.name);
+        // Giá theo size
+        for (Map.Entry<String, Integer> entry : this.sizePrice.entrySet()) {
+            System.out.println("\t\t" + entry.getKey() + ": " + Function.formatMoney(entry.getValue() + ""));
+        }
+    }
+
 }
