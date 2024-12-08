@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+@SuppressWarnings("resource")
 public class QLBan implements IXuat {
     public ArrayList<Ban> tableList;
 
@@ -19,7 +21,7 @@ public class QLBan implements IXuat {
     }
 
     // Phương thức dùng để đọc dữ liệu bàn từ tập tin và ghi vào mảng quản lí bàn
-    public void init() {
+    public void Init() {
         File tableFile = new File("../File/table.txt");
         try (Scanner sc = new Scanner(tableFile)) {
             while (sc.hasNextLine()) {
@@ -166,7 +168,7 @@ public class QLBan implements IXuat {
         Scanner sc = new Scanner(System.in);
         String str;
 
-        while (true) { 
+        while (true) {
             System.out.println("\n\tBạn có chắc chắn muốn xoá toàn bộ danh sách không?");
             System.out.println("\t1. Có");
             System.out.println("\t2. Không");
@@ -200,7 +202,7 @@ public class QLBan implements IXuat {
 
             break;
         }
-    } 
+    }
 
     // Phương thức để in ra số bàn trong quán
     public void countTable() {
@@ -265,11 +267,11 @@ public class QLBan implements IXuat {
 
     public void menuQLBan() {
         Function.clearScreen();
-        this.init();
+        this.Init();
         Scanner sc = new Scanner(System.in);
         String str;
 
-        while (true) { 
+        while (true) {
             // In tiêu đề
             System.out.println("\t==================================[ Menu Quản Lý Bàn ]==================================");
 
@@ -328,7 +330,7 @@ public class QLBan implements IXuat {
                 continue;
 
                 case "6":
-                this.init();
+                this.Init();
                 continue;
 
                 case "7":

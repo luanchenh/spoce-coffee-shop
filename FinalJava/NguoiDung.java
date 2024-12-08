@@ -7,19 +7,33 @@ import KhachHang.KHMangDi;
 import KhachHang.KHTaiCho;
 import KhachHang.KhachHang;
 import Utils.Function;
+import NuocUong.QLNuocUong;
+import Ban.QLBan;
+import KhachHang.QLKhachHang;
 
 /**
  *
  */
+
+@SuppressWarnings("resource")
 public class NguoiDung {
 
     public static String IDLink = "";
+    // Các QLy
+    public static QLNuocUong qlNuocUong = new QLNuocUong();
+    public static QLBan qlBan = new QLBan();
+    public static QLKhachHang qlKhachHang = new QLKhachHang();
+    static {
+        qlNuocUong.Init();
+        qlBan.Init();
+        qlKhachHang.Init();
+    }
 
     public static KhachHang getInfoCustomer() {
         KhachHang temp = null;
         File customerFile = new File("../File/customers.txt");
-        try(Scanner rd = new Scanner(customerFile)) {
-            while(rd.hasNextLine() && temp != null) {
+        try (Scanner rd = new Scanner(customerFile)) {
+            while (rd.hasNextLine() && temp != null) {
                 String line = rd.nextLine();
                 String[] parts = line.split("\\|");
                 if (parts[1].equals(IDLink)) {
@@ -33,8 +47,7 @@ public class NguoiDung {
                     break;
                 }
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("\tLỗi: " + e.getMessage());
         }
         return temp;
@@ -46,30 +59,30 @@ public class NguoiDung {
     }
 
     public static void selectCustomer() {
-        
+
     }
 
-    public static void main(String[] args) {
+    public static void selectOne() {
         Scanner sc = new Scanner(System.in);
         String str;
+        int number = 0;
         while (true) {
             Function.clearScreen();
             System.out.println(
-                    "\t===================================[Trang người dùng]====================================");
-            System.out.printf("\t| %-87s |%n", "Chọn chức năng:");
+                    "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+            System.out.printf("\t| %-87s |%n", "Chọn chức năng (Cần đăng nhập để chọn bàn)");
             System.out.printf("\t| %-5s %-81s |%n", "1.", "Đăng nhập tài khoản đã có");
             System.out.printf("\t| %-5s %-81s |%n", "2.", "Đăng ký nếu chưa có tài khoản");
-            System.out.printf("\t| %-5s %-81s |%n", "3.", "Thoát chương trình");
+            System.out.printf("\t| %-5s %-81s |%n", "3.", "Quay lại trang trước");
             System.out.println(
                     "\t==========================================================================================");
             System.out.print("\tNhập lựa chọn của bạn: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không để trống !");
-            }
-            else {
+            } else {
                 if (Function.isTrueNumber(str)) {
-                    int number = Integer.parseInt(str);
+                    number = Integer.parseInt(str);
                     if (number >= 1 && number <= 3) {
                         if (number == 1) {
                             Account account = new Account("1");
@@ -79,8 +92,7 @@ public class NguoiDung {
                                 System.out.println("\tĐăng nhập thành công !");
                                 choseMenu();
                                 break;
-                            }
-                            else {
+                            } else {
                                 System.out.println("\tĐăng nhập thất bại, đăng nhập lại ! !");
                                 try {
                                     Thread.sleep(2500);
@@ -88,29 +100,77 @@ public class NguoiDung {
                                     e.printStackTrace();
                                 }
                             }
-                        }
-                        else if (number == 2) {
+                        } else if (number == 2) {
                             Account account = new Account("1");
                             account.nhapThongTin();
 
-                        }
-                        else if (number == 3) {
-                            // Thoát
+                        } else if (number == 3) {
                             System.out.println("\tCảm ơn bạn đã sử dụng dịch vụ của chúng tôi !");
                             break;
-                        }
-                        else {
+                        } else {
                             System.out.println("\tVui lòng chọn từ 1 đến 3 !");
                         }
+                    } else {
+                        System.out.println("\tVui lòng chọn từ 1 đến 3 !");
                     }
-                    else {
-                        System.out.println("\tVui lòng chọn từ 1 đến 2 !");
-                    }
-                }
-                else {
+                } else {
                     System.out.println("\tVui lòng nhập số !");
                 }
             }
         }
+
+    }
+
+    public static void selectTwo() {
+    }
+
+    public static void Menu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        int number = 0;
+        while (true) {
+            Function.clearScreen();
+            System.out.println(
+                    "\t===================================[Trang người dùng]====================================");
+            System.out.printf("\t| %-87s |%n", "Bạn là người dùng gì ?");
+            System.out.printf("\t| %-5s %-81s |%n", "1.", "Dùng tại chỗ");
+            System.out.printf("\t| %-5s %-81s |%n", "2.", "Dùng mang đi");
+            System.out.printf("\t| %-5s %-81s |%n", "3.", "Thoát chương trình");
+            System.out.println(
+                    "\t==========================================================================================");
+            System.out.print("\tNhập lựa chọn của bạn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống !");
+            } else {
+                if (Function.isTrueNumber(str)) {
+                    number = Integer.parseInt(str);
+                    if (number >= 1 && number <= 3) {
+                        if (number == 1) {
+                            selectOne();
+
+                        } else if (number == 2) {
+                            selectTwo();
+
+                        } else if (number == 3) {
+                            // Thoát
+                            System.out.println("\tCảm ơn bạn đã sử dụng dịch vụ của chúng tôi !");
+                            return;
+                        } else {
+                            System.out.println("\tVui lòng chọn từ 1 đến 3 !");
+                        }
+                    } else {
+                        System.out.println("\tVui lòng chọn từ 1 đến 2 !");
+                    }
+                } else {
+                    System.out.println("\tVui lòng nhập số !");
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        Menu();
     }
 }

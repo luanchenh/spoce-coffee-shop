@@ -4,9 +4,10 @@ import Ban.Ban;
 import Utils.Function;
 import java.util.Scanner;
 
+@SuppressWarnings("resource")
 public class KHTaiCho extends KhachHang {
-    private int dineInCustomer; // số lượng khách
-    private Ban table; // bàn mà khách sẽ được xếp vào (mặc định là null)
+    private int dineInCustomer;
+    private Ban table;
 
     // hàm khởi tạo phi tham số
     public KHTaiCho() {
@@ -59,7 +60,7 @@ public class KHTaiCho extends KhachHang {
 
         System.out.println("\n\t[Notice] ID khách hàng hiện tại: " + this.customerID);
         // Nhập tên khách hàng
-        while (true) { 
+        while (true) {
             System.out.print("\t=> Nhập tên khách hàng: ");
             str = sc.nextLine();
 
@@ -78,7 +79,7 @@ public class KHTaiCho extends KhachHang {
         }
 
         // Nhập trạng thái thành viên và chi tiết thành viên
-        while (true) { 
+        while (true) {
             System.out.println("\n\t==========================================================================================");
             System.out.printf("\t| %-87s |%n", "Chọn trạng thái thành viên:");
             System.out.printf("\t| %-5s %-81s |%n", "1.", "Khách hàng là thành viên");
@@ -122,7 +123,7 @@ public class KHTaiCho extends KhachHang {
         }
 
         // Nhập số lượng khách
-        while (true) { 
+        while (true) {
             System.out.print("\n\t=> Nhập số lượng khách: ");
             str = sc.nextLine();
 
@@ -144,7 +145,7 @@ public class KHTaiCho extends KhachHang {
             this.dineInCustomer = Integer.parseInt(str);
             break;
         }
-    
+
         // Tìm ra bàn phù hợp
         this.table = Ban.findTable(this.dineInCustomer);
     }
@@ -192,7 +193,7 @@ public class KHTaiCho extends KhachHang {
         String str;
 
         loop2:
-        while (true) { 
+        while (true) {
             // System.out.println("\nSửa thông tin khách hàng dùng tại chỗ có ID: " + this.customerID);
             // System.out.println("1. Tên khách hàng");
             // System.out.println("2. Trạng thái thành viên");
@@ -246,7 +247,7 @@ public class KHTaiCho extends KhachHang {
                             System.out.println("\tLựa chọn không được rỗng!");
                             continue;
                         }
-            
+
                         if (!Function.isTrueNumber(str)) {
                             System.out.println("\tLựa chọn phải là số!");
                             continue;
@@ -261,7 +262,7 @@ public class KHTaiCho extends KhachHang {
                             break;
 
                             case 2:
-                            while (true) { 
+                            while (true) {
                                 System.out.println("\n\t==========================================================================================");
                                 System.out.printf("\t| %-87s |%n", "Sửa thông tin thành viên");
                                 System.out.printf("\t| %-5s %-81s |%n", "1.", "Ngày tháng năm sinh");
@@ -274,7 +275,7 @@ public class KHTaiCho extends KhachHang {
                                     System.out.println("\tLựa chọn không được rỗng!");
                                     continue;
                                 }
-                    
+
                                 if (!Function.isTrueNumber(str)) {
                                     System.out.println("\tLựa chọn phải là số!");
                                     continue;
@@ -289,59 +290,59 @@ public class KHTaiCho extends KhachHang {
                                         while (true) {
                                             System.out.print("\t=> Mời nhập ngày: ");
                                             str = sc.nextLine();
-                            
+
                                             if (Function.isEmpty(str)) {
                                                 System.out.println("\tNgày sinh không được rỗng!");
                                                 continue loop1;
                                             }
-                            
+
                                             if (!Function.isTrueNumber(str)) {
                                                 System.out.println("\tNgày sinh phải là số!");
                                                 continue loop1;
                                             }
-                            
+
                                             this.memberCard.getBirthDay().setDay(str);
                                             break loop1;
                                         }
-                            
+
                                         loop1:
                                         while (true) {
                                             System.out.print("\n\t=> Mời nhập tháng: ");
                                             str = sc.nextLine();
-                            
+
                                             if (Function.isEmpty(str)) {
                                                 System.out.println("\tTháng sinh không được rỗng!");
                                                 continue loop1;
                                             }
-                            
+
                                             if (!Function.isTrueNumber(str)) {
                                                 System.out.println("\tTháng sinh phải là số!");
                                                 continue loop1;
                                             }
-                            
+
                                             this.memberCard.getBirthDay().setMonth(str);
                                             break loop1;
                                         }
-                            
+
                                         loop1:
                                         while (true) {
                                             System.out.print("\n\t=> Mời nhập năm: ");
                                             str = sc.nextLine();
-                            
+
                                             if (Function.isEmpty(str)) {
                                                 System.out.println("\tNăm sinh không được rỗng!");
                                                 continue loop1;
                                             }
-                            
+
                                             if (!Function.isTrueNumber(str)) {
                                                 System.out.println("\tNăm sinh phải là số!");
                                                 continue loop1;
                                             }
-                            
+
                                             this.memberCard.getBirthDay().setYear(str);
                                             break loop1;
                                         }
-                            
+
                                         if (!this.memberCard.getBirthDay().isValidDate()) {
                                             System.out.println("\tDữ liệu ngày không hợp lệ!");
                                             continue loop;
@@ -360,7 +361,7 @@ public class KHTaiCho extends KhachHang {
                                             System.out.println("\tĐiểm tích lũy không được rỗng!");
                                             continue;
                                         }
-                        
+
                                         if (!Function.isTrueNumber(str)) {
                                             System.out.println("\tĐiểm tích lũy phải là số!");
                                             continue;
@@ -375,7 +376,7 @@ public class KHTaiCho extends KhachHang {
                                     }
                                     break;
 
-                                    default: 
+                                    default:
                                     System.out.println("\tLựa chọn không hợp lệ!");
                                     continue;
                                 }
@@ -403,7 +404,7 @@ public class KHTaiCho extends KhachHang {
                             System.out.println("\tLựa chọn không được rỗng!");
                             continue;
                         }
-            
+
                         if (!Function.isTrueNumber(str)) {
                             System.out.println("\tLựa chọn phải là số!");
                             continue;
@@ -420,7 +421,7 @@ public class KHTaiCho extends KhachHang {
 
                             case 2:
                             continue loop2;
-                            
+
                             default:
                             continue;
                         }
@@ -430,7 +431,7 @@ public class KHTaiCho extends KhachHang {
                 break;
 
                 case 3:
-                while (true) { 
+                while (true) {
                     System.out.print("\n\t=> Nhập số lượng khách dùng tại chỗ: ");
                     str = sc.nextLine();
 
@@ -480,7 +481,10 @@ public class KHTaiCho extends KhachHang {
         String memberStatus = this.isMember ? "1" : "0";
         str.append(memberStatus).append("|");
         if (this.isMember) {
-            str.append(this.memberCard.makeString()).append("|");
+            str.append(this.memberCard.makeString());
+        }
+        else {
+            str.append("null");
         }
         return str.toString();
     }

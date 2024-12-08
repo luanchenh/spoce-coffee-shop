@@ -116,7 +116,7 @@ public abstract class KhachHang {
 
     public static String makeCustomerID() {
         QLKhachHang ql = new QLKhachHang();
-        ql.init();
+        ql.Init();
         int idNumber = 1;
         boolean isValid = false;
 

@@ -3,6 +3,8 @@ package KhachHang;
 import Utils.Function;
 import java.util.Scanner;
 
+
+@SuppressWarnings("resource")
 public class KHMangDi extends KhachHang {
 
     // Hàm khởi tạo phi tham số
@@ -388,6 +390,9 @@ public class KHMangDi extends KhachHang {
         str.append(memberStatus).append("|");
         if (this.isMember) {
             str.append(this.memberCard.makeString());
+        }
+        else {
+            str.append("null");
         }
 
         return str.toString();

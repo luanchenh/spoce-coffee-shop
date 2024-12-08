@@ -6,6 +6,8 @@ import Utils.IXuat;
 import java.io.File;
 import java.util.Scanner;
 
+
+@SuppressWarnings("resource")
 public class Ban implements INhap, IXuat {
     private String tableID; // ID của bàn (B1, B2, B3)
     private int numOfCustomersOfTable; // Số lượng người bàn có thể chứa (2,4,8 chỗ)
@@ -63,7 +65,7 @@ public class Ban implements INhap, IXuat {
         String str;
 
         System.out.println("\tNhập thông tin bàn có ID: " + this.tableID);
-        while (true) { 
+        while (true) {
             System.out.println("\n\tSố chỗ ngồi của bàn");
             System.out.println("\t1. 2 chỗ");
             System.out.println("\t2. 4 chỗ");
@@ -186,18 +188,18 @@ public class Ban implements INhap, IXuat {
 
             switch (Integer.parseInt(str)) {
                 case 2:
-                while (true) { 
+                while (true) {
                     System.out.println("\n\tTình trạng bàn:");
                     System.out.println("\t1. Đang trống");
                     System.out.println("\t2. Đã có người ngồi");
                     System.out.print("\t=> Nhập lựa chọn: ");
                     str = sc.nextLine();
-        
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tLựa chọn không được rỗng!");
                         continue;
                     }
-        
+
                     if (!Function.isTrueNumber(str)) {
                         System.out.println("\tLựa chọn phải là số!");
                         continue;
@@ -228,12 +230,12 @@ public class Ban implements INhap, IXuat {
                     System.out.println("\t3. 8 chỗ");
                     System.out.print("\t=> Nhập lựa chọn: ");
                     str = sc.nextLine();
-        
+
                     if (Function.isEmpty(str)) {
                         System.out.println("\tLựa chọn không được rỗng!");
                         continue;
                     }
-        
+
                     if (!Function.isTrueNumber(str)) {
                         System.out.println("\tLựa chọn phải là số!");
                         continue;
@@ -311,7 +313,7 @@ public class Ban implements INhap, IXuat {
     public static Ban findTable(int numOfCustomers) {
         Ban table = null;
         QLBan ql = new QLBan();
-        ql.init();
+        ql.Init();
 
         if (numOfCustomers >= 1 && numOfCustomers <= 2) {
             for (Ban ban : ql.tableList) {
@@ -376,7 +378,7 @@ public class Ban implements INhap, IXuat {
     // Phương thức dùng để hủy 1 bàn (chuyển trạng thái từ "đang được sử dụng" sang "trống") và cập nhật vào file
     public void cancelTable() {
         QLBan ql = new QLBan();
-        ql.init();
+        ql.Init();
         for (Ban ban : ql.tableList) {
             if (ban.getTableID().equals(this.tableID)) {
                 ql.tableList.get(ql.tableList.indexOf(ban)).setTableStatus(false);
@@ -388,7 +390,7 @@ public class Ban implements INhap, IXuat {
 
     public static String makeTableID() {
         QLBan ql = new QLBan();
-        ql.init();
+        ql.Init();
         int idNumber = 1;
         boolean isValid = false;
 

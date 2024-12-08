@@ -200,7 +200,7 @@ public class MemberCard implements INhap, IXuat {
 
     public static String makeMemberID() {
         QLKhachHang ql = new QLKhachHang();
-        ql.init();
+        ql.Init();
         int idNumber = 1;
         boolean isValid = false;
 

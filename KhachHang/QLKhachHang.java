@@ -1,13 +1,12 @@
 package KhachHang;
 
-import Utils.Address;
-import Utils.Date;
+
 import Utils.Function;
 import Utils.IXuat;
-import Utils.Province;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import Utils.Date;
 import java.util.Scanner;
 
 @SuppressWarnings("resource")
@@ -25,11 +24,28 @@ public class QLKhachHang implements IXuat {
     }
 
     // Phương thức để nhập dữ liệu từ file vào Array List
-    public void init() {
+    public void Init() {
         File customerFile = new File("../File/customer.txt");
         try (Scanner sc = new Scanner(customerFile)) {
             while (sc.hasNextLine()) {
-
+                String line = sc.nextLine();
+                String[] parts = line.split("\\|");
+                KhachHang khachHang = null;
+                MemberCard card = null;
+                boolean status = false;
+                if (parts[3].equals("1")) {
+                    card = new MemberCard(parts[4], new Date(parts[5], parts[6], parts[7]),
+                                                    new Date(parts[8], parts[9], parts[10]),
+                                                    new Date(parts[11], parts[12], parts[13]), Integer.parseInt(parts[14]));
+                    status = true;
+                }
+                if (parts[0].equals("0")) {
+                    khachHang = new KHTaiCho(parts[1], parts[2], status, card);
+                }
+                else if (parts[0].equals("1")) {
+                    khachHang = new KHMangDi(parts[1], parts[2], status, card);
+                }
+                this.customerList.add(khachHang);
             }
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
@@ -468,7 +484,7 @@ public class QLKhachHang implements IXuat {
 
     public void menuQLKhachHang() {
         Function.clearScreen();
-        this.init(); // Khởi tạo dữ liệu
+        this.Init(); // Khởi tạo dữ liệu
         Scanner sc = new Scanner(System.in);
         String str;
 
@@ -519,7 +535,7 @@ public class QLKhachHang implements IXuat {
                             this.modifyCustomer();
                         }
                         if (number == 5) {
-                            this.init();
+                            this.Init();
                         }
                         if (number == 6) {
                             this.writeAll();;
