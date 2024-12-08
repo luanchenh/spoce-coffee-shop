@@ -1,22 +1,17 @@
 package NhanVien;
 
-
-import Utils.INhap;
-import Utils.IXuat;
 import Utils.Address;
 import Utils.Date;
 import Utils.Function;
+import Utils.INhap;
+import Utils.IXuat;
 import java.util.Scanner;
-
 
 @SuppressWarnings("resource")
 public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
     private int soBillDaXuLy;
     private double tongTienDaXuLy;
     private int soGioLamThem;
-
-
-
 
     public NhanVienThuNgan() {
         super("NVTN");
@@ -111,14 +106,14 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
 
     @Override
     public void xuatThongTin() {
-
+        
     }
     @Override
     public void tinhLuong() {
 
     }
     @Override
-void modifyInfo() {
+    void modifyInfo() {
     Scanner sc = new Scanner(System.in);
     String str;
     int number;
@@ -238,7 +233,7 @@ void modifyInfo() {
     }
 }
 
-
-
-
+    public String makeString() {
+        return this.maNhanVien;
+    }
 }

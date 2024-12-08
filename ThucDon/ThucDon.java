@@ -3,39 +3,35 @@ import NuocUong.NuocUong;
 import Topping.Topping;
 import Utils.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 public class ThucDon implements INhap, IXuat {
-
     private ArrayList<NuocUong> danhSachNuocUong;
     private ArrayList<Topping> danhSachTopping;
-
 
     public ThucDon() {
         this.danhSachNuocUong = new ArrayList<>();
         this.danhSachTopping = new ArrayList<>();
     }
 
+    // public void nhap() {
+    //     Scanner scanner = new Scanner(System.in);
+    //     System.out.println("Nhập danh sách nước uống:");
 
-    public void nhap() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Nhập danh sách nước uống:");
+    //     System.out.print("Số lượng nước uống: ");
+    //     int soLuongNuoc = Integer.parseInt(scanner.nextLine());
+    //     for (int i = 0; i < soLuongNuoc; i++) {
+    //         NuocUong a = null;
+    //     }
 
-        System.out.print("Số lượng nước uống: ");
-        int soLuongNuoc = Integer.parseInt(scanner.nextLine());
-        for (int i = 0; i < soLuongNuoc; i++) {
-            NuocUong a = null;
-        }
+    //     System.out.println("Nhập danh sách topping:");
 
-        System.out.println("Nhập danh sách topping:");
-
-        System.out.print("Số lượng topping: ");
-        int soLuongTopping = Integer.parseInt(scanner.nextLine());
-        for (int i = 0; i < soLuongTopping; i++) {
-            Topping a = null;
-            a.createTopping();
-            danhSachTopping.add(a);
-        }
-    }
+    //     System.out.print("Số lượng topping: ");
+    //     int soLuongTopping = Integer.parseInt(scanner.nextLine());
+    //     for (int i = 0; i < soLuongTopping; i++) {
+    //         Topping a = null;
+    //         a.createTopping();
+    //         danhSachTopping.add(a);
+    //     }
+    // }
 
     public void xuat() {
         System.out.println("=== Thực đơn ===");
@@ -66,8 +62,6 @@ public class ThucDon implements INhap, IXuat {
         return danhSachTopping;
     }
 
-
-    
     @Override
     public void nhapThongTin() {
         //

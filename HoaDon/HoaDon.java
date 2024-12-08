@@ -1,30 +1,32 @@
 package HoaDon;
 
+import KhachHang.KHMangDi;
+import KhachHang.KHTaiCho;
+import KhachHang.KhachHang;
+import NhanVien.NhanVienThuNgan;
 import ThucDon.ThucDon;
 import Utils.Function;
 import Utils.INhap;
 import Utils.IXuat;
-
 import java.io.File;
-import java.util.Date;
-import NhanVien.NhanVienThuNgan;
+import Utils.Date;
 import java.util.Scanner;
 
 @SuppressWarnings("resource")
 public class HoaDon implements INhap, IXuat {
     private String maHoaDon;
     private NhanVienThuNgan nhanVien;
+    private KhachHang khachHang;
     private ThucDon thucDon;
     private Date ngayTaoHoaDon;
     private String trangThaiHoaDon;
-
 
     // Get mã tự động
     private static int countBill = 0;
     static {
         int totalBillCode = 0;
         File hoaDonFile = new File("../File/hoadon.txt");
-        try(Scanner rd = new Scanner(hoaDonFile)) {
+        try (Scanner rd = new Scanner(hoaDonFile)) {
             while (rd.hasNextLine()) {
                 totalBillCode++;
                 rd.nextLine();
@@ -39,10 +41,11 @@ public class HoaDon implements INhap, IXuat {
         this.maHoaDon =  "HD" + (countBill++);
         this.thucDon = new ThucDon();
         this.ngayTaoHoaDon = new Date(); // Mặc định là ngày hiện tại
+        this.ngayTaoHoaDon.getLocalDate();
         this.nhanVien = new NhanVienThuNgan();
     }
 
-    public HoaDon(String maHoaDon, NhanVienThuNgan nhanVien ,Date ngayTaoHoaDon, ThucDon thucDon, String trangThaiHoaDon) {
+    public HoaDon(String maHoaDon, NhanVienThuNgan nhanVien , Date ngayTaoHoaDon, ThucDon thucDon, String trangThaiHoaDon) {
         this.maHoaDon = maHoaDon;
         this.nhanVien = nhanVien;
         this.ngayTaoHoaDon = ngayTaoHoaDon;
@@ -132,10 +135,11 @@ public class HoaDon implements INhap, IXuat {
                 }
             }
         }
-        System.out.print("\tNhập trạng thái hóa đơn: ");
-        this.trangThaiHoaDon = sc.nextLine();
+        // System.out.print("\tNhập trạng thái hóa đơn: ");
+        // this.trangThaiHoaDon = sc.nextLine();
 
         this.ngayTaoHoaDon = new Date();
+        this.ngayTaoHoaDon.getLocalDate();
     }
     public double getTongTien(){
         return 1;
@@ -146,9 +150,11 @@ public class HoaDon implements INhap, IXuat {
         System.out.println("========================================");
         System.out.println("           THÔNG TIN HÓA ĐƠN            ");
         System.out.println("========================================");
-        System.out.printf("Mã hóa đơn        : %s%n", this.maHoaDon);
-        System.out.printf("Ngày tạo hóa đơn  : %s%n", this.ngayTaoHoaDon);
-        System.out.printf("Trạng thái hóa đơn: %s%n", this.trangThaiHoaDon);
+        System.out.printf("Mã hóa đơn         : %s%n", this.maHoaDon);
+        System.out.printf("Nhân viên lập đơn  : %s%n", this.nhanVien.getTenNhanVien());
+        System.out.printf("Ngày tạo hóa đơn   : %s%n", this.ngayTaoHoaDon);
+        System.out.printf("Tên khách hàng     : %s%n", this.khachHang.getCustomerName());
+        System.out.printf("Trạng thái hóa đơn : %s%n", this.trangThaiHoaDon);
         System.out.println("----------------------------------------");
         System.out.println("         CHI TIẾT THỰC ĐƠN              ");
         System.out.println("----------------------------------------");
@@ -156,6 +162,29 @@ public class HoaDon implements INhap, IXuat {
         System.out.println("========================================");
         System.out.println("         CẢM ƠN QUÝ KHÁCH!             ");
         System.out.println("========================================");
+    }
+
+    public String makeString() {
+        StringBuilder str = new StringBuilder();
+        str.append(this.maHoaDon).append("|");
+        str.append(this.nhanVien.getMaNhanVien()).append("|");
+        str.append(this.khachHang.getCustomerID()).append("|");
+
+        if (this.khachHang instanceof KHTaiCho && ((KHTaiCho) this.khachHang).getTable() != null) {
+            str.append("1|").append(((KHTaiCho) this.khachHang).getTable().getTableID()).append("|");
+        } else {
+            str.append("0|0|");
+        }
+
+        str.append(this.trangThaiHoaDon).append("|");
+
+        // CÒN LƯU NƯỚC UỐNG VÀ TOPPING KHÁCH HÀNG CHỌN
+
+        return str.toString();
+    }
+
+    public void inRaTrangThai() {
+        System.out.printf("\t| %-10s %-10s %20s |%n", this.maHoaDon, this.ngayTaoHoaDon.toString(), this.trangThaiHoaDon);
     }
 }
 

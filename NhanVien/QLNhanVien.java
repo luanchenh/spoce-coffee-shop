@@ -3,10 +3,8 @@
  */
 package NhanVien;
 import java.util.ArrayList;
-
-import Utils.Function;
 public class QLNhanVien {
-    private ArrayList<Nhanvien> nhanVienList;
+    public ArrayList<Nhanvien> nhanVienList;
 
     public QLNhanVien() {
         this.nhanVienList = new ArrayList<>();
