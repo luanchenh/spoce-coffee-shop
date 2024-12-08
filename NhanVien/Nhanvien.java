@@ -295,6 +295,17 @@ public abstract class Nhanvien {
         System.out.println("\tĐịa chỉ");
         System.out.println("\t"+ this.diaChi.toString());
     }
+    public String makeString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.maNhanVien).append("|");
+        sb.append(this.tenNhanVien).append("|");
+        sb.append(this.tuoi).append("|");
+        sb.append(this.ngaySinh).append("|"); 
+        sb.append(this.diaChi).append("|");
+        sb.append(this.loaiNhanVien).append("|");
+        sb.append(this.caLamViec);
+        return sb.toString();
+    }
 
     abstract void tinhLuong();
     abstract void modifyInfo();

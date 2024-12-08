@@ -85,9 +85,6 @@ public void nhapThongTin() {
 
     @Override
     public void tinhLuong() {
-    }
-    @Override
-    public void xuatThongTin() {
         System.out.println("\tLương cơ bản: " + Function.formatMoney("2000000"));
         // Nếu ca tối thì cấp cơ bản
         System.out.println("\tPhụ cấp ca: " + (this.caLamViec.equals("EVENING") ? Function.formatMoney("500000") : Function.formatMoney("0")));
@@ -230,6 +227,14 @@ public void nhapThongTin() {
         }
     }
 }
+@Override
+    public String makeString() {
+        StringBuilder sb = new StringBuilder(super.makeString()); // Gọi makeString của lớp cha
+        sb.append("||");
+        sb.append("|").append(this.soDonDaPhaChe).append("|");
+        sb.append(this.soGioLamThem);
+        return sb.toString();
+    }
 }
 
 

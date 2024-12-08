@@ -27,7 +27,6 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
             String loaiNhanVien, String caLamViec) {
         super(maNhanVien, tenNhanVien, tuoi, ngaySinh, diaChi, loaiNhanVien, caLamViec);
     }
-
     public NhanVienThuNgan(String maNhanVien, String tenNhanVien, int tuoi, Date ngaySinh, Address diaChi,
             String loaiNhanVien, String caLamViec, int soBillDaXuLy, double tongTienDaXuLy, int soGioLamThem) {
         super(maNhanVien, tenNhanVien, tuoi, ngaySinh, diaChi, loaiNhanVien, caLamViec);
@@ -273,5 +272,13 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
                 System.out.println("\tVui lòng nhập số!");
             }
         }
+    }
+    @Override
+    public String makeString() {
+        StringBuilder sb = new StringBuilder(super.makeString()); // Gọi makeString của lớp cha
+        sb.append("|").append(this.soBillDaXuLy).append("|");
+        sb.append("||");
+        sb.append(this.soGioLamThem);
+        return sb.toString();
     }
 }
