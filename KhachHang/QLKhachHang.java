@@ -29,40 +29,7 @@ public class QLKhachHang implements IXuat {
         File customerFile = new File("../File/customer.txt");
         try (Scanner sc = new Scanner(customerFile)) {
             while (sc.hasNextLine()) {
-                KhachHang kh;
-                String str = sc.nextLine();
-                String[] arr = str.split("\\|");
-                // System.out.println(arr[0]+" "+arr[1]+" "+arr[2]+" "+arr[3]+" "+arr[4]+" "+arr[5]+" "+arr[6]+" "+arr[7]+" "+arr[8]);
-                MemberCard card = null;
-                boolean status = false;
-                if (arr[3].compareTo("1") == 0) {
-                    card = new MemberCard(arr[4], new Date(arr[5], arr[6], arr[7]), new Date(arr[8], arr[9], arr[10]), new Date(arr[11], arr[12], arr[13]), Integer.parseInt(arr[14]));
-                    status = true;
-                }
 
-                if (arr[0].compareTo("0") == 0) {
-                    kh = new KHTaiCho(arr[1], arr[2], status, card);
-                } else {
-                    Address address;
-                    String[] addressArr;
-                    if (status) {
-                        addressArr = arr[15].split(",");
-                        // System.out.println(address.getHouseNumer() + " " + address.getWardName() + " " + address.getCityName());
-                    } else {
-                        addressArr = arr[4].split(",");
-                        // System.out.println(address.getHouseNumer() + " " + address.getWardName() + " " + address.getCityName());
-                        // System.out.println(address.getProvince().getCityCode() + " " + address.getProvince().getCityName());
-                    }
-                    address = new Address(addressArr[0], addressArr[1], addressArr[2], new Province(addressArr[3], Province.getProvinceNameFromID(addressArr[3])));
-                    // System.out.println(address.getHouseNumer() + " " + address.getWardName() + " " + address.getCityName());
-                    // System.out.println(address.getProvince().getCityCode() + " " + address.getProvince().getCityName());
-                    // System.out.println(card.getCardID()+" "+card.getBirthDay().toString()+" "+card.getStartDate().toString()+" "+card.getEndDate().toString()+ " "+card.getPoint());
-                    // System.out.println(arr[1] + " " + arr[2] +" "+ status + " " + card.makeString() + " " + address.toString());
-                    kh = new KHMangDi(arr[1], arr[2], status, card, address);
-                    // System.out.println("test");
-                }
-
-                this.customerList.add(kh);
             }
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
@@ -89,9 +56,6 @@ public class QLKhachHang implements IXuat {
 
         while (true) {
             System.out.println("\n\t==========================================================================================");
-            // System.out.println("\tChọn loại khách hàng");
-            // System.out.println("1. Khách hàng mang đi");
-            // System.out.println("2. Khách hàng dùng tại chỗ");
             System.out.printf("\t| %-87s |%n", "Chọn loại khách hàng:");
             System.out.printf("\t| %-5s %-81s |%n", "1.", "Khách hàng mang đi");
             System.out.printf("\t| %-5s %-81s |%n", "2.", "Khách hàng dùng tại chỗ");
@@ -258,11 +222,6 @@ public class QLKhachHang implements IXuat {
             System.out.println("\n\tBạn muốn sửa thông tin khách hàng theo ID hay theo tên?");
             System.out.println("\t1. ID");
             System.out.println("\t2. Tên khách hàng");
-            // System.out.println("\n\t==========================================================================================");
-            // System.out.printf("\t| %-87s |%n", "Bạn muốn sửa thông tin khách hàng theo ID hay theo tên?");
-            // System.out.printf("\t| %-5s %-81s |%n", "1.", "ID");
-            // System.out.printf("\t| %-5s %-81s |%n", "2.", "Tên khách hàng");
-            // System.out.println("\t==========================================================================================");
             System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 

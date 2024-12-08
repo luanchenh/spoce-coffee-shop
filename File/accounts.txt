@@ -1,0 +1,8 @@
+namduongit1|1422005|1|KH1
+namduongit2|1422005|1|KH7
+namduongit3|1422005|1|KH2
+namduongit4|1422005|1|KH3
+namduongit5|1422005|1|KH6
+namduongit6|1422005|1|KH4
+namduongit7|1422005|1|KH5
+namduongit8|1422005|1|KH8
