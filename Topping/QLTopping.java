@@ -3,12 +3,11 @@
  */
 package Topping;
 
+import Utils.IXuat;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import Utils.IXuat;
 
 public class QLTopping implements IXuat{
     private ArrayList<Topping> toppingList;
@@ -98,6 +97,16 @@ public class QLTopping implements IXuat{
         return false;
     }
 
+    public Topping getToppingByID(String id) {
+        Topping tp = null;
+        for (Topping topping : this.toppingList) {
+            if (topping.getId().equals(id)) {
+                tp = topping;
+                break;
+            }
+        }
+        return tp;
+    }
 
     public void writeToppingIntoFile(Topping topping) {
         if (!IDtoppingInList(topping)) {

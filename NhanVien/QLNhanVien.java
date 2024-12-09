@@ -1,22 +1,12 @@
 package NhanVien;
 
+import Utils.Date;
+import Utils.Function;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
-
-import NuocUong.Coffee;
-import NuocUong.NuocTraiCay;
-import NuocUong.NuocUong;
-import NuocUong.QLNuocUong;
-import NuocUong.SinhTo;
-import NuocUong.TraSua;
-import Utils.Address;
-import Utils.Function;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class QLNhanVien {
     public ArrayList<Nhanvien> nhanVienList;
@@ -50,15 +40,17 @@ public class QLNhanVien {
                     int soGioLamThem = Integer.parseInt(nhanVienSplit[9]);
 
                     Nhanvien nhanVien = null;
+                    String[] ngaySinhSplit = ngaySinh.split("\\/");
+                    Date birthDate = new Date(ngaySinhSplit[0], ngaySinhSplit[1], ngaySinhSplit[2]);
                     // Phân biệt loại nhân viên dựa trên mã
                     switch (loaiNhanVien) {
                         case "NVTN":
-                            LocalDate dateOfBirth = LocalDate.parse(ngaySinh, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                            nhanVien = new NhanVienThuNgan();
+                            // LocalDate dateOfBirth = LocalDate.parse(ngaySinh, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                            nhanVien = new NhanVienThuNgan(maNhanVien, tenNhanVien, tuoi, birthDate, null, loaiNhanVien, caLamViec);
                             break;
                         case "NVPC":
-                            dateOfBirth = LocalDate.parse(ngaySinh, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                            nhanVien = new NhanVienPhaChe();
+                            // dateOfBirth = LocalDate.parse(ngaySinh, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                            nhanVien = new NhanVienPhaChe(maNhanVien, tenNhanVien, tuoi, birthDate, null, loaiNhanVien, caLamViec, soBillDaXuLy, soGioLamThem);
                             break;
                         default:
                             System.out.println("Loại nhân viên không hợp lệ: " + loaiNhanVien);

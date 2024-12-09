@@ -32,8 +32,8 @@ public class ThucDon implements IXuat {
             // In các trạng thái của nước uống
             System.out.println("\t| Uống nóng: "+ this.danhSachNuocUong.get(i).isHot());
             System.out.println("\t| Uống lạnh: "+ this.danhSachNuocUong.get(i).isCold());
-            System.out.println("\t|Có đường: "+ this.danhSachNuocUong.get(i).isSugar());
-            System.out.println("\t|Có sữa: "+ this.danhSachNuocUong.get(i).isMilk());
+            System.out.println("\t| Có đường: "+ this.danhSachNuocUong.get(i).isSugar());
+            System.out.println("\t| Có sữa: "+ this.danhSachNuocUong.get(i).isMilk());
             if (this.danhSachTopping.get(i).size() > 0) {
                 System.out.println("\t| Topping: ");
                 for (int j = 0; j < this.danhSachTopping.get(i).size(); j++) {
