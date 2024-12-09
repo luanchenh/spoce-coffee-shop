@@ -5,7 +5,6 @@ package Utils;
 
 import java.util.Scanner;
 
-
 @SuppressWarnings("resource")
 public class Address {
     private String houseNumer;
@@ -16,6 +15,7 @@ public class Address {
     public Address() {
         this.province = new Province();
     }
+
     public Address(String houseNumer, String wardName, String cityName, Province province) {
         this.houseNumer = houseNumer;
         this.wardName = wardName;
@@ -27,24 +27,31 @@ public class Address {
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
+
     public void setHouseNumer(String houseNumer) {
         this.houseNumer = houseNumer;
     }
+
     public void setProvince(Province province) {
         this.province = province;
     }
+
     public void setWardName(String wardName) {
         this.wardName = wardName;
     }
+
     public String getCityName() {
         return cityName;
     }
+
     public String getHouseNumer() {
         return houseNumer;
     }
+
     public Province getProvince() {
         return province;
     }
+
     public String getWardName() {
         return wardName;
     }
@@ -59,12 +66,8 @@ public class Address {
             if (Function.isEmpty(str)) {
                 System.out.println("\tDữ liệu không được để trống !");
             } else {
-                if (Function.isTrueNumber(str)) {
-                    this.houseNumer = str;
-                    break;
-                } else {
-                    System.out.println("\tDữ liệu nhập vào không phải là số !");
-                }
+                this.houseNumer = str;
+                break;
             }
         }
         while (true) {
@@ -92,12 +95,13 @@ public class Address {
     }
 
     public String makeString() {
-        return this.houseNumer +","+ this.wardName +","+ this.cityName +","+ this.province.getCityCode();
-    }
-    @Override
-    public String toString() {
-        return "Số nhà: "+ this.houseNumer +", Phường: "+ this.wardName +", Quận: "+ this.cityName +", Tỉnh: "+ this.province.getCityName();
+        return this.houseNumer + "|" + this.wardName + "|" + this.cityName + "|" + this.province.getCityCode();
     }
 
+    @Override
+    public String toString() {
+        return "Số nhà: " + this.houseNumer + ", Phường: " + this.wardName + ", Quận: " + this.cityName + ", Tỉnh: "
+                + this.province.getCityName();
+    }
 
 }

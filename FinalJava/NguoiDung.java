@@ -75,25 +75,10 @@ public class NguoiDung {
         return temp;
     }
 
-    // public static void choseMenu() {
-    //     Scanner sc = new Scanner(System.in);
-    //     String str;
-
-    //     while (true) {
-    //         Function.clearScreen();
-    //         qlNuocUong.inDanhSach();
-    //         System.out.print("\tNhập ID nước bạn muốn đặt: ");
-    //         str = sc.nextLine();
-
-    //         if (Function.isEmpty(str)) {
-    //             System.out.println("\tVui lòng không để trống !");
-    //             continue;
-    //         }
-
-    //         // xử lí phần chọn nước
-    //         break;
-    //     }
+    // public static NhanVienThuNgan getInfoNhanVien() {
+    //     NhanVienThuNgan temp = null;
     // }
+
 
     public static void selectCustomer() {
 

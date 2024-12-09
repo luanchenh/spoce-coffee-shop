@@ -119,7 +119,10 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
 
     @Override
     public void xuatThongTin() {
-
+        super.xuatThongTin();
+        System.out.println("\tSố bill đã xử lý: " + this.soBillDaXuLy);
+        System.out.println("\tTổng tiền đã xử lý: " + Function.formatMoney(String.valueOf(this.tongTienDaXuLy)));
+        System.out.println("\tSố giờ làm thêm: " + this.soGioLamThem);
     }
 
     public void addGioLamThem(int soGioLamThem) {
@@ -277,8 +280,8 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
     public String makeString() {
         StringBuilder sb = new StringBuilder(super.makeString()); // Gọi makeString của lớp cha
         sb.append("|").append(this.soBillDaXuLy).append("|");
-        sb.append("||");
-        sb.append(this.soGioLamThem);
+        sb.append(this.soGioLamThem).append("|");
+        sb.append(this.tongTienDaXuLy);
         return sb.toString();
     }
 }

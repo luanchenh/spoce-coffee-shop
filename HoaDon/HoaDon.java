@@ -9,7 +9,7 @@ import Utils.IXuat;
 import java.io.File;
 import java.util.Scanner;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({ "resource", "unused" })
 public class HoaDon implements IXuat {
     private String maHoaDon;
     private NhanVienThuNgan nhanVien;
