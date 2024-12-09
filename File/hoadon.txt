@@ -1,0 +1,1 @@
+ID|IDNV|N,G,A,Y,T,A,O|TrangThaiDon|MaKH|NU1, Size, GiaTien, tp1;tp2;tp...|tongTienHoaDon|TongTienKhachDua|TongTienthoilai

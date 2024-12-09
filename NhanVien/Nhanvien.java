@@ -24,39 +24,23 @@ public abstract class Nhanvien {
     // Tình trạng đang làm hay dã nghỉ
     protected boolean dangLam = true;
 
-    private static final Map<String, Integer> typeCounter = new HashMap<>();
+    private static int countNhanVien = 0;
 
     static {
-        int totalNhanVienPhaChe = 0;
-        int totalNhanVienThuNgan = 0;
-        int totalNhanVienQuanLy = 0;
 
-        File nhanVienFile = new File("nhanvien.txt"); // Sửa lại đường dẫn nếu cần
+        File nhanVienFile = new File("../File/nhanvien.txt"); // Sửa lại đường dẫn nếu cần
         try (Scanner rd = new Scanner(nhanVienFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();
                 if (line.isEmpty())
                     continue;
                 String[] parts = line.split("\\|");
-                if (parts.length > 0) {
-                    String prefix = parts[0].substring(0, 4).toUpperCase();
-                    int number = Integer.parseInt(parts[0].substring(4));
-                    if (prefix.equals("NVPC")) {
-                        totalNhanVienPhaChe = Math.max(totalNhanVienPhaChe, number);
-                    } else if (prefix.equals("NVTN")) {
-                        totalNhanVienThuNgan = Math.max(totalNhanVienThuNgan, number);
-                    } else if (prefix.equals("NVQL")) {
-                        totalNhanVienQuanLy = Math.max(totalNhanVienQuanLy, number);
-                    }
-                }
+                countNhanVien = Math.max(countNhanVien, Integer.parseInt(parts[0].substring(2)));
             }
         } catch (Exception e) {
             System.out.println("\tLỗinhanvien.txt: " + e.getMessage());
         }
 
-        typeCounter.put("NVPC", totalNhanVienPhaChe);
-        typeCounter.put("NVTN", totalNhanVienThuNgan);
-        typeCounter.put("NVQL", totalNhanVienQuanLy);
     }
 
     // Constructor không tham số
@@ -78,15 +62,10 @@ public abstract class Nhanvien {
         this.tenNhanVien = "";
         this.tuoi = 0;
         this.caLamViec = "";
+        this.loaiNhanVien = loaiNhanVien;
 
         // Get ID nhân viên tạm thời
-        if (typeCounter.containsKey(loaiNhanVien)) {
-            int currentCount = typeCounter.get(loaiNhanVien);
-            typeCounter.put(loaiNhanVien, currentCount);
-            this.maNhanVien = loaiNhanVien + currentCount;
-        } else {
-            this.maNhanVien = "UNKNOWN";
-        }
+        this.maNhanVien = "NV" + (++countNhanVien);
     }
 
     // Constructor biết full tham số
@@ -166,9 +145,9 @@ public abstract class Nhanvien {
 
         if (this.loaiNhanVien == null || this.loaiNhanVien.equals("")) { // Sửa lỗi NullPointerException
             while (true) {
-                System.out.println("\t1. [Nhân viên pha chế] NVPC - Số lượng hiện tại: " + typeCounter.get("NVPC"));
-                System.out.println("\t2. [Nhân viên thu ngân] NVTN - Số lượng hiện tại: " + typeCounter.get("NVTN"));
-                System.out.println("\t3. [Nhân viên quản lý] NVQL - Số lượng hiện tại: " + typeCounter.get("NVQL"));
+                System.out.println("\tTổng số nhân viên hiện tại: " + countNhanVien);
+                System.out.println("\t1. [Nhân viên pha chế] NVPC");
+                System.out.println("\t2. [Nhân viên thu ngân] NVTN");
                 System.out.print("\tChọn loại nhân viên: ");
                 str = sc.nextLine();
                 if (Function.isEmpty(str)) {
@@ -187,6 +166,9 @@ public abstract class Nhanvien {
                             } else if (number == 3) {
                                 this.loaiNhanVien = "NVQL";
                             }
+                            System.out.println("\t[Notice] Loại nhân viên hiện tại: " + this.loaiNhanVien);
+                            this.maNhanVien = "NV" + (++countNhanVien);
+                            System.out.println("\t[Notice] Mã nhân viên hiện tại: " + this.maNhanVien);
                             break;
                         }
                     } else {
@@ -194,12 +176,10 @@ public abstract class Nhanvien {
                     }
                 }
             }
+        } else {
+            System.out.println("\t[Notice] Loại nhân viên hiện tại: " + this.loaiNhanVien);
+            System.out.println("\t[Notice] Mã nhân viên hiện tại: " + this.maNhanVien);
         }
-        System.out.println("\t[Notice] Loại nhân viên hiện tại: " + this.loaiNhanVien);
-        int currentCount = typeCounter.get(this.loaiNhanVien) + 1;
-        typeCounter.put(this.loaiNhanVien, currentCount);
-        this.maNhanVien = this.loaiNhanVien + currentCount;
-        System.out.println("\t[Notice] Mã nhân viên hiện tại: " + this.maNhanVien);
 
         while (true) {
             System.out.print("\tNhập tên nhân viên: ");
@@ -285,29 +265,32 @@ public abstract class Nhanvien {
                 "Mã nhân viên", "Tên nhân viên", "Loại nhân viên", "Ngày sinh", "Tuổi", "Ca làm việc");
         System.out.println(
                 "\t+--------------+-----------------------------+----------------------+-------------------+--------------+----------------+");
-        String loaiNhanVienLabel = this.loaiNhanVien.equals("NVPC") ? "Nhân viên pha chế" :
-                                   this.loaiNhanVien.equals("NVTN") ? "Nhân viên thu ngân" :
-                                   this.loaiNhanVien.equals("NVQL") ? "Nhân viên quản lý" : "Không xác định";
+        String loaiNhanVienLabel = this.loaiNhanVien.equals("NVPC") ? "Nhân viên pha chế"
+                : this.loaiNhanVien.equals("NVTN") ? "Nhân viên thu ngân"
+                        : this.loaiNhanVien.equals("NVQL") ? "Nhân viên quản lý" : "Không xác định";
         System.out.printf("\t| %-12s | %-27s | %-20s | %-17s | %-12s | %-14s |\n",
-                this.maNhanVien, this.tenNhanVien, loaiNhanVienLabel, this.ngaySinh.toString(), this.tuoi, this.caLamViec);
+                this.maNhanVien, this.tenNhanVien, loaiNhanVienLabel, this.ngaySinh.toString(), this.tuoi,
+                this.caLamViec);
         System.out.println(
                 "\t+--------------+-----------------------------+----------------------+-------------------+--------------+----------------+");
         System.out.println("\tĐịa chỉ");
-        System.out.println("\t"+ this.diaChi.toString());
+        System.out.println("\t" + this.diaChi.toString());
     }
+
     public String makeString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.maNhanVien).append("|");
         sb.append(this.tenNhanVien).append("|");
         sb.append(this.tuoi).append("|");
-        sb.append(this.ngaySinh).append("|"); 
-        sb.append(this.diaChi).append("|");
+        sb.append(this.ngaySinh).append("|");
+        sb.append(this.diaChi.makeString()).append("|");
         sb.append(this.loaiNhanVien).append("|");
         sb.append(this.caLamViec);
         return sb.toString();
     }
 
     abstract void tinhLuong();
+
     abstract void modifyInfo();
 
 }

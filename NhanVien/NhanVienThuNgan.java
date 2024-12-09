@@ -119,7 +119,16 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
 
     @Override
     public void xuatThongTin() {
-
+        System.out.println("\tMã nhân viên: " + this.maNhanVien);
+        System.out.println("\tTên nhân viên: " + this.tenNhanVien);
+        System.out.println("\tTuổi: " + this.tuoi);
+        System.out.println("\tNgày sinh: " + this.ngaySinh.toString());
+        System.out.println("\tĐịa chỉ: " + this.diaChi.toString());
+        System.out.println("\tLoại nhân viên: " + this.loaiNhanVien);
+        System.out.println("\tCa làm việc: " + this.caLamViec);
+        System.out.println("\tSố bill đã xử lý: " + this.soBillDaXuLy);
+        System.out.println("\tTổng tiền đã xử lý: " + Function.formatMoney(String.valueOf(this.tongTienDaXuLy)));
+        System.out.println("\tSố giờ làm thêm: " + this.soGioLamThem);
     }
 
     public void addGioLamThem(int soGioLamThem) {
@@ -277,8 +286,8 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
     public String makeString() {
         StringBuilder sb = new StringBuilder(super.makeString()); // Gọi makeString của lớp cha
         sb.append("|").append(this.soBillDaXuLy).append("|");
-        sb.append("||");
-        sb.append(this.soGioLamThem);
+        sb.append(this.soGioLamThem).append("|");
+        sb.append(this.tongTienDaXuLy);
         return sb.toString();
     }
 }

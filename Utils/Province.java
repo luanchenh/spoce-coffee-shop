@@ -17,6 +17,24 @@ public class Province {
     public Province() {
     }
 
+    public Province(String provinceCode) {
+        this.provinceCode = provinceCode;
+        // Get tên từ file
+        File cityFile = new File("../File/tinhthanh.txt");
+        try(Scanner rd = new Scanner(cityFile)) {
+            while (rd.hasNextLine()) {
+                String line = rd.nextLine();
+                String[] parts = line.split("\\|");
+                if (parts[0].equals(this.provinceCode)) {
+                    this.provinceName = parts[1];
+                    break;
+                }
+            }
+        }
+        catch(Exception e) {
+            System.out.println("Lỗi: "+ e.getMessage());
+        }
+    }
     // Getter - Setter
     public Province(String cityCode, String cityName) {
         this.provinceCode = cityCode;

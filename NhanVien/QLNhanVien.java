@@ -1,7 +1,10 @@
 package NhanVien;
 
+import Utils.Address;
 import Utils.Date;
 import Utils.Function;
+import Utils.Province;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -27,38 +30,38 @@ public class QLNhanVien {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();
                 String[] nhanVienSplit = line.split("\\|");
+                System.out.println(nhanVienSplit.length);
+                // System.out.println("Dữ liệu: " + line);
+                Nhanvien nhanVien = null;
+                if (nhanVienSplit.length == 13 || nhanVienSplit.length == 11) { // Kiểm tra độ dài của dữ liệu
+                    if (nhanVienSplit[8].equals("NVTN")) {
+                        System.out.println("true");
+                        String maNhanVien = nhanVienSplit[0];
+                        String tenNhanVien = nhanVienSplit[1];
+                        int tuoi = Integer.parseInt(nhanVienSplit[2]);
+                        String ngaySinh = nhanVienSplit[3]; // Ngày sinh, chưa chuyển thành đối tượng Date
+                        String soNha = nhanVienSplit[4];
+                        String phuong = nhanVienSplit[5];
+                        String quan = nhanVienSplit[6];
+                        String maThanhPho = nhanVienSplit[7];
+                        String loaiNhanVien = nhanVienSplit[8];
+                        String caLamViec = nhanVienSplit[9];
+                        int soBillDaXuLy = Integer.parseInt(nhanVienSplit[10]);
+                        int soGioLamThem = Integer.parseInt(nhanVienSplit[11]);
+                        double tongTienDaXuLy = Double.parseDouble(nhanVienSplit[12]);
 
-                if (nhanVienSplit.length >= 9) { // Kiểm tra độ dài của dữ liệu
-                    String maNhanVien = nhanVienSplit[0];
-                    String tenNhanVien = nhanVienSplit[1];
-                    int tuoi = Integer.parseInt(nhanVienSplit[2]);
-                    String ngaySinh = nhanVienSplit[3]; // Ngày sinh, chưa chuyển thành đối tượng Date
-                    String diaChi = nhanVienSplit[4];
-                    String loaiNhanVien = nhanVienSplit[5];
-                    String caLamViec = nhanVienSplit[6];
-                    int soBillDaXuLy = Integer.parseInt(nhanVienSplit[7]);
-                    int soLyNuocPhaChe = nhanVienSplit[8].equals("") ? 0 : Integer.parseInt(nhanVienSplit[8]);
-                    int soGioLamThem = Integer.parseInt(nhanVienSplit[9]);
+                        String[] ngaySinhSplit = ngaySinh.split("\\/");
+                        Date birthDate = new Date(ngaySinhSplit[0], ngaySinhSplit[1], ngaySinhSplit[2]);
+                        Province thanhPho = new Province(maThanhPho);
+                        Address diaChi = new Address(soNha, phuong, quan, thanhPho);
 
-                    Nhanvien nhanVien = null;
-                    String[] ngaySinhSplit = ngaySinh.split("\\/");
-                    Date birthDate = new Date(ngaySinhSplit[0], ngaySinhSplit[1], ngaySinhSplit[2]);
-                    // Phân biệt loại nhân viên dựa trên mã
-                    switch (loaiNhanVien) {
-                        case "NVTN":
-                            // LocalDate dateOfBirth = LocalDate.parse(ngaySinh, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                            nhanVien = new NhanVienThuNgan(maNhanVien, tenNhanVien, tuoi, birthDate, null, loaiNhanVien, caLamViec);
-                            break;
-                        case "NVPC":
-                            // dateOfBirth = LocalDate.parse(ngaySinh, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-                            nhanVien = new NhanVienPhaChe(maNhanVien, tenNhanVien, tuoi, birthDate, null, loaiNhanVien, caLamViec, soBillDaXuLy, soGioLamThem);
-                            break;
-                        default:
-                            System.out.println("Loại nhân viên không hợp lệ: " + loaiNhanVien);
-                            continue;
+                        nhanVien = new NhanVienThuNgan(maNhanVien, tenNhanVien, tuoi, birthDate, diaChi, loaiNhanVien, caLamViec, soBillDaXuLy, tongTienDaXuLy, soGioLamThem);
+
+                        this.nhanVienList.add(nhanVien);
+                        System.out.println(nhanVien.makeString());
+                    } else if (nhanVienSplit[8].equals("NVPC")) {
+                        nhanVien = new NhanVienPhaChe();
                     }
-
-                    this.nhanVienList.add(nhanVien);
                 }
             }
             System.out.println("\tĐọc thành công dữ liệu nhân viên từ file!");
@@ -142,22 +145,6 @@ public void addNewNhanVien() {
 
     if (temp != null) {
         temp.nhapThongTin();
-        if (temp instanceof NhanVienThuNgan) {
-            System.out.print("Số bill đã xử lý: ");
-            ((NhanVienThuNgan) temp).setSoBillDaXuLy(Integer.parseInt(sc.nextLine()));
-
-            System.out.print("Tổng tiền đã xử lý: ");
-            ((NhanVienThuNgan) temp).setTongTienDaXuLy(Double.parseDouble(sc.nextLine()));
-
-            System.out.print("Số giờ làm thêm: ");
-            ((NhanVienThuNgan) temp).setSoGioLamThem(Integer.parseInt(sc.nextLine()));
-        } else if (temp instanceof NhanVienPhaChe) {
-            System.out.print("Số đơn đã pha chế: ");
-            ((NhanVienPhaChe) temp).setSoDonDaPhaChe(Integer.parseInt(sc.nextLine()));
-
-            System.out.print("Số giờ làm thêm: ");
-            ((NhanVienPhaChe) temp).setSoGioLamThem(Integer.parseInt(sc.nextLine()));
-        }
 
         // Thêm nhân viên vào danh sách
         this.nhanVienList.add(temp);
