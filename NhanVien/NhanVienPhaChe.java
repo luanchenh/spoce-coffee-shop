@@ -247,7 +247,24 @@ public class NhanVienPhaChe extends Nhanvien implements INhap, IXuat {
     @Override
     public void xuatThongTin() {
         super.xuatThongTin();
-        System.out.println("\tSố đơn đã pha chế: " + this.soDonDaPhaChe);
-        System.out.println("\tSố giờ làm thêm: " + this.soGioLamThem);
+        // System.out.println("\tSố đơn đã pha chế: " + this.soDonDaPhaChe);
+        // System.out.println("\tSố giờ làm thêm: " + this.soGioLamThem);
     }
+    @Override
+    public void thongTinChiTiet() {
+        System.out.println("\t+----------------------------------------------------------------------+");
+        System.out.println("\t|                          Thông Tin Chi Tiết                         |");
+        System.out.println("\t+----------------------------------------------------------------------+");
+        System.out.printf("\t| %-30s: %-40s |\n", "Mã nhân viên", this.maNhanVien);
+        System.out.println("\t+----------------------------------------------------------------------+");
+        System.out.printf("\t| %-30s: %-70s |\n", "Địa chỉ", this.diaChi.toString());
+        System.out.println("\t+----------------------------------------------------------------------+");
+        System.out.printf("\t| %-30s: %-15d |\n", "Số đơn đã pha chế", this.soDonDaPhaChe);
+        System.out.printf("\t| %-30s: %-15d |\n", "Số giờ làm thêm", this.soGioLamThem);
+        System.out.println("\t+----------------------------------------------------------------------+");
+    }
+    
+    
+    
 }
+

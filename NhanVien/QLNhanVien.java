@@ -14,7 +14,7 @@ import java.util.Scanner;
 @SuppressWarnings({ "resource", "unused" })
 public class QLNhanVien {
     public ArrayList<Nhanvien> nhanVienList;
-    File EmployeeFile = new File("../File/nhanvien.txt");
+    File EmployeeFile = new File("./File/nhanvien.txt");
 
     public QLNhanVien() {
         this.nhanVienList = new ArrayList<>();
@@ -443,10 +443,59 @@ public void listItem() {
         this.writeFile();
     }
     public void xuat() {
+        System.out.println(
+            "\t+======================================================================================================================+");
+    System.out.println(
+            "\t|                                             Thông tin cơ bản nhân viên                                                       |");
+    System.out.println(
+            "\t+--------------+-----------------------------+----------------------+-------------------+--------------+----------------+");
+            System.out.printf("\t| %-10s | %-27s | %-20s | %-17s | %-12s | %-14s |\n",
+            "Mã nhân viên", "Tên nhân viên", "Loại nhân viên", "Ngày sinh", "Tuổi", "Ca làm việc");
+    System.out.println(
+            "\t+--------------+-----------------------------+----------------------+-------------------+--------------+----------------+");
         for (Nhanvien nv : this.nhanVienList) {
             nv.xuatThongTin();
         }
-    }
+        System.out.println("Bạn có muốn xem chi tiết thông tin nhân viên?");
+        System.out.println("\t1. Xem tất cả");
+        System.out.println("\t2. Chọn nhân viên cụ thể");
+        System.out.println("\t3. Thoát");
+        Scanner sc = new Scanner(System.in);
+        int choice = Integer.parseInt(sc.nextLine());
+        
+        switch (choice) {
+            case 1:
+                // Xem thông tin chi tiết tất cả nhân viên
+                System.out.println("Thông tin chi tiết tất cả nhân viên:");
+                for (Nhanvien nv : this.nhanVienList) {
+                    System.out.println("\n----------------------------------------");
+                    nv.thongTinChiTiet();
+                }
+                break;
+        
+            case 2:
+                System.out.println("Vui lòng chọn nhân viên theo số thứ tự:");
+                for (int i = 0; i < this.nhanVienList.size(); i++) {
+                    System.out.printf("\t%d. %s\n", i + 1, this.nhanVienList.get(i).getTenNhanVien());
+                }
+                int selectedIndex = Integer.parseInt(sc.nextLine()) - 1;
+                if (selectedIndex >= 0 && selectedIndex < this.nhanVienList.size()) {
+                    // System.out.println("Thông tin chi tiết:");
+                    this.nhanVienList.get(selectedIndex).thongTinChiTiet();
+                } else {
+                    System.out.println("Lựa chọn không hợp lệ.");
+                }
+                break;
+        
+            case 3:
+                System.out.println("Kết thúc.");
+                break;
+        
+            default:
+                System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
+                break;
+        }
+    }        
     public void menuQLNhanVien() {
         Function.clearScreen();
         this.Init(); //

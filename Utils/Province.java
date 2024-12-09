@@ -20,7 +20,7 @@ public class Province {
     public Province(String provinceCode) {
         this.provinceCode = provinceCode;
         // Get tên từ file
-        File cityFile = new File("../File/tinhthanh.txt");
+        File cityFile = new File("./File/tinhthanh.txt");
         try(Scanner rd = new Scanner(cityFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();

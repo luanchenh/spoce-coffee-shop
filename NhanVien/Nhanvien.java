@@ -245,26 +245,9 @@ public abstract class Nhanvien {
     }
 
     public void xuatThongTin() {
-        /*
-         * protected String maNhanVien;
-         * protected String tenNhanVien;
-         * protected int tuoi;
-         * protected Date ngaySinh;
-         * protected Address diaChi;
-         * protected String loaiNhanVien;
-         * protected String caLamViec;
-         */
-        System.out.println(
-                "\t+======================================================================================================================+");
-        System.out.println(
-                "\t|                                             Thông tin nhân viên                                                       |");
-        System.out.println(
-                "\t+--------------+-----------------------------+----------------------+-------------------+--------------+----------------+");
+       
         // In thông tin chính của nhân viên
-        System.out.printf("\t| %-10s | %-27s | %-20s | %-17s | %-12s | %-14s |\n",
-                "Mã nhân viên", "Tên nhân viên", "Loại nhân viên", "Ngày sinh", "Tuổi", "Ca làm việc");
-        System.out.println(
-                "\t+--------------+-----------------------------+----------------------+-------------------+--------------+----------------+");
+       
         String loaiNhanVienLabel = this.loaiNhanVien.equals("NVPC") ? "Nhân viên pha chế"
                 : this.loaiNhanVien.equals("NVTN") ? "Nhân viên thu ngân"
                         : this.loaiNhanVien.equals("NVQL") ? "Nhân viên quản lý" : "Không xác định";
@@ -273,9 +256,10 @@ public abstract class Nhanvien {
                 this.caLamViec);
         System.out.println(
                 "\t+--------------+-----------------------------+----------------------+-------------------+--------------+----------------+");
-        System.out.println("\tĐịa chỉ");
-        System.out.println("\t" + this.diaChi.toString());
+        // System.out.println("\tĐịa chỉ");
+        // System.out.println("\t" + this.diaChi.toString());
     }
+    public void thongTinChiTiet(){}
 
     public String makeString() {
         StringBuilder sb = new StringBuilder();
