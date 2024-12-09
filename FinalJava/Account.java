@@ -3,11 +3,14 @@
  */
 package FinalJava;
 
-import java.io.File;
-import java.util.Scanner;
-
+import KhachHang.KHTaiCho;
+import KhachHang.KhachHang;
+import KhachHang.QLKhachHang;
 import Utils.Function;
 import Utils.INhap;
+import java.io.File;
+import java.io.FileWriter;
+import java.util.Scanner;
 
 
 @SuppressWarnings("resource")
@@ -115,6 +118,23 @@ public class Account implements INhap {
                 }
             }
             if (this.checkValidAccount()) {
+                KhachHang kh = new KHTaiCho();
+                kh.nhapThongTin();
+                this.IDLink = kh.getCustomerID();
+                
+                // ghi thông tin khách hàng mới tạo vào file
+                QLKhachHang ql = new QLKhachHang();
+                ql.Init();
+                ql.customerList.add(kh);
+                ql.writeAll();
+
+                // ghi thông tin account vào file
+                try (FileWriter writer = new FileWriter("../File/accounts.txt", true)) {
+                    writer.write(this.makeString());
+                    writer.flush();    
+                } catch (Exception e) {
+                    System.out.println("Lỗi: " + e.getMessage());
+                }
                 break;
             }
             else {
@@ -122,6 +142,7 @@ public class Account implements INhap {
             }
         }
         // ID link là mã khách hàng không nhập mà tự thêm vào
+        
     }
 
     public void Login() {

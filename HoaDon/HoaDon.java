@@ -67,6 +67,15 @@ public class HoaDon implements IXuat {
         this.trangThaiHoaDon = "Đang xử lý";
     }
 
+    public HoaDon(KhachHang khachHang, NhanVienThuNgan nhanVien) {
+        this.maHoaDon =  "HD" + (countBill++);
+        this.nhanVien = nhanVien;
+        this.khachHang = khachHang;
+        this.ngayTaoHoaDon = new Date();
+        this.ngayTaoHoaDon.getLocalDate();
+        this.trangThaiHoaDon = "Đang xử lý";
+    }
+
     public String getMaHoaDon() {
         return maHoaDon;
     }
@@ -170,7 +179,7 @@ public class HoaDon implements IXuat {
         System.out.printf("\tMã hóa đơn        : %s%n", this.maHoaDon);
         System.out.printf("\tNgày tạo hóa đơn  : %s%n", this.ngayTaoHoaDon);
         System.out.printf("\tTrạng thái hóa đơn: %s%n", this.trangThaiHoaDon);
-        System.out.println("\t Tên khách hàng   : " + this.khachHang.getCustomerName());
+        System.out.println("\tTên khách hàng   : " + this.khachHang.getCustomerName());
         System.out.println("\t----------------------------------------");
         System.out.println("\t         CHI TIẾT THỰC ĐƠN              ");
         System.out.println("\t----------------------------------------");

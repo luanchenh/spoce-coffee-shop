@@ -70,4 +70,25 @@ public class ThucDon implements IXuat {
         return str.toString();
 
     }
+
+    public static String makeStringWithStatus(NuocUong nu, String size, ArrayList<Topping> tpList, boolean wantHot, boolean wantCold, boolean wantSugar, boolean wantMilk) {
+        StringBuilder str = new StringBuilder();
+        str.append(nu.getId()).append(",");
+        str.append(size).append(",");
+
+        for (Topping tp : tpList) {
+            if (tpList.indexOf(tp) == tpList.size() - 1) {
+                str.append(tp.getId()).append(",");
+            } else {
+                str.append(tp.getId()).append(";");
+            }
+        }
+
+        str.append(wantHot).append("|");
+        str.append(wantCold).append("|");
+        str.append(wantSugar).append("|");
+        str.append(wantMilk).append("|");
+
+        return str.toString();
+    }
 }

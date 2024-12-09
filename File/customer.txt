@@ -1,5 +1,6 @@
 0|KH1|Nguyen Nam Duong|0|null
 0|KH2|Nguyen Hong Anh|1|MB1|14|2|2005|8|12|2024|8|12|2025|0
 0|KH3|Nguyen Van Lam|0|null
-0|KH4|Chenh Tien Luan|1|MB2|2|4|2005|8|12|2024|8|12|2025|0
-0|KH7|Chenh Tien Loc|0|null
+0|KH4|Chenh Tien Lu|1|MB2|2|4|2005|8|12|2024|8|12|2025|0
+0|KH5|Chenh Tien Luan|0|null
+
