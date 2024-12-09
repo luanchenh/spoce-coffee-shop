@@ -30,12 +30,10 @@ public class QLNhanVien {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();
                 String[] nhanVienSplit = line.split("\\|");
-                System.out.println(nhanVienSplit.length);
                 // System.out.println("Dữ liệu: " + line);
                 Nhanvien nhanVien = null;
-                if (nhanVienSplit.length == 13 || nhanVienSplit.length == 11) { // Kiểm tra độ dài của dữ liệu
+                if (nhanVienSplit.length >= 11) { // Kiểm tra độ dài của dữ liệu
                     if (nhanVienSplit[8].equals("NVTN")) {
-                        System.out.println("true");
                         String maNhanVien = nhanVienSplit[0];
                         String tenNhanVien = nhanVienSplit[1];
                         int tuoi = Integer.parseInt(nhanVienSplit[2]);
