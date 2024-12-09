@@ -191,7 +191,7 @@ public void removeNhanVien() {
 
     System.out.println("\tĐịnh dạng chuỗi: ID | TÊN | TUỔI | NGÀY SINH | ĐỊA CHỈ | LOẠI NHÂN VIÊN | CA LÀM VIỆC ");
     for (Nhanvien nv : this.nhanVienList) {
-        System.out.println("\t" + nv.makeString());
+        nv.xuatThongTin();
     }
 
     if (number == 1) {
