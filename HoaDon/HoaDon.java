@@ -1,13 +1,12 @@
 package HoaDon;
 
-import KhachHang.KHMangDi;
 import KhachHang.KHTaiCho;
 import KhachHang.KhachHang;
 import NhanVien.NhanVienThuNgan;
 import ThucDon.ThucDon;
+import Utils.Date;
 import Utils.IXuat;
 import java.io.File;
-import Utils.Date;
 import java.util.Scanner;
 
 @SuppressWarnings("unused")
@@ -56,6 +55,16 @@ public class HoaDon implements IXuat {
         this.tongTien = tongTien;
         this.tienKhachDua = tienKhachDua;
         this.tienThua = tienKhachDua - this.tongTien;
+    }
+
+    public HoaDon(KhachHang khachHang, NhanVienThuNgan nhanVien, ThucDon thucDon) {
+        this.maHoaDon =  "HD" + (countBill++);
+        this.nhanVien = nhanVien;
+        this.khachHang = khachHang;
+        this.thucDon = thucDon;
+        this.ngayTaoHoaDon = new Date();
+        this.ngayTaoHoaDon.getLocalDate();
+        this.trangThaiHoaDon = "Đang xử lý";
     }
 
     public String getMaHoaDon() {

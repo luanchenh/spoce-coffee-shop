@@ -2,11 +2,15 @@ package FinalJava;
 
 import Ban.Ban;
 import Ban.QLBan;
+import HoaDon.HoaDon;
 import KhachHang.KHMangDi;
 import KhachHang.KHTaiCho;
 import KhachHang.KhachHang;
 import KhachHang.MemberCard;
 import KhachHang.QLKhachHang;
+import NhanVien.NhanVienThuNgan;
+import NhanVien.Nhanvien;
+import NhanVien.QLNhanVien;
 import NuocUong.NuocUong;
 import NuocUong.QLNuocUong;
 import ThucDon.ThucDon;
@@ -31,11 +35,13 @@ public class NguoiDung {
     public static QLBan qlBan = new QLBan();
     public static QLKhachHang qlKhachHang = new QLKhachHang();
     public static QLTopping qlTopping = new QLTopping();
+    public static QLNhanVien qlNhanVien = new QLNhanVien();
     static {
         qlNuocUong.Init();
         qlBan.Init();
         qlKhachHang.Init();
         qlTopping.Init();
+        qlNhanVien.Init();
     }
 
     public static KhachHang getInfoCustomer() {
@@ -179,15 +185,13 @@ public class NguoiDung {
                                     }
 
                                     while (true) {
-                                        Function.clearScreen();
-                                        qlNuocUong.inDanhSach();
-                                        System.out.println("\tBàn của bạn có ID: " + tmp.getTableID());
-
                                         boolean isWantDrink = true;
                                         ThucDon order = new ThucDon();
                                         int count = 0;
 
                                         while (isWantDrink) {
+                                            Function.clearScreen();
+                                            qlNuocUong.inDanhSach();
                                             System.out.print("\tNhập ID nước bạn muốn đặt: ");
                                             str = sc.nextLine();
                                 
@@ -264,6 +268,7 @@ public class NguoiDung {
                         
                                             ArrayList<Topping> tplist = new ArrayList<>();
                                             while (isWantTopping) { 
+                                                Function.clearScreen();
                                                 nuocuong.printToppingOfDrink();
                                                 while (true) { 
                                                     System.out.print("\tNhập ID topping bạn muốn đặt: ");
@@ -284,6 +289,7 @@ public class NguoiDung {
                                                     }
 
                                                     while (true) {
+                                                        Function.clearScreen();
                                                         System.out.println(
                                                             "\t=============================[Chức năng người Dùng tại chỗ]===============================");
                                                         System.out.printf("\t| %-87s |%n", "Bạn có muốn thêm topping nào nữa không?");
@@ -313,7 +319,7 @@ public class NguoiDung {
                                                             break;
         
                                                             default:
-                                                            System.out.println("\tVui lòng chọn từ 1 đến 3 !");
+                                                            System.out.println("\tVui lòng chọn từ 1 đến 2 !");
                                                             try {
                                                                 Thread.sleep(2500);
                                                             } catch (InterruptedException e) {
@@ -329,10 +335,65 @@ public class NguoiDung {
                                             }
                                             order.getDanhSachTopping().add(tplist);
 
-                                            break;
+                                            while (true) { 
+                                                Function.clearScreen();
+                                                System.out.println(
+                                                    "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                System.out.printf("\t| %-87s |%n", "Bạn có muốn đặt thêm món nước nào nữa không?");
+                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
+                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
+                                                System.out.println(
+                                                    "\t==========================================================================================");
+                                                System.out.print("\tNhập lựa chọn của bạn: ");
+                                                str = sc.nextLine();
+
+                                                if (Function.isEmpty(str)) {
+                                                    System.out.println("\tVui lòng không để trống !");
+                                                    continue;
+                                                }
+                                                if (!Function.isTrueNumber(str)) {
+                                                    System.out.println("\tVui lòng nhập số !");
+                                                    continue;
+                                                }
+
+                                                switch (str) {
+                                                    case "1":
+                                                    isWantDrink = true;
+                                                    break;
+
+                                                    case "2":
+                                                    isWantDrink = false;
+                                                    break;
+
+                                                    default:
+                                                    System.out.println("\tVui lòng chọn từ 1 đến 2 !");
+                                                    try {
+                                                        Thread.sleep(2500);
+                                                    } catch (InterruptedException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    continue;
+                                                }
+                                                break;
+                                            }
                                         }
 
-                            
+                                        NhanVienThuNgan nvtmp = null;
+                                        for (Nhanvien nv : qlNhanVien.nhanVienList) {
+                                            if (nv instanceof NhanVienThuNgan) {
+                                                nvtmp = (NhanVienThuNgan)nv;
+                                                break;
+                                            }
+                                        }
+
+                                        HoaDon hoaDon = new HoaDon(temp, nvtmp, order);
+
+                                        hoaDon.xuatThongTin();
+                                        try {
+                                            Thread.sleep(2500);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
                                         // xử lí phần chọn nước
                                         break;
                                     }
