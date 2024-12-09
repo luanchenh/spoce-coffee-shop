@@ -9,7 +9,7 @@ import Utils.INhap;
 import Utils.IXuat;
 import java.util.Scanner;
 
-@SuppressWarnings("resource")
+@SuppressWarnings({ "resource", "unused" })
 public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
     private int soBillDaXuLy;
     private double tongTienDaXuLy;

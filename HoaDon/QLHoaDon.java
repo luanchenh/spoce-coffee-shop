@@ -10,6 +10,8 @@ import NhanVien.Nhanvien;
 import Utils.Date;
 import Utils.Function;
 
+
+@SuppressWarnings({ "resource", "unused" })
 public class QLHoaDon {
     public ArrayList<HoaDon> billList;
 

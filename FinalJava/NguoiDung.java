@@ -99,6 +99,7 @@ public class NguoiDung {
 
     }
 
+    @SuppressWarnings("unused")
     public static void selectOne() {
         Scanner sc = new Scanner(System.in);
         String str;
@@ -135,7 +136,7 @@ public class NguoiDung {
                             if (IDLink != "") {
                                 System.out.println("\tĐăng nhập thành công !");
                                 KHTaiCho temp = null;
-                                
+
                                 for (KhachHang kh : qlKhachHang.customerList) {
                                     if (kh.getCustomerID().equals(IDLink)) {
                                         temp = (KHTaiCho)kh;
@@ -146,7 +147,7 @@ public class NguoiDung {
                                 temp.xuatThongTin();
 
 
-                                while (true) { 
+                                while (true) {
                                     System.out.print("\tNhập số lượng khách: ");
                                     str = sc.nextLine();
 
@@ -167,15 +168,15 @@ public class NguoiDung {
                                 boolean isDone = qlBan.printEmptyTable();
                                 Ban tmp = null;
                                 if (isDone) {
-                                    while (true) { 
+                                    while (true) {
                                         System.out.print("\tNhập ID bàn bạn muốn chọn: ");
                                         str = sc.nextLine();
-    
+
                                         if (Function.isEmpty(str)) {
                                             System.out.println("\tVui lòng không để trống !");
                                             continue;
                                         }
-                                        
+
                                         tmp = qlBan.getTableByID(str);
                                         if (tmp == null) {
                                             System.out.println("\tID không đúng, vui lòng nhập lại!");
@@ -194,7 +195,7 @@ public class NguoiDung {
                                             qlNuocUong.inDanhSach();
                                             System.out.print("\tNhập ID nước bạn muốn đặt: ");
                                             str = sc.nextLine();
-                                
+
                                             if (Function.isEmpty(str)) {
                                                 System.out.println("\tVui lòng không để trống !");
                                                 try {
@@ -222,7 +223,7 @@ public class NguoiDung {
                                             }
 
                                             boolean isWantTopping;
-                                            while (true) { 
+                                            while (true) {
                                                 Function.clearScreen();
                                                 System.out.println(
                                                     "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -233,12 +234,12 @@ public class NguoiDung {
                                                     "\t==========================================================================================");
                                                 System.out.print("\tNhập lựa chọn của bạn: ");
                                                 str = sc.nextLine();
-    
+
                                                 if (Function.isEmpty(str)) {
                                                     System.out.println("\tVui lòng không để trống !");
                                                     continue;
                                                 }
-    
+
                                                 if (!Function.isTrueNumber(str)) {
                                                     System.out.println("\tVui lòng nhập số !");
                                                     continue;
@@ -265,12 +266,12 @@ public class NguoiDung {
 
                                                 break;
                                             }
-                        
+
                                             ArrayList<Topping> tplist = new ArrayList<>();
-                                            while (isWantTopping) { 
+                                            while (isWantTopping) {
                                                 Function.clearScreen();
                                                 nuocuong.printToppingOfDrink();
-                                                while (true) { 
+                                                while (true) {
                                                     System.out.print("\tNhập ID topping bạn muốn đặt: ");
                                                     str = sc.nextLine();
 
@@ -308,16 +309,16 @@ public class NguoiDung {
                                                             System.out.println("\tVui lòng nhập số !");
                                                             continue;
                                                         }
-        
+
                                                         switch (str) {
                                                             case "1":
                                                             isWantTopping = true;
                                                             break;
-        
+
                                                             case "2":
                                                             isWantTopping = false;
                                                             break;
-        
+
                                                             default:
                                                             System.out.println("\tVui lòng chọn từ 1 đến 2 !");
                                                             try {
@@ -335,7 +336,7 @@ public class NguoiDung {
                                             }
                                             order.getDanhSachTopping().add(tplist);
 
-                                            while (true) { 
+                                            while (true) {
                                                 Function.clearScreen();
                                                 System.out.println(
                                                     "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -496,7 +497,7 @@ public class NguoiDung {
                         System.out.println("\tVui lòng không để trống !");
                         continue;
                     }
-        
+
                     if (!Function.isTrueNumber(str)) {
                         System.out.println("\tVui lòng nhập số !");
                         continue;
@@ -504,7 +505,7 @@ public class NguoiDung {
 
                     switch (str) {
                         case "1":
-                        while (true) { 
+                        while (true) {
                             System.out.print("\tNhập mã khách hàng của bạn: ");
                             str = sc.nextLine();
 
@@ -512,7 +513,7 @@ public class NguoiDung {
                                 System.out.println("\tVui lòng không để trống !");
                                 continue;
                             }
-                
+
                             if (Function.isTrueNumber(str)) {
                                 System.out.println("\tVui lòng nhập chữ !");
                                 continue;
@@ -541,7 +542,7 @@ public class NguoiDung {
                                     qlNuocUong.inDanhSach();
                                     System.out.print("\tNhập ID nước bạn muốn đặt: ");
                                     str = sc.nextLine();
-                        
+
                                     if (Function.isEmpty(str)) {
                                         System.out.println("\tVui lòng không để trống !");
                                         try {
@@ -551,7 +552,7 @@ public class NguoiDung {
                                         }
                                         continue;
                                     }
-                        
+
                                     // xử lí phần chọn nước
                                     break;
                                 }
@@ -568,12 +569,12 @@ public class NguoiDung {
                             qlKhachHang.customerList.add(temp);
                             qlKhachHang.writeAll();
 
-                            while (true) { 
+                            while (true) {
                                 Function.clearScreen();
                                 qlNuocUong.inDanhSach();
                                 System.out.print("\tNhập ID nước bạn muốn đặt: ");
                                 str = sc.nextLine();
-                    
+
                                 if (Function.isEmpty(str)) {
                                     System.out.println("\tVui lòng không để trống !");
                                     try {
@@ -583,7 +584,7 @@ public class NguoiDung {
                                     }
                                     continue;
                                 }
-                    
+
                                 // xử lí phần chọn nước
                                 break;
                             }

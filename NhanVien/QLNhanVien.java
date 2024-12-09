@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+@SuppressWarnings({ "resource", "unused" })
 public class QLNhanVien {
     public ArrayList<Nhanvien> nhanVienList;
     File EmployeeFile = new File("../File/nhanvien.txt");
@@ -67,11 +68,11 @@ public class QLNhanVien {
     }
     public void writeFile() {
         String line;
-        try (FileWriter writer = new FileWriter(EmployeeFile, false)) { 
+        try (FileWriter writer = new FileWriter(EmployeeFile, false)) {
             for (Nhanvien nv : this.nhanVienList) {
                 line = nv.makeString(); // Gọi phương thức makeString() của đối tượng nhân viên
                 writer.append(line);
-                writer.append(System.lineSeparator()); 
+                writer.append(System.lineSeparator());
             }
             System.out.println("\tCập nhật dữ liệu thành công !");
         } catch (Exception e) {
@@ -112,14 +113,14 @@ public void addNewNhanVien() {
     Scanner sc = new Scanner(System.in);
     String str;
     Nhanvien temp = null;
-    
+
     while (true) {
         System.out.println("\t1. Loại nhân viên [Thu ngân] (NVTN)");
         System.out.println("\t2. Loại nhân viên [Pha chế] (NVPC)");
         System.out.print("\tChọn loại nhân viên: ");
         str = sc.nextLine();
-        
-        if (Function.isEmpty(str)) { 
+
+        if (Function.isEmpty(str)) {
             System.out.println("Vui lòng không để trống!");
         } else {
             if (Function.isTrueNumber(str)) {
@@ -166,7 +167,7 @@ public void addNewNhanVien() {
         System.out.println("\tThêm thành công nhân viên!");
 
         // Ghi thông tin nhân viên vào file
-        try (FileWriter writer = new FileWriter(EmployeeFile, true)) { 
+        try (FileWriter writer = new FileWriter(EmployeeFile, true)) {
             writer.append(line);
             writer.append(System.lineSeparator());
         } catch (Exception e) {
@@ -186,7 +187,7 @@ public void removeNhanVien() {
         System.out.println("\t2. Xoá theo Tên (sẽ xoá từ đó có chứa chữ. Lưu ý trước khi chọn)");
         System.out.print("\tNhập lựa chọn: ");
         str = sc.nextLine();
-        
+
         if (Function.isEmpty(str)) {
             System.out.println("\tVui lòng không để trống!");
         } else {
@@ -302,7 +303,7 @@ public void listItem() {
         String str;
         String result = "";
         Nhanvien temp = null;
-    
+
         while (true) {
             System.out.println("\tTìm kiếm nhân viên theo: ");
             System.out.println("\t1. Tìm kiếm theo ID");
@@ -312,7 +313,7 @@ public void listItem() {
             System.out.println("\t5. Thoát");
             System.out.print("\tNhập lựa chọn: ");
             str = sc.nextLine();
-    
+
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không để trống!");
             } else {
@@ -443,7 +444,7 @@ public void listItem() {
                 for (Nhanvien nv : this.nhanVienList) {
                     if (nv.getMaNhanVien().equalsIgnoreCase(str)) {
                         action = true;
-                        nv.modifyInfo(); 
+                        nv.modifyInfo();
                         break;
                     }
                 }
@@ -466,17 +467,17 @@ public void listItem() {
         this.Init(); // Khởi tạo dữ liệu
         Scanner sc = new Scanner(System.in);
         String str;
-    
+
         while (true) {
             // In tiêu đề
             System.out.println(
                     "\t===============================[ Menu Quản Lý Nhân Viên ]===============================");
-    
+
             // In tiêu đề các cột
             System.out.printf("\t| %-4s | %-77s |%n", "STT", "Chức năng");
             System.out.println(
                     "\t|------|-------------------------------------------------------------------------------|");
-    
+
             // In danh sách các lựa chọn
             System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách nhân viên");
             System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một nhân viên mới");
@@ -489,7 +490,7 @@ public void listItem() {
             System.out.printf("\t| %-4s | %-77s |%n", "9", "In ra số lượng nhân viên từng loại");
             System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
             System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản lý");
-    
+
             // In dòng kẻ dưới cùng
             System.out.println(
                     "\t========================================================================================");
