@@ -265,6 +265,39 @@ public class QLBan implements IXuat {
         }
     }
 
+    public Ban getTableByID(String id) {
+        Ban table = null;
+        for (Ban ban : this.tableList) {
+            if (ban.getTableID().equals(id) && !ban.getTableStatus()) {
+                table = ban;
+                break;
+            }
+        }
+        return table;
+    }
+
+    public boolean printEmptyTable() {
+        boolean isThereAnEmptyTable = false;
+        for (Ban ban : this.tableList) {
+            if (!ban.getTableStatus()) {
+                isThereAnEmptyTable = true;
+            }
+        }
+
+        if (isThereAnEmptyTable) {
+            System.out.println("\t==============================[Danh sách bàn trống]==============================");
+            System.out.printf("\t| %-25s %-25s %-25s |\n", "Mã bàn", "Số chỗ ngồi", "Tình trạng");
+            for (Ban ban : this.tableList) {
+                if (!ban.getTableStatus()) {
+                    ban.printString();
+                }
+            }
+            System.out.println("\t=================================================================================");
+        }
+
+        return isThereAnEmptyTable;
+    }
+
     public void menuQLBan() {
         Function.clearScreen();
         this.Init();

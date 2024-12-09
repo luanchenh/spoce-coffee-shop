@@ -1,16 +1,15 @@
 package NuocUong;
 
+import Topping.QLTopping;
+import Topping.Topping;
+import Utils.Function;
 import Utils.INhap;
 import Utils.IXuat;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import Utils.Function;
-import Topping.QLTopping;
-import Topping.Topping;
 
 @SuppressWarnings("resource")
 public abstract class NuocUong implements INhap, IXuat {
@@ -931,4 +930,13 @@ public abstract class NuocUong implements INhap, IXuat {
         }
     }
 
+    public void printToppingOfDrink() {
+        QLTopping ql = new QLTopping();
+        ql.Init();
+        System.out.println("\t====================[Danh sách topping]====================");
+        System.out.printf("\t%-5s %-25s %-10s\n", "Mã", "Tên topping", "Giá (VND)\n");
+        for (String tpID : this.topping) {
+            ql.getToppingByID(tpID).menuInfo();
+        }
+    }
 }
