@@ -471,7 +471,7 @@ public void listItem() {
     }
     public void menuQLNhanVien() {
         Function.clearScreen();
-        this.Init(); // Khởi tạo dữ liệu
+        this.Init(); //
         Scanner sc = new Scanner(System.in);
         String str;
     
