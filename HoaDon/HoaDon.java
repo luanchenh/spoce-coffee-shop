@@ -1,6 +1,5 @@
 package HoaDon;
 
-import KhachHang.KHTaiCho;
 import KhachHang.KhachHang;
 import NhanVien.NhanVienThuNgan;
 import ThucDon.ThucDon;
@@ -57,7 +56,7 @@ public class HoaDon implements IXuat {
         this.tienThua = tienKhachDua - this.tongTien;
     }
 
-    public HoaDon(KhachHang khachHang, NhanVienThuNgan nhanVien, ThucDon thucDon) {
+    public HoaDon(KhachHang khachHang, NhanVienThuNgan nhanVien, ThucDon thucDon, double tongTien, double tienKhachDua) {
         this.maHoaDon =  "HD" + (countBill++);
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
@@ -65,6 +64,9 @@ public class HoaDon implements IXuat {
         this.ngayTaoHoaDon = new Date();
         this.ngayTaoHoaDon.getLocalDate();
         this.trangThaiHoaDon = "Đang xử lý";
+        this.tongTien = tongTien;
+        this.tienKhachDua = tienKhachDua;
+        this.tienThua = this.tienKhachDua - this.tongTien;
     }
 
     public HoaDon(KhachHang khachHang, NhanVienThuNgan nhanVien) {
@@ -197,16 +199,38 @@ public class HoaDon implements IXuat {
         StringBuilder str = new StringBuilder();
         str.append(this.maHoaDon).append("|");
         str.append(this.nhanVien.getMaNhanVien()).append("|");
+        str.append(this.ngayTaoHoaDon.makeString()).append("|");
+        str.append(this.trangThaiHoaDon).append("|");
         str.append(this.khachHang.getCustomerID()).append("|");
 
-        if (this.khachHang instanceof KHTaiCho && ((KHTaiCho) this.khachHang).getTable() != null) {
-            str.append("1|").append(((KHTaiCho) this.khachHang).getTable().getTableID()).append("|");
-        } else {
-            str.append("0|0|");
+        for (int i=0; i<this.thucDon.getDanhSachNuocUong().size(); i++) {
+            str.append(this.thucDon.getDanhSachNuocUong().get(i).getId()).append(",");
+
+            str.append(this.thucDon.getSize().get(i)).append(",");
+
+            if (this.thucDon.getDanhSachTopping().get(i).isEmpty()) {
+                str.append(",");
+            } else {
+                for (int j=0; j<this.thucDon.getDanhSachTopping().get(i).size(); j++) {
+                    if (this.thucDon.getDanhSachTopping().get(i).indexOf(this.thucDon.getDanhSachTopping().get(i).get(j)) == this.thucDon.getDanhSachTopping().get(i).size() - 1) {
+                        str.append(this.thucDon.getDanhSachTopping().get(i).get(j).getId()).append(",");
+                    } else {
+                        str.append(this.thucDon.getDanhSachTopping().get(i).get(j).getId()).append(";");
+                    }
+                }
+            }
+
+            for (int j=0; j<this.thucDon.getTrangThaiNuocUong().get(i).size(); j++) {
+                if (j == 3) {
+                    str.append(this.thucDon.getTrangThaiNuocUong().get(i).get(j) ? "1" : "0").append("|");
+                } else {
+                    str.append(this.thucDon.getTrangThaiNuocUong().get(i).get(j) ? "1" : "0").append(";");
+                }
+            }
         }
-
-        str.append(this.trangThaiHoaDon).append("|");
-
+        str.append(this.tongTien).append("|");
+        str.append(this.tienKhachDua).append("|");
+        str.append(this.tienThua);
         // CÒN LƯU NƯỚC UỐNG VÀ TOPPING KHÁCH HÀNG CHỌN
 
         return str.toString();

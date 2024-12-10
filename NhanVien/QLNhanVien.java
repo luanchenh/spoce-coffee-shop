@@ -4,7 +4,6 @@ import Utils.Address;
 import Utils.Date;
 import Utils.Function;
 import Utils.Province;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import java.util.Scanner;
 @SuppressWarnings({ "resource", "unused" })
 public class QLNhanVien {
     public ArrayList<Nhanvien> nhanVienList;
-    File EmployeeFile = new File("./File/nhanvien.txt");
+    File EmployeeFile = new File("../File/nhanvien.txt");
 
     public QLNhanVien() {
         this.nhanVienList = new ArrayList<>();

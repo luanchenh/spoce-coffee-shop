@@ -6,10 +6,14 @@ import java.util.ArrayList;
 public class ThucDon implements IXuat {
 
     private ArrayList<NuocUong> danhSachNuocUong;
+    private ArrayList<String> size;
+    private ArrayList<ArrayList<Boolean>> trangThaiNuocUong;
     private ArrayList<ArrayList<Topping>> danhSachTopping;
 
     public ThucDon() {
         this.danhSachNuocUong = new ArrayList<>();
+        this.size = new ArrayList<>();
+        this.trangThaiNuocUong = new ArrayList<>();
         this.danhSachTopping = new ArrayList<>();
     }
 
@@ -21,27 +25,44 @@ public class ThucDon implements IXuat {
         return danhSachTopping;
     }
 
+    public ArrayList<String> getSize() {
+        return this.size;
+    }
+
+    public ArrayList<ArrayList<Boolean>> getTrangThaiNuocUong() {
+        return this.trangThaiNuocUong;
+    }
+
     @Override
     public void xuatThongTin() {
         // Danh sách nước uống và topping có size bằng nhau
         System.out.println("\t+====================[Danh sách Thực Đơn]====================+");
         for (int i = 0; i < this.danhSachNuocUong.size(); i++) {
             System.out.println("\t|------------------------------------------------------------|");
-            System.out.println("\t| Món thức uống thứ " + (i + 1) + ":");
-            System.out.println("\t| Nước uống: " + this.danhSachNuocUong.get(i).getName());
-            // In các trạng thái của nước uống
-            System.out.println("\t| Uống nóng: "+ this.danhSachNuocUong.get(i).isHot());
-            System.out.println("\t| Uống lạnh: "+ this.danhSachNuocUong.get(i).isCold());
-            System.out.println("\t| Có đường: "+ this.danhSachNuocUong.get(i).isSugar());
-            System.out.println("\t| Có sữa: "+ this.danhSachNuocUong.get(i).isMilk());
-            if (this.danhSachTopping.get(i).size() > 0) {
-                System.out.println("\t| Topping: ");
+            System.out.println("\t| Món thức uống thứ " + (i + 1) + ":                                       |");
+            // System.out.println("\t| Size: " + this.size.get(i));
+            // System.out.println("\t| Nước uống: " + this.danhSachNuocUong.get(i).getName());
+            // // In các trạng thái của nước uống
+            // System.out.println("\t| Uống lạnh: "+ this.trangThaiNuocUong.get(i).get(0));
+            // System.out.println("\t| Uống nóng: "+ this.trangThaiNuocUong.get(i).get(1));
+            // System.out.println("\t| Có đường: "+ this.trangThaiNuocUong.get(i).get(2));
+            // System.out.println("\t| Có sữa: "+ this.trangThaiNuocUong.get(i).get(3));
+            System.out.printf("\t| %-20s %-37s |%n", "Nước uống:", this.danhSachNuocUong.get(i).getName());
+            System.out.printf("\t| %-20s %-37s |%n", "Size:", this.size.get(i));
+            System.out.printf("\t| %-20s %-37s |%n", "Uống đá:", this.trangThaiNuocUong.get(i).get(0) ? "Có" : "Không");
+            System.out.printf("\t| %-20s %-37s |%n", "Uống nóng:", this.trangThaiNuocUong.get(i).get(1) ? "Có" : "Không");
+            System.out.printf("\t| %-20s %-37s |%n", "Có đường:", this.trangThaiNuocUong.get(i).get(2) ? "Có" : "Không");
+            System.out.printf("\t| %-20s %-37s |%n", "Có sữa:", this.trangThaiNuocUong.get(i).get(3) ? "Có" : "Không");
+            if (!this.danhSachTopping.get(i).isEmpty()) {
+                System.out.println("\t| Topping:                                                   |");
                 for (int j = 0; j < this.danhSachTopping.get(i).size(); j++) {
-                    System.out.println("\t|   - " + this.danhSachTopping.get(i).get(j).getName());
+                    // System.out.println("\t|   - " + this.danhSachTopping.get(i).get(j).getName());
+                    System.out.printf("\t|   - %-54s |%n", this.danhSachTopping.get(i).get(j).getName());
                 }
             }
             else {
-                System.out.println("\t| Không có topping");
+                // System.out.println("\t| Không có topping");
+                System.out.printf("\t| %-20s %-37s |%n", "Không có topping", "");
             }
             System.out.println("\t|------------------------------------------------------------|");
         }
@@ -90,5 +111,18 @@ public class ThucDon implements IXuat {
         str.append(wantMilk).append("|");
 
         return str.toString();
+    }
+
+    public double tinhTongTien() {
+        double tongTien = 0;
+        for (int i=0; i<this.danhSachNuocUong.size(); i++) {
+            tongTien += this.danhSachNuocUong.get(i).getSizePrice().get(this.size.get(i));
+
+            for (Topping tp : this.danhSachTopping.get(i)) {
+                tongTien += tp.getPrice();
+            }
+        }
+
+        return tongTien;
     }
 }

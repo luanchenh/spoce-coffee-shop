@@ -150,5 +150,8 @@ public class Date {
         return true;
     }
 
+    public String makeString() {
+        return this.day + "|" + this.month + "|" + this.year;
+    }
 }
 

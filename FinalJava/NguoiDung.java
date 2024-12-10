@@ -3,6 +3,7 @@ package FinalJava;
 import Ban.Ban;
 import Ban.QLBan;
 import HoaDon.HoaDon;
+import HoaDon.QLHoaDon;
 import KhachHang.KHMangDi;
 import KhachHang.KHTaiCho;
 import KhachHang.KhachHang;
@@ -36,12 +37,14 @@ public class NguoiDung {
     public static QLKhachHang qlKhachHang = new QLKhachHang();
     public static QLTopping qlTopping = new QLTopping();
     public static QLNhanVien qlNhanVien = new QLNhanVien();
+    public static QLHoaDon qlHoaDon = new QLHoaDon();
     static {
         qlNuocUong.Init();
         qlBan.Init();
         qlKhachHang.Init();
         qlTopping.Init();
         qlNhanVien.Init();
+        qlHoaDon.Init();
     }
 
     public static KhachHang getInfoCustomer() {
@@ -170,7 +173,8 @@ public class NguoiDung {
                                         break;
                                     }
 
-                                    
+                                    HoaDon hd = null;
+                                    loop2:
                                     while (true) {
                                         NhanVienThuNgan nvtmp = null;
                                         for (Nhanvien nv : qlNhanVien.nhanVienList) {
@@ -179,15 +183,13 @@ public class NguoiDung {
                                                 break;
                                             }
                                         }
-                                        HoaDon hoaDon = new HoaDon(temp, nvtmp);
+                                        
                                         boolean isWantDrink = true;
                                         ThucDon order = new ThucDon();
-                                        int count = 0;
                                         
 
                                         while (isWantDrink) {
-                                            boolean wantHot = false, wantCold = false, wantSugar = false, wantMilk = false;
-                                            String size;
+                                            // boolean wantHot = false, wantCold = false, wantSugar = false, wantMilk = false;
 
                                             Function.clearScreen();
                                             qlNuocUong.inDanhSach();
@@ -217,7 +219,6 @@ public class NguoiDung {
                                                 continue;
                                             } else {
                                                 order.getDanhSachNuocUong().add(nuocuong);
-                                                count++;
                                             }
 
                                             // chọn size nước uống
@@ -229,7 +230,7 @@ public class NguoiDung {
                                                     "\t=============================[Chức năng người Dùng tại chỗ]===============================");
                                                 System.out.printf("\t| %-87s |%n", "Mời bạn chọn size cho món nước " + nuocuong.getId());
                                                 for (String key : nuocuong.getSizePrice().keySet()) {
-                                                    System.out.printf("\t| %-5s %-81s |%n", count++ + ".", key);
+                                                    System.out.printf("\t| %-5s %-81s |%n", countOption++ + ".", key);
                                                 }
                                                 System.out.println(
                                                     "\t==========================================================================================");
@@ -246,40 +247,40 @@ public class NguoiDung {
                                                     continue;
                                                 }
 
-                                                if (count-1 == 3) {
+                                                if (countOption-1 == 3) {
                                                     switch (str) {
                                                         case "1":
-                                                        size = "S";
+                                                        order.getSize().add("S");
                                                         break;
 
                                                         case "2":
-                                                        size = "M";
+                                                        order.getSize().add("L");
                                                         break;
 
                                                         case "3":
-                                                        size = "L";
+                                                        order.getSize().add("M");
                                                         break;
 
                                                         default:
                                                         System.out.println("\tVui lòng chọn từ 1 đến 3!");
                                                         continue;
                                                     }
-                                                } else if (count-1 == 4) {
+                                                } else if (countOption-1 == 4) {
                                                     switch (str) {
                                                         case "1":
-                                                        size = "S";
+                                                        order.getSize().add("S");
                                                         break;
 
                                                         case "2":
-                                                        size = "M";
+                                                        order.getSize().add("M");
                                                         break;
 
                                                         case "3":
-                                                        size = "L";
+                                                        order.getSize().add("L");
                                                         break;
 
                                                         case "4":
-                                                        size = "XL";
+                                                        order.getSize().add("XL");
                                                         break;
 
                                                         default:
@@ -291,6 +292,11 @@ public class NguoiDung {
                                             }
 
                                             // yêu cầu nóng, đá, sữa, đường
+                                            ArrayList<Boolean> trangThai = new ArrayList<>(); // mảng lưu trạng thái của món nước hiện tại
+                                            trangThai.add(false); // đá
+                                            trangThai.add(false); // nóng
+                                            trangThai.add(false); // đường
+                                            trangThai.add(false); // sữa
                                             loop:
                                             while (true) { 
                                                 Function.clearScreen();
@@ -345,7 +351,7 @@ public class NguoiDung {
                                                         switch (str) {
                                                             case "1":
                                                             if (nuocuong.isCold()) {
-                                                                wantCold = true;
+                                                                trangThai.set(0, true);
                                                             } else {
                                                                 System.out.println("\tMón nước này không được thêm đá!");
                                                                 try {
@@ -359,7 +365,7 @@ public class NguoiDung {
 
                                                             case "2":
                                                             if (nuocuong.isHot()) {
-                                                                wantHot = true;
+                                                                trangThai.set(1, true);
                                                             } else {
                                                                 System.out.println("\tMón nước này không được uống nóng!");
                                                                 try {
@@ -373,7 +379,7 @@ public class NguoiDung {
 
                                                             case "3":
                                                             if (nuocuong.isSugar()) {
-                                                                wantSugar = true;
+                                                                trangThai.set(2, true);
                                                             } else {
                                                                 System.out.println("\tMón nước này không được bỏ đường!");
                                                                 try {
@@ -387,7 +393,7 @@ public class NguoiDung {
 
                                                             case "4":
                                                             if (nuocuong.isMilk()) {
-                                                                wantMilk = true;
+                                                                trangThai.set(3, true);
                                                             } else {
                                                                 System.out.println("\tMón nước này không được thêm sữa!");
                                                                 try {
@@ -467,6 +473,7 @@ public class NguoiDung {
 
                                                 break;
                                             }
+                                            order.getTrangThaiNuocUong().add(trangThai);
 
                                             boolean isWantTopping;
                                             while (true) {
@@ -528,7 +535,7 @@ public class NguoiDung {
 
                                                     Topping tp = qlTopping.getToppingByID(str);
                                                     if (tp == null) {
-                                                        System.out.println("\t Vui lòng nhập mã topping!");
+                                                        System.out.println("\t Vui lòng nhập đúng mã topping!");
                                                         continue;
                                                     } else {
                                                         tplist.add(tp);
@@ -625,20 +632,90 @@ public class NguoiDung {
                                             }
                                         }
 
-                                        hoaDon.setThucDon(order);
-                                        // chưa xử lý xong
-                                        
+                                        while (true) { 
+                                            Function.clearScreen();
+                                            order.xuatThongTin();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n", "Mời bạn xác nhận đơn hàng");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Xác nhận");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Không xác nhận");
+                                            System.out.println(
+                                                "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
 
-                                        hoaDon.xuatThongTin();
-                                        try {
-                                            Thread.sleep(2500);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                double tongTien = order.tinhTongTien();
+                                                double tienKhachDua;
+                                                while (true) { 
+                                                    // System.out.println("\tSố tiền phải trả là: " + tongTien);
+                                                    System.out.printf("\tSố tiền phải trả là:  %.0f VNĐ%n", tongTien);
+                                                    System.out.print("\tMời nhập số tiền khách đưa: ");
+                                                    str = sc.nextLine();
+
+                                                    if (Function.isEmpty(str)) {
+                                                        System.out.println("\tVui lòng không để trống!");
+                                                        continue;
+                                                    }
+
+                                                    if (!Function.isTrueNumber(str)) {
+                                                        System.out.println("\tVui lòng nhập số!");
+                                                        continue;
+                                                    }
+
+                                                    if (Double.parseDouble(str) < tongTien) {
+                                                        System.out.println("\tQuý khách đưa không đủ tiền. Vui lòng nhập lại!");
+                                                        continue;
+                                                    }
+
+                                                    tienKhachDua = Double.parseDouble(str);
+                                                    break;
+                                                }
+
+
+                                                hd = new HoaDon(temp, nvtmp, order, tongTien, tienKhachDua);
+                                                break;
+
+                                                case "2":
+                                                continue loop2;
+                                                
+                                                default:
+                                                System.out.println("\tVui lòng chọn từ 1 đến 2 !");
+                                                try {
+                                                    Thread.sleep(2500);
+                                                } catch (InterruptedException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                continue;
+                                            }
+                                            break;
                                         }
-                                        str = sc.nextLine();
-                                        // xử lí phần chọn nước
+
                                         break;
                                     }
+
+                                    hd.xuatThongTin();
+                                    qlHoaDon.billList.add(hd);
+                                    qlHoaDon.writeAll();
+                                    try {
+                                        Thread.sleep(2500);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    str = sc.nextLine();
+                                    // xử lí phần chọn nước
+                                    break;
                                 } else {
                                     System.out.println("\tKhông còn bàn trống!");
                                     try {
@@ -982,9 +1059,9 @@ public class NguoiDung {
                                         }
                                     }
 
-                                    HoaDon hoaDon = new HoaDon(temp, nvtmp, order);
+                                    // HoaDon hoaDon = new HoaDon(temp, nvtmp, order);
 
-                                    hoaDon.xuatThongTin();
+                                    // hoaDon.xuatThongTin();
                                     try {
                                         Thread.sleep(2500);
                                     } catch (InterruptedException e) {
@@ -1209,9 +1286,9 @@ public class NguoiDung {
                                     }
                                 }
 
-                                HoaDon hoaDon = new HoaDon(temp, nvtmp, order);
+                                // HoaDon hoaDon = new HoaDon(temp, nvtmp, order);
 
-                                hoaDon.xuatThongTin();
+                                // hoaDon.xuatThongTin();
                                 try {
                                     Thread.sleep(2500);
                                 } catch (InterruptedException e) {

@@ -1,14 +1,14 @@
 package HoaDon;
 
 import NhanVien.NhanVienThuNgan;
+import NhanVien.Nhanvien;
+import NhanVien.QLNhanVien;
+import Utils.Date;
+import Utils.Function;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import NhanVien.QLNhanVien;
-import NhanVien.Nhanvien;
-import Utils.Date;
-import Utils.Function;
 
 
 @SuppressWarnings({ "resource", "unused" })
@@ -24,7 +24,7 @@ public class QLHoaDon {
     }
 
     // Phương thức để đọc toàn bộ hóa đơn từ File về Array list
-    public void init() {
+    public void Init() {
         File billFile = new File("../File/hoadon.txt");
         try (Scanner sc = new Scanner(billFile)) {
             while (sc.hasNextLine()) {
