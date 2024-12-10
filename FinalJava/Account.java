@@ -41,6 +41,10 @@ public class Account implements INhap {
         this.IDLink = "";
     }
 
+    public String getIDLink() {
+        return this.IDLink;
+    }
+
     // Hàm check tài khoản tồn tại
     public boolean checkValidAccount() {
         boolean check = true;
@@ -131,6 +135,7 @@ public class Account implements INhap {
                 // ghi thông tin account vào file
                 try (FileWriter writer = new FileWriter("../File/accounts.txt", true)) {
                     writer.write(this.makeString());
+                    writer.write(System.lineSeparator());
                     writer.flush();    
                 } catch (Exception e) {
                     System.out.println("Lỗi: " + e.getMessage());
