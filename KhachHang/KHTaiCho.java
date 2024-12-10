@@ -123,31 +123,31 @@ public class KHTaiCho extends KhachHang {
         }
 
         // Nhập số lượng khách
-        while (true) {
-            System.out.print("\n\t=> Nhập số lượng khách: ");
-            str = sc.nextLine();
+        // while (true) {
+        //     System.out.print("\n\t=> Nhập số lượng khách: ");
+        //     str = sc.nextLine();
 
-            if (Function.isEmpty(str)) {
-                System.out.println("\tSố lượng khách không được rỗng!");
-                continue;
-            }
+        //     if (Function.isEmpty(str)) {
+        //         System.out.println("\tSố lượng khách không được rỗng!");
+        //         continue;
+        //     }
 
-            if (!Function.isTrueNumber(str)) {
-                System.out.println("\tDữ liệu nhập vào phải là số!");
-                continue;
-            }
+        //     if (!Function.isTrueNumber(str)) {
+        //         System.out.println("\tDữ liệu nhập vào phải là số!");
+        //         continue;
+        //     }
 
-            if (Integer.parseInt(str) < 0) {
-                System.out.println("\tDữ liệu nhập vào không được âm!");
-                continue;
-            }
+        //     if (Integer.parseInt(str) < 0) {
+        //         System.out.println("\tDữ liệu nhập vào không được âm!");
+        //         continue;
+        //     }
 
-            this.dineInCustomer = Integer.parseInt(str);
-            break;
-        }
+        //     this.dineInCustomer = Integer.parseInt(str);
+        //     break;
+        // }
 
-        // Tìm ra bàn phù hợp
-        this.table = Ban.findTable(this.dineInCustomer);
+        // // Tìm ra bàn phù hợp
+        // this.table = Ban.findTable(this.dineInCustomer);
     }
 
     // Hàm xuất thông tin của khách hàng dùng tại chỗ

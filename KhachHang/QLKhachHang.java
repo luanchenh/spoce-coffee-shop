@@ -1,12 +1,12 @@
 package KhachHang;
 
 
+import Utils.Date;
 import Utils.Function;
 import Utils.IXuat;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import Utils.Date;
 import java.util.Scanner;
 
 @SuppressWarnings("resource")
@@ -490,6 +490,7 @@ public class QLKhachHang implements IXuat {
 
         while (true) {
             // In tiêu đề
+            Function.clearScreen();
             System.out.println(
                     "\t==============================[ Menu Quản Lý Khách Hàng ]===============================");
 
@@ -524,33 +525,54 @@ public class QLKhachHang implements IXuat {
                     if (number >= 1 && number <= 11) {
                         if (number == 1) {
                             this.xuatThongTin();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 2) {
                             this.addCustomer();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 3) {
                             this.removeCustomer();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 4) {
                             this.modifyCustomer();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 5) {
+                            this.customerList.clear();
                             this.Init();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 6) {
-                            this.writeAll();;
+                            this.writeAll();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 7) {
                             this.resetList();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 8) {
                             this.listItem();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 9) {
                             this.findCustomer();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 10) {
                             Function.clearScreen();
+                            System.out.println("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
                         }
                         if (number == 11) {
                             System.out.println("\tThoát chương trình thành công !");
