@@ -113,6 +113,7 @@ public class QLBan implements IXuat {
 
     // Phương thức dùng để in ra danh sách bàn
     public void printTableList() {
+        Function.clearScreen();
         System.out.println("\t=================================[Danh sách bàn]=================================");
         System.out.printf("\t| %-25s %-25s %-25s |\n", "Mã bàn", "Số chỗ ngồi", "Tình trạng");
         for (Ban table : this.tableList) {
@@ -305,6 +306,7 @@ public class QLBan implements IXuat {
         String str;
 
         while (true) {
+            Function.clearScreen();
             // In tiêu đề
             System.out.println("\t==================================[ Menu Quản Lý Bàn ]==================================");
 
@@ -344,6 +346,8 @@ public class QLBan implements IXuat {
             switch (str) {
                 case "1":
                 this.printTableList();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
 
                 case "2":
@@ -372,10 +376,14 @@ public class QLBan implements IXuat {
 
                 case "8":
                 this.countTable();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
 
                 case "9":
                 this.findTable();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
 
                 case "10":
