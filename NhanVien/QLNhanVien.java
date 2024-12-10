@@ -13,7 +13,7 @@ import java.util.Scanner;
 @SuppressWarnings({ "resource", "unused" })
 public class QLNhanVien {
     public ArrayList<Nhanvien> nhanVienList;
-    File EmployeeFile = new File("../File/nhanvien.txt");
+    File EmployeeFile = new File("./File/nhanvien.txt");
 
     public QLNhanVien() {
         this.nhanVienList = new ArrayList<>();
@@ -57,7 +57,28 @@ public class QLNhanVien {
                         this.nhanVienList.add(nhanVien);
                         System.out.println(nhanVien.makeString());
                     } else if (nhanVienSplit[8].equals("NVPC")) {
-                        nhanVien = new NhanVienPhaChe();
+                        String maNhanVien = nhanVienSplit[0];
+                        String tenNhanVien = nhanVienSplit[1];
+                        int tuoi = Integer.parseInt(nhanVienSplit[2]);
+                        String ngaySinh = nhanVienSplit[3]; // Ngày sinh, chưa chuyển thành đối tượng Date
+                        String soNha = nhanVienSplit[4];
+                        String phuong = nhanVienSplit[5];
+                        String quan = nhanVienSplit[6];
+                        String maThanhPho = nhanVienSplit[7];
+                        String loaiNhanVien = nhanVienSplit[8];
+                        String caLamViec = nhanVienSplit[9];
+                        
+                        int soGioLamThem = Integer.parseInt(nhanVienSplit[10]);
+                        int soDonDaPhaChe = Integer.parseInt(nhanVienSplit[11]);
+                       
+
+                        String[] ngaySinhSplit = ngaySinh.split("\\/");
+                        Date birthDate = new Date(ngaySinhSplit[0], ngaySinhSplit[1], ngaySinhSplit[2]);
+                        Province thanhPho = new Province(maThanhPho);
+                        Address diaChi = new Address(soNha, phuong, quan, thanhPho);
+                        nhanVien = new NhanVienPhaChe(maNhanVien, tenNhanVien, tuoi, birthDate, diaChi, loaiNhanVien, caLamViec, soGioLamThem, soDonDaPhaChe);
+                        this.nhanVienList.add(nhanVien);
+                        System.out.println(nhanVien.makeString());
                     }
                 }
             }
@@ -443,9 +464,9 @@ public void listItem() {
     }
     public void xuat() {
         System.out.println(
-            "\t+======================================================================================================================+");
+            "\t+=======================================================================================================================+");
     System.out.println(
-            "\t|                                             Thông tin cơ bản nhân viên                                                       |");
+            "\t|                                             Thông tin cơ bản nhân viên                                                |");
     System.out.println(
             "\t+--------------+-----------------------------+----------------------+-------------------+--------------+----------------+");
             System.out.printf("\t| %-10s | %-27s | %-20s | %-17s | %-12s | %-14s |\n",
@@ -465,10 +486,60 @@ public void listItem() {
         switch (choice) {
             case 1:
                 // Xem thông tin chi tiết tất cả nhân viên
+                ArrayList<NhanVienThuNgan> danhSachThuNgan = new ArrayList<>();
+                ArrayList<NhanVienPhaChe> danhSachPhaChe = new ArrayList<>();
+                for (Nhanvien nhanvien : this.nhanVienList) {
+                    if(nhanvien instanceof NhanVienPhaChe){
+                        danhSachPhaChe.add((NhanVienPhaChe) nhanvien);
+                    }
+                    else{
+                        danhSachThuNgan.add((NhanVienThuNgan) nhanvien);
+                    }
+                }
                 System.out.println("Thông tin chi tiết tất cả nhân viên:");
-                for (Nhanvien nv : this.nhanVienList) {
-                    System.out.println("\n----------------------------------------");
-                    nv.thongTinChiTiet();
+                System.out.println(
+                    "\t+==========================================================================================================================================================================+");
+                System.out.println(
+                    "\t|                                                                    Thông Tin Nhân Viên Thu Ngân                                                                          |");
+                System.out.println( 
+                    "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
+                System.out.printf("\t| %-12s | %-27s | %-20s | %-17s | %-80s |\n",
+                    "Mã nhân viên", "Số bill đã xử lí", "Tổng tiền đã xử lí", "Tổng số giờ làm", "Địa chỉ");
+                System.out.println(
+                    "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
+                
+                for (NhanVienThuNgan nv : danhSachThuNgan) {
+                    // Bảng chính hiển thị thông tin tổng quan
+                   nv.thongTinChiTiet();
+                    
+                    // Hiển thị chi tiết bên dưới từng dòng
+                    // System.out.println("\nChi tiết:");
+                    // nv.thongTinChiTiet();
+                    System.out.println(
+                        "\t+==========================================================================================================================================================================+");
+                }
+                        ///////////////////////////////////////////////////////////////////////////////////////////////
+                        /// 
+                        System.out.println(
+                    "\t+==========================================================================================================================================================================+");
+                System.out.println(
+                    "\t|                                                                    Thông Tin Nhân Viên Pha Chế                                                                           |");
+                System.out.println( 
+                    "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
+                        System.out.printf("\t| %-12s | %-27s | %-20s | %-101s |\n",
+                            "Mã nhân viên", "Số đơn đẫ pha chế", "Tổng số giờ làm", "Địa chỉ");
+                            System.out.println(
+                                "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
+                        
+                        for (NhanVienPhaChe nv : danhSachPhaChe) {
+                            // Bảng chính hiển thị thông tin tổng quan
+                           nv.thongTinChiTiet();
+                            
+                            // Hiển thị chi tiết bên dưới từng dòng
+                            // System.out.println("\nChi tiết:");
+                            // nv.thongTinChiTiet();
+                            System.out.println(
+                                "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
                 }
                 break;
         
@@ -480,7 +551,33 @@ public void listItem() {
                 int selectedIndex = Integer.parseInt(sc.nextLine()) - 1;
                 if (selectedIndex >= 0 && selectedIndex < this.nhanVienList.size()) {
                     // System.out.println("Thông tin chi tiết:");
-                    this.nhanVienList.get(selectedIndex).thongTinChiTiet();
+                    // this.nhanVienList.get(selectedIndex).thongTinChiTiet();
+                    if(this.nhanVienList.get(selectedIndex) instanceof NhanVienThuNgan){
+                        System.out.println(
+                            "\t+==========================================================================================================================================================================+");
+                        System.out.println(
+                            "\t|                                                                    Thông Tin Chi Tiết                                                                                    |");
+                        System.out.println( 
+                            "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
+                            System.out.printf("\t| %-12s | %-27s | %-20s | %-17s | %-90s |\n",
+                            "Mã nhân viên", "Số bill đã xử lí", "Tổng tiền đã xử lí", "Tổng số giờ làm", "Địa chỉ");
+                        System.out.println(
+                            "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
+                           (this.nhanVienList.get(selectedIndex)).thongTinChiTiet();
+                    }
+                    else if(this.nhanVienList.get(selectedIndex) instanceof NhanVienPhaChe){
+                        System.out.println(
+                            "\t+==========================================================================================================================================================================+");
+                        System.out.println(
+                            "\t|                                                                    Thông Tin Chi Tiết                                                                                    |");
+                        System.out.println( 
+                            "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
+                            System.out.printf("\t| %-12s | %-27s | %-20s | %-101s |\n",
+                            "Mã nhân viên", "Số đơn đẫ pha chế", "Tổng số giờ làm", "Địa chỉ");
+                        System.out.println(
+                            "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
+                    }
+                    
                 } else {
                     System.out.println("Lựa chọn không hợp lệ.");
                 }

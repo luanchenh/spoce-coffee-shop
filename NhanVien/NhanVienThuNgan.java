@@ -126,17 +126,11 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
     }
     @Override
     public void thongTinChiTiet() {
-        System.out.println("\t+----------------------------------------------------------------------+");
-        System.out.println("\t|                          Thông Tin Chi Tiết                         |");
-        System.out.println("\t+----------------------------------------------------------------------+");
-        System.out.printf("\t| %-30s: %-40s |\n", "Mã nhân viên", this.maNhanVien);
-        System.out.println("\t+----------------------------------------------------------------------+");
-        System.out.printf("\t| %-30s: %-70s |\n", "Địa chỉ", this.diaChi.toString());
-        System.out.println("\t+----------------------------------------------------------------------+");
-        System.out.printf("\t| %-30s: %-15d |\n", "Số bill đã xử lý", this.soBillDaXuLy);
-        System.out.printf("\t| %-30s: %-15s |\n", "Tổng tiền đã xử lý", Function.formatMoney(String.valueOf(this.tongTienDaXuLy)));
-        System.out.printf("\t| %-30s: %-15d |\n", "Số giờ làm thêm", this.soGioLamThem);
-        System.out.println("\t+----------------------------------------------------------------------+");
+        System.out.printf(
+                        "\t| %-12s | %-27d | %-20s | %-17d | %-80s |\n",
+                        this.getMaNhanVien(), this.getSoBillDaXuLy(),
+                        Function.formatMoney(String.valueOf(this.getTongTienDaXuLy())),
+                        this.getSoGioLamThem(), this.getDiaChi());
     }
     
     
