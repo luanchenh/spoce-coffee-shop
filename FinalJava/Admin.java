@@ -4,14 +4,23 @@ package FinalJava;
  *
  */
 
+import Ban.QLBan;
+import HoaDon.QLHoaDon;
 import KhachHang.QLKhachHang;
+import NhanVien.QLNhanVien;
+import NuocUong.QLNuocUong;
+import Topping.QLTopping;
 import Utils.Function;
 import java.util.Scanner;
 
 public class Admin {
     public static void Menu() {
         QLKhachHang qlKhachHang = new QLKhachHang();
-
+        QLNhanVien qlNhanVien = new QLNhanVien();
+        QLNuocUong qlNuocUong = new QLNuocUong();
+        QLTopping qlTopping = new QLTopping();
+        QLBan qlBan = new QLBan();
+        QLHoaDon qlHoaDon = new QLHoaDon();
         Scanner sc = new Scanner(System.in);
         String str;
 
@@ -48,18 +57,23 @@ public class Admin {
                 continue;
 
                 case "2":
+                qlNhanVien.menuQLNhanVien();
                 continue;
 
                 case "3":
+                qlNuocUong.menuQLNuocUong();
                 continue;
 
                 case "4":
+                qlTopping.menuQLTopping();
                 continue;
 
                 case "5":
+                qlBan.menuQLBan();
                 continue;
 
                 case "6":
+                //qlHoaDon
                 continue;
 
                 case "7":

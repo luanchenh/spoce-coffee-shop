@@ -69,10 +69,16 @@ public class Topping implements INhap, IXuat{
     // ========================================[Override Method]========================================
     @Override
     public void xuatThongTin() {
-        System.out.println("===========================================================");
-        System.out.println("ID Topping: "+ this.id);
-        System.out.println("Tên Topping: "+ this.name);
-        System.out.println("Giá tiền: "+ Function.formatMoney(this.price + ""));
+        // System.out.println("\t===========================================================");
+        // System.out.println("ID Topping: "+ this.id);
+        // System.out.println("Tên Topping: "+ this.name);
+        // System.out.println("Giá tiền: "+ Function.formatMoney(this.price + ""));
+
+        System.out.println("\t============================================================");
+        System.out.printf("\t| %-20s %-35s |%n", "ID Topping:", this.id);
+        System.out.printf("\t| %-20s %-35s |%n", "Tên Topping:", this.name);
+        System.out.printf("\t| %-20s %-35s |%n", "Giá Tiền:", Function.formatMoney(this.price + ""));
+        System.out.println("\t============================================================");
     }
 
     @Override
@@ -80,16 +86,16 @@ public class Topping implements INhap, IXuat{
         Scanner sc = new Scanner(System.in);
         String str;
         int number;
-        System.out.println("[Notice] ID topping hiện tại: " + this.id);
+        System.out.println("\t[Notice] ID topping hiện tại: " + this.id);
         while (true) {
-            System.out.print("Nhập tên đồ uống: ");
+            System.out.print("\tNhập tên topping: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
-                System.out.println("Vui lòng không để trống !");
+                System.out.println("\tVui lòng không để trống !");
             }
             else {
                 if (Function.isTrueNumber(str)) {
-                    System.out.println("Tên topping không được là số !");
+                    System.out.println("\tTên topping không được là số !");
                 }
                 else {
                     this.name = str;
@@ -97,16 +103,16 @@ public class Topping implements INhap, IXuat{
                 }
             }
         }
-        System.out.println("[Notice] Tên topping hiện tại: "+ this.name);
+        System.out.println("\t[Notice] Tên topping hiện tại: "+ this.name);
         while (true) {
-            System.out.print("Nhập giá của topping: ");
+            System.out.print("\tNhập giá của topping: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
-                System.out.println("Vui lòng không để trống !");
+                System.out.println("\tVui lòng không để trống !");
             }
             else {
                 if (!Function.isTrueNumber(str)) {
-                    System.out.println("Giá phải là số !");
+                    System.out.println("\tGiá phải là số !");
                 }
                 else {
                     number = Integer.parseInt(str);
@@ -136,29 +142,29 @@ public class Topping implements INhap, IXuat{
         String str;
         int number;
         while (true) {
-            System.out.print("Nhập ID của topping: ");
+            System.out.print("\tNhập ID của topping: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
-                System.out.println("Vui lòng không để trống");
+                System.out.println("\tVui lòng không để trống");
             } else {
                 if (Function.isTrueNumber(str)) {
                     tp.setId("TP"+ str);
                     break;
                 } else {
-                    System.out.println("ID bạn nhập phải là số !");
+                    System.out.println("\tID bạn nhập phải là số !");
                 }
             }
         }
-        System.out.println("ID bạn vừa nhập là: "+ tp.getId());
+        System.out.println("\tID bạn vừa nhập là: "+ tp.getId());
         while (true) {
-            System.out.print("Nhập tên đồ uống: ");
+            System.out.print("\tNhập tên topping: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
-                System.out.println("Vui lòng không để trống !");
+                System.out.println("\tVui lòng không để trống !");
             }
             else {
                 if (Function.isTrueNumber(str)) {
-                    System.out.println("Tên topping không được là số !");
+                    System.out.println("\tTên topping không được là số !");
                 }
                 else {
                     tp.setName(str);;
@@ -166,16 +172,16 @@ public class Topping implements INhap, IXuat{
                 }
             }
         }
-        System.out.println("[Notice] Tên topping hiện tại: "+ tp.getName());
+        System.out.println("\t[Notice] Tên topping hiện tại: "+ tp.getName());
         while (true) {
-            System.out.print("Nhập giá của topping: ");
+            System.out.print("\tNhập giá của topping: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
-                System.out.println("Vui lòng không để trống !");
+                System.out.println("\tVui lòng không để trống !");
             }
             else {
                 if (!Function.isTrueNumber(str)) {
-                    System.out.println("Giá phải là số !");
+                    System.out.println("\tGiá phải là số !");
                 }
                 else {
                     number = Integer.parseInt(str);
@@ -187,12 +193,80 @@ public class Topping implements INhap, IXuat{
                 }
             }
         }
-        System.out.println("[Notice] Giá của topping hiện tại là: "+ Function.formatMoney(tp.getPrice() + ""));
+        System.out.println("\t[Notice] Giá của topping hiện tại là: "+ Function.formatMoney(tp.getPrice() + ""));
         return tp;
     }
 
     // Hàm sửa thông tin
     public void suaThongTin() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            System.out.println("\n\tSửa thông tin topping có ID: " + this.id);
+            System.out.println("\t1. Tên topping");
+            System.out.println("\t2. Giá topping");
+            System.out.println("\t3. Quay lại");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được rỗng!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (Integer.parseInt(str)) {
+                case 1:
+                while (true) {
+                    System.out.print("\t=> Mời nhập tên topping: ");
+                    str = sc.nextLine();
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("\tTên topping không được rỗng!");
+                        continue;
+                    }
+
+                    this.name = str;
+
+                    break;
+                }
+                break;
+
+                case 2:
+                while (true) {
+                    System.out.print("\t=> Mời nhập giá topping: ");
+                    str = sc.nextLine();
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("\tGiá topping không được rỗng!");
+                        continue;
+                    }
+
+                    if (!Function.isTrueNumber(str)) {
+                        System.out.println("\tGiá topping phải là số!");
+                        continue;
+                    }
+
+                    this.price = Integer.parseInt(str);
+                    break;
+                }
+                break;
+
+                case 3:
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                continue;
+            }
+
+            break; // while
+        }
     }
 
 
@@ -202,7 +276,8 @@ public class Topping implements INhap, IXuat{
     }
     // Hàm để hiện thông tin theo fomat khi in trong menu
     public void menuInfo() {
-        System.out.printf("\t%-5s %-25s %-10s\n", this.id, Function.normalizeName(this.name), Function.formatMoney(this.price + ""));
+        //System.out.printf("\t%-5s %-25s %-10s\n", this.id, Function.normalizeName(this.name), Function.formatMoney(this.price + ""));
+        System.out.printf("\t| %-10s | %-25s | %-16s |\n", this.id, Function.normalizeName(this.name), Function.formatMoney(this.price + ""));
     }
 
 }

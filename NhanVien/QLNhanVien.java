@@ -55,7 +55,7 @@ public class QLNhanVien {
                         nhanVien = new NhanVienThuNgan(maNhanVien, tenNhanVien, tuoi, birthDate, diaChi, loaiNhanVien, caLamViec, soBillDaXuLy, tongTienDaXuLy, soGioLamThem);
 
                         this.nhanVienList.add(nhanVien);
-                        System.out.println(nhanVien.makeString());
+                        // System.out.println(nhanVien.makeString());
                     } else if (nhanVienSplit[8].equals("NVPC")) {
                         nhanVien = new NhanVienPhaChe();
                     }
