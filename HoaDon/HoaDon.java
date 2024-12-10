@@ -45,9 +45,10 @@ public class HoaDon implements IXuat {
         this.nhanVien = new NhanVienThuNgan();
     }
 
-    public HoaDon(String maHoaDon, NhanVienThuNgan nhanVien ,Date ngayTaoHoaDon, ThucDon thucDon, String trangThaiHoaDon, double tongTien, double tienKhachDua) {
+    public HoaDon(String maHoaDon, KhachHang khachHang, NhanVienThuNgan nhanVien ,Date ngayTaoHoaDon, ThucDon thucDon, String trangThaiHoaDon, double tongTien, double tienKhachDua) {
         this.maHoaDon = maHoaDon;
         this.nhanVien = nhanVien;
+        this.khachHang = khachHang;
         this.ngayTaoHoaDon = ngayTaoHoaDon;
         this.thucDon = thucDon;
         this.trangThaiHoaDon = trangThaiHoaDon;
@@ -202,6 +203,9 @@ public class HoaDon implements IXuat {
         str.append(this.ngayTaoHoaDon.makeString()).append("|");
         str.append(this.trangThaiHoaDon).append("|");
         str.append(this.khachHang.getCustomerID()).append("|");
+        str.append(this.tongTien).append("|");
+        str.append(this.tienKhachDua).append("|");
+        str.append(this.tienThua).append("|");
 
         for (int i=0; i<this.thucDon.getDanhSachNuocUong().size(); i++) {
             str.append(this.thucDon.getDanhSachNuocUong().get(i).getId()).append(",");
@@ -228,9 +232,6 @@ public class HoaDon implements IXuat {
                 }
             }
         }
-        str.append(this.tongTien).append("|");
-        str.append(this.tienKhachDua).append("|");
-        str.append(this.tienThua);
         // CÒN LƯU NƯỚC UỐNG VÀ TOPPING KHÁCH HÀNG CHỌN
 
         return str.toString();

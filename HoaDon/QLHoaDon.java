@@ -1,8 +1,15 @@
 package HoaDon;
 
+import KhachHang.KhachHang;
+import KhachHang.QLKhachHang;
 import NhanVien.NhanVienThuNgan;
 import NhanVien.Nhanvien;
 import NhanVien.QLNhanVien;
+import NuocUong.NuocUong;
+import NuocUong.QLNuocUong;
+import ThucDon.ThucDon;
+import Topping.QLTopping;
+import Topping.Topping;
 import Utils.Date;
 import Utils.Function;
 import java.io.File;
@@ -25,11 +32,74 @@ public class QLHoaDon {
 
     // Phương thức để đọc toàn bộ hóa đơn từ File về Array list
     public void Init() {
+        QLNhanVien qlNhanVien = new QLNhanVien();
+        QLKhachHang qlKhachHang = new QLKhachHang();
+        QLNuocUong qlNuocUong = new QLNuocUong();
+        QLTopping qlTopping = new QLTopping();
+        qlNhanVien.Init();
+        qlKhachHang.Init();
+        qlNuocUong.Init();
+        qlTopping.Init();
+
         File billFile = new File("../File/hoadon.txt");
         try (Scanner sc = new Scanner(billFile)) {
             while (sc.hasNextLine()) {
                 String str = sc.nextLine();
                 String[] arr = str.split("\\|");
+                NhanVienThuNgan nv = null;
+                ThucDon order = new ThucDon();
+                for (Nhanvien nhanvien : qlNhanVien.nhanVienList) {
+                    if (nhanvien.getMaNhanVien().equals(arr[1])) {
+                        nv = (NhanVienThuNgan)nhanvien;
+                        break;
+                    }
+                }
+                Date billDate = new Date(arr[2],arr[3],arr[4]);
+                KhachHang kh = null;
+                for (KhachHang khachHang : qlKhachHang.customerList) {
+                    if (khachHang.getCustomerID().equals(arr[6])) {
+                        kh = khachHang;
+                        break;
+                    }
+                }
+
+                // ma nuoc,size,tp1;tp2,0;0;0;0
+                for (int i=10; i<arr.length; i++) {
+                    String[] waterDetailArr = arr[i].split(",");
+                    String[] toppingList = waterDetailArr[2].split(";");
+                    String[] waterStatus = waterDetailArr[3].split(";");
+                    
+                    NuocUong nu = null;
+                    for (NuocUong nuocUong : qlNuocUong.getWaterList()) {
+                        if (nuocUong.getId().equals(waterDetailArr[0])) {
+                            nu = nuocUong;
+                        }
+                    }
+                    order.getDanhSachNuocUong().add(nu); // nuoc
+
+                    order.getSize().add(waterDetailArr[1]); // size
+
+                    ArrayList<Topping> tpList = new ArrayList<>();
+                    for (String s : toppingList) {
+                        for (Topping tp : qlTopping.getToppingList()) {
+                            if (tp.getId().equals(s)) {
+                                tpList.add(tp);
+                                break;
+                            }
+                        }
+                    }
+                    order.getDanhSachTopping().add(tpList);
+
+                    ArrayList<Boolean> ttList = new ArrayList<>();
+                    for (String s : waterStatus) {
+                        Boolean flag = s.equals("1");
+                        ttList.add(flag);
+                    }
+                    order.getTrangThaiNuocUong().add(ttList);
+                }
+
+                HoaDon hd = new HoaDon(arr[0], kh, nv, billDate, order, arr[5], Double.parseDouble(arr[7]), Double.parseDouble(arr[8]));
+                this.billList.add(hd);
             }
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
@@ -40,7 +110,7 @@ public class QLHoaDon {
     public void writeAll() {
         try (FileWriter writer = new FileWriter("../File/hoadon.txt", false)) {
             for (HoaDon bill : this.billList) {
-                // writer.write(bill.makeString()).append("\n");
+                writer.write(bill.makeString() + "\n");
             }
             writer.flush();
         } catch (Exception e) {
