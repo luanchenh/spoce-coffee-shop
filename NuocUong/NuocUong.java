@@ -488,14 +488,14 @@ public abstract class NuocUong implements INhap, IXuat {
 
     @Override
     public void xuatThongTin() {
-        System.out.println("\t+======================================================================================================================+");
-        System.out.println("\t|                                             Thông tin sản phẩm                                                       |");
-        System.out.println("\t+------------+------------+--------------------------------+--------------+--------------+--------------+--------------+");
+        System.out.println("\t+=========================================================================================================================+");
+        System.out.println("\t|                                                Thông tin sản phẩm                                                       |");
+        System.out.println("\t+------------+---------------+--------------------------------+--------------+--------------+--------------+--------------+");
 
         // In thông tin chính của sản phẩm
-        System.out.printf("\t| %-10s | %-10s | %-30s | %-12s | %-12s | %-12s | %-12s |\n",
+        System.out.printf("\t| %-10s | %-13s | %-30s | %-12s | %-12s | %-12s | %-12s |\n",
                 "ID", "Loại", "Tên", "Chỉnh đá", "Chỉnh nóng", "Chỉnh sữa", "Chỉnh đường");
-        System.out.println("\t+------------+------------+--------------------------------+--------------+--------------+--------------+--------------+");
+        System.out.println("\t+------------+---------------+--------------------------------+--------------+--------------+--------------+--------------+");
 
         // In các giá trị của sản phẩm
         String drinkTypeLabel = this.drinkType.equals("CF") ? "Cà phê" :
@@ -503,17 +503,33 @@ public abstract class NuocUong implements INhap, IXuat {
                                 this.drinkType.equals("ST") ? "Sinh tố" :
                                 this.drinkType.equals("TC") ? "Nước trái cây" : "Không xác định";
 
-        System.out.printf("\t| %-10s | %-10s | %-30s | %-12s | %-12s | %-12s | %-12s |\n",
+        System.out.printf("\t| %-10s | %-13s | %-30s | %-12s | %-12s | %-12s | %-12s |\n",
                 this.id, drinkTypeLabel, this.name, (this.isCold ? "Có" : "Không"),
                 (this.isHot ? "Có" : "Không"), (this.isMilk ? "Có" : "Không"), (this.isSugar ? "Có" : "Không"));
-        System.out.println("\t+------------+------------+--------------------------------+--------------+--------------+--------------+--------------+");
+        System.out.println("\t+------------+---------------+--------------------------------+--------------+--------------+--------------+--------------+");
 
         // In bảng giá theo size
-        System.out.println("\t| Bảng giá:                                                                                                            |");
-        System.out.println("\t+------------+------------+------------+------------+------------+------------+------------+------------+----------+---+");
+        System.out.println("\t| Bảng giá:                                                                                                               |");
+        System.out.println("\t+------------+---------------+------------+------------+------------+------------+------------+------------+----------+---+");
         System.out.print("\t| ");
-        for (String size : sizePrice.keySet()) {
-            System.out.print(String.format("%-10s | ", size));
+        // for (String size : sizePrice.keySet()) {
+        //     System.out.print(String.format("%-10s | ", size));
+        // }
+        ArrayList<String> keySet = new ArrayList<>(sizePrice.keySet());
+        for (int i=0; i<keySet.size(); i++) {
+            switch (i) {
+                case 0:
+                System.out.print(String.format("%-10s | ", keySet.get(i)));
+                break;
+
+                case 1:
+                System.out.print(String.format("%-13s | ", keySet.get(i)));
+                break;
+
+                case 2:
+                System.out.print(String.format("%-10s | ", keySet.get(i)));
+                break;
+            }
         }
         if (this.sizePrice.size() == 4) {
             System.out.print("                                                                 |");
@@ -523,8 +539,24 @@ public abstract class NuocUong implements INhap, IXuat {
         }
         System.out.println();
         System.out.print("\t| ");
-        for (Integer price : sizePrice.values()) {
-            System.out.print(String.format("%-10s | ", Function.formatMoney(price + "")));
+        // for (Integer price : sizePrice.values()) {
+        //     System.out.print(String.format("%-10s | ", Function.formatMoney(price + "")));
+        // }
+        ArrayList<Integer> valueSet = new ArrayList<>(sizePrice.values());
+        for (int i=0; i<keySet.size(); i++) {
+            switch (i) {
+                case 0:
+                System.out.print(String.format("%-10s | ", valueSet.get(i)));
+                break;
+
+                case 1:
+                System.out.print(String.format("%-13s | ", valueSet.get(i)));
+                break;
+
+                case 2:
+                System.out.print(String.format("%-10s | ", valueSet.get(i)));
+                break;
+            }
         }
         if (this.sizePrice.size() == 4) {
             System.out.print("                                                                 |");
@@ -533,18 +565,18 @@ public abstract class NuocUong implements INhap, IXuat {
             System.out.print("                                                                              |");
         }
         System.out.println();
-        System.out.println("\t+------------+------------+------------+------------+------------+------------+------------+------------+----------+---+");
+        System.out.println("\t+------------+---------------+------------+------------+------------+------------+------------+------------+----------+---+");
 
         // In danh sách topping
-        System.out.println("\t| Danh sách topping:                                                                                                   |");
+        System.out.println("\t| Danh sách topping:                                                                                                      |");
         if (topping.isEmpty()) {
-            System.out.printf("\t| %-116s |\n", "Không có topping nào.");
+            System.out.printf("\t| %-119s |\n", "Không có topping nào.");
         } else {
             String toppings = String.join(", ", this.topping); // Nối tất cả topping thành một chuỗi
-            System.out.printf("\t| %-116s |\n", toppings);
+            System.out.printf("\t| %-119s |\n", toppings);
         }
 
-        System.out.println("\t+======================================================================================================================+");
+        System.out.println("\t+=========================================================================================================================+");
         System.out.println();
     }
 
@@ -591,6 +623,9 @@ public abstract class NuocUong implements INhap, IXuat {
                             } else {
                                 System.out.println("\tSửa trạng thái sản phẩm thất bại !");
                             }
+                        }
+                        if (number == 4) {
+                            this.modifyToppingList();
                         }
                         break;
                     } else {

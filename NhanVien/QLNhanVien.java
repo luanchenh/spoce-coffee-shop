@@ -13,7 +13,7 @@ import java.util.Scanner;
 @SuppressWarnings({ "resource", "unused" })
 public class QLNhanVien {
     public ArrayList<Nhanvien> nhanVienList;
-    File EmployeeFile = new File("./File/nhanvien.txt");
+    File EmployeeFile = new File("../File/nhanvien.txt");
 
     public QLNhanVien() {
         this.nhanVienList = new ArrayList<>();
@@ -78,11 +78,11 @@ public class QLNhanVien {
                         Address diaChi = new Address(soNha, phuong, quan, thanhPho);
                         nhanVien = new NhanVienPhaChe(maNhanVien, tenNhanVien, tuoi, birthDate, diaChi, loaiNhanVien, caLamViec, soGioLamThem, soDonDaPhaChe);
                         this.nhanVienList.add(nhanVien);
-                        System.out.println(nhanVien.makeString());
+                        //System.out.println(nhanVien.makeString());
                     }
                 }
             }
-            System.out.println("\tĐọc thành công dữ liệu nhân viên từ file!");
+            //System.out.println("\tĐọc thành công dữ liệu nhân viên từ file!");
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
         }
@@ -476,7 +476,7 @@ public void listItem() {
         for (Nhanvien nv : this.nhanVienList) {
             nv.xuatThongTin();
         }
-        System.out.println("Bạn có muốn xem chi tiết thông tin nhân viên?");
+        System.out.println("\tBạn có muốn xem chi tiết thông tin nhân viên?");
         System.out.println("\t1. Xem tất cả");
         System.out.println("\t2. Chọn nhân viên cụ thể");
         System.out.println("\t3. Thoát");
@@ -496,7 +496,7 @@ public void listItem() {
                         danhSachThuNgan.add((NhanVienThuNgan) nhanvien);
                     }
                 }
-                System.out.println("Thông tin chi tiết tất cả nhân viên:");
+                System.out.println("\tThông tin chi tiết tất cả nhân viên:");
                 System.out.println(
                     "\t+==========================================================================================================================================================================+");
                 System.out.println(
@@ -526,7 +526,7 @@ public void listItem() {
                     "\t|                                                                    Thông Tin Nhân Viên Pha Chế                                                                           |");
                 System.out.println( 
                     "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
-                        System.out.printf("\t| %-12s | %-27s | %-20s | %-101s |\n",
+                        System.out.printf("\t| %-12s | %-27s | %-20s | %-100s |\n",
                             "Mã nhân viên", "Số đơn đẫ pha chế", "Tổng số giờ làm", "Địa chỉ");
                             System.out.println(
                                 "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
@@ -544,7 +544,7 @@ public void listItem() {
                 break;
         
             case 2:
-                System.out.println("Vui lòng chọn nhân viên theo số thứ tự:");
+                System.out.println("\tVui lòng chọn nhân viên theo số thứ tự:");
                 for (int i = 0; i < this.nhanVienList.size(); i++) {
                     System.out.printf("\t%d. %s\n", i + 1, this.nhanVienList.get(i).getTenNhanVien());
                 }
@@ -579,16 +579,16 @@ public void listItem() {
                     }
                     
                 } else {
-                    System.out.println("Lựa chọn không hợp lệ.");
+                    System.out.println("\tLựa chọn không hợp lệ.");
                 }
                 break;
         
             case 3:
-                System.out.println("Kết thúc.");
+                System.out.println("\tKết thúc.");
                 break;
         
             default:
-                System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
+                System.out.println("\tLựa chọn không hợp lệ. Vui lòng thử lại.");
                 break;
         }
     }        
@@ -600,6 +600,7 @@ public void listItem() {
 
         while (true) {
             // In tiêu đề
+            Function.clearScreen();
             System.out.println(
                     "\t===============================[ Menu Quản Lý Nhân Viên ]===============================");
 

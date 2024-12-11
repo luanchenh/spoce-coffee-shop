@@ -73,7 +73,7 @@ public class Admin {
                 continue;
 
                 case "6":
-                //qlHoaDon
+                qlHoaDon.menuQLHoaDon();
                 continue;
 
                 case "7":

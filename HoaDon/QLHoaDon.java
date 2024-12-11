@@ -118,6 +118,14 @@ public class QLHoaDon {
         }
     }
 
+    public void printBill() {
+        System.out.println("\tThông tin toàn bộ hóa đơn:");
+        for (HoaDon hd : this.billList) {
+            hd.xuatThongTin();
+            System.out.println();
+        }
+    }
+
     // Phương thức để thống kê doanh thu, số lượng đơn hàng, số lượng mỗi sản phẩm toàn thời gian
     public void thongKeDoanhThuAll() {
         System.out.println("\tThống kê:");
@@ -306,5 +314,113 @@ public class QLHoaDon {
     // Phương thức để in ra số lượng từng sản phẩm bán được
     public void inRaSoLuongTungMatHangBanDuoc() {
         //
+    }
+
+    public void menuQLHoaDon() {
+        Function.clearScreen();
+        this.Init();
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            // In tiêu đề
+            System.out.println("\t==================================[ Menu Quản Lý Hóa Đơn ]==================================");
+
+            // In tiêu đề các cột
+            System.out.printf("\t| %-4s | %-77s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------------------|");
+
+            // In danh sách các lựa chọn
+            System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách hóa đơn");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thống kê toàn bộ doanh thu");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Thống kê doanh thu theo thời gian");
+            System.out.printf("\t| %-4s | %-77s |%n", "4", "In ra số lượng đơn hàng đã bán được");
+            System.out.printf("\t| %-4s | %-77s |%n", "5", "In ra nhân viên bán được nhiều đơn nhất");
+            System.out.printf("\t| %-4s | %-77s |%n", "6", "In ra trạng thái từng hóa đơn");
+            System.out.printf("\t| %-4s | %-77s |%n", "7", "In ra số lượng từng mặt hàng bán ");
+            System.out.printf("\t| %-4s | %-77s |%n", "8", "Chuyển trạng thái hóa đơn");
+            System.out.printf("\t| %-4s | %-77s |%n", "9", "Cập nhật lại hóa đơn vào File từ danh sách");
+            System.out.printf("\t| %-4s | %-77s |%n", "10", "Cập nhật lại hóa đơn vào danh sách từ File");
+            System.out.printf("\t| %-4s | %-77s |%n", "11", "Làm mới danh sách hóa đơn (Reset dữ liệu nhưng không load vào File)");
+            System.out.printf("\t| %-4s | %-77s |%n", "13", "Tìm kiếm hóa đơn");
+            System.out.printf("\t| %-4s | %-77s |%n", "14", "Làm mới màn hình");
+            System.out.printf("\t| %-4s | %-77s |%n", "115", "Thoát chương trình quản lý");
+
+            // In dòng kẻ dưới cùng
+            System.out.println("\t========================================================================================");
+            System.out.print("\t[Manage] Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được rỗng!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.printBill();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+
+                case "2":
+                this.thongKeDoanhThuAll();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+
+                case "3":
+                //this.removeTable();
+                continue;
+
+                case "4":
+                //this.modifyTable();
+                continue;
+
+                case "5":
+                //this.writeAll();
+                continue;
+
+                case "6":
+                //this.Init();
+                continue;
+
+                case "7":
+                //this.resetList();
+                continue;
+
+                case "8":
+                //this.countTable();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+
+                case "9":
+                //this.findTable();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+
+                case "10":
+                Function.clearScreen();
+                continue;
+
+                case "11":
+                Function.clearScreen();
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                continue;
+            }
+            break;
+        }
     }
 }

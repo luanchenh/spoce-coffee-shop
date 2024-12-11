@@ -1,12 +1,11 @@
 package NhanVien;
 
 import Utils.Address;
+import Utils.Date;
 import Utils.Function;
-
-import java.util.Scanner;
 import Utils.INhap;
 import Utils.IXuat;
-import Utils.Date;
+import java.util.Scanner;
 
 @SuppressWarnings("resource")
 public class NhanVienPhaChe extends Nhanvien implements INhap, IXuat {
@@ -253,7 +252,7 @@ public class NhanVienPhaChe extends Nhanvien implements INhap, IXuat {
     @Override
     public void thongTinChiTiet() {
         System.out.printf(
-          "\t| %-12s | %-27s | %-20s| %-101s |\n",
+          "\t| %-12s | %-27s | %-20s | %-100s |\n",
                         this.getMaNhanVien(), this.getSoDonDaPhaChe(),
                         this.getSoGioLamThem(), this.getDiaChi());
     }

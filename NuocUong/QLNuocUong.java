@@ -477,6 +477,7 @@ public class QLNuocUong {
         String str;
 
         while (true) {
+            Function.clearScreen();
             // In tiêu đề
             System.out.println(
                     "\t===============================[ Menu Quản Lý Nước Uống ]===============================");
@@ -512,6 +513,8 @@ public class QLNuocUong {
                     if (number >= 1 && number <= 11) {
                         if (number == 1) {
                             this.inDanhSach();
+                            System.out.println("\tEnter để tiếp tục");
+                            str = sc.nextLine();
                         }
                         if (number == 2) {
                             this.addNewWater();
