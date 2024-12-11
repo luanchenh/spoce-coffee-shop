@@ -21,6 +21,7 @@ import Utils.Date;
 import Utils.Function;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -177,12 +178,15 @@ public class NguoiDung {
                                     loop2:
                                     while (true) {
                                         NhanVienThuNgan nvtmp = null;
+                                        ArrayList<NhanVienThuNgan> nvtnList = new ArrayList<>();
                                         for (Nhanvien nv : qlNhanVien.nhanVienList) {
                                             if (nv instanceof NhanVienThuNgan) {
-                                                nvtmp = (NhanVienThuNgan)nv;
-                                                break;
+                                                nvtnList.add((NhanVienThuNgan)nv);
                                             }
                                         }
+
+                                        Random rd = new Random();
+                                        nvtmp = nvtnList.get(rd.nextInt(nvtnList.size() - 0));
                                         
                                         boolean isWantDrink = true;
                                         ThucDon order = new ThucDon();
@@ -523,6 +527,12 @@ public class NguoiDung {
                                             ArrayList<Topping> tplist = new ArrayList<>();
                                             while (isWantTopping) {
                                                 Function.clearScreen();
+                                                if (nuocuong.getTopping().size() == 0) {
+                                                    System.out.println("\tNước uống này không được thêm topping!");
+                                                    System.out.println("\tEnter để tiếp tục!");
+                                                    str = sc.nextLine();
+                                                    break;
+                                                }
                                                 nuocuong.printToppingOfDrink();
                                                 while (true) {
                                                     System.out.print("\tNhập ID topping bạn muốn đặt: ");
@@ -685,6 +695,8 @@ public class NguoiDung {
 
 
                                                 hd = new HoaDon(temp, nvtmp, order, tongTien, tienKhachDua);
+                                                nvtmp.setSoBillDaXuLy(nvtmp.getSoBillDaXuLy() + 1);
+                                                nvtmp.setTongTienDaXuLy(nvtmp.getTongTienDaXuLy() + tongTien);
                                                 break;
 
                                                 case "2":
@@ -708,6 +720,7 @@ public class NguoiDung {
                                     hd.xuatThongTin();
                                     qlHoaDon.billList.add(hd);
                                     qlHoaDon.writeAll();
+                                    qlNhanVien.writeFile();
                                     try {
                                         Thread.sleep(2500);
                                     } catch (InterruptedException e) {
@@ -772,12 +785,15 @@ public class NguoiDung {
                                 loop2:
                                 while (true) {
                                     NhanVienThuNgan nvtmp = null;
+                                    ArrayList<NhanVienThuNgan> nvtnList = new ArrayList<>();
                                     for (Nhanvien nv : qlNhanVien.nhanVienList) {
                                         if (nv instanceof NhanVienThuNgan) {
-                                            nvtmp = (NhanVienThuNgan)nv;
-                                            break;
+                                            nvtnList.add((NhanVienThuNgan)nv);
                                         }
                                     }
+
+                                    Random rd = new Random();
+                                    nvtmp = nvtnList.get(rd.nextInt(nvtnList.size() - 0));
                                     
                                     boolean isWantDrink = true;
                                     ThucDon order = new ThucDon();
@@ -1118,6 +1134,12 @@ public class NguoiDung {
                                         ArrayList<Topping> tplist = new ArrayList<>();
                                         while (isWantTopping) {
                                             Function.clearScreen();
+                                            if (nuocuong.getTopping().size() == 0) {
+                                                System.out.println("\tNước uống này không được thêm topping!");
+                                                System.out.println("\tEnter để tiếp tục!");
+                                                str = sc.nextLine();
+                                                break;
+                                            }
                                             nuocuong.printToppingOfDrink();
                                             while (true) {
                                                 System.out.print("\tNhập ID topping bạn muốn đặt: ");
@@ -1451,12 +1473,15 @@ public class NguoiDung {
                                 loop22:
                                 while (true) {
                                     NhanVienThuNgan nvtmp = null;
+                                    ArrayList<NhanVienThuNgan> nvtnList = new ArrayList<>();
                                     for (Nhanvien nv : qlNhanVien.nhanVienList) {
                                         if (nv instanceof NhanVienThuNgan) {
-                                            nvtmp = (NhanVienThuNgan)nv;
-                                            break;
+                                            nvtnList.add((NhanVienThuNgan)nv);
                                         }
                                     }
+
+                                    Random rd = new Random();
+                                    nvtmp = nvtnList.get(rd.nextInt(nvtnList.size() - 0));
                                     
                                     boolean isWantDrink = true;
                                     ThucDon order = new ThucDon();
@@ -1797,6 +1822,12 @@ public class NguoiDung {
                                         ArrayList<Topping> tplist = new ArrayList<>();
                                         while (isWantTopping) {
                                             Function.clearScreen();
+                                            if (nuocuong.getTopping().size() == 0) {
+                                                System.out.println("\tNước uống này không được thêm topping!");
+                                                System.out.println("\tEnter để tiếp tục!");
+                                                str = sc.nextLine();
+                                                break;
+                                            }
                                             nuocuong.printToppingOfDrink();
                                             while (true) {
                                                 System.out.print("\tNhập ID topping bạn muốn đặt: ");
@@ -2013,12 +2044,15 @@ public class NguoiDung {
                             loop22:
                             while (true) {
                                 NhanVienThuNgan nvtmp = null;
+                                ArrayList<NhanVienThuNgan> nvtnList = new ArrayList<>();
                                 for (Nhanvien nv : qlNhanVien.nhanVienList) {
                                     if (nv instanceof NhanVienThuNgan) {
-                                        nvtmp = (NhanVienThuNgan)nv;
-                                        break;
+                                        nvtnList.add((NhanVienThuNgan)nv);
                                     }
                                 }
+
+                                Random rd = new Random();
+                                nvtmp = nvtnList.get(rd.nextInt(nvtnList.size() - 0));
                                 
                                 boolean isWantDrink = true;
                                 ThucDon order = new ThucDon();
@@ -2359,6 +2393,12 @@ public class NguoiDung {
                                     ArrayList<Topping> tplist = new ArrayList<>();
                                     while (isWantTopping) {
                                         Function.clearScreen();
+                                        if (nuocuong.getTopping().size() == 0) {
+                                            System.out.println("\tNước uống này không được thêm topping!");
+                                            System.out.println("\tEnter để tiếp tục!");
+                                            str = sc.nextLine();
+                                            break;
+                                        }
                                         nuocuong.printToppingOfDrink();
                                         while (true) {
                                             System.out.print("\tNhập ID topping bạn muốn đặt: ");

@@ -96,6 +96,18 @@ public class HoaDon implements IXuat {
         this.thucDon = thucDon;
     }
 
+    public double getTongTien() {
+        return this.tongTien;
+    }
+
+    public double getTienKhachDua() {
+        return this.tienKhachDua;
+    }
+
+    public double getTienThua() {
+        return this.tienThua;
+    }
+
     public Date getNgayTaoHoaDon() {
         return ngayTaoHoaDon;
     }
@@ -239,7 +251,7 @@ public class HoaDon implements IXuat {
     }
 
     public void inRaTrangThai() {
-        System.out.printf("\t| %-10s %-10s %20s |%n", this.maHoaDon, this.ngayTaoHoaDon.toString(), this.trangThaiHoaDon);
+        System.out.printf("\t| %-10s | %-12s | %-20s |%n", this.maHoaDon, this.ngayTaoHoaDon.toString(), this.trangThaiHoaDon);
     }
 
     public void changeBillStatus() {
@@ -294,6 +306,16 @@ public class HoaDon implements IXuat {
             str = sc.nextLine();
             break;
         }
+    }
+
+    public boolean checkMonthAndYear(int month, int year) {
+        int billMonth = Integer.parseInt(this.ngayTaoHoaDon.getMonth());
+        int billYear = Integer.parseInt(this.ngayTaoHoaDon.getYear());
+
+        if (billMonth == month && billYear == year) {
+            return true;
+        }
+        return false;
     }
 }
 

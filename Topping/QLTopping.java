@@ -45,7 +45,7 @@ public class QLTopping implements IXuat{
                     this.toppingList.add(newTopping);
                 }
             }
-            System.out.println("Đọc thành công !");
+            //System.out.println("Đọc thành công !");
             rd.close();
         } catch(Exception e) {
             System.out.println("Lỗi "+ e.getMessage());

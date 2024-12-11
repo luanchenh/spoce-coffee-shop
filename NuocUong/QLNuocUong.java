@@ -95,7 +95,7 @@ public class QLNuocUong {
                         this.waterList.add(water);
                     }
                 }
-                System.out.println("\tĐọc thành công !");
+                //System.out.println("\tĐọc thành công !");
             } catch (Exception e) {
                 System.out.println("Lỗi " + e.getMessage());
             }

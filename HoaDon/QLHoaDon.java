@@ -128,143 +128,135 @@ public class QLHoaDon {
 
     // Phương thức để thống kê doanh thu, số lượng đơn hàng, số lượng mỗi sản phẩm toàn thời gian
     public void thongKeDoanhThuAll() {
-        System.out.println("\tThống kê:");
-        System.out.printf("\t%-10s %s%n", "", "Tổng doanh thu: ");
-        System.out.printf("\t%-10s %s%n", "", "Tổng đơn hàng bán được: " + this.billList.size());
-        System.out.printf("\t%-10s %s%n", "", "Số lượng mỗi sản phẩm bán được: ");
+        double tongDoanhThu = 0;
+        for (HoaDon hd : this.billList) {
+            tongDoanhThu += hd.getTongTien();
+        }
+        System.out.println("\t======================================================================================================");
+        System.out.println("\t|                                  Thống Kê Toàn Bộ Doanh Thu                                        |");
+        // System.out.printf("\t| %-10s %-40s|%n", "", "Tổng doanh thu: ");
+        // System.out.printf("\t%-10s %s%n", "", "Tổng đơn hàng bán được: " + this.billList.size());
+        System.out.printf("\t| %-30s %-67s |%n", "Tổng đơn hàng bán được:", this.billList.size());
+        System.out.printf("\t| %-30s %-67s |%n", "Tổng doanh thu:", Function.formatMoney((int)tongDoanhThu + ""));
+        System.out.println("\t======================================================================================================");
+
+        QLNuocUong qlNuocUong = new QLNuocUong();
+        this.billList.clear();
+        this.Init();
+        qlNuocUong.Init();
+
+        System.out.println("\t|                           Tổng số lượng nước đã bán ra theo mặt hàng                               |");
+        System.out.println("\t======================================================================================================");
+        System.out.printf("\t| %-16s | %-56s | %-20s |%n", "Mã nước", "Tên nước", "Số lượng");
+        for (NuocUong nu : qlNuocUong.getWaterList()) {
+            int count = 0;
+            for (HoaDon hd : this.billList) {
+                for (NuocUong nuHoaDon : hd.getThucDon().getDanhSachNuocUong()) {
+                    if (nuHoaDon.getId().equals(nu.getId())) {
+                        count++;
+                    }
+                }
+            }
+            System.out.printf("\t| %-16s | %-56s | %-20s |%n", nu.getId(), nu.getName(), count);
+        }
+        System.out.println("\t======================================================================================================");
     }
 
     // Phương thức để thống kê doanh thu, số lượng đơn hàng, số lượng mỗi sản phẩm theo thời gian
     public void thongKeDoanhThuTheoThoiGian() {
         Scanner sc = new Scanner(System.in);
         String str;
-        Date startDate = new Date();
-        Date endDate = new Date();
+        int monthSelect;
+        int yearSelect;
 
         while (true) {
-            while (true) {
-                while (true) {
-                    System.out.print("\n\t=> Nhập ngày bắt đầu: ");
-                    str = sc.nextLine();
-
-                    if (Function.isEmpty(str)) {
-                        System.out.println("\tNgày bắt đầu không được rỗng!");
-                        continue;
-                    }
-
-                    if (!Function.isTrueNumber(str)) {
-                        System.out.println("\tNgày bắt đầu phải là số!");
-                        continue;
-                    }
-
-                    startDate.setDay(str);
-                    break;
+            while (true) { 
+                Function.clearScreen();
+                System.out.print("\t=> Mời nhập tháng muốn bạn muốn xem thống kê: ");
+                str = sc.nextLine();
+    
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống!");
+                    continue;
+                }
+    
+                if (!Function.isTrueNumber(str)) {
+                    System.out.println("\tVui lòng nhập số!");
+                    continue;
                 }
 
-                while (true) {
-                    System.out.print("\n\t=> Nhập tháng bắt đầu: ");
-                    str = sc.nextLine();
-
-                    if (Function.isEmpty(str)) {
-                        System.out.println("\tTháng bắt đầu không được rỗng!");
-                        continue;
-                    }
-
-                    if (!Function.isTrueNumber(str)) {
-                        System.out.println("\tTháng bắt đầu phải là số!");
-                        continue;
-                    }
-
-                    startDate.setMonth(str);
-                    break;
+                monthSelect = Integer.parseInt(str);
+                if (!(monthSelect >= 1 && monthSelect <= 12)) {
+                    System.out.println("\tVui lòng nhập từ 1 đến 12");
+                    continue;
                 }
-
-                while (true) {
-                    System.out.print("\n\t=> Nhập năm bắt đầu: ");
-                    str = sc.nextLine();
-
-                    if (Function.isEmpty(str)) {
-                        System.out.println("\tNăm bắt đầu không được rỗng!");
-                        continue;
-                    }
-
-                    if (!Function.isTrueNumber(str)) {
-                        System.out.println("\tNăm bắt đầu phải là số!");
-                        continue;
-                    }
-
-                    startDate.setYear(str);
-                    break;
-                }
-
-                if (startDate.isValidDate()) {
-                    break;
-                } else {
-                    System.out.println("\tThời gian bắt đầu không hợp lệ!");
-                }
+                break;
             }
 
-            while (true) {
-                while (true) {
-                    System.out.print("\n\t=> Nhập ngày kết thúc: ");
-                    str = sc.nextLine();
-
-                    if (Function.isEmpty(str)) {
-                        System.out.println("\tNgày kết thúc không được rỗng!");
-                        continue;
-                    }
-
-                    if (!Function.isTrueNumber(str)) {
-                        System.out.println("\tNgày kết thúc phải là số!");
-                        continue;
-                    }
-
-                    endDate.setDay(str);
-                    break;
+            while (true) { 
+                Function.clearScreen();
+                System.out.print("\t=> Mời nhập năm muốn bạn muốn xem thống kê: ");
+                str = sc.nextLine();
+    
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống!");
+                    continue;
+                }
+    
+                if (!Function.isTrueNumber(str)) {
+                    System.out.println("\tVui lòng nhập số!");
+                    continue;
                 }
 
-                while (true) {
-                    System.out.print("\n\t=> Nhập tháng kết thúc: ");
-                    str = sc.nextLine();
-
-                    if (Function.isEmpty(str)) {
-                        System.out.println("\tTháng kết thúc không được rỗng!");
-                        continue;
-                    }
-
-                    if (!Function.isTrueNumber(str)) {
-                        System.out.println("\tTháng kết thúc phải là số!");
-                        continue;
-                    }
-
-                    endDate.setMonth(str);
-                    break;
+                yearSelect = Integer.parseInt(str);
+                if (yearSelect < 0) {
+                    System.out.println("\tNăm không được có giá trị âm!");
+                    continue;
                 }
+                break;
+            }
 
-                while (true) {
-                    System.out.print("\n\t=> Nhập năm kết thúc: ");
-                    str = sc.nextLine();
-
-                    if (Function.isEmpty(str)) {
-                        System.out.println("\tNăm kết thúc không được rỗng!");
-                        continue;
-                    }
-
-                    if (!Function.isTrueNumber(str)) {
-                        System.out.println("\tNăm kết thúc phải là số!");
-                        continue;
-                    }
-
-                    endDate.setYear(str);
-                    break;
-                }
-
-                if (endDate.isValidDate()) {
-                    break;
-                } else {
-                    System.out.println("\tThời gian kết thúc không hợp lệ!");
+            double tongDoanhThu = 0;
+            int tongHoadon = 0;
+            for (HoaDon hd : this.billList) {
+                if (hd.checkMonthAndYear(monthSelect, yearSelect)) {
+                    tongDoanhThu += hd.getTongTien();
+                    tongHoadon++;
                 }
             }
+            if (tongHoadon == 0) {
+                System.out.println("\tKhông có hóa đơn nào trong tháng " + monthSelect + " năm " + yearSelect + "!");
+            } else {
+                Function.clearScreen();
+                System.out.println("\t======================================================================================================");
+                System.out.println("\t|                                   Thống Kê Doanh Thu Theo Tháng                                    |");
+                System.out.println("\t|====================================================================================================|");
+                System.out.printf("\t| %-30s %-67s |%n", "Thời gian thống kê:", monthSelect + "/" + yearSelect);
+                System.out.printf("\t| %-30s %-67s |%n", "Tổng đơn hàng bán được:", tongHoadon);
+                System.out.printf("\t| %-30s %-67s |%n", "Tổng doanh thu:", Function.formatMoney((int)tongDoanhThu + ""));
+                System.out.println("\t======================================================================================================");
+                QLNuocUong qlNuocUong = new QLNuocUong();
+                this.billList.clear();
+                this.Init();
+                qlNuocUong.Init();
+        
+                System.out.println("\t|                           Tổng số lượng nước đã bán ra theo mặt hàng                               |");
+                System.out.println("\t======================================================================================================");
+                System.out.printf("\t| %-16s | %-56s | %-20s |%n", "Mã nước", "Tên nước", "Số lượng");
+                for (NuocUong nu : qlNuocUong.getWaterList()) {
+                    int count = 0;
+                    for (HoaDon hd : this.billList) {
+                        for (NuocUong nuHoaDon : hd.getThucDon().getDanhSachNuocUong()) {
+                            if (nuHoaDon.getId().equals(nu.getId()) && hd.checkMonthAndYear(monthSelect, yearSelect)) {
+                                count++;
+                            }
+                        }
+                    }
+                    System.out.printf("\t| %-16s | %-56s | %-20s |%n", nu.getId(), nu.getName(), count);
+                }
+                System.out.println("\t======================================================================================================");
+            }
+            break;
         }
     }
 
@@ -276,6 +268,7 @@ public class QLHoaDon {
     // Phương thức để in ra nhân viên bán được nhiều đơn hàng nhất toàn thời gian
     public void inRaNhanVienBanDuocNhieuDonNhat() {
         QLNhanVien ql = new QLNhanVien();
+        ql.Init();
         NhanVienThuNgan nv = null;
 
         // tìm ra nhân viên thu ngân đầu tiên trong mảng
@@ -292,28 +285,152 @@ public class QLHoaDon {
                 nv = (NhanVienThuNgan)nhanvien;
             }
         }
-
-        System.out.println("\tNhân viên bán được nhiều đơn nhất:");
-        System.out.println("\t========================================================================================================");
-        System.out.printf("\t| %-20s %-80s |%n", "Mã nhân viên:", nv.getMaNhanVien());
-        System.out.printf("\t| %-20s %-80s |%n", "Tên nhân viên:", nv.getTenNhanVien());
-        System.out.printf("\t| %-20s %-80s |%n", "Số đơn hàng bán được:", nv.getSoBillDaXuLy());
-        System.out.println("\t========================================================================================================");
+        System.out.println("\t=========================================================================================================");
+        System.out.println("\t|                                  Nhân viên bán được nhiều đơn nhất                                    |");
+        System.out.println("\t=========================================================================================================");
+        System.out.printf("\t| %-21s %-79s |%n", "Mã nhân viên:", nv.getMaNhanVien());
+        System.out.printf("\t| %-21s %-79s |%n", "Tên nhân viên:", nv.getTenNhanVien());
+        System.out.printf("\t| %-20s %-79s |%n", "Số đơn hàng bán được:", nv.getSoBillDaXuLy());
+        System.out.println("\t=========================================================================================================");
     }
 
     // Phương thức để in ra trạng thái của các đơn hàng
     public void inRaTungTrangThaiHoaDon() {
-        System.out.println("\t==================================================");
-        System.out.printf("\t| %-10s %-10s %20s |%n", "Mã hóa đơn", "Ngày lập đơn", "Trạng thái");
+        System.out.println("\t====================================================");
+        System.out.printf("\t| %-10s | %-10s | %-20s |%n", "Mã hóa đơn", "Ngày lập đơn", "Trạng thái");
         for (HoaDon hd : this.billList) {
             hd.inRaTrangThai();
         }
-        System.out.println("\t==================================================");
+        System.out.println("\t====================================================");
     }
 
     // Phương thức để in ra số lượng từng sản phẩm bán được
     public void inRaSoLuongTungMatHangBanDuoc() {
-        //
+        QLHoaDon qlHoaDon = new QLHoaDon();
+        QLNuocUong qlNuocUong = new QLNuocUong();
+        qlHoaDon.Init();
+        qlNuocUong.Init();
+
+        System.out.println("\t======================================================================================================");
+        System.out.println("\t|                           Tổng số lượng nước đã bán ra theo mặt hàng                               |");
+        System.out.println("\t======================================================================================================");
+        System.out.printf("\t| %-16s | %-56s | %-20s |%n", "Mã nước", "Tên nước", "Số lượng");
+        for (NuocUong nu : qlNuocUong.getWaterList()) {
+            int count = 0;
+            for (HoaDon hd : qlHoaDon.billList) {
+                for (NuocUong nuHoaDon : hd.getThucDon().getDanhSachNuocUong()) {
+                    if (nuHoaDon.getId().equals(nu.getId())) {
+                        count++;
+                    }
+                }
+            }
+            System.out.printf("\t| %-16s | %-56s | %-20s |%n", nu.getId(), nu.getName(), count);
+        }
+        System.out.println("\t======================================================================================================");
+    }
+
+    public void chuyenTrangThaiHoaDon() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        boolean isDone = false;
+        
+        while (true) {
+            Function.clearScreen();
+            this.printBill();
+            System.out.print("\t=> Nhập ID hóa đơn mà bạn muốn đổi trạng thái: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống!");
+                continue;
+            }
+
+            for (HoaDon hd : this.billList) {
+                if (hd.getMaHoaDon().equals(str)) {
+                    hd.changeBillStatus();
+                    this.writeAll();
+                    isDone = true;
+                    break;
+                }
+            }
+
+            if (!isDone) {
+                System.out.println("\tKhông tìm thấy hóa đơn có mã hóa đơn " + str);
+            }
+
+            break;
+        }
+    }
+
+    public void resetList() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\n\tBạn có chắc chắn muốn xoá toàn bộ danh sách không?");
+            System.out.println("\t1. Có");
+            System.out.println("\t2. Không");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được rỗng!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.billList.clear();
+                System.out.println("\tLàm mới danh sách thành công!");
+                break;
+
+                case "2":
+                System.out.println("\tHủy bỏ làm mới danh sách!");
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                continue;
+            }
+
+            break;
+        }
+    }
+
+    public void findBill() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        HoaDon hoaDon = null;
+
+        while (true) { 
+            Function.clearScreen();
+            System.out.print("\t=> Mời bạn nhập ID hóa đơn muốn tìm: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không bỏ trống!");
+                continue;
+            }
+
+            for (HoaDon hd : this.billList) {
+                if (hd.getMaHoaDon().equals(str)) {
+                    hoaDon = hd;
+                }
+            }
+
+            if (hoaDon == null) {
+                System.out.println("\tKhông tìm thấy hóa đơn có ID " + str);
+            } else {
+                hoaDon.xuatThongTin();
+            }
+            break;
+        }
     }
 
     public void menuQLHoaDon() {
@@ -325,7 +442,7 @@ public class QLHoaDon {
         while (true) {
             Function.clearScreen();
             // In tiêu đề
-            System.out.println("\t==================================[ Menu Quản Lý Hóa Đơn ]==================================");
+            System.out.println("\t==================================[ Menu Quản Lý Hóa Đơn ]==============================");
 
             // In tiêu đề các cột
             System.out.printf("\t| %-4s | %-77s |%n", "STT", "Chức năng");
@@ -339,14 +456,14 @@ public class QLHoaDon {
             System.out.printf("\t| %-4s | %-77s |%n", "4", "In ra số lượng đơn hàng đã bán được");
             System.out.printf("\t| %-4s | %-77s |%n", "5", "In ra nhân viên bán được nhiều đơn nhất");
             System.out.printf("\t| %-4s | %-77s |%n", "6", "In ra trạng thái từng hóa đơn");
-            System.out.printf("\t| %-4s | %-77s |%n", "7", "In ra số lượng từng mặt hàng bán ");
+            System.out.printf("\t| %-4s | %-77s |%n", "7", "In ra số lượng từng mặt hàng bán");
             System.out.printf("\t| %-4s | %-77s |%n", "8", "Chuyển trạng thái hóa đơn");
             System.out.printf("\t| %-4s | %-77s |%n", "9", "Cập nhật lại hóa đơn vào File từ danh sách");
             System.out.printf("\t| %-4s | %-77s |%n", "10", "Cập nhật lại hóa đơn vào danh sách từ File");
             System.out.printf("\t| %-4s | %-77s |%n", "11", "Làm mới danh sách hóa đơn (Reset dữ liệu nhưng không load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "13", "Tìm kiếm hóa đơn");
-            System.out.printf("\t| %-4s | %-77s |%n", "14", "Làm mới màn hình");
-            System.out.printf("\t| %-4s | %-77s |%n", "115", "Thoát chương trình quản lý");
+            System.out.printf("\t| %-4s | %-77s |%n", "12", "Tìm kiếm hóa đơn");
+            System.out.printf("\t| %-4s | %-77s |%n", "13", "Làm mới màn hình");
+            System.out.printf("\t| %-4s | %-77s |%n", "14", "Thoát chương trình quản lý");
 
             // In dòng kẻ dưới cùng
             System.out.println("\t========================================================================================");
@@ -377,43 +494,67 @@ public class QLHoaDon {
                 continue;
 
                 case "3":
-                //this.removeTable();
+                this.thongKeDoanhThuTheoThoiGian();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
 
                 case "4":
-                //this.modifyTable();
+                this.inRaSoLuongDonHangBanDuoc();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
 
                 case "5":
-                //this.writeAll();
+                this.inRaNhanVienBanDuocNhieuDonNhat();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
 
                 case "6":
-                //this.Init();
+                this.inRaTungTrangThaiHoaDon();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
 
                 case "7":
-                //this.resetList();
+                this.inRaSoLuongTungMatHangBanDuoc();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
 
                 case "8":
-                //this.countTable();
+                this.chuyenTrangThaiHoaDon();
                 System.out.println("\tEnter để tiếp tục!");
                 str = sc.nextLine();
                 continue;
 
                 case "9":
-                //this.findTable();
+                this.writeAll();
+                continue;
+
+                case "10":
+                this.billList.clear();
+                this.Init();
+                continue;
+
+                case "11":
+                this.resetList();
                 System.out.println("\tEnter để tiếp tục!");
                 str = sc.nextLine();
                 continue;
 
-                case "10":
+                case "12":
+                this.findBill();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+
+                case "13":
                 Function.clearScreen();
                 continue;
 
-                case "11":
-                Function.clearScreen();
+                case "14":
                 break;
 
                 default:
