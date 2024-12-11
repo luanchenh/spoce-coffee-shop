@@ -317,6 +317,18 @@ public class HoaDon implements IXuat {
         }
         return false;
     }
+    public boolean checkDayAndMonthAndYear(int day,int month, int year) {
+        int billDay = Integer.parseInt(this.ngayTaoHoaDon.getDay());
+        int billMonth = Integer.parseInt(this.ngayTaoHoaDon.getMonth());
+        int billYear = Integer.parseInt(this.ngayTaoHoaDon.getYear());
+
+        if (billDay == day && billMonth == month && billYear == year) {
+            return true;
+        }
+        return false;
+    }
+
+
 }
 
 

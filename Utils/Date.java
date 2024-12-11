@@ -153,5 +153,45 @@ public class Date {
     public String makeString() {
         return this.day + "|" + this.month + "|" + this.year;
     }
+    public boolean isEqual(Date other) {
+        return this.day.equals(other.day) && this.month.equals(other.month) && this.year.equals(other.year);
+    }
+
+    public boolean isAfter(Date other) {
+        if (Integer.parseInt(this.year) > Integer.parseInt(other.year)) return true;
+        if (Integer.parseInt(this.year) == Integer.parseInt(other.year)) {
+            if (Integer.parseInt(this.month) > Integer.parseInt(other.month)) return true;
+            if (Integer.parseInt(this.month) == Integer.parseInt(other.month)) {
+                return Integer.parseInt(this.day) > Integer.parseInt(other.day);
+            }
+        }
+        return false;
+    }
+
+    public boolean isBefore(Date other) {
+        if (Integer.parseInt(this.year) < Integer.parseInt(other.year)) return true;
+        if (Integer.parseInt(this.year) == Integer.parseInt(other.year)) {
+            if (Integer.parseInt(this.month) < Integer.parseInt(other.month)) return true;
+            if (Integer.parseInt(this.month) == Integer.parseInt(other.month)) {
+                return Integer.parseInt(this.day) < Integer.parseInt(other.day);
+            }
+        }
+        return false;
+    }
+
+    // Cộng thêm số ngày
+    public Date addDays(int days) {
+        LocalDate localDate = LocalDate.of(
+            Integer.parseInt(this.day),
+            Integer.parseInt(this.month),
+            Integer.parseInt(this.year)
+        ).plusDays(days);
+
+        return new Date(
+            String.valueOf(localDate.getDayOfMonth()),
+            String.valueOf(localDate.getMonthValue()),
+            String.valueOf(localDate.getYear())
+        );
+    }
 }
 

@@ -14,6 +14,7 @@ import Utils.Date;
 import Utils.Function;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -163,7 +164,7 @@ public class QLHoaDon {
     }
 
     // Phương thức để thống kê doanh thu, số lượng đơn hàng, số lượng mỗi sản phẩm theo thời gian
-    public void thongKeDoanhThuTheoThoiGian() {
+    public void thongKeDoanhThuTheoThang() {
         Scanner sc = new Scanner(System.in);
         String str;
         int monthSelect;
@@ -259,6 +260,249 @@ public class QLHoaDon {
             break;
         }
     }
+    public void thongKeDoanhThuTrongMotNgay() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        int ngay, thang, nam;
+    
+        // Xác định ngày hiện tại làm mặc định
+        LocalDate today = LocalDate.now();
+        ngay = today.getDayOfMonth();
+        thang = today.getMonthValue();
+        nam = today.getYear();
+    
+        System.out.println("\n=== Thống kê doanh thu trong một ngày ===");
+    
+        // Nhập ngày nếu muốn
+        System.out.print("\t=> Bạn có muốn nhập ngày cụ thể không? (y/n): ");
+        String choice = sc.nextLine().trim();
+    
+        if (choice.equalsIgnoreCase("y")) {
+            // Nhập ngày
+            while (true) {
+                System.out.print("\t=> Mời nhập ngày: ");
+                str = sc.nextLine();
+    
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống!");
+                    continue;
+                }
+    
+                if (!Function.isTrueNumber(str)) {
+                    System.out.println("\tVui lòng nhập số hợp lệ!");
+                    continue;
+                }
+    
+                ngay = Integer.parseInt(str);
+                if (!(ngay >= 1 && ngay <= 31)) {
+                    System.out.println("\tVui lòng nhập ngày từ 1 đến 31!");
+                    continue;
+                }
+                break;
+            }
+    
+            // Nhập tháng
+            while (true) {
+                System.out.print("\t=> Mời nhập tháng: ");
+                str = sc.nextLine();
+    
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống!");
+                    continue;
+                }
+    
+                if (!Function.isTrueNumber(str)) {
+                    System.out.println("\tVui lòng nhập số hợp lệ!");
+                    continue;
+                }
+    
+                thang = Integer.parseInt(str);
+                if (!(thang >= 1 && thang <= 12)) {
+                    System.out.println("\tVui lòng nhập tháng từ 1 đến 12!");
+                    continue;
+                }
+                break;
+            }
+    
+            // Nhập năm
+            while (true) {
+                System.out.print("\t=> Mời nhập năm: ");
+                str = sc.nextLine();
+    
+                if (Function.isEmpty(str)) {
+                    System.out.println("\tVui lòng không để trống!");
+                    continue;
+                }
+    
+                if (!Function.isTrueNumber(str)) {
+                    System.out.println("\tVui lòng nhập số hợp lệ!");
+                    continue;
+                }
+    
+                nam = Integer.parseInt(str);
+                if (nam < 0) {
+                    System.out.println("\tNăm không được có giá trị âm!");
+                    continue;
+                }
+                break;
+            }
+        }
+    
+        double tongDoanhThu = 0;
+        int tongHoaDon = 0;
+    
+        for (HoaDon hd : this.billList) {
+            if (hd.checkDayAndMonthAndYear(ngay, thang, nam)) {
+                tongDoanhThu += hd.getTongTien();
+                tongHoaDon++;
+            }
+        }
+    
+        if (tongHoaDon == 0) {
+            System.out.println("\tKhông có hóa đơn nào trong ngày " + ngay + " tháng " + thang + " năm " + nam + "!");
+        } else {
+            System.out.println("\t======================================================================================================");
+            System.out.println("\t|                                   Thống Kê Doanh Thu Theo Ngày                                     |");
+            System.out.println("\t|====================================================================================================|");
+            System.out.printf("\t| %-30s %-67s |%n", "Thời gian thống kê:", ngay + "/" + thang + "/" + nam);
+            System.out.printf("\t| %-30s %-67s |%n", "Tổng đơn hàng bán được:", tongHoaDon);
+            System.out.printf("\t| %-30s %-67s |%n", "Tổng doanh thu:", Function.formatMoney((int) tongDoanhThu + ""));
+            System.out.println("\t======================================================================================================");
+        }
+    }
+    
+
+    //thống kê doanh thu trong 1 tuần
+    public void thongKeDoanhThuTrongMotTuan() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        String ngay, thang, nam;
+        System.out.println("\n=== Thống kê doanh thu trong một tuần ===");  
+        
+        // Nhập ngày
+        while (true) {
+            System.out.print("\t=> Mời nhập ngày: ");
+            str = sc.nextLine();
+    
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống!");
+                continue;
+            }
+    
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tVui lòng nhập số hợp lệ!");
+                continue;
+            }
+    
+            ngay = str;
+            if (!(Integer.parseInt(ngay) >= 1 && Integer.parseInt(ngay) <= 31)) {
+                System.out.println("\tVui lòng nhập ngày từ 1 đến 31!");
+                continue;
+            }
+            break;
+        }
+    
+        // Nhập tháng
+        while (true) {
+            System.out.print("\t=> Mời nhập tháng: ");
+            str = sc.nextLine();
+    
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống!");
+                continue;
+            }
+    
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tVui lòng nhập số hợp lệ!");
+                continue;
+            }
+    
+            thang = str;
+            if (!(Integer.parseInt(thang) >= 1 && Integer.parseInt(thang) <= 12)) {
+                System.out.println("\tVui lòng nhập tháng từ 1 đến 12!");
+                continue;
+            }
+            break;
+        }
+    
+        // Nhập năm
+        while (true) {
+            System.out.print("\t=> Mời nhập năm: ");
+            str = sc.nextLine();
+    
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống!");
+                continue;
+            }
+    
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tVui lòng nhập số hợp lệ!");
+                continue;
+            }
+    
+            nam = str;
+            if (Integer.parseInt(nam) < 0) {
+                System.out.println("\tNăm không được có giá trị âm!");
+                continue;
+            }
+            break;          
+        }
+    
+        // Tính ngày bắt đầu và ngày kết thúc
+        Date startDate = new Date(ngay, thang, nam);
+        Date endDate = startDate.addDays(6); // Tính 7 ngày sau (0-index)
+    
+        double tongDoanhThu = 0;
+        int tongHoaDon = 0;
+    
+        // Duyệt hóa đơn
+        for (HoaDon hd : this.billList) {
+        //     LocalDate invoiceDate = LocalDate.of(Integer.parseInt(hd.getNgayTaoHoaDon().getYear()), Integer.parseInt(hd.getNgayTaoHoaDon().getMonth()), Integer.parseInt(hd.getNgayTaoHoaDon().getDay()));
+    
+        //     LocalDate localStartDate = LocalDate.of(Integer.parseInt(startDate.getYear()), Integer.parseInt(startDate.getMonth()), Integer.parseInt(startDate.getDay()));
+        //     LocalDate localEndDate = LocalDate.of(Integer.parseInt(endDate.getYear()), Integer.parseInt(endDate.getMonth()), Integer.parseInt(endDate.getDay()));
+    
+        //     if ((invoiceDate.isEqual(localStartDate) || invoiceDate.isAfter(localStartDate)) && invoiceDate.isBefore(localEndDate.plusDays(1))) {
+        //         tongDoanhThu += hd.getTongTien();
+        //         tongHoaDon++;
+        //     }
+    
+            System.out.println(hd.getNgayTaoHoaDon());
+        
+        
+        }
+    
+        if (tongHoaDon == 0) {
+            System.out.println("\tKhông có hóa đơn nào từ " + startDate + " đến " + endDate + "!");
+        } else {
+            System.out.println("\t======================================================================================================");
+            System.out.println("\t|                                   Thống Kê Doanh Thu Theo Tuần                                     |");
+            System.out.println("\t|====================================================================================================|");
+            System.out.printf("\t| %-30s %-67s |%n", "Thời gian thống kê:", startDate + " - " + endDate);
+            System.out.printf("\t| %-30s %-67s |%n", "Tổng đơn hàng bán được:", tongHoaDon);
+            System.out.printf("\t| %-30s %-67s |%n", "Tổng doanh thu:", Function.formatMoney((int) tongDoanhThu + ""));
+            System.out.println("\t======================================================================================================");
+        }
+    }
+    
+
+    ////////////////
+    /// 
+    public void thongKeDoanhThuTheoThoiGian(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\n=== Thống kê doanh thu theo thời gian ===");
+    System.out.println("\t1. Tính theo ngày");
+    System.out.println("\t2. Tính theo tháng");
+    System.out.print("\t=> Chọn kiểu thống kê: ");
+    String choice = sc.nextLine().trim();
+        if(choice.equals("1")){
+            this.thongKeDoanhThuTrongMotNgay();
+        }
+        if(choice.equals("2")){
+            this.thongKeDoanhThuTheoThang();
+        }
+    }
+    /// 
 
     // Phương thức để in ra tổng số lượng đơn hàng bán được toàn thời gian
     public void inRaSoLuongDonHangBanDuoc() {
