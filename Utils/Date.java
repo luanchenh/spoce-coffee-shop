@@ -95,7 +95,7 @@ public class Date {
                     }
                 }
             }
-            if (Function.isTrueDate(this.toString())) {
+            if (this.isValidDate()) {
                 return;
             }
             else {

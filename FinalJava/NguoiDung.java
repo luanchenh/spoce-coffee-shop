@@ -598,9 +598,10 @@ public class NguoiDung {
 
                                             }
                                             order.getDanhSachTopping().add(tplist);
-
+                                            Function.clearScreen();
+                                            order.xuatThongTin();
                                             while (true) {
-                                                Function.clearScreen();
+                                                // Function.clearScreen();
                                                 System.out.println(
                                                     "\t=============================[Chức năng người Dùng tại chỗ]===============================");
                                                 System.out.printf("\t| %-87s |%n", "Bạn có muốn đặt thêm món nước nào nữa không?");
@@ -697,6 +698,9 @@ public class NguoiDung {
                                                 hd = new HoaDon(temp, nvtmp, order, tongTien, tienKhachDua);
                                                 nvtmp.setSoBillDaXuLy(nvtmp.getSoBillDaXuLy() + 1);
                                                 nvtmp.setTongTienDaXuLy(nvtmp.getTongTienDaXuLy() + tongTien);
+                                                if (temp.IsMember()) {
+                                                    temp.getMemberCard().point((int)tongTien);
+                                                }
                                                 break;
 
                                                 case "2":
@@ -721,6 +725,7 @@ public class NguoiDung {
                                     qlHoaDon.billList.add(hd);
                                     qlHoaDon.writeAll();
                                     qlNhanVien.writeFile();
+                                    qlKhachHang.writeAll();
                                     try {
                                         Thread.sleep(2500);
                                     } catch (InterruptedException e) {
@@ -1205,9 +1210,10 @@ public class NguoiDung {
 
                                         }
                                         order.getDanhSachTopping().add(tplist);
+                                        order.xuatThongTin();
 
                                         while (true) {
-                                            Function.clearScreen();
+                                            // Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
                                             System.out.printf("\t| %-87s |%n", "Bạn có muốn đặt thêm món nước nào nữa không?");
@@ -1302,6 +1308,11 @@ public class NguoiDung {
 
 
                                             hd = new HoaDon(temp, nvtmp, order, tongTien, tienKhachDua);
+                                            nvtmp.setSoBillDaXuLy(nvtmp.getSoBillDaXuLy() + 1);
+                                            nvtmp.setTongTienDaXuLy(nvtmp.getTongTienDaXuLy() + tongTien);
+                                            if (temp.IsMember()) {
+                                                temp.getMemberCard().point((int)tongTien);
+                                            }
                                             break;
 
                                             case "2":
@@ -1325,6 +1336,8 @@ public class NguoiDung {
                                 hd.xuatThongTin();
                                 qlHoaDon.billList.add(hd);
                                 qlHoaDon.writeAll();
+                                qlNhanVien.writeFile();
+                                qlKhachHang.writeAll();
                                 try {
                                     Thread.sleep(2500);
                                 } catch (InterruptedException e) {
@@ -1526,7 +1539,7 @@ public class NguoiDung {
     
                                             Function.clearScreen();
                                             System.out.println(
-                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                "\t=============================[Chức năng người Dùng mang đi]===============================");
                                             System.out.printf("\t| %-87s |%n", "Mời bạn chọn size cho món nước " + nuocuong.getId());
                                             for (String key : nuocuong.getSizePrice().keySet()) {
                                                 System.out.printf("\t| %-5s %-81s |%n", countOption++ + ".", key);
@@ -1600,7 +1613,7 @@ public class NguoiDung {
                                         while (true) { 
                                             Function.clearScreen();
                                             System.out.println(
-                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                "\t=============================[Chức năng người Dùng mang đi]===============================");
                                             System.out.printf("\t| %-87s |%n", "Bạn có yêu cầu gì cho món nước " + nuocuong.getId() + " không?");
                                             System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                             System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -1625,7 +1638,7 @@ public class NguoiDung {
                                                 while (true) { 
                                                     Function.clearScreen();
                                                     System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                        "\t=============================[Chức năng người Dùng mang đi]===============================");
                                                     System.out.printf("\t| %-87s |%n", "Bạn muốn yêu cầu gì cho món nước " + nuocuong.getId() + "?");
                                                     System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá");
                                                     System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng");
@@ -1715,7 +1728,7 @@ public class NguoiDung {
                                                     while (true) { 
                                                         Function.clearScreen();
                                                         System.out.println(
-                                                            "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                            "\t=============================[Chức năng người Dùng mang đi]===============================");
                                                         System.out.printf("\t| %-87s |%n", "Bạn còn yêu cầu gì thêm cho món nước " + nuocuong.getId() + " không?");
                                                         System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                                         System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -1778,7 +1791,7 @@ public class NguoiDung {
                                         while (true) {
                                             Function.clearScreen();
                                             System.out.println(
-                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                "\t=============================[Chức năng người Dùng mang đi]===============================");
                                             System.out.printf("\t| %-87s |%n", "Bạn có muốn thêm topping cho món nước " + nuocuong.getId() + " không?");
                                             System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                             System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -1850,7 +1863,7 @@ public class NguoiDung {
                                                 while (true) {
                                                     Function.clearScreen();
                                                     System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                        "\t=============================[Chức năng người Dùng mang đi]===============================");
                                                     System.out.printf("\t| %-87s |%n", "Bạn có muốn thêm topping nào nữa không?");
                                                     System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                                     System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -1897,7 +1910,7 @@ public class NguoiDung {
                                         while (true) {
                                             Function.clearScreen();
                                             System.out.println(
-                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                "\t=============================[Chức năng người Dùng mang đi]===============================");
                                             System.out.printf("\t| %-87s |%n", "Bạn có muốn đặt thêm món nước nào nữa không?");
                                             System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                             System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -1941,7 +1954,7 @@ public class NguoiDung {
                                         Function.clearScreen();
                                         order.xuatThongTin();
                                         System.out.println(
-                                            "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            "\t=============================[Chức năng người Dùng mang đi]===============================");
                                         System.out.printf("\t| %-87s |%n", "Mời bạn xác nhận đơn hàng");
                                         System.out.printf("\t| %-5s %-81s |%n", "1.", "Xác nhận");
                                         System.out.printf("\t| %-5s %-81s |%n", "2.", "Không xác nhận");
@@ -1990,6 +2003,11 @@ public class NguoiDung {
     
     
                                             hd = new HoaDon(temp, nvtmp, order, tongTien, tienKhachDua);
+                                            nvtmp.setSoBillDaXuLy(nvtmp.getSoBillDaXuLy() + 1);
+                                            nvtmp.setTongTienDaXuLy(nvtmp.getTongTienDaXuLy() + tongTien);
+                                            if (temp.IsMember()) {
+                                                temp.getMemberCard().point((int)tongTien);
+                                            }
                                             break;
     
                                             case "2":
@@ -2013,6 +2031,8 @@ public class NguoiDung {
                                 hd.xuatThongTin();
                                 qlHoaDon.billList.add(hd);
                                 qlHoaDon.writeAll();
+                                qlNhanVien.writeFile();
+                                qlKhachHang.writeAll();
                                 try {
                                     Thread.sleep(2500);
                                 } catch (InterruptedException e) {
@@ -2097,7 +2117,7 @@ public class NguoiDung {
 
                                         Function.clearScreen();
                                         System.out.println(
-                                            "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            "\t=============================[Chức năng người Dùng mang đi]===============================");
                                         System.out.printf("\t| %-87s |%n", "Mời bạn chọn size cho món nước " + nuocuong.getId());
                                         for (String key : nuocuong.getSizePrice().keySet()) {
                                             System.out.printf("\t| %-5s %-81s |%n", countOption++ + ".", key);
@@ -2171,7 +2191,7 @@ public class NguoiDung {
                                     while (true) { 
                                         Function.clearScreen();
                                         System.out.println(
-                                            "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            "\t=============================[Chức năng người Dùng mang đi]===============================");
                                         System.out.printf("\t| %-87s |%n", "Bạn có yêu cầu gì cho món nước " + nuocuong.getId() + " không?");
                                         System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                         System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -2196,7 +2216,7 @@ public class NguoiDung {
                                             while (true) { 
                                                 Function.clearScreen();
                                                 System.out.println(
-                                                    "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                    "\t=============================[Chức năng người Dùng mang đi]===============================");
                                                 System.out.printf("\t| %-87s |%n", "Bạn muốn yêu cầu gì cho món nước " + nuocuong.getId() + "?");
                                                 System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá");
                                                 System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng");
@@ -2286,7 +2306,7 @@ public class NguoiDung {
                                                 while (true) { 
                                                     Function.clearScreen();
                                                     System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                        "\t=============================[Chức năng người Dùng mang đi]===============================");
                                                     System.out.printf("\t| %-87s |%n", "Bạn còn yêu cầu gì thêm cho món nước " + nuocuong.getId() + " không?");
                                                     System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                                     System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -2349,7 +2369,7 @@ public class NguoiDung {
                                     while (true) {
                                         Function.clearScreen();
                                         System.out.println(
-                                            "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            "\t=============================[Chức năng người Dùng mang đi]===============================");
                                         System.out.printf("\t| %-87s |%n", "Bạn có muốn thêm topping cho món nước " + nuocuong.getId() + " không?");
                                         System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                         System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -2421,7 +2441,7 @@ public class NguoiDung {
                                             while (true) {
                                                 Function.clearScreen();
                                                 System.out.println(
-                                                    "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                                    "\t=============================[Chức năng người Dùng mang đi]===============================");
                                                 System.out.printf("\t| %-87s |%n", "Bạn có muốn thêm topping nào nữa không?");
                                                 System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                                 System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -2468,7 +2488,7 @@ public class NguoiDung {
                                     while (true) {
                                         Function.clearScreen();
                                         System.out.println(
-                                            "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            "\t=============================[Chức năng người Dùng mang đi]===============================");
                                         System.out.printf("\t| %-87s |%n", "Bạn có muốn đặt thêm món nước nào nữa không?");
                                         System.out.printf("\t| %-5s %-81s |%n", "1.", "Có");
                                         System.out.printf("\t| %-5s %-81s |%n", "2.", "Không");
@@ -2512,7 +2532,7 @@ public class NguoiDung {
                                     Function.clearScreen();
                                     order.xuatThongTin();
                                     System.out.println(
-                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                        "\t=============================[Chức năng người Dùng mang đi]===============================");
                                     System.out.printf("\t| %-87s |%n", "Mời bạn xác nhận đơn hàng");
                                     System.out.printf("\t| %-5s %-81s |%n", "1.", "Xác nhận");
                                     System.out.printf("\t| %-5s %-81s |%n", "2.", "Không xác nhận");
@@ -2561,6 +2581,11 @@ public class NguoiDung {
 
 
                                         hd = new HoaDon(temp, nvtmp, order, tongTien, tienKhachDua);
+                                        nvtmp.setSoBillDaXuLy(nvtmp.getSoBillDaXuLy() + 1);
+                                        nvtmp.setTongTienDaXuLy(nvtmp.getTongTienDaXuLy() + tongTien);
+                                        if (temp.IsMember()) {
+                                            temp.getMemberCard().point((int)tongTien);
+                                        }
                                         break;
 
                                         case "2":
@@ -2584,6 +2609,8 @@ public class NguoiDung {
                             hd.xuatThongTin();
                             qlHoaDon.billList.add(hd);
                             qlHoaDon.writeAll();
+                            qlNhanVien.writeFile();
+                            qlKhachHang.writeAll();
                             try {
                                 Thread.sleep(2500);
                             } catch (InterruptedException e) {

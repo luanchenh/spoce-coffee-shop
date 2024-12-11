@@ -968,10 +968,12 @@ public abstract class NuocUong implements INhap, IXuat {
     public void printToppingOfDrink() {
         QLTopping ql = new QLTopping();
         ql.Init();
-        System.out.println("\t====================[Danh sách topping]====================");
-        System.out.printf("\t%-5s %-25s %-10s\n", "Mã", "Tên topping", "Giá (VND)\n");
+        System.out.println("\t======================[Danh sách topping]====================");
+        System.out.printf("\t| %-10s | %-25s | %-16s |\n", "Mã", "Tên topping", "Giá (VND)");
+        System.out.println("\t=============================================================");
         for (String tpID : this.topping) {
             ql.getToppingByID(tpID).menuInfo();
         }
+        System.out.println("\t=============================================================");
     }
 }

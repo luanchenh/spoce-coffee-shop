@@ -45,6 +45,10 @@ public class Account implements INhap {
         return this.IDLink;
     }
 
+    public void setIDLink(String idLink) {
+        this.IDLink = idLink;
+    }
+
     // Hàm check tài khoản tồn tại
     public boolean checkValidAccount() {
         boolean check = true;
@@ -120,6 +124,10 @@ public class Account implements INhap {
                     this.password = str;
                     break;
                 }
+            }
+
+            if (this.type.equals("2")) {
+                break;
             }
             if (this.checkValidAccount()) {
                 KhachHang kh = new KHTaiCho();

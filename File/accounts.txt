@@ -4,3 +4,5 @@ namduongit3|1422005|1|KH3
 luchenh|192|1|KH4
 luanchenh|192|1|KH5
 locchenh|192|1|KH6
+admin|admin@12345|2|NV9
+lchenh29|192|2|NV10
