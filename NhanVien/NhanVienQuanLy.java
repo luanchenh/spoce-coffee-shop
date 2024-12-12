@@ -8,6 +8,8 @@ import Utils.Function;
 import Utils.INhap;
 import Utils.IXuat;
 
+
+@SuppressWarnings("resource")
 public class NhanVienQuanLy extends Nhanvien implements INhap, IXuat {
 
     public NhanVienQuanLy() {

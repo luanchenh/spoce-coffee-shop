@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+@SuppressWarnings("resource")
 public class QLTopping implements IXuat{
     private ArrayList<Topping> toppingList;
 
