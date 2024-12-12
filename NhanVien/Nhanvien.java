@@ -188,7 +188,7 @@ public abstract class Nhanvien {
                 if (Function.isTrueNumber(str)) {
                     System.out.println("\tTên nhân viên không được là số !");
                 } else {
-                    this.tenNhanVien = str;
+                    this.tenNhanVien = Function.normalizeName(str);
                     break;
                 }
             }

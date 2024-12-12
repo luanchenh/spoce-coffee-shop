@@ -278,7 +278,7 @@ public abstract class NuocUong implements INhap, IXuat {
                 if (Function.isTrueNumber(str)) {
                     System.out.println("\tTên đồ uống không được là số !");
                 } else {
-                    this.name = str;
+                    this.name = Function.normalizeName(str);
                     break;
                 }
             }

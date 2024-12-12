@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 import Utils.Function;
 
+
+@SuppressWarnings("resource")
 public class QLAccount {
     ArrayList<Account> listAccount = new ArrayList<Account>();
 
@@ -56,25 +58,25 @@ public class QLAccount {
     }
     public void resetPassword() {
         Scanner scanner = new Scanner(System.in);
-    
+
         System.out.print("Nhập tên tài khoản: ");
         String username = scanner.nextLine();
-    
+
         boolean accountFound = false;
         for (Account account : listAccount) {
             if (account.getUsername().equals(username)) {
                 accountFound = true;
-    
+
                 System.out.print("\tNhập mật khẩu hiện tại: ");
                 String currentPassword = scanner.nextLine();
-    
+
                 if (account.getPassword().equals(currentPassword)) {
                     System.out.print("\tNhập mật khẩu mới: ");
                     String newPassword = scanner.nextLine();
-    
+
                     System.out.print("\tXác nhận lại mật khẩu mới: ");
                     String confirmPassword = scanner.nextLine();
-    
+
                     if (newPassword.equals(confirmPassword)) {
                         account.setPassword(newPassword);
                         System.out.println("\tMật khẩu đã được đổi thành công!");
@@ -88,7 +90,7 @@ public class QLAccount {
                 break;
             }
         }
-    
+
         if (!accountFound) {
             System.out.println("\tTài khoản không tồn tại.");
         }
@@ -104,7 +106,7 @@ public class QLAccount {
     }
 }
 
-    
+
     public void Menu() {
         this.Init();
         Scanner scanner = new Scanner(System.in);

@@ -48,7 +48,7 @@ public class KHMangDi extends KhachHang {
                 continue;
             }
 
-            this.customerName = str;
+            this.customerName = Function.normalizeName(str);
             break;
         }
 

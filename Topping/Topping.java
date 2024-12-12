@@ -98,7 +98,7 @@ public class Topping implements INhap, IXuat{
                     System.out.println("\tTên topping không được là số !");
                 }
                 else {
-                    this.name = str;
+                    this.name = Function.normalizeName(str);
                     break;
                 }
             }
