@@ -133,7 +133,7 @@ public class Account implements INhap {
                 KhachHang kh = new KHTaiCho();
                 kh.nhapThongTin();
                 this.IDLink = kh.getCustomerID();
-                
+
                 // ghi thông tin khách hàng mới tạo vào file
                 QLKhachHang ql = new QLKhachHang();
                 ql.Init();
@@ -144,7 +144,7 @@ public class Account implements INhap {
                 try (FileWriter writer = new FileWriter("../File/accounts.txt", true)) {
                     writer.write(this.makeString());
                     writer.write(System.lineSeparator());
-                    writer.flush();    
+                    writer.flush();
                 } catch (Exception e) {
                     System.out.println("Lỗi: " + e.getMessage());
                 }
@@ -155,7 +155,7 @@ public class Account implements INhap {
             }
         }
         // ID link là mã khách hàng không nhập mà tự thêm vào
-        
+
     }
 
     public void Login() {
@@ -201,8 +201,31 @@ public class Account implements INhap {
         return IDLink;
     }
 
+    public void resetPassword() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            System.out.print("\tNhập mật khẩu mới: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống !");
+            } else {
+                this.password = str;
+                break;
+            }
+        }
+    }
+
     public String makeString() {
         return this.username + "|" + this.password + "|" + this.type + "|" + this.IDLink;
     }
+
+
+    public void xuatThongTin() {
+        System.out.println("\t+-------------------------------------------------------------------------------------------+");
+        System.out.printf("\t| %-20s | %-20s | %-20s | %-20s |%n", this.username, this.password, this.type, this.IDLink);
+        System.out.println("\t+-------------------------------------------------------------------------------------------+");
+    }
+
 
 }
