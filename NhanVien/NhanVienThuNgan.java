@@ -140,6 +140,12 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
     public void addGioLamThem(int soGioLamThem) {
         this.soGioLamThem += soGioLamThem;
     }
+    public void addBill(int soBill) {
+        this.soBillDaXuLy += soBill;
+    }
+    public void addTongTien(double tongTien) {
+        this.tongTienDaXuLy += tongTien;
+    }
 
     @Override
     public void tinhLuong() {

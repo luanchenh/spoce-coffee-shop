@@ -112,6 +112,58 @@ public class QLNhanVien {
         }
     }
 
+
+    // Lấy từng loại danh sách nhân viên
+    public ArrayList<Nhanvien> getThuNganList() {
+        ArrayList<Nhanvien> danhSachThuNgan = new ArrayList<>();
+        for (Nhanvien nv : this.nhanVienList) {
+            if (nv instanceof NhanVienThuNgan) {
+                danhSachThuNgan.add((NhanVienThuNgan) nv);
+            }
+        }
+        return danhSachThuNgan;
+    }
+    public ArrayList<Nhanvien> getPhaCheList() {
+        ArrayList<Nhanvien> danhSachPhaChe = new ArrayList<>();
+        for (Nhanvien nv : this.nhanVienList) {
+            if (nv instanceof NhanVienPhaChe) {
+                danhSachPhaChe.add((NhanVienPhaChe) nv);
+            }
+        }
+        return danhSachPhaChe;
+    }
+
+    public ArrayList<Nhanvien> getQuanLyList() {
+        ArrayList<Nhanvien> danhSachQuanLy = new ArrayList<>();
+        for (Nhanvien nv : this.nhanVienList) {
+            if (nv instanceof NhanVienQuanLy) {
+                danhSachQuanLy.add((NhanVienQuanLy) nv);
+            }
+        }
+        return danhSachQuanLy;
+    }
+
+    public ArrayList<String> maNVPhaChe() {
+        ArrayList<String> danhSachMaNV = new ArrayList<>();
+        for (Nhanvien nv : this.nhanVienList) {
+            if (nv instanceof NhanVienPhaChe) {
+                danhSachMaNV.add(nv.getMaNhanVien());
+            }
+        }
+        return danhSachMaNV;
+    }
+
+
+    // Lấy cả danh sách nhân viên
+    public ArrayList<Nhanvien> getNhanVienList() {
+        return this.nhanVienList;
+    }
+
+    // Setter
+    public void setNhanVienList(ArrayList<Nhanvien> nhanVienList) {
+        this.nhanVienList = nhanVienList;
+    }
+
     public void writeFile() {
         String line;
         try (FileWriter writer = new FileWriter(EmployeeFile, false)) {
@@ -120,7 +172,7 @@ public class QLNhanVien {
                 writer.append(line);
                 writer.append(System.lineSeparator());
             }
-            System.out.println("\tCập nhật dữ liệu thành công !");
+            // System.out.println("\tCập nhật dữ liệu thành công !");
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
         }

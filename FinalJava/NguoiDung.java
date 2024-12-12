@@ -9,6 +9,7 @@ import KhachHang.KHTaiCho;
 import KhachHang.KhachHang;
 import KhachHang.MemberCard;
 import KhachHang.QLKhachHang;
+import NhanVien.NhanVienPhaChe;
 import NhanVien.NhanVienThuNgan;
 import NhanVien.Nhanvien;
 import NhanVien.QLNhanVien;
@@ -20,9 +21,12 @@ import Topping.Topping;
 import Utils.Date;
 import Utils.Function;
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+// Local Date
+import java.time.LocalDate;
 
 /**
  *
@@ -679,6 +683,7 @@ public class NguoiDung {
 
                                             switch (str) {
                                                 case "1":
+
                                                     double tongTien = order.tinhTongTien();
                                                     double tienKhachDua;
                                                     while (true) {
@@ -1517,6 +1522,14 @@ public class NguoiDung {
 
                                             Random rd = new Random();
                                             nvtmp = nvtnList.get(rd.nextInt(nvtnList.size() - 0));
+                                            NhanVienPhaChe nvpc = null;
+                                            ArrayList<NhanVienPhaChe> nvpcList = new ArrayList<>();
+                                            for (Nhanvien nv : qlNhanVien.nhanVienList) {
+                                                if (nv instanceof NhanVienPhaChe) {
+                                                    nvpcList.add((NhanVienPhaChe) nv);
+                                                }
+                                            }
+                                            nvpc = nvpcList.get(rd.nextInt(nvpcList.size() - 0));
 
                                             boolean isWantDrink = true;
                                             ThucDon order = new ThucDon();
@@ -2017,6 +2030,56 @@ public class NguoiDung {
                                                 switch (str) {
                                                     case "1":
                                                         double tongTien = order.tinhTongTien();
+                                                        if (temp.IsMember()) {
+                                                            if (temp.getMemberCard().getPoint() > tongTien / 100) {
+                                                                while (true) {
+                                                                    System.out.println(
+                                                                            "\tBạn có muốn sử dụng điểm tích lũy để giảm 10% tổng hóa đơn không?");
+                                                                    System.out.println("\t1. Có");
+                                                                    System.out.println("\t2. Không");
+                                                                    System.out.print("\tNhập lựa chọn của bạn: ");
+                                                                    str = sc.nextLine();
+                                                                    if (Function.isEmpty(str)) {
+                                                                        System.out.println("\tVui lòng không để trống !");
+                                                                        continue;
+                                                                    }
+                                                                    if (!Function.isTrueNumber(str)) {
+                                                                        System.out.println("\tVui lòng nhập số !");
+                                                                        continue;
+                                                                    }
+                                                                    switch (str) {
+                                                                        case "1":
+                                                                            tongTien -= tongTien * 0.1;
+                                                                            temp.getMemberCard().subPoint((int) (tongTien / 100));
+                                                                            break;
+
+                                                                        case "2":
+                                                                            break;
+
+                                                                        default:
+                                                                            System.out.println("\tVui lòng chọn từ 1 đến 2 !");
+                                                                            try {
+                                                                                Thread.sleep(1500);
+                                                                            } catch (InterruptedException e) {
+                                                                                e.printStackTrace();
+                                                                            }
+                                                                            continue;
+                                                                    }
+                                                                    break;
+                                                                }
+                                                            }
+                                                        }
+                                                        // Lấy ngày và tháng hiện tại
+                                                        LocalDate today = LocalDate.now();
+                                                        String day = String.format("%02d", today.getDayOfMonth()); // Ngày
+                                                        String month = String.format("%02d", today.getMonthValue()); // Tháng
+
+                                                        if (temp.IsMember()) {
+                                                            if (temp.getMemberCard().getBirthDay().getDay().equals(day) && temp.getMemberCard().getBirthDay().getMonth().equals(month)) {
+                                                                System.out.println("\tChúc mừng sinh nhật bạn được giảm 10% hoá đơn !");
+                                                                tongTien -= tongTien * 0.1;
+                                                            }
+                                                        }
                                                         double tienKhachDua;
                                                         while (true) {
                                                             // System.out.println("\tSố tiền phải trả là: " + tongTien);
@@ -2048,6 +2111,8 @@ public class NguoiDung {
                                                         hd = new HoaDon(temp, nvtmp, order, tongTien, tienKhachDua);
                                                         nvtmp.setSoBillDaXuLy(nvtmp.getSoBillDaXuLy() + 1);
                                                         nvtmp.setTongTienDaXuLy(nvtmp.getTongTienDaXuLy() + tongTien);
+
+                                                        nvpc.setSoDonDaPhaChe(nvpc.getSoDonDaPhaChe() + 1);
                                                         if (temp.IsMember()) {
                                                             temp.getMemberCard().point((int) tongTien);
                                                         }
@@ -2081,6 +2146,7 @@ public class NguoiDung {
                                         } catch (InterruptedException e) {
                                             e.printStackTrace();
                                         }
+                                        System.out.print("\tEnter để tiếp tục!");
                                         str = sc.nextLine();
                                     }
 

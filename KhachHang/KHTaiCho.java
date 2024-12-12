@@ -153,20 +153,7 @@ public class KHTaiCho extends KhachHang {
     // Hàm xuất thông tin của khách hàng dùng tại chỗ
     @Override
     public void xuatThongTin() {
-        // System.out.println("ID khách hàng: " + this.customerID);
-        // System.out.println("Tên khách hàng: " + this.customerName);
-        // String memberStatus = this.isMember ? "Là thành viên" : "Không là thành viên";
-        // System.out.println("Trạng thái thành viên: " + memberStatus);
-        // if (this.memberCard != null) {
-        //     this.memberCard.xuatThongTin();
-        // }
-        // System.out.println("Số lượng khách dùng tại chỗ: " + this.dineInCustomer);
-        // if (this.table != null) {
-        //     this.table.xuatThongTin();
-        // } else {
-        //     System.out.println("Thông tin bàn: Chưa có bàn");
-        // }
-        // System.out.println();
+
 
         System.out.println("\t========================================================================================================================");
         System.out.printf("\t| %-23s %-93s |%n", "ID Khách Hàng:", this.customerID);
