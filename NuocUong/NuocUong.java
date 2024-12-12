@@ -440,8 +440,27 @@ public abstract class NuocUong implements INhap, IXuat {
                 } else {
                     if (Function.isTrueNumber(str)) {
                         number = Integer.parseInt(str);
-                        System.out.println("\t[Notice] Loại đồ uống " + this.drinkType + " có " + number + " topping");
-                        break;
+                        // Lấy số lượng topping hiện có trong file
+                        File file = new File("../File/topping.txt");
+                        int count = 0;
+                        try (Scanner rd = new Scanner(file)) {
+                            while (rd.hasNextLine()) {
+                                String line = rd.nextLine();
+                                if (line.isEmpty())
+                                    continue;
+                                count++;
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Lỗi khi đọc file topping.txt: " + e.getMessage());
+                        }
+                        if (number > count) {
+                            System.out.println("\tSố lượng topping không được lớn hơn số lượng topping hiện có !");
+                        } else if (number == 0) {
+                            System.out.println("\tSố lượng topping không được bằng 0 !");
+                        } else {
+                            System.out.println("\t[Notice] Loại đồ uống " + this.drinkType + " có " + number + " topping");
+                            break;
+                        }
                     } else {
                         System.out.println("\tVui lòng nhập số và số phải lớn hơn 0");
                     }

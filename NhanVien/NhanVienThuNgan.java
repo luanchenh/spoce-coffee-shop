@@ -27,6 +27,7 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
             String loaiNhanVien, String caLamViec) {
         super(maNhanVien, tenNhanVien, tuoi, ngaySinh, diaChi, loaiNhanVien, caLamViec);
     }
+
     public NhanVienThuNgan(String maNhanVien, String tenNhanVien, int tuoi, Date ngaySinh, Address diaChi,
             String loaiNhanVien, String caLamViec, int soBillDaXuLy, double tongTienDaXuLy, int soGioLamThem) {
         super(maNhanVien, tenNhanVien, tuoi, ngaySinh, diaChi, loaiNhanVien, caLamViec);
@@ -121,21 +122,20 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
     public void xuatThongTin() {
         super.xuatThongTin();
         // System.out.println("\tSố bill đã xử lý: " + this.soBillDaXuLy);
-        // System.out.println("\tTổng tiền đã xử lý: " + Function.formatMoney(String.valueOf(this.tongTienDaXuLy)));
+        // System.out.println("\tTổng tiền đã xử lý: " +
+        // Function.formatMoney(String.valueOf(this.tongTienDaXuLy)));
         // System.out.println("\tSố giờ làm thêm: " + this.soGioLamThem);
     }
+
     @Override
     public void thongTinChiTiet() {
         System.out.printf(
-                        "\t| %-12s | %-27d | %-20s | %-17d | %-80s |\n",
-                        this.getMaNhanVien(), this.getSoBillDaXuLy(),
-                        Function.formatMoney(String.valueOf(this.getTongTienDaXuLy())),
-                        this.getSoGioLamThem(), this.getDiaChi());
-    }
-    
-    
-    
+                "\t| %-12s | %-27d | %-20s | %-17d | %-80s |\n",
+                this.getMaNhanVien(), this.getSoBillDaXuLy(),
+                Function.formatMoney(String.valueOf(this.getTongTienDaXuLy())),
+                this.getSoGioLamThem(), this.getDiaChi());
 
+    }
 
     public void addGioLamThem(int soGioLamThem) {
         this.soGioLamThem += soGioLamThem;
@@ -143,18 +143,26 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
 
     @Override
     public void tinhLuong() {
-        System.out.println("\tLương căn bản: "+ Function.formatMoney("1500000"));
-        // Nếu ca tối phụ cấp 500000 còn không thì hiện 0
-        System.out.println("\tPhụ cấp ca: " + (this.caLamViec.equals("EVENING") ? Function.formatMoney("500000") : Function.formatMoney("0")));
-        // Nếu số giờ làm thêm lớn hơn 0 thì tính tiền làm thêm
-        if (this.soGioLamThem > 0) {
-            System.out.println("\tTiền làm thêm: " + Function.formatMoney(String.valueOf(this.soGioLamThem * 50000)));
-        } else {
-            System.out.println("\tTiền làm thêm: " + Function.formatMoney("0"));
-        }
-        // Tính tổng lương
-        double tongLuong = 1500000 + (this.caLamViec.equals("EVENING") ? 500000 : 0) + (this.soGioLamThem * 50000);
-        System.out.println("\tTổng lương: " + Function.formatMoney(String.valueOf(tongLuong)));
+        int luongCoBan = 1500000;
+        int phuCapCa = this.caLamViec.equals("EVENING") ? 500000 : 0;
+        int tienLamThem = this.soGioLamThem * 50000;
+        String loaiNhanVien = "Nhân viên thu ngân";
+        double tongLuong = luongCoBan + phuCapCa + tienLamThem;
+
+        System.out.println(
+                "\t+--------------+-----------------------------+----------------------+-------------------+---------------------------+-------------------+");
+        System.out.printf(
+                "\t| %-12s | %-27s | %-20s | %-17s | %-25s | %-17s |\n",
+                "Mã nhân viên", "Loại nhân viên", "Lương cơ bản", "Phụ cấp ca", "Tiền giờ làm thêm", "Tổng lương");
+        System.out.println(
+                "\t+--------------+-----------------------------+----------------------+-------------------+---------------------------+-------------------+");
+        System.out.printf(
+                "\t| %-12s | %-27s | %-20s | %-17s | %-25s | %-17s |\n",
+                this.maNhanVien, loaiNhanVien, Function.formatMoney(String.valueOf(luongCoBan)),
+                Function.formatMoney(String.valueOf(phuCapCa)), Function.formatMoney(String.valueOf(tienLamThem)),
+                Function.formatMoney(String.valueOf(tongLuong)));
+        System.out.println(
+                "\t+--------------+-----------------------------+----------------------+-------------------+---------------------------+-------------------+");
     }
 
     @Override
@@ -288,6 +296,7 @@ public class NhanVienThuNgan extends Nhanvien implements INhap, IXuat {
             }
         }
     }
+
     @Override
     public String makeString() {
         StringBuilder sb = new StringBuilder(super.makeString()); // Gọi makeString của lớp cha

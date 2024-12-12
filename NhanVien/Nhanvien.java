@@ -245,9 +245,9 @@ public abstract class Nhanvien {
     }
 
     public void xuatThongTin() {
-       
+
         // In thông tin chính của nhân viên
-       
+
         String loaiNhanVienLabel = this.loaiNhanVien.equals("NVPC") ? "Nhân viên pha chế"
                 : this.loaiNhanVien.equals("NVTN") ? "Nhân viên thu ngân"
                         : this.loaiNhanVien.equals("NVQL") ? "Nhân viên quản lý" : "Không xác định";
@@ -259,7 +259,9 @@ public abstract class Nhanvien {
         // System.out.println("\tĐịa chỉ");
         // System.out.println("\t" + this.diaChi.toString());
     }
-    public void thongTinChiTiet(){}
+
+    public void thongTinChiTiet() {
+    }
 
     public String makeString() {
         StringBuilder sb = new StringBuilder();

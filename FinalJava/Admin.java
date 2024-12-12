@@ -13,6 +13,7 @@ import Topping.QLTopping;
 import Utils.Function;
 import java.util.Scanner;
 
+@SuppressWarnings("resource")
 public class Admin {
     public static void Menu() {
         QLKhachHang qlKhachHang = new QLKhachHang();
@@ -21,10 +22,11 @@ public class Admin {
         QLTopping qlTopping = new QLTopping();
         QLBan qlBan = new QLBan();
         QLHoaDon qlHoaDon = new QLHoaDon();
+
         Scanner sc = new Scanner(System.in);
         String str;
 
-        while (true) { 
+        while (true) {
             Function.clearScreen();
             System.out.println(
                     "\t======================================[Trang admin]========================================");

@@ -33,7 +33,7 @@ public class Main {
                     "\t==========================================================================================");
             System.out.print("\t=> Nhập lựa chọn của bạn: ");
             str = sc.nextLine();
-            
+
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không bỏ trống!");
                 continue;
@@ -56,24 +56,24 @@ public class Main {
                     while (true) {
                         System.out.print("\t=> Mời bạn nhập tài khoản: ");
                         username = sc.nextLine();
-    
+
                         if (Function.isEmpty(username)) {
                             System.out.println("\tTài khoản không được rỗng!");
                             continue;
                         }
-    
+
                         break;
                     }
 
                     while (true) {
                         System.out.print("\t=> Mời bạn nhập mật khẩu: ");
                         password = sc.nextLine();
-    
+
                         if (Function.isEmpty(password)) {
                             System.out.println("\tMật khẩu không được rỗng!");
                             continue;
                         }
-    
+
                         break;
                     }
 
@@ -88,7 +88,7 @@ public class Main {
                                 if (arr[2].equals("2")) {
                                     System.out.println("\tĐăng nhập thành công!");
                                     try {
-                                        Thread.sleep(2500);
+                                        Thread.sleep(1500);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
@@ -97,7 +97,7 @@ public class Main {
                                 } else {
                                     System.out.println("\tTài khoản không có quyền quản trị!");
                                     try {
-                                        Thread.sleep(2500);
+                                        Thread.sleep(1500);
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
@@ -109,7 +109,7 @@ public class Main {
                             System.out.println("\tTài khoản hoặc mật khẩu không đúng!");
                         }
                         try {
-                            Thread.sleep(2500);
+                            Thread.sleep(1500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }

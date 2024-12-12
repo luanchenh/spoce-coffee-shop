@@ -6,3 +6,6 @@ luanchenh|192|1|KH5
 locchenh|192|1|KH6
 admin|admin@12345|2|NV9
 lchenh29|192|2|NV10
+namduongit|NDuong205|1|KH12
+luanadmin|1422005Nam|2|NV10
+tuanadmin|14222005|2|NV11

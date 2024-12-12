@@ -24,7 +24,7 @@ public class NhanVienQuanLy extends Nhanvien implements INhap, IXuat {
 
     @Override
     void tinhLuong() {
-        System.out.println("\tTổng lương: " + Function.formatMoney("20000000"));
+        // Nhân viên quản lí không có lương cứng
     }
 
     @Override
@@ -105,7 +105,7 @@ public class NhanVienQuanLy extends Nhanvien implements INhap, IXuat {
                             System.out.println("\tVui lòng nhập số!");
                         }
                     break;
-                    
+
                     case 10:
                         System.out.println("\tThoát chỉnh sửa.");
                         return;
@@ -118,13 +118,13 @@ public class NhanVienQuanLy extends Nhanvien implements INhap, IXuat {
             }
         }
     }
-    
+
     @Override
     public void thongTinChiTiet() {
         System.out.printf("\t| %-12s | %-27s | %-20s | %-17s | %-80s |\n", this.getMaNhanVien(), this.getTenNhanVien(), this.getNgaySinh().toString(), this.getCaLamViec(), this.getDiaChi().toString());
     }
 
-    @Override 
+    @Override
     public void nhapThongTin() {
         super.nhapThongTin();
     }

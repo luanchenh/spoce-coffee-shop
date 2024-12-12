@@ -8,6 +8,8 @@ import Utils.Function;
 import Utils.IXuat;
 import java.io.File;
 import java.util.Scanner;
+// Local Date
+import java.time.LocalDate;
 
 @SuppressWarnings({ "resource", "unused" })
 public class HoaDon implements IXuat {
@@ -21,7 +23,6 @@ public class HoaDon implements IXuat {
     private double tienKhachDua;
     private double tienThua;
 
-
     // Get mã tự động
     private static int countBill = 0;
     static {
@@ -33,20 +34,21 @@ public class HoaDon implements IXuat {
                 rd.nextLine();
             }
         } catch (Exception e) {
-            System.out.println("\tLỗi: "+ e.getMessage());
+            System.out.println("\tLỗi: " + e.getMessage());
         }
         countBill = totalBillCode;
     }
 
     public HoaDon() {
-        this.maHoaDon =  "HD" + (countBill++);
+        this.maHoaDon = "HD" + (countBill++);
         this.thucDon = new ThucDon();
         this.ngayTaoHoaDon = new Date(); // Mặc định là ngày hiện tại
         this.ngayTaoHoaDon.getLocalDate();
         this.nhanVien = new NhanVienThuNgan();
     }
 
-    public HoaDon(String maHoaDon, KhachHang khachHang, NhanVienThuNgan nhanVien ,Date ngayTaoHoaDon, ThucDon thucDon, String trangThaiHoaDon, double tongTien, double tienKhachDua) {
+    public HoaDon(String maHoaDon, KhachHang khachHang, NhanVienThuNgan nhanVien, Date ngayTaoHoaDon, ThucDon thucDon,
+            String trangThaiHoaDon, double tongTien, double tienKhachDua) {
         this.maHoaDon = maHoaDon;
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
@@ -58,8 +60,9 @@ public class HoaDon implements IXuat {
         this.tienThua = tienKhachDua - this.tongTien;
     }
 
-    public HoaDon(KhachHang khachHang, NhanVienThuNgan nhanVien, ThucDon thucDon, double tongTien, double tienKhachDua) {
-        this.maHoaDon =  "HD" + (countBill++);
+    public HoaDon(KhachHang khachHang, NhanVienThuNgan nhanVien, ThucDon thucDon, double tongTien,
+            double tienKhachDua) {
+        this.maHoaDon = "HD" + (countBill++);
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
         this.thucDon = thucDon;
@@ -72,7 +75,7 @@ public class HoaDon implements IXuat {
     }
 
     public HoaDon(KhachHang khachHang, NhanVienThuNgan nhanVien) {
-        this.maHoaDon =  "HD" + (countBill++);
+        this.maHoaDon = "HD" + (countBill++);
         this.nhanVien = nhanVien;
         this.khachHang = khachHang;
         this.ngayTaoHoaDon = new Date();
@@ -111,6 +114,7 @@ public class HoaDon implements IXuat {
     public Date getNgayTaoHoaDon() {
         return ngayTaoHoaDon;
     }
+
     public NhanVienThuNgan getNhanVien() {
         return nhanVien;
     }
@@ -126,87 +130,88 @@ public class HoaDon implements IXuat {
     public void setTrangThaiHoaDon(String trangThaiHoaDon) {
         this.trangThaiHoaDon = trangThaiHoaDon;
     }
+
     public void setNhanVien(NhanVienThuNgan nhanVien) {
         this.nhanVien = nhanVien;
     }
 
-
-
     // @Override
     // public void nhapThongTin() {
-    //     Scanner sc = new Scanner(System.in);
-    //     String str;
-    //     System.out.println("\tThông tin mã hóa đơn đã được tự động tạo: " + this.maHoaDon);
+    // Scanner sc = new Scanner(System.in);
+    // String str;
+    // System.out.println("\tThông tin mã hóa đơn đã được tự động tạo: " +
+    // this.maHoaDon);
 
-    //     System.out.println("\tNhập thông tin thực đơn:");
-    //     this.thucDon.nhap();
+    // System.out.println("\tNhập thông tin thực đơn:");
+    // this.thucDon.nhap();
 
-    //     while(true) {
-    //         System.out.println("\tChọn trạng thái hoá đơn");
-    //         System.out.println("\t1. Đang xử lý");
-    //         System.out.println("\t2. Đã làm xong");
-    //         System.out.println("\t3. Huỷ đơn");
-    //         System.out.print("\tNhập lựa chọn: ");
-    //         str = sc.nextLine();
-    //         if (Function.isEmpty(str)) {
-    //             System.out.println("\tVui lòng không để trống !");
-    //         }
-    //         else {
-    //             if (Function.isTrueNumber(str)) {
-    //                 int number = Integer.parseInt(str);
-    //                 if (number >= 1 && number <= 3) {
-    //                     if (number == 1) {
-    //                         this.trangThaiHoaDon = "Đang xử lý";
-    //                         break;
-    //                     }
-    //                     else if (number == 2) {
-    //                         this.trangThaiHoaDon = "Đã làm xong";
-    //                         break;
-    //                     }
-    //                     else if (number == 3) {
-    //                         this.trangThaiHoaDon = "Huỷ đơn";
-    //                         break;
-    //                     }
-    //                 }
-    //                 else {
-    //                     System.out.println("\tVui lòng chọn từ 1 đến 3 !");
-    //                 }
-    //             }
-    //             else {
-    //                 System.out.println("\tVui lòng nhập số !");
-    //             }
-    //         }
-    //     }
-    //     System.out.print("\tNhập trạng thái hóa đơn: ");
-    //     this.trangThaiHoaDon = sc.nextLine();
+    // while(true) {
+    // System.out.println("\tChọn trạng thái hoá đơn");
+    // System.out.println("\t1. Đang xử lý");
+    // System.out.println("\t2. Đã làm xong");
+    // System.out.println("\t3. Huỷ đơn");
+    // System.out.print("\tNhập lựa chọn: ");
+    // str = sc.nextLine();
+    // if (Function.isEmpty(str)) {
+    // System.out.println("\tVui lòng không để trống !");
+    // }
+    // else {
+    // if (Function.isTrueNumber(str)) {
+    // int number = Integer.parseInt(str);
+    // if (number >= 1 && number <= 3) {
+    // if (number == 1) {
+    // this.trangThaiHoaDon = "Đang xử lý";
+    // break;
+    // }
+    // else if (number == 2) {
+    // this.trangThaiHoaDon = "Đã làm xong";
+    // break;
+    // }
+    // else if (number == 3) {
+    // this.trangThaiHoaDon = "Huỷ đơn";
+    // break;
+    // }
+    // }
+    // else {
+    // System.out.println("\tVui lòng chọn từ 1 đến 3 !");
+    // }
+    // }
+    // else {
+    // System.out.println("\tVui lòng nhập số !");
+    // }
+    // }
+    // }
+    // System.out.print("\tNhập trạng thái hóa đơn: ");
+    // this.trangThaiHoaDon = sc.nextLine();
 
-    //     this.ngayTaoHoaDon = new Date();
+    // this.ngayTaoHoaDon = new Date();
     // }
     // public double getTongTien(){
-    //     return 1;
+    // return 1;
     // }
 
     @Override
     public void xuatThongTin() {
-        System.out.println("\t==============================================================");
-        System.out.println("\t                      THÔNG TIN HÓA ĐƠN                       ");
-        System.out.println("\t==============================================================");
-        System.out.printf("\tNhân viên tạo      : %s%n", this.nhanVien.getTenNhanVien());
-        System.out.printf("\tMã hóa đơn         : %s%n", this.maHoaDon);
-        System.out.printf("\tNgày tạo hóa đơn   : %s%n", this.ngayTaoHoaDon);
-        System.out.printf("\tTrạng thái hóa đơn : %s%n", this.trangThaiHoaDon);
-        System.out.println("\tTên khách hàng     : " + this.khachHang.getCustomerName());
-        System.out.println("\t--------------------------------------------------------------");
-        System.out.println("\t                      CHI TIẾT THỰC ĐƠN                       ");
-        System.out.println("\t--------------------------------------------------------------");
-        this.thucDon.xuatThongTin(); //xuất
-        System.out.println("\t==============================================================");
-        System.out.printf("\tTổng tiền         : %.0f VNĐ%n", this.tongTien);
-        System.out.printf("\tTiền khách đưa    : %.0f VNĐ%n", this.tienKhachDua);
-        System.out.printf("\tTiền thừa         : %.0f VNĐ%n", this.tienThua);
+        System.out.println("\t+============================================================+");
+        System.out.println("\t|                     THÔNG TIN HÓA ĐƠN                      |");
+        System.out.println("\t+============================================================+");
+        System.out.printf("\t| %-18s : %-37s |%n", "Nhân viên tạo", this.nhanVien.getTenNhanVien());
+        System.out.printf("\t| %-18s : %-37s |%n", "Mã hóa đơn", this.maHoaDon);
+        System.out.printf("\t| %-18s : %-37s |%n", "Ngày tạo hóa đơn", this.ngayTaoHoaDon);
+        System.out.printf("\t| %-18s : %-37s |%n", "Trạng thái hóa đơn", this.trangThaiHoaDon);
+        System.out.printf("\t| %-18s : %-37s |%n", "Tên khách hàng", this.khachHang.getCustomerName());
+        System.out.println("\t+------------------------------------------------------------+");
+        System.out.println("\t|                     CHI TIẾT THỰC ĐƠN                      |");
+        System.out.println("\t+------------------------------------------------------------+");
+        this.thucDon.xuatThongTin(); // Xuất thông tin thực đơn
+        System.out.println("\t+------------------------------------------------------------+");
+        System.out.printf("\t| %-18s : %-37s |%n", "Tổng tiền", Function.formatMoney(this.tongTien + ""));
+        System.out.printf("\t| %-18s : %-37s |%n", "Tiền khách đưa", Function.formatMoney(this.tienKhachDua + ""));
+        System.out.printf("\t| %-18s : %-37s |%n", "Tiền thừa", Function.formatMoney(this.tienThua + ""));
+        System.out.println("\t+============================================================+");
+        System.out.println("\t|                   CẢM ƠN QUÝ KHÁCH!                        |");
+        System.out.println("\t+============================================================+");
 
-        System.out.println("\t                      CẢM ƠN QUÝ KHÁCH!                       ");
-        System.out.println("\t==============================================================");
     }
 
     public String makeString() {
@@ -220,7 +225,7 @@ public class HoaDon implements IXuat {
         str.append(this.tienKhachDua).append("|");
         str.append(this.tienThua).append("|");
 
-        for (int i=0; i<this.thucDon.getDanhSachNuocUong().size(); i++) {
+        for (int i = 0; i < this.thucDon.getDanhSachNuocUong().size(); i++) {
             str.append(this.thucDon.getDanhSachNuocUong().get(i).getId()).append(",");
 
             str.append(this.thucDon.getSize().get(i)).append(",");
@@ -228,8 +233,9 @@ public class HoaDon implements IXuat {
             if (this.thucDon.getDanhSachTopping().get(i).isEmpty()) {
                 str.append(",");
             } else {
-                for (int j=0; j<this.thucDon.getDanhSachTopping().get(i).size(); j++) {
-                    if (this.thucDon.getDanhSachTopping().get(i).indexOf(this.thucDon.getDanhSachTopping().get(i).get(j)) == this.thucDon.getDanhSachTopping().get(i).size() - 1) {
+                for (int j = 0; j < this.thucDon.getDanhSachTopping().get(i).size(); j++) {
+                    if (this.thucDon.getDanhSachTopping().get(i).indexOf(this.thucDon.getDanhSachTopping().get(i)
+                            .get(j)) == this.thucDon.getDanhSachTopping().get(i).size() - 1) {
                         str.append(this.thucDon.getDanhSachTopping().get(i).get(j).getId()).append(",");
                     } else {
                         str.append(this.thucDon.getDanhSachTopping().get(i).get(j).getId()).append(";");
@@ -237,7 +243,7 @@ public class HoaDon implements IXuat {
                 }
             }
 
-            for (int j=0; j<this.thucDon.getTrangThaiNuocUong().get(i).size(); j++) {
+            for (int j = 0; j < this.thucDon.getTrangThaiNuocUong().get(i).size(); j++) {
                 if (j == 3) {
                     str.append(this.thucDon.getTrangThaiNuocUong().get(i).get(j) ? "1" : "0").append("|");
                 } else {
@@ -251,7 +257,8 @@ public class HoaDon implements IXuat {
     }
 
     public void inRaTrangThai() {
-        System.out.printf("\t| %-10s | %-12s | %-20s |%n", this.maHoaDon, this.ngayTaoHoaDon.toString(), this.trangThaiHoaDon);
+        System.out.printf("\t| %-10s | %-12s | %-20s |%n", this.maHoaDon, this.ngayTaoHoaDon.toString(),
+                this.trangThaiHoaDon);
     }
 
     public void changeBillStatus() {
@@ -260,51 +267,51 @@ public class HoaDon implements IXuat {
 
         switch (this.trangThaiHoaDon) {
             case "Đang xử lý":
-            while (true) { 
-                Function.clearScreen();
-                System.out.println("\tTrạng thái hóa đơn hiện tại: " + this.trangThaiHoaDon);
-                System.out.println("\tCác trạng thái có thể chuyển");
-                System.out.println("\t1. Đã làm xong");
-                System.out.println("\t2. Đã hủy");
-                System.out.print("\tMời bạn chọn trạng thái chuyển đổi: ");
-                str = sc.nextLine();
-
-                if (Function.isEmpty(str)) {
-                    System.out.println("\tVui lòng không để trống!");
-                    continue;
-                }
-
-                if (!Function.isTrueNumber(str)) {
-                    System.out.println("\tVui lòng nhập số!");
-                    continue;
-                }
-
-                switch (str) {
-                    case "1":
-                    this.trangThaiHoaDon = "Đã làm xong";
-                    System.out.println("\tĐã chuyển trạng thái thành công!");
-                    break;
-
-                    case "2":
-                    this.trangThaiHoaDon = "Huỷ đơn";
-                    System.out.println("\tĐã chuyển trạng thái thành công!");
-                    break;
-
-                    default:
-                    System.out.println("\tVui lòng chọn từ 1 đến 2!");
-                    System.out.println("\tEnter để tiếp tục!");
+                while (true) {
+                    Function.clearScreen();
+                    System.out.println("\tTrạng thái hóa đơn hiện tại: " + this.trangThaiHoaDon);
+                    System.out.println("\tCác trạng thái có thể chuyển");
+                    System.out.println("\t1. Đã làm xong");
+                    System.out.println("\t2. Đã hủy");
+                    System.out.print("\tMời bạn chọn trạng thái chuyển đổi: ");
                     str = sc.nextLine();
-                    continue;
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("\tVui lòng không để trống!");
+                        continue;
+                    }
+
+                    if (!Function.isTrueNumber(str)) {
+                        System.out.println("\tVui lòng nhập số!");
+                        continue;
+                    }
+
+                    switch (str) {
+                        case "1":
+                            this.trangThaiHoaDon = "Đã làm xong";
+                            System.out.println("\tĐã chuyển trạng thái thành công!");
+                            break;
+
+                        case "2":
+                            this.trangThaiHoaDon = "Huỷ đơn";
+                            System.out.println("\tĐã chuyển trạng thái thành công!");
+                            break;
+
+                        default:
+                            System.out.println("\tVui lòng chọn từ 1 đến 2!");
+                            System.out.print("\tEnter để tiếp tục!");
+                            str = sc.nextLine();
+                            continue;
+                    }
+                    break;
                 }
                 break;
-            }
-            break;
 
             default:
-            System.out.println("\tTrạng thái hóa đơn hiện tại không thể thay đổi!");
-            System.out.println("\tEnter để tiếp tục!");
-            str = sc.nextLine();
-            break;
+                System.out.println("\tTrạng thái hóa đơn hiện tại không thể thay đổi!");
+                System.out.print("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                break;
         }
     }
 
@@ -317,7 +324,8 @@ public class HoaDon implements IXuat {
         }
         return false;
     }
-    public boolean checkDayAndMonthAndYear(int day,int month, int year) {
+
+    public boolean checkDayAndMonthAndYear(int day, int month, int year) {
         int billDay = Integer.parseInt(this.ngayTaoHoaDon.getDay());
         int billMonth = Integer.parseInt(this.ngayTaoHoaDon.getMonth());
         int billYear = Integer.parseInt(this.ngayTaoHoaDon.getYear());
@@ -328,7 +336,4 @@ public class HoaDon implements IXuat {
         return false;
     }
 
-
 }
-
-

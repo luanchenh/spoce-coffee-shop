@@ -88,19 +88,27 @@ public class NhanVienPhaChe extends Nhanvien implements INhap, IXuat {
 
     @Override
     public void tinhLuong() {
-        System.out.println("\tLương cơ bản: " + Function.formatMoney("2000000"));
-        // Nếu ca tối thì cấp cơ bản
-        System.out.println("\tPhụ cấp ca: "
-                + (this.caLamViec.equals("EVENING") ? Function.formatMoney("500000") : Function.formatMoney("0")));
-        // Nếu số đơn đã pha chế lớn hơn 100 thì thưởng 1 triệu
-        System.out.println("\tThưởng số đơn: "
-                + (this.soDonDaPhaChe > 100 ? Function.formatMoney("1000000") : Function.formatMoney("0")));
-        // Số giờ lamg thêm + 50
-        System.out.println("\tThưởng giờ làm thêm: " + Function.formatMoney(String.valueOf(this.soGioLamThem * 50000)));
-        // Tổng lương
-        System.out.println("\tTổng lương: "
-                + Function.formatMoney(String.valueOf(2000000 + (this.caLamViec.equals("EVENING") ? 500000 : 0)
-                        + (this.soDonDaPhaChe > 100 ? 1000000 : 0) + (this.soGioLamThem * 50000))));
+        int luongCoBan = 2000000;
+        int phuCapCa = this.caLamViec.equals("EVENING") ? 500000 : 0;
+        int thuongSoDon = this.soDonDaPhaChe > 100 ? 1000000 : 0;
+        int thuongSoGio = this.soGioLamThem * 50000;
+        int tongLuong = luongCoBan + phuCapCa + thuongSoDon + thuongSoGio;
+        String loaiNhanVien = "Nhân viên pha chế";
+
+        System.out.println(
+                "\t+--------------+-----------------------------+----------------------+-------------------+---------------------------+-------------------+");
+        System.out.printf(
+                "\t| %-12s | %-27s | %-20s | %-17s | %-25s | %-17s |\n",
+                "Mã nhân viên", "Loại nhân viên", "Lương cơ bản", "Phụ cấp ca", "Tiền giờ làm thêm", "Tổng lương");
+        System.out.println(
+                "\t+--------------+-----------------------------+----------------------+-------------------+---------------------------+-------------------+");
+        System.out.printf(
+                "\t| %-12s | %-27s | %-20s | %-17s | %-25s | %-17s |\n",
+                this.maNhanVien, loaiNhanVien, Function.formatMoney(String.valueOf(luongCoBan)),
+                Function.formatMoney(String.valueOf(phuCapCa)), Function.formatMoney(String.valueOf(thuongSoGio)),
+                Function.formatMoney(String.valueOf(tongLuong)));
+        System.out.println(
+                "\t+--------------+-----------------------------+----------------------+-------------------+---------------------------+-------------------+");
     }
 
     @Override
@@ -249,15 +257,13 @@ public class NhanVienPhaChe extends Nhanvien implements INhap, IXuat {
         // System.out.println("\tSố đơn đã pha chế: " + this.soDonDaPhaChe);
         // System.out.println("\tSố giờ làm thêm: " + this.soGioLamThem);
     }
+
     @Override
     public void thongTinChiTiet() {
         System.out.printf(
-          "\t| %-12s | %-27s | %-20s | %-100s |\n",
-                        this.getMaNhanVien(), this.getSoDonDaPhaChe(),
-                        this.getSoGioLamThem(), this.getDiaChi());
+                "\t| %-12s | %-27s | %-20s | %-100s |\n",
+                this.getMaNhanVien(), this.getSoDonDaPhaChe(),
+                this.getSoGioLamThem(), this.getDiaChi());
     }
-    
-    
-    
-}
 
+}

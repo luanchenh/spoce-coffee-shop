@@ -100,7 +100,7 @@ public class Function {
     }
 
     public static String formatMoney(String money) {
-        String value = money.trim();
+        String value = (int)Double.parseDouble(money.trim()) + "";
         String result = "";
         int count = 0;
         for (int i = value.length() - 1; i >= 0; i--) {
