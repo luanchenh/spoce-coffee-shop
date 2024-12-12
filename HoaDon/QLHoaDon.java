@@ -271,7 +271,7 @@ public class QLHoaDon {
         thang = today.getMonthValue();
         nam = today.getYear();
     
-        System.out.println("\n=== Thống kê doanh thu trong một ngày ===");
+        System.out.println("\n\t=== Thống kê doanh thu trong một ngày ===");
     
         // Nhập ngày nếu muốn
         System.out.print("\t=> Bạn có muốn nhập ngày cụ thể không? (y/n): ");
@@ -490,17 +490,17 @@ public class QLHoaDon {
     /// 
     public void thongKeDoanhThuTheoThoiGian(){
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n=== Thống kê doanh thu theo thời gian ===");
-    System.out.println("\t1. Tính theo ngày");
-    System.out.println("\t2. Tính theo tháng");
-    System.out.print("\t=> Chọn kiểu thống kê: ");
-    String choice = sc.nextLine().trim();
-        if(choice.equals("1")){
-            this.thongKeDoanhThuTrongMotNgay();
-        }
-        if(choice.equals("2")){
-            this.thongKeDoanhThuTheoThang();
-        }
+        System.out.println("\n\t=== Thống kê doanh thu theo thời gian ===");
+        System.out.println("\t1. Tính theo ngày");
+        System.out.println("\t2. Tính theo tháng");
+        System.out.print("\t=> Chọn kiểu thống kê: ");
+        String choice = sc.nextLine().trim();
+            if(choice.equals("1")){
+                this.thongKeDoanhThuTrongMotNgay();
+            }
+            if(choice.equals("2")){
+                this.thongKeDoanhThuTheoThang();
+            }
     }
     /// 
 
