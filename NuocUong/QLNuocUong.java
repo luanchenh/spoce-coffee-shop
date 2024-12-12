@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class QLNuocUong {
     ArrayList<NuocUong> waterList;
 
-    File waterFile = new File("../File/water.txt");
+    File waterFile = new File("./File/water.txt");
 
     public QLNuocUong() {
         this.waterList = new ArrayList<>();
