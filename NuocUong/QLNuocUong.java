@@ -470,14 +470,92 @@ public class QLNuocUong {
     }
 
     public void inMenuNuocUong() {
-        System.out.println(
-                    "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
-        System.out.printf("\t| %-10s | %-30s | %-20s | %-20s | %-20s | %-20s |\n",
-                "ID", "Tên", "Size S", "Size M", "Size L", "Size XL");
-                System.out.println(
-                    "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
-        for (NuocUong nu : this.waterList) {
-            nu.menuTable();
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            System.out.println("\t+--------------------------------------------------------------------------------+");
+            System.out.println("\t|                                MENU NƯỚC UỐNG                                  |");
+            System.out.println("\t+--------------------------------------------------------------------------------+");
+            System.out.println("\t| 1. Coffee                                                                      |");
+            System.out.println("\t| 2. Trà sữa                                                                     |");
+            System.out.println("\t| 3. Sinh tố                                                                     |");
+            System.out.println("\t| 4. Nước trái cây                                                               |");
+            System.out.println("\t+--------------------------------------------------------------------------------+");
+            System.out.print("\tChọn loại nước uống: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống !");
+                continue;
+            }
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tVui lòng nhập số !");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    System.out.printf("\t| %-10s | %-30s | %-20s | %-20s | %-20s | %-20s |\n",
+                            "ID", "Tên", "Size S", "Size M", "Size L", "Size XL");
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    for (NuocUong nu : this.waterList) {
+                        if (nu.drinkType.equals("CF")) {
+                            nu.menuTable();
+                        }
+                    }
+
+                    break;
+                case "2":
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    System.out.printf("\t| %-10s | %-30s | %-20s | %-20s | %-20s | %-20s |\n",
+                            "ID", "Tên", "Size S", "Size M", "Size L", "Size XL");
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    for (NuocUong nu : this.waterList) {
+                        if (nu.drinkType.equals("TS")) {
+                            nu.menuTable();
+                        }
+                    }
+                    break;
+                case "3":
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    System.out.printf("\t| %-10s | %-30s | %-20s | %-20s | %-20s | %-20s |\n",
+                            "ID", "Tên", "Size S", "Size M", "Size L", "Size XL");
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    for (NuocUong nu : this.waterList) {
+                        if (nu.drinkType.equals("ST")) {
+                            nu.menuTable();
+                        }
+                    }
+                    break;
+                case "4":
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    System.out.printf("\t| %-10s | %-30s | %-20s | %-20s | %-20s | %-20s |\n",
+                            "ID", "Tên", "Size S", "Size M", "Size L", "Size XL");
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    for (NuocUong nu : this.waterList) {
+                        if (nu.drinkType.equals("TC")) {
+                            nu.menuTable();
+                        }
+                    }
+                    break;
+                default:
+                    System.out.println("\tVui lòng chọn trong khoảng 1 đến 4 !");
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+            break;
         }
     }
 
