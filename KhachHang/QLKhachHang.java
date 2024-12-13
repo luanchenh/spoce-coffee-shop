@@ -45,8 +45,8 @@ public class QLKhachHang implements IXuat {
 
                     if (ngayHetHanThe.toString().equals(currentDate)) {
                         card.setPoint(0);
-                        card.getEndDate().setYear(Integer.parseInt(card.getEndDate().getYear()) + 2 + "");
                         card.setStartDate(card.getEndDate());
+                        card.getEndDate().setYear(Integer.parseInt(card.getEndDate().getYear()) + 2 + "");
                     }
                     status = true;
                 }
