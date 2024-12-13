@@ -1387,7 +1387,7 @@ public class NguoiDung {
                         }
                         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
                         else if (number == 3) {
-                                KhachHang temp = new KHTaiCho("KH1", false, null, 0);
+                                KhachHang temp = new KHTaiCho("KH1", "Không có tên", false, null, 0);
                                 Function.clearScreen();
                                 temp.xuatThongTin();
 

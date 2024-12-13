@@ -33,6 +33,11 @@ public class KHTaiCho extends KhachHang {
         this.dineInCustomer = 0;
         this.table = null;
     }
+    public KHTaiCho(String customerID, String customerName, boolean isMember, MemberCard memberCard, int dineInCustomer) {
+        super(customerID, customerName, isMember, memberCard);
+        this.dineInCustomer = dineInCustomer;
+        this.table = null;
+    }
 
     // Getter
     public int getNumberOfCustomer() {
