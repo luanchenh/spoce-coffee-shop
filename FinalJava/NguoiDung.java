@@ -21,11 +21,10 @@ import Topping.Topping;
 import Utils.Date;
 import Utils.Function;
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
-// Local Date
-import java.time.LocalDate;
 
 /**
  *
@@ -55,7 +54,7 @@ public class NguoiDung {
         KhachHang temp = null;
         MemberCard memberCard = null;
         boolean status = false;
-        File customerFile = new File("./File/customer.txt");
+        File customerFile = new File("../File/customer.txt");
         try (Scanner rd = new Scanner(customerFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();
