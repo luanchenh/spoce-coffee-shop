@@ -492,6 +492,7 @@ public class QLNuocUong {
                 continue;
             }
 
+            int count = 0;
             switch (str) {
                 case "1":
                     System.out.println(
@@ -503,7 +504,11 @@ public class QLNuocUong {
                     for (NuocUong nu : this.waterList) {
                         if (nu.drinkType.equals("CF")) {
                             nu.menuTable();
+                            count++;
                         }
+                    }
+                    if (count == 0) {
+                        System.out.println("\tKhông có sản phẩm nào !");
                     }
 
                     break;
@@ -517,7 +522,11 @@ public class QLNuocUong {
                     for (NuocUong nu : this.waterList) {
                         if (nu.drinkType.equals("TS")) {
                             nu.menuTable();
+                            count++;
                         }
+                    }
+                    if (count == 0) {
+                        System.out.println("\tKhông có sản phẩm nào !");
                     }
                     break;
                 case "3":
@@ -530,7 +539,11 @@ public class QLNuocUong {
                     for (NuocUong nu : this.waterList) {
                         if (nu.drinkType.equals("ST")) {
                             nu.menuTable();
+                            count++;
                         }
+                    }
+                    if (count == 0) {
+                        System.out.println("\tKhông có sản phẩm nào !");
                     }
                     break;
                 case "4":
@@ -543,7 +556,11 @@ public class QLNuocUong {
                     for (NuocUong nu : this.waterList) {
                         if (nu.drinkType.equals("TC")) {
                             nu.menuTable();
+                            count++;
                         }
+                    }
+                    if (count == 0) {
+                        System.out.println("\tKhông có sản phẩm nào !");
                     }
                     break;
                 default:
