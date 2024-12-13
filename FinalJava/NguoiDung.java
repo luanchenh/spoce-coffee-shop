@@ -54,7 +54,7 @@ public class NguoiDung {
         KhachHang temp = null;
         MemberCard memberCard = null;
         boolean status = false;
-        File customerFile = new File("./File/customer.txt");
+        File customerFile = new File("../File/customer.txt");
         try (Scanner rd = new Scanner(customerFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();

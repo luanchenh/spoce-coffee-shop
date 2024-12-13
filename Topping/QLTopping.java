@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class QLTopping implements IXuat{
     private ArrayList<Topping> toppingList;
 
-    File toppingFile = new File("./File/topping.txt");
+    File toppingFile = new File("../File/topping.txt");
 
     public QLTopping() {
         this.toppingList = new ArrayList<>();

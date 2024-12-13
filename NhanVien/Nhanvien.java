@@ -25,7 +25,7 @@ public abstract class Nhanvien {
 
     static {
 
-        File nhanVienFile = new File("./File/nhanvien.txt"); // Sửa lại đường dẫn nếu cần
+        File nhanVienFile = new File("../File/nhanvien.txt"); // Sửa lại đường dẫn nếu cần
         try (Scanner rd = new Scanner(nhanVienFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();
