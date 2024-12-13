@@ -27,7 +27,7 @@ public class QLKhachHang implements IXuat {
 
     // Phương thức để nhập dữ liệu từ file vào Array List
     public void Init() {
-        File customerFile = new File("./File/customer.txt");
+        File customerFile = new File("../File/customer.txt");
         try (Scanner sc = new Scanner(customerFile)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -45,7 +45,7 @@ public class QLKhachHang implements IXuat {
 
                     if (ngayHetHanThe.toString().equals(currentDate)) {
                         card.setPoint(0);
-                        card.getEndDate().setYear(Integer.parseInt(card.getEndDate().getYear()) + 1 + "");
+                        card.getEndDate().setYear(Integer.parseInt(card.getEndDate().getYear()) + 2 + "");
                         card.setStartDate(card.getEndDate());
                     }
                     status = true;
@@ -67,7 +67,7 @@ public class QLKhachHang implements IXuat {
 
     // Phương thức để ghi dữ liệu từ mảng vào file
     public void writeAll() {
-        try (FileWriter writer = new FileWriter("./File/customer.txt", false)) {
+        try (FileWriter writer = new FileWriter("../File/customer.txt", false)) {
             for (KhachHang kh : this.customerList) {
                 writer.write(kh.makeString() + "\n");
             }
@@ -538,53 +538,53 @@ public class QLKhachHang implements IXuat {
                     if (number >= 1 && number <= 11) {
                         if (number == 1) {
                             this.xuatThongTin();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 2) {
                             this.addCustomer();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 3) {
                             this.removeCustomer();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 4) {
                             this.modifyCustomer();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 5) {
                             this.customerList.clear();
                             this.Init();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 6) {
                             this.writeAll();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 7) {
                             this.resetList();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 8) {
                             this.listItem();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 9) {
                             this.findCustomer();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 10) {
                             Function.clearScreen();
-                            System.out.println("\tEnter để tiếp tục!");
+                            System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 11) {

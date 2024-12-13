@@ -59,7 +59,7 @@ public class QLAccount {
     public void resetPassword() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Nhập tên tài khoản: ");
+        System.out.print("\tNhập tên tài khoản: ");
         String username = scanner.nextLine();
 
         boolean accountFound = false;
@@ -112,7 +112,7 @@ public class QLAccount {
         Scanner scanner = new Scanner(System.in);
         int choice;
         do {
-            System.out.println("\n\t===== QUẢN LÝ TÀI KHOẢN =====");
+            System.out.println("\n\t=============== QUẢN LÝ TÀI KHOẢN ===============");
             System.out.println("\t1. Hiển thị thông tin tài khoản");
             System.out.println("\t2. Đổi mật khẩu");
             System.out.println("\t0. Thoát chương trình quản lí");
