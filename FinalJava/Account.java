@@ -77,7 +77,7 @@ public class Account implements INhap {
     // Hàm check tài khoản tồn tại
     public boolean checkValidAccount() {
         boolean check = true;
-        File accountFile = new File("./File/accounts.txt");
+        File accountFile = new File("../File/accounts.txt");
         try (Scanner rd = new Scanner(accountFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();
@@ -166,7 +166,7 @@ public class Account implements INhap {
                 ql.writeAll();
 
                 // ghi thông tin account vào file
-                try (FileWriter writer = new FileWriter("./File/accounts.txt", true)) {
+                try (FileWriter writer = new FileWriter("../File/accounts.txt", true)) {
                     writer.write(this.makeString());
                     writer.write(System.lineSeparator());
                     writer.flush();
@@ -210,7 +210,7 @@ public class Account implements INhap {
 
     public String checkLogin() {
         String IDLink = "";
-        File accountFile = new File("./File/accounts.txt");
+        File accountFile = new File("../File/accounts.txt");
         try (Scanner rd = new Scanner(accountFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();
