@@ -27,7 +27,7 @@ public class QLKhachHang implements IXuat {
 
     // Phương thức để nhập dữ liệu từ file vào Array List
     public void Init() {
-        File customerFile = new File("../File/customer.txt");
+        File customerFile = new File("./File/customer.txt");
         try (Scanner sc = new Scanner(customerFile)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -67,7 +67,7 @@ public class QLKhachHang implements IXuat {
 
     // Phương thức để ghi dữ liệu từ mảng vào file
     public void writeAll() {
-        try (FileWriter writer = new FileWriter("../File/customer.txt", false)) {
+        try (FileWriter writer = new FileWriter("./File/customer.txt", false)) {
             for (KhachHang kh : this.customerList) {
                 writer.write(kh.makeString() + "\n");
             }
@@ -513,17 +513,12 @@ public class QLKhachHang implements IXuat {
                     "\t|------|-------------------------------------------------------------------------------|");
 
             // In danh sách các lựa chọn
-            System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách khách hàng");
-            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một khách hàng (Tự động lưu vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một khách hàng (Tự động load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin khách hàng");
-            System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại khách hàng vào File từ danh sách");
-            System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại khách hàng vào danh sách từ File");
-            System.out.printf("\t| %-4s | %-77s |%n", "7", "Làm mới danh sách khách hàng (Reset dữ liệu nhưng không load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "8", "In ra số khách hàng từng loại");
-            System.out.printf("\t| %-4s | %-77s |%n", "9", "Tìm kiếm khách hàng");
-            System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
-            System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản lý");
+            System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm/sửa/xóa thông tin khách hàng");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Cập nhật và làm mới danh sách");
+            System.out.printf("\t| %-4s | %-77s |%n", "4", "Tìm kiếm khách hàng");
+            System.out.printf("\t| %-4s | %-77s |%n", "5", "Làm mới màn hình");
+            System.out.printf("\t| %-4s | %-77s |%n", "6", "Thoát chương trình quản lý");
 
             // In dòng kẻ dưới cùng
             System.out.println(
@@ -602,7 +597,131 @@ public class QLKhachHang implements IXuat {
         }
 
     }
+    public void MenuChinhSua(){
+        while (true) {
+            Function.clearScreen();
+System.out.println("\t============================[ Menu thêm/sửa/xóa ]===========================");
+System.out.printf("\t| %-4s | %-60s |%n", "STT", "Chức năng");
+System.out.println(
+    "\t|------|--------------------------------------------------------------|");
+    System.out.printf("\t| %-4s | %-77s |%n", "1", "Thêm một khách hàng (Tự động lưu vào File)");
+    System.out.printf("\t| %-4s | %-77s |%n", "2", "Xoá một khách hàng (Tự động load vào File)");
+    System.out.printf("\t| %-4s | %-77s |%n", "3", "Sửa thông tin khách hàng");
+    System.out.printf("\t| %-4s | %-60s |%n", "4", "Quay lại menu chính");
+System.out.println("\t=======================================================================");
+System.out.print("\t[Làm mới] Nhập lựa chọn: ");
+String str = sc.nextLine();
 
+    
+            switch (str) {
+                case "1":
+                this.addCustomer();
+                    pause(sc);
+                    break;
+    
+                case "2":
+                this.removeCustomer();
+                pause(sc);
+                    break;
+    
+                case "3":
+                this.modifyCustomer();
+                pause(sc);
+                
+                case "4":
+                return;
+
+                default:
+                    System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
+                    pause(sc);
+                    break;
+            }
+        }
+    }
+    public void capnhatChinhSua(){
+        while (true) {
+            Function.clearScreen();
+System.out.println("\t============================[ Menu cập nhật và làm mới ]===========================");
+System.out.printf("\t| %-4s | %-60s |%n", "STT", "Chức năng");
+System.out.println(
+    "\t|------|--------------------------------------------------------------|");
+    System.out.printf("\t| %-4s | %-77s |%n", "1", "Cập nhật lại khách hàng vào File từ danh sách");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Cập nhật lại khách hàng vào danh sách từ File");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Làm mới danh sách khách hàng (Reset dữ liệu nhưng không load vào File)");
+            System.out.printf("\t| %-4s | %-60s |%n", "4", "Quay lại menu chính");
+System.out.println("\t=======================================================================");
+System.out.print("\t[Làm mới] Nhập lựa chọn: ");
+String str = sc.nextLine();
+
+    
+            switch (str) {
+                case "1":
+                this.customerList.clear();
+                            this.Init();
+                    pause(sc);
+                    break;
+    
+                case "2":
+                this.writeAll();
+                pause(sc);
+                    break;
+    
+                case "3":
+                this.resetList();
+                pause(sc);
+                
+                case "4":
+                return;
+
+                default:
+                    System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
+                    pause(sc);
+                    break;
+            }
+        }
+
+    }
+    public void in(){
+        while (true) {
+            Function.clearScreen();
+System.out.println("\t============================[ Menu in danh sách ]===========================");
+System.out.printf("\t| %-4s | %-60s |%n", "STT", "Chức năng");
+System.out.println(
+    "\t|------|--------------------------------------------------------------|");
+    System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách khách hàng");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "In danh sách khách hàng từng loại");
+            System.out.printf("\t| %-4s | %-60s |%n", "3", "Quay lại menu chính");
+System.out.println("\t=======================================================================");
+System.out.print("\t[Làm mới] Nhập lựa chọn: ");
+String str = sc.nextLine();
+
+    
+            switch (str) {
+                case "1":
+                this.xuatThongTin();
+                    pause(sc);
+                    break;
+    
+                case "2":
+                this.listItem();
+                pause(sc);
+                    break;
+                
+                case "3":
+                return;
+
+                default:
+                    System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
+                    pause(sc);
+                    break;
+            }
+        }
+
+    }
+    private void pause(Scanner sc) {
+        System.out.print("\tNhấn Enter để tiếp tục...");
+        sc.nextLine();
+    }
     public static void main(String[] args) {
         QLKhachHang ql = new QLKhachHang();
         ql.menuQLKhachHang();

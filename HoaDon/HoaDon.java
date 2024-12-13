@@ -25,7 +25,7 @@ public class HoaDon implements IXuat {
     private static int countBill = 0;
     static {
         int totalBillCode = 0;
-        File hoaDonFile = new File("../File/hoadon.txt");
+        File hoaDonFile = new File("./File/hoadon.txt");
         try (Scanner rd = new Scanner(hoaDonFile)) {
             while (rd.hasNextLine()) {
                 totalBillCode++;

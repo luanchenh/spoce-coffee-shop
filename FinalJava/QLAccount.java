@@ -31,7 +31,7 @@ public class QLAccount {
     }
 
     public void Init() {
-        File file = new File("../File/accounts.txt");
+        File file = new File("./File/accounts.txt");
         if (!file.exists()) {
             return;
         }
@@ -96,7 +96,7 @@ public class QLAccount {
         }
     }
     public void saveToFile() {
-    File file = new File("../File/accounts.txt");
+    File file = new File("./File/accounts.txt");
     try (PrintWriter writer = new PrintWriter(file)) {
         for (Account account : listAccount) {
             writer.println(account.getUsername() + "|" + account.getPassword() + "|" + account.getType() + "|" + account.getIDLink());

@@ -22,7 +22,7 @@ public class QLBan implements IXuat {
 
     // Phương thức dùng để đọc dữ liệu bàn từ tập tin và ghi vào mảng quản lí bàn
     public void Init() {
-        File tableFile = new File("../File/table.txt");
+        File tableFile = new File("./File/table.txt");
         try (Scanner sc = new Scanner(tableFile)) {
             while (sc.hasNextLine()) {
                 String str = sc.nextLine();
@@ -47,7 +47,7 @@ public class QLBan implements IXuat {
 
     // Phương thức dùng để ghi tất cả đối tượng Bàn trong Array List vào file
     public void writeAll() {
-        try (FileWriter writer = new FileWriter("../File/table.txt", false)) {
+        try (FileWriter writer = new FileWriter("./File/table.txt", false)) {
             for (Ban ban : this.tableList) {
                 writer.write(ban.makeString() + "\n");
             }
