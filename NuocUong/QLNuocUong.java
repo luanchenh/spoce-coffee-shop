@@ -31,75 +31,75 @@ public class QLNuocUong {
         return waterList;
     }
 
-        public void Init() {
-            this.waterList.clear();
-            try (Scanner rd = new Scanner(waterFile)) {
-                while (rd.hasNextLine()) {
-                    String line = rd.nextLine();
-                    String[] waterSplit = line.split("\\|");
-                    if (waterSplit.length >= 7) {
-                        String id = waterSplit[0];
-                        String name = waterSplit[1];
-                        NuocUong water = null;
-                        String drinkType = id.substring(0, 2); // Lấy 2 ký tự đầu tiên để so sánh
+    public void Init() {
+        this.waterList.clear();
+        try (Scanner rd = new Scanner(waterFile)) {
+            while (rd.hasNextLine()) {
+                String line = rd.nextLine();
+                String[] waterSplit = line.split("\\|");
+                if (waterSplit.length >= 7) {
+                    String id = waterSplit[0];
+                    String name = waterSplit[1];
+                    NuocUong water = null;
+                    String drinkType = id.substring(0, 2); // Lấy 2 ký tự đầu tiên để so sánh
 
-                        switch (drinkType) {
-                            case "CF":
-                                water = new Coffee();
-                                break;
-                            case "TC":
-                                water = new NuocTraiCay();
-                                break;
-                            case "TS":
-                                water = new TraSua();
-                                break;
-                            case "ST":
-                                water = new SinhTo();
-                                break;
-                            default:
-                                System.out.println("Loại nước uống không hợp lệ: " + drinkType);
-                                continue;
-                        }
-
-                        // Cài đặt các thuộc tính khác của đối tượng
-                        water.setId(id);
-                        water.setName(name);
-                        water.setDrinkType(drinkType);
-                        water.setCold(Boolean.parseBoolean(waterSplit[2]));
-                        water.setHot(Boolean.parseBoolean(waterSplit[3]));
-                        water.setMilk(Boolean.parseBoolean(waterSplit[4]));
-                        water.setSugar(Boolean.parseBoolean(waterSplit[5]));
-
-                        Map<String, Integer> sizePriceMap = new HashMap<>();
-                        String[] sizePrice = waterSplit[6].split(",");
-                        if (sizePrice.length == 3) {
-                            sizePriceMap.put("S", Integer.parseInt(sizePrice[0]));
-                            sizePriceMap.put("M", Integer.parseInt(sizePrice[1]));
-                            sizePriceMap.put("L", Integer.parseInt(sizePrice[2]));
-                        } else if (sizePrice.length == 4) {
-                            sizePriceMap.put("S", Integer.parseInt(sizePrice[0]));
-                            sizePriceMap.put("M", Integer.parseInt(sizePrice[1]));
-                            sizePriceMap.put("L", Integer.parseInt(sizePrice[2]));
-                            sizePriceMap.put("XL", Integer.parseInt(sizePrice[3]));
-                        }
-                        water.setSizePrice(sizePriceMap);
-
-                        ArrayList<String> toppingList = new ArrayList<>();
-                        if (waterSplit.length > 7) {
-                            for (String str : waterSplit[7].split(",")) {
-                                toppingList.add(str);
-                            }
-                        }
-                        water.setTopping(toppingList);
-
-                        this.waterList.add(water);
+                    switch (drinkType) {
+                        case "CF":
+                            water = new Coffee();
+                            break;
+                        case "TC":
+                            water = new NuocTraiCay();
+                            break;
+                        case "TS":
+                            water = new TraSua();
+                            break;
+                        case "ST":
+                            water = new SinhTo();
+                            break;
+                        default:
+                            System.out.println("Loại nước uống không hợp lệ: " + drinkType);
+                            continue;
                     }
+
+                    // Cài đặt các thuộc tính khác của đối tượng
+                    water.setId(id);
+                    water.setName(name);
+                    water.setDrinkType(drinkType);
+                    water.setCold(Boolean.parseBoolean(waterSplit[2]));
+                    water.setHot(Boolean.parseBoolean(waterSplit[3]));
+                    water.setMilk(Boolean.parseBoolean(waterSplit[4]));
+                    water.setSugar(Boolean.parseBoolean(waterSplit[5]));
+
+                    Map<String, Integer> sizePriceMap = new HashMap<>();
+                    String[] sizePrice = waterSplit[6].split(",");
+                    if (sizePrice.length == 3) {
+                        sizePriceMap.put("S", Integer.parseInt(sizePrice[0]));
+                        sizePriceMap.put("M", Integer.parseInt(sizePrice[1]));
+                        sizePriceMap.put("L", Integer.parseInt(sizePrice[2]));
+                    } else if (sizePrice.length == 4) {
+                        sizePriceMap.put("S", Integer.parseInt(sizePrice[0]));
+                        sizePriceMap.put("M", Integer.parseInt(sizePrice[1]));
+                        sizePriceMap.put("L", Integer.parseInt(sizePrice[2]));
+                        sizePriceMap.put("XL", Integer.parseInt(sizePrice[3]));
+                    }
+                    water.setSizePrice(sizePriceMap);
+
+                    ArrayList<String> toppingList = new ArrayList<>();
+                    if (waterSplit.length > 7) {
+                        for (String str : waterSplit[7].split(",")) {
+                            toppingList.add(str);
+                        }
+                    }
+                    water.setTopping(toppingList);
+
+                    this.waterList.add(water);
                 }
-                //System.out.println("\tĐọc thành công !");
-            } catch (Exception e) {
-                System.out.println("Lỗi " + e.getMessage());
             }
+            // System.out.println("\tĐọc thành công !");
+        } catch (Exception e) {
+            System.out.println("Lỗi " + e.getMessage());
         }
+    }
 
     public void writeFile() {
         String line;
@@ -347,8 +347,7 @@ public class QLNuocUong {
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không để trống !");
-            }
-            else {
+            } else {
                 if (Function.isTrueNumber(str)) {
                     int number = Integer.parseInt(str);
                     if (number >= 1 && number <= 5) {
@@ -436,7 +435,7 @@ public class QLNuocUong {
         }
     }
 
-    public void modifyInfo()  {
+    public void modifyInfo() {
         Scanner sc = new Scanner(System.in);
         String str;
         boolean action = false;
@@ -470,6 +469,18 @@ public class QLNuocUong {
         }
     }
 
+    public void inMenuNuocUong() {
+        System.out.println(
+                    "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+        System.out.printf("\t| %-10s | %-30s | %-20s | %-20s | %-20s | %-20s |\n",
+                "ID", "Tên", "Size S", "Size M", "Size L", "Size XL");
+                System.out.println(
+                    "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+        for (NuocUong nu : this.waterList) {
+            nu.menuTable();
+        }
+    }
+
     public void menuQLNuocUong() {
         Function.clearScreen();
         this.Init(); // Khởi tạo dữ liệu
@@ -494,8 +505,10 @@ public class QLNuocUong {
             System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin nước uống");
             System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại sản phẩm vào File từ danh sách");
             System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại sản phẩm vào danh sách từ File");
-            System.out.printf("\t| %-4s | %-77s |%n", "7", "Làm mới danh sách nước uống (Reset dữ liệu nhưng không load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "8", "In ra số sản phẩm từng loại (Kiểm tra số loại sản phẩm có trong danh sách)");
+            System.out.printf("\t| %-4s | %-77s |%n", "7",
+                    "Làm mới danh sách nước uống (Reset dữ liệu nhưng không load vào File)");
+            System.out.printf("\t| %-4s | %-77s |%n", "8",
+                    "In ra số sản phẩm từng loại (Kiểm tra số loại sản phẩm có trong danh sách)");
             System.out.printf("\t| %-4s | %-77s |%n", "9", "Tìm kiếm sản phẩm");
             System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
             System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản lý");

@@ -458,7 +458,8 @@ public abstract class NuocUong implements INhap, IXuat {
                         } else if (number == 0) {
                             System.out.println("\tSố lượng topping không được bằng 0 !");
                         } else {
-                            System.out.println("\t[Notice] Loại đồ uống " + this.drinkType + " có " + number + " topping");
+                            System.out.println(
+                                    "\t[Notice] Loại đồ uống " + this.drinkType + " có " + number + " topping");
                             break;
                         }
                     } else {
@@ -507,87 +508,91 @@ public abstract class NuocUong implements INhap, IXuat {
 
     @Override
     public void xuatThongTin() {
-        System.out.println("\t+=========================================================================================================================+");
-        System.out.println("\t|                                                Thông tin sản phẩm                                                       |");
-        System.out.println("\t+------------+---------------+--------------------------------+--------------+--------------+--------------+--------------+");
+        System.out.println(
+                "\t+=========================================================================================================================+");
+        System.out.println(
+                "\t|                                                Thông tin sản phẩm                                                       |");
+        System.out.println(
+                "\t+------------+---------------+--------------------------------+--------------+--------------+--------------+--------------+");
 
         // In thông tin chính của sản phẩm
         System.out.printf("\t| %-10s | %-13s | %-30s | %-12s | %-12s | %-12s | %-12s |\n",
                 "ID", "Loại", "Tên", "Chỉnh đá", "Chỉnh nóng", "Chỉnh sữa", "Chỉnh đường");
-        System.out.println("\t+------------+---------------+--------------------------------+--------------+--------------+--------------+--------------+");
+        System.out.println(
+                "\t+------------+---------------+--------------------------------+--------------+--------------+--------------+--------------+");
 
         // In các giá trị của sản phẩm
-        String drinkTypeLabel = this.drinkType.equals("CF") ? "Cà phê" :
-                                this.drinkType.equals("TS") ? "Trà sữa" :
-                                this.drinkType.equals("ST") ? "Sinh tố" :
-                                this.drinkType.equals("TC") ? "Nước trái cây" : "Không xác định";
+        String drinkTypeLabel = this.drinkType.equals("CF") ? "Cà phê"
+                : this.drinkType.equals("TS") ? "Trà sữa"
+                        : this.drinkType.equals("ST") ? "Sinh tố"
+                                : this.drinkType.equals("TC") ? "Nước trái cây" : "Không xác định";
 
         System.out.printf("\t| %-10s | %-13s | %-30s | %-12s | %-12s | %-12s | %-12s |\n",
                 this.id, drinkTypeLabel, this.name, (this.isCold ? "Có" : "Không"),
                 (this.isHot ? "Có" : "Không"), (this.isMilk ? "Có" : "Không"), (this.isSugar ? "Có" : "Không"));
-        System.out.println("\t+------------+---------------+--------------------------------+--------------+--------------+--------------+--------------+");
+        System.out.println(
+                "\t+------------+---------------+--------------------------------+--------------+--------------+--------------+--------------+");
 
         // In bảng giá theo size
-        System.out.println("\t| Bảng giá:                                                                                                               |");
-        System.out.println("\t+------------+---------------+------------+------------+------------+------------+------------+------------+----------+---+");
+        System.out.println(
+                "\t| Bảng giá:                                                                                                               |");
+        System.out.println(
+                "\t+------------+---------------+------------+------------+------------+------------+------------+------------+----------+---+");
         System.out.print("\t| ");
         // for (String size : sizePrice.keySet()) {
-        //     System.out.print(String.format("%-10s | ", size));
+        // System.out.print(String.format("%-10s | ", size));
         // }
         ArrayList<String> keySet = new ArrayList<>(sizePrice.keySet());
-        for (int i=0; i<keySet.size(); i++) {
+        for (int i = 0; i < keySet.size(); i++) {
             switch (i) {
                 case 0:
-                System.out.print(String.format("%-10s | ", keySet.get(i)));
-                break;
+                    System.out.print(String.format("%-10s | ", keySet.get(i)));
+                    break;
 
                 case 1:
-                System.out.print(String.format("%-13s | ", keySet.get(i)));
-                break;
+                    System.out.print(String.format("%-13s | ", keySet.get(i)));
+                    break;
 
                 case 2:
-                System.out.print(String.format("%-10s | ", keySet.get(i)));
-                break;
+                    System.out.print(String.format("%-10s | ", keySet.get(i)));
+                    break;
             }
         }
         if (this.sizePrice.size() == 4) {
             System.out.print("                                                                 |");
-        }
-        else {
+        } else {
             System.out.print("                                                                              |");
         }
         System.out.println();
         System.out.print("\t| ");
-        // for (Integer price : sizePrice.values()) {
-        //     System.out.print(String.format("%-10s | ", Function.formatMoney(price + "")));
-        // }
         ArrayList<Integer> valueSet = new ArrayList<>(sizePrice.values());
-        for (int i=0; i<keySet.size(); i++) {
+        for (int i = 0; i < keySet.size(); i++) {
             switch (i) {
                 case 0:
-                System.out.print(String.format("%-10s | ", valueSet.get(i)));
-                break;
+                    System.out.print(String.format("%-10s | ", valueSet.get(i)));
+                    break;
 
                 case 1:
-                System.out.print(String.format("%-13s | ", valueSet.get(i)));
-                break;
+                    System.out.print(String.format("%-13s | ", valueSet.get(i)));
+                    break;
 
                 case 2:
-                System.out.print(String.format("%-10s | ", valueSet.get(i)));
-                break;
+                    System.out.print(String.format("%-10s | ", valueSet.get(i)));
+                    break;
             }
         }
         if (this.sizePrice.size() == 4) {
             System.out.print("                                                                 |");
-        }
-        else {
+        } else {
             System.out.print("                                                                              |");
         }
         System.out.println();
-        System.out.println("\t+------------+---------------+------------+------------+------------+------------+------------+------------+----------+---+");
+        System.out.println(
+                "\t+------------+---------------+------------+------------+------------+------------+------------+------------+----------+---+");
 
         // In danh sách topping
-        System.out.println("\t| Danh sách topping:                                                                                                      |");
+        System.out.println(
+                "\t| Danh sách topping:                                                                                                      |");
         if (topping.isEmpty()) {
             System.out.printf("\t| %-119s |\n", "Không có topping nào.");
         } else {
@@ -595,10 +600,43 @@ public abstract class NuocUong implements INhap, IXuat {
             System.out.printf("\t| %-119s |\n", toppings);
         }
 
-        System.out.println("\t+=========================================================================================================================+");
+        System.out.println(
+                "\t+=========================================================================================================================+");
         System.out.println();
     }
 
+    public void menuTable() {
+        if (this.sizePrice.size() == 3) {
+            // Kiểm tra từng key và lấy giá trị
+            String sizeS = this.sizePrice.containsKey("S") ? Function.formatMoney(this.sizePrice.get("S").toString())
+                    : "N/A";
+            String sizeM = this.sizePrice.containsKey("M") ? Function.formatMoney(this.sizePrice.get("M").toString())
+                    : "N/A";
+            String sizeL = this.sizePrice.containsKey("L") ? Function.formatMoney(this.sizePrice.get("L").toString())
+                    : "N/A";
+
+            System.out.printf("\t| %-10s | %-30s | %-20s | %-20s | %-20s |                      |\n",
+                    this.getId(), this.getName(), sizeS, sizeM, sizeL);
+            System.out.println(
+                    "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+
+        } else if (this.sizePrice.size() == 4) {
+            // Kiểm tra từng key và lấy giá trị
+            String sizeS = this.sizePrice.containsKey("S") ? Function.formatMoney(this.sizePrice.get("S").toString())
+                    : "N/A";
+            String sizeM = this.sizePrice.containsKey("M") ? Function.formatMoney(this.sizePrice.get("M").toString())
+                    : "N/A";
+            String sizeL = this.sizePrice.containsKey("L") ? Function.formatMoney(this.sizePrice.get("L").toString())
+                    : "N/A";
+            String sizeXL = this.sizePrice.containsKey("XL") ? Function.formatMoney(this.sizePrice.get("XL").toString())
+                    : "N/A";
+
+            System.out.printf("\t| %-10s | %-30s | %-20s | %-20s | %-20s | %-20s |\n",
+                    this.getId(), this.getName(), sizeS, sizeM, sizeL, sizeXL);
+            System.out.println(
+                    "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+        }
+    }
 
     // Abstract method
     public void suaThongTin() {
@@ -685,7 +723,7 @@ public abstract class NuocUong implements INhap, IXuat {
         int number = 0;
         QLTopping qlTopping = new QLTopping();
         qlTopping.Init();
-        while(true) {
+        while (true) {
             System.out.println("\tBạn muốn thêm hay xoá topping ?");
             System.out.println("\t1. Thêm topping");
             System.out.println("\t2. Xoá topping");
@@ -694,8 +732,7 @@ public abstract class NuocUong implements INhap, IXuat {
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println(("\tVui lòng không để trống !"));
-            }
-            else {
+            } else {
                 if (Function.isTrueNumber(str)) {
                     number = Integer.parseInt(str);
                     if (number >= 1 && number <= 3) {
@@ -712,7 +749,8 @@ public abstract class NuocUong implements INhap, IXuat {
                                         for (Topping tp : list.getToppingList()) {
                                             if (tp.getId().equals(result)) {
                                                 this.topping.add(result);
-                                                System.out.println("\t[Notice] Topping " + tp.getName() + " đã được thêm vào");
+                                                System.out.println(
+                                                        "\t[Notice] Topping " + tp.getName() + " đã được thêm vào");
                                                 break;
                                             }
                                         }
@@ -760,8 +798,7 @@ public abstract class NuocUong implements INhap, IXuat {
                             System.out.println("\t[Notice] Đã xoá tất cả topping !");
                             break;
                         }
-                    }
-                    else {
+                    } else {
                         System.out.println("\tVui lòng nhập trong khoảng 1 đến 3 !");
                     }
                 }
@@ -880,7 +917,7 @@ public abstract class NuocUong implements INhap, IXuat {
     }
 
     public boolean suaTrangThai() {
-        Scanner sc  = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         boolean updated = false;
         while (true) {
             System.out.println("\t Bạn muốn sửa trạng thái nào của sản phẩm ?");
@@ -898,10 +935,12 @@ public abstract class NuocUong implements INhap, IXuat {
                     if (number >= 1 && number <= 4) {
                         if (number == 1) {
                             while (true) {
-                                System.out.println("\tTrạng thái hiện tại của chỉnh đá: " + (this.isCold ? "Có" : "Không"));
+                                System.out.println(
+                                        "\tTrạng thái hiện tại của chỉnh đá: " + (this.isCold ? "Có" : "Không"));
                                 if (this.askYesNo()) {
                                     this.isCold = !this.isCold;
-                                    System.out.println("\t[Notice] Trạng thái chỉnh đá: " + (this.isCold ? "Có" : "Không"));
+                                    System.out.println(
+                                            "\t[Notice] Trạng thái chỉnh đá: " + (this.isCold ? "Có" : "Không"));
                                     updated = true;
                                 }
                                 break;
@@ -909,10 +948,12 @@ public abstract class NuocUong implements INhap, IXuat {
                         }
                         if (number == 2) {
                             while (true) {
-                                System.out.println("\tTrạng thái hiện tại của chỉnh nóng: " + (this.isHot ? "Có" : "Không"));
+                                System.out.println(
+                                        "\tTrạng thái hiện tại của chỉnh nóng: " + (this.isHot ? "Có" : "Không"));
                                 if (this.askYesNo()) {
                                     this.isHot = !this.isHot;
-                                    System.out.println("\t[Notice] Trạng thái chỉnh nóng: " + (this.isHot ? "Có" : "Không"));
+                                    System.out.println(
+                                            "\t[Notice] Trạng thái chỉnh nóng: " + (this.isHot ? "Có" : "Không"));
                                     updated = true;
                                 }
                                 break;
@@ -920,10 +961,12 @@ public abstract class NuocUong implements INhap, IXuat {
                         }
                         if (number == 3) {
                             while (true) {
-                                System.out.println("\tTrạng thái hiện tại của chỉnh sữa: " + (this.isMilk ? "Có" : "Không"));
+                                System.out.println(
+                                        "\tTrạng thái hiện tại của chỉnh sữa: " + (this.isMilk ? "Có" : "Không"));
                                 if (this.askYesNo()) {
                                     this.isMilk = !this.isMilk;
-                                    System.out.println("\t[Notice] Trạng thái chỉnh sữa: " + (this.isMilk ? "Có" : "Không"));
+                                    System.out.println(
+                                            "\t[Notice] Trạng thái chỉnh sữa: " + (this.isMilk ? "Có" : "Không"));
                                     updated = true;
                                 }
                                 break;
@@ -931,10 +974,12 @@ public abstract class NuocUong implements INhap, IXuat {
                         }
                         if (number == 4) {
                             while (true) {
-                                System.out.println("\tTrạng thái hiện tại của chỉnh đường: " + (this.isSugar ? "Có" : "Không"));
+                                System.out.println(
+                                        "\tTrạng thái hiện tại của chỉnh đường: " + (this.isSugar ? "Có" : "Không"));
                                 if (this.askYesNo()) {
                                     this.isSugar = !this.isSugar;
-                                    System.out.println("\t[Notice] Trạng thái chỉnh đường: " + (this.isSugar ? "Có" : "Không"));
+                                    System.out.println(
+                                            "\t[Notice] Trạng thái chỉnh đường: " + (this.isSugar ? "Có" : "Không"));
                                     updated = true;
                                 }
                                 break;
@@ -974,7 +1019,6 @@ public abstract class NuocUong implements INhap, IXuat {
         }
         return sb.toString();
     }
-
 
     public void showMenu() {
         System.out.println("\t Tên sản phẩm: " + this.name);

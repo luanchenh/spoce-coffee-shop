@@ -19,7 +19,7 @@ public class Account implements INhap {
     private String password;
     private String type;
     private String IDLink;
-    
+
 
     public String getUsername() {
         return username;
@@ -91,7 +91,19 @@ public class Account implements INhap {
         }
         return check;
     }
-
+    // Hàm lấy khách hàng từ IDLink
+    public KhachHang getCustomer() {
+        KhachHang kh = null;
+        QLKhachHang ql = new QLKhachHang();
+        ql.Init();
+        for (KhachHang khachHang : ql.customerList) {
+            if (khachHang.getCustomerID().equals(this.IDLink)) {
+                kh = khachHang;
+                break;
+            }
+        }
+        return kh;
+    }
     @Override
     public void nhapThongTin() {
         Scanner sc = new Scanner(System.in);
