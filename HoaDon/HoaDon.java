@@ -8,8 +8,6 @@ import Utils.Function;
 import Utils.IXuat;
 import java.io.File;
 import java.util.Scanner;
-// Local Date
-import java.time.LocalDate;
 
 @SuppressWarnings({ "resource", "unused" })
 public class HoaDon implements IXuat {
@@ -27,7 +25,7 @@ public class HoaDon implements IXuat {
     private static int countBill = 0;
     static {
         int totalBillCode = 0;
-        File hoaDonFile = new File("./File/hoadon.txt");
+        File hoaDonFile = new File("../File/hoadon.txt");
         try (Scanner rd = new Scanner(hoaDonFile)) {
             while (rd.hasNextLine()) {
                 totalBillCode++;

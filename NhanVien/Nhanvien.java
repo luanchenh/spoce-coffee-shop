@@ -1,13 +1,12 @@
 package NhanVien;
 
 import Utils.Address;
-
+import Utils.Date;
+import Utils.Function;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Scanner;
-import Utils.Function;
-import Utils.Date;
 
 @SuppressWarnings("resource")
 public abstract class Nhanvien {
