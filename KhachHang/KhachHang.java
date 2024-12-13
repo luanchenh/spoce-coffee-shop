@@ -97,7 +97,7 @@ public abstract class KhachHang {
 
     // Phương thức dùng để đọc số lượng khách hàng từ file
     public static int getNumberOfCustomerFromFile() {
-        File customerFile = new File("./File/customer.txt");
+        File customerFile = new File("../File/customer.txt");
         int num = 0;
         String str;
         try (Scanner sc = new Scanner(customerFile)) {

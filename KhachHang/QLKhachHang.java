@@ -25,7 +25,7 @@ public class QLKhachHang implements IXuat {
 
     // Phương thức để nhập dữ liệu từ file vào Array List
     public void Init() {
-        File customerFile = new File("./File/customer.txt");
+        File customerFile = new File("../File/customer.txt");
         try (Scanner sc = new Scanner(customerFile)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -54,7 +54,7 @@ public class QLKhachHang implements IXuat {
 
     // Phương thức để ghi dữ liệu từ mảng vào file
     public void writeAll() {
-        try (FileWriter writer = new FileWriter("./File/customer.txt", false)) {
+        try (FileWriter writer = new FileWriter("../File/customer.txt", false)) {
             for (KhachHang kh : this.customerList) {
                 writer.write(kh.makeString() + "\n");
             }

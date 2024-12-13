@@ -1,13 +1,12 @@
 package NhanVien;
 
 import Utils.Address;
-
+import Utils.Date;
+import Utils.Function;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Scanner;
-import Utils.Function;
-import Utils.Date;
 
 @SuppressWarnings("resource")
 public abstract class Nhanvien {
@@ -26,7 +25,7 @@ public abstract class Nhanvien {
 
     static {
 
-        File nhanVienFile = new File("./File/nhanvien.txt"); // Sửa lại đường dẫn nếu cần
+        File nhanVienFile = new File("../File/nhanvien.txt"); // Sửa lại đường dẫn nếu cần
         try (Scanner rd = new Scanner(nhanVienFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();

@@ -14,7 +14,7 @@ import java.util.Scanner;
 @SuppressWarnings({ "resource", "unused" })
 public class QLNhanVien {
     public ArrayList<Nhanvien> nhanVienList;
-    File EmployeeFile = new File("./File/nhanvien.txt");
+    File EmployeeFile = new File("../File/nhanvien.txt");
 
     public QLNhanVien() {
         this.nhanVienList = new ArrayList<>();
@@ -236,7 +236,7 @@ public class QLNhanVien {
                         Account acc = new Account("2");
                         acc.nhapThongTin();
                         acc.setIDLink(temp.getMaNhanVien());
-                        try (FileWriter writer = new FileWriter("./File/accounts.txt", true)) {
+                        try (FileWriter writer = new FileWriter("../File/accounts.txt", true)) {
                             writer.write(acc.makeString());
                             writer.write(System.lineSeparator());
                             writer.flush();
