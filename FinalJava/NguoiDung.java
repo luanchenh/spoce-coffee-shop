@@ -119,7 +119,7 @@ public class NguoiDung {
             } else {
                 if (Function.isTrueNumber(str)) {
                     number = Integer.parseInt(str);
-                    if (number >= 1 && number <= 3) {
+                    if (number >= 1 && number <= 4) {
                         if (number == 1) {
                             Account account = new Account("1");
                             account.Login();
@@ -2019,7 +2019,7 @@ public class NguoiDung {
                             System.out.println("\tCảm ơn bạn đã sử dụng dịch vụ của chúng tôi !");
                             break;
                         } else {
-                            System.out.println("\tVui lòng chọn từ 1 đến 3 !");
+                            System.out.println("\tVui lòng chọn từ 1 đến 4 !");
                             try {
                                 Thread.sleep(1500);
                             } catch (InterruptedException e) {
