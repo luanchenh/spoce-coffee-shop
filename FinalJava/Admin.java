@@ -40,7 +40,6 @@ public class Admin {
             System.out.printf("\t| %-5s %-81s |%n", "6.", "Quản lý hóa đơn");
             System.out.printf("\t| %-5s %-81s |%n", "7.", "Quản lý các tài khoản");
             System.out.printf("\t| %-5s %-81s |%n", "8.", "Quay về trang trước");
-            System.out.println();
             System.out.println(
                     "\t===========================================================================================");
             System.out.print("\tNhập lựa chọn của bạn: ");
