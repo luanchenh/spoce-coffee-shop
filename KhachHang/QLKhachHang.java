@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+
 
 @SuppressWarnings("resource")
 public class QLKhachHang implements IXuat {
@@ -34,9 +36,18 @@ public class QLKhachHang implements IXuat {
                 MemberCard card = null;
                 boolean status = false;
                 if (parts[3].equals("1")) {
+                    Date ngayHetHanThe = new Date(parts[11], parts[12], parts[13]); // 12/13/2024
+                    LocalDate localDate = LocalDate.now();
+                    String currentDate = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
                     card = new MemberCard(parts[4], new Date(parts[5], parts[6], parts[7]),
                                                     new Date(parts[8], parts[9], parts[10]),
                                                     new Date(parts[11], parts[12], parts[13]), Integer.parseInt(parts[14]));
+
+                    if (ngayHetHanThe.toString().equals(currentDate)) {
+                        card.setPoint(0);
+                        card.getEndDate().setYear(Integer.parseInt(card.getEndDate().getYear()) + 1 + "");
+                        card.setStartDate(card.getEndDate());
+                    }
                     status = true;
                 }
                 if (parts[0].equals("0")) {
@@ -50,6 +61,8 @@ public class QLKhachHang implements IXuat {
         } catch (Exception e) {
             System.out.println("Lỗi: " + e.getMessage());
         }
+
+        this.writeAll();
     }
 
     // Phương thức để ghi dữ liệu từ mảng vào file

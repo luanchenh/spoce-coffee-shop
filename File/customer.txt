@@ -6,7 +6,7 @@
 0|KH6|Chenh Tien Loc|0|null
 1|KH7|Lam Vinh Dat|1|MB3|1|1|2005|10|12|2024|10|12|2025|0
 1|KH8|Luong Vinh Thuan|0|null
-1|KH9|Truong Thu Nhan|1|MB4|12|12|2005|10|12|2024|10|12|2025|505
+1|KH9|Truong Thu Nhan|1|MB4|12|12|2005|13|12|2023|13|12|2024|505
 1|KH10|Truong Luc Nhuong|0|null
 1|KH11|Trieu Phu Quan|0|null
 0|KH1|Nguyen Nam Duong|0|null
