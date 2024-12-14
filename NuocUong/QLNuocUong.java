@@ -152,11 +152,20 @@ public class QLNuocUong {
         String str;
         NuocUong temp = null;
         while (true) {
-            System.out.println("\t1. Loại nước [Trà sữa]");
-            System.out.println("\t2. Loại nước [Coffee]");
-            System.out.println("\t3. Loại nước [Sinh tố]");
-            System.out.println("\t4. Loại nước [Nước trái cây]");
-            System.out.print("\tChọn loại nước: ");
+            // System.out.println("\t1. Loại nước [Trà sữa]");
+            // System.out.println("\t2. Loại nước [Coffee]");
+            // System.out.println("\t3. Loại nước [Sinh tố]");
+            // System.out.println("\t4. Loại nước [Nước trái cây]");
+            // System.out.print("\tChọn loại nước: ");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Mời bạn chọn loại nước", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "Trà sữa");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "Coffee");
+            System.out.printf("\t| %-10s %-68s |%n", "3.", "Sinh tố");
+            System.out.printf("\t| %-10s %-68s |%n", "4.", "Nước trái cây");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời nhập lựa chọn: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("Vui lòng không để trống !");
@@ -324,11 +333,21 @@ public class QLNuocUong {
                 totalNuocTraiCay++;
             }
         }
-        System.out.println("\tSố loại nước uống: ");
-        System.out.println("\t1. Coffee: " + totalCoffee);
-        System.out.println("\t2. Trà sữa: " + totalTraSua);
-        System.out.println("\t3. Sinh tố: " + totalSinhTo);
-        System.out.println("\t4. Nước trái cây: " + totalNuocTraiCay);
+        // System.out.println("\tSố loại nước uống: ");
+        // System.out.println("\t1. Coffee: " + totalCoffee);
+        // System.out.println("\t2. Trà sữa: " + totalTraSua);
+        // System.out.println("\t3. Sinh tố: " + totalSinhTo);
+        // System.out.println("\t4. Nước trái cây: " + totalNuocTraiCay);
+
+        Function.clearScreen();
+        System.out.println("\t============================================================================");
+        System.out.printf("\t| %-50s %-21s |%n", "Số loại nước uống", "");
+        System.out.println("\t============================================================================");
+        System.out.printf("\t| %-30s %-41s |%n", "Coffee:", totalCoffee);
+        System.out.printf("\t| %-30s %-41s |%n", "Trà sữa:", totalTraSua);
+        System.out.printf("\t| %-30s %-41s |%n", "Sinh tố:", totalSinhTo);
+        System.out.printf("\t| %-30s %-41s |%n", "Nước trái cây:", totalNuocTraiCay);
+        System.out.println("\t============================================================================");
     }
 
     public void findWater() {
@@ -337,13 +356,24 @@ public class QLNuocUong {
         String result = "";
         NuocUong temp = null;
         while (true) {
-            System.out.println("\tTìm kiếm sản phẩm theo: ");
-            System.out.println("\t1. Tìm kiếm theo ID");
-            System.out.println("\t2. Tìm kiếm theo Tên");
-            System.out.println("\t3. Tìm kiếm theo giá");
-            System.out.println("\t4. Tìm kiếm theo loại");
-            System.out.println("\t5. Thoát");
-            System.out.print("\tNhập lựa chọn: ");
+            // System.out.println("\tTìm kiếm sản phẩm theo: ");
+            // System.out.println("\t1. Tìm kiếm theo ID");
+            // System.out.println("\t2. Tìm kiếm theo Tên");
+            // System.out.println("\t3. Tìm kiếm theo giá");
+            // System.out.println("\t4. Tìm kiếm theo loại");
+            // System.out.println("\t5. Thoát");
+            // System.out.print("\tNhập lựa chọn: ");
+            Function.clearScreen();
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Bạn muốn tìm nước uống theo tiêu chí nào?", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "Tìm kiếm theo ID");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "Tìm kiếm theo Tên");
+            System.out.printf("\t| %-10s %-68s |%n", "3.", "Tìm kiếm theo giá");
+            System.out.printf("\t| %-10s %-68s |%n", "4.", "Tìm kiếm theo loại");
+            System.out.printf("\t| %-10s %-68s |%n", "5.", "Thoát");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời bạn nhập lựa chọn: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không để trống !");
@@ -353,7 +383,7 @@ public class QLNuocUong {
                     if (number >= 1 && number <= 5) {
                         // Tìm kiếm theo ID
                         if (number == 1) {
-                            System.out.print("\tNhập ID muốn tìm (bao gồm mã): ");
+                            System.out.print("\t=> Nhập ID muốn tìm (bao gồm mã): ");
                             str = sc.nextLine();
                             for (NuocUong nu : this.waterList) {
                                 if (nu.getId().equalsIgnoreCase(str)) {
@@ -365,13 +395,16 @@ public class QLNuocUong {
                             if (Function.isEmpty(result)) {
                                 System.out.println("\tKhông tìm thấy sản phẩm nào có ID: " + str);
                             } else {
+                                Function.clearScreen();
                                 System.out.println("\tKết quả tìm kiếm: ");
                                 temp.xuatThongTin();
+                                System.out.println("\tEnter để tiếp tục!");
+                                str = sc.nextLine();
                             }
                         }
                         // Tìm kiếm theo Tên (Có thể rỗng)
                         if (number == 2) {
-                            System.out.print("\tNhập tên muốn tìm: ");
+                            System.out.print("\t=> Nhập tên muốn tìm: ");
                             str = sc.nextLine();
                             for (NuocUong nu : this.waterList) {
                                 if (nu.getName().equalsIgnoreCase(str)) {
@@ -383,17 +416,23 @@ public class QLNuocUong {
                             if (Function.isEmpty(result)) {
                                 System.out.println("\tKhông tìm thấy sản phẩm nào có tên: " + str);
                             } else {
+                                Function.clearScreen();
                                 System.out.println("\tKết quả tìm kiếm: ");
                                 temp.xuatThongTin();
+                                System.out.println("\tEnter để tiếp tục!");
+                                str = sc.nextLine();
                             }
                         }
                         // Tìm kiếm theo giá
                         if (number == 3) {
-                            System.out.print("\tNhập giá muốn tìm: ");
+                            System.out.print("\t=> Nhập giá muốn tìm: ");
                             str = sc.nextLine();
                             for (NuocUong nu : this.waterList) {
                                 if (nu.getSizePrice().containsValue(Integer.parseInt(str))) {
+                                    Function.clearScreen();
                                     nu.xuatThongTin();
+                                    System.out.println("\tEnter để tiếp tục!");
+                                    str = sc.nextLine();
                                     result = nu.makeString();
                                 }
                             }
@@ -403,21 +442,76 @@ public class QLNuocUong {
                         }
                         // Tìm kiếm theo loại
                         if (number == 4) {
-                            System.out.println("\tCác loại nước uống: ");
-                            System.out.println("\t1. Coffee mã loại [CF]");
-                            System.out.println("\t2. Trà sữa mã loại [TS]");
-                            System.out.println("\t3. Sinh tố mã loại [ST]");
-                            System.out.println("\t4. Nước trái cây mã loại [TC]");
-                            System.out.print("\tNhập loại muốn tìm: ");
-                            str = sc.nextLine();
-                            for (NuocUong nu : this.waterList) {
-                                if (nu.getDrinkType().equalsIgnoreCase(str)) {
-                                    nu.xuatThongTin();
-                                    result = nu.makeString();
+                            while (true) { 
+                                                            // System.out.println("\tCác loại nước uống: ");
+                            // System.out.println("\t1. Coffee mã loại [CF]");
+                            // System.out.println("\t2. Trà sữa mã loại [TS]");
+                            // System.out.println("\t3. Sinh tố mã loại [ST]");
+                            // System.out.println("\t4. Nước trái cây mã loại [TC]");
+                                Function.clearScreen();
+                                System.out.println("\t===================================================================================");
+                                System.out.printf("\t| %-60s %-18s |%n", "Các loại nước uống", "");
+                                System.out.println("\t===================================================================================");
+                                System.out.printf("\t| %-10s %-68s |%n", "1.", "Coffee mã loại [CF]");
+                                System.out.printf("\t| %-10s %-68s |%n", "2.", "Trà sữa mã loại [TS]");
+                                System.out.printf("\t| %-10s %-68s |%n", "3.", "Sinh tố mã loại [ST]");
+                                System.out.printf("\t| %-10s %-68s |%n", "4.", "Nước trái cây mã loại [TC]");
+                                System.out.println("\t===================================================================================");
+                                System.out.print("\t=> Nhập loại muốn tìm: ");
+                                str = sc.nextLine();
+
+                                if (Function.isEmpty(str)) {
+                                    System.out.println("\tVui lòng không để trống!");
+                                    System.out.println("\tEnter để tiếp tục");
+                                    str = sc.nextLine();
+                                    continue;
                                 }
-                            }
-                            if (Function.isEmpty(result)) {
-                                System.out.println("\tKhông tìm thấy sản phẩm nào có loại: " + str);
+
+                                if (!Function.isTrueNumber(str)) {
+                                    System.out.println("\tVui lòng nhập số!");
+                                    System.out.println("\tEnter để tiếp tục");
+                                    str = sc.nextLine();
+                                    continue;
+                                }
+
+                                String type = new String();
+                                switch (str) {
+                                    case "1":
+                                        type = "CF";
+                                        break;
+                                    
+                                    case "2":
+                                        type = "TS";
+                                        break;
+
+                                    case "3":
+                                        type = "ST";
+                                        break;
+
+                                    case "4":
+                                        type = "TC";
+                                        break;
+
+                                    default:
+                                        System.out.println("\tLựa chọn không hợp lệ!");
+                                        System.out.println("\tEnter để tiếp tục");
+                                        str = sc.nextLine();
+                                        continue;
+                                }
+                                Function.clearScreen();
+                                for (NuocUong nu : this.waterList) {
+                                    if (nu.getDrinkType().equalsIgnoreCase(type)) {
+                                        nu.xuatThongTin();
+                                        result = nu.makeString();
+                                    }
+                                }
+                                System.out.println("\tEnter để tiếp tục!");
+                                str = sc.nextLine();
+                                if (Function.isEmpty(result)) {
+                                    System.out.println("\tKhông tìm thấy sản phẩm nào có loại: " + type);
+                                }
+
+                                break;
                             }
                         }
                         if (number == 5) {
@@ -576,6 +670,167 @@ public class QLNuocUong {
         }
     }
 
+    public void drinkFunctionMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t===============================[ Menu chức năng ]===========================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Tìm kiếm nước uống");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "In ra nước uống từng loại");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Quay lại menu chính");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.findWater();
+                break;
+
+                case "2":
+                this.listItem();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                break;
+
+                case "3":
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            break;
+        }
+    }
+
+    public void addRemoveModifyMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t============================[ Menu thêm/sửa/xóa ]===========================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Thêm một món nước (Tự động lưu vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Xoá một món nước (Tự động load vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Sửa thông tin nước uống");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay lại menu chính");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                    this.addNewWater();
+                    break;
+
+                case "2":
+                    this.removeWater();
+                    break;
+
+                case "3":
+                    this.modifyInfo();
+                    break;
+
+                case "4":
+                    break;
+
+                default:
+                    System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
+                    System.out.println("\tEnter để tiếp tục!");
+                    str = sc.nextLine();
+                    continue;
+            }
+            break;
+        }
+    }
+
+    public void updateMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t===============================[ Menu cập nhật ]============================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Cập nhật danh sách nước uống vào File");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Cập nhật lại danh sách nước uống từ File");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Làm mới danh sách nước uống (Reset dữ liệu)");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay về trang trước");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.writeFile();
+                break;
+
+                case "2":
+                this.Init();
+                break;
+
+                case "3":
+                this.clearList();
+                break;
+
+                case "4":
+                break;
+
+                default:
+                continue;
+            }
+
+            break;
+        }
+    }
+
     public void menuQLNuocUong() {
         Function.clearScreen();
         this.Init(); // Khởi tạo dữ liệu
@@ -594,19 +849,26 @@ public class QLNuocUong {
                     "\t|------|-------------------------------------------------------------------------------|");
 
             // In danh sách các lựa chọn
+            // System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách nước uống");
+            // System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một sản phẩm nước uống (Tự động lưu vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một sản phẩm nước uống (Tự động load vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin nước uống");
+            // System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại sản phẩm vào File từ danh sách");
+            // System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại sản phẩm vào danh sách từ File");
+            // System.out.printf("\t| %-4s | %-77s |%n", "7",
+            //         "Làm mới danh sách nước uống (Reset dữ liệu nhưng không load vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "8",
+            //         "In ra số sản phẩm từng loại (Kiểm tra số loại sản phẩm có trong danh sách)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "9", "Tìm kiếm sản phẩm");
+            // System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
+            // System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản lý");
+
             System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách nước uống");
-            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một sản phẩm nước uống (Tự động lưu vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một sản phẩm nước uống (Tự động load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin nước uống");
-            System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại sản phẩm vào File từ danh sách");
-            System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại sản phẩm vào danh sách từ File");
-            System.out.printf("\t| %-4s | %-77s |%n", "7",
-                    "Làm mới danh sách nước uống (Reset dữ liệu nhưng không load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "8",
-                    "In ra số sản phẩm từng loại (Kiểm tra số loại sản phẩm có trong danh sách)");
-            System.out.printf("\t| %-4s | %-77s |%n", "9", "Tìm kiếm sản phẩm");
-            System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
-            System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản lý");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Chức năng về nước uống");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Thêm/sửa/xóa thông tin nước uống");
+            System.out.printf("\t| %-4s | %-77s |%n", "4", "Cập nhật và làm mới danh sách nước uống");
+            System.out.printf("\t| %-4s | %-77s |%n", "5", "Làm mới màn hình");
+            System.out.printf("\t| %-4s | %-77s |%n", "6", "Thoát chương trình quản lý");
 
             // In dòng kẻ dưới cùng
             System.out.println(
@@ -618,46 +880,29 @@ public class QLNuocUong {
             } else {
                 if (Function.isTrueNumber(str)) {
                     int number = Integer.parseInt(str);
-                    if (number >= 1 && number <= 11) {
+                    if (number >= 1 && number <= 6) {
                         if (number == 1) {
                             this.inDanhSach();
                             System.out.print("\tEnter để tiếp tục");
                             str = sc.nextLine();
                         }
                         if (number == 2) {
-                            this.addNewWater();
+                            this.drinkFunctionMenu();
                         }
                         if (number == 3) {
-                            this.removeWater();
+                            this.addRemoveModifyMenu();
                         }
                         if (number == 4) {
-                            this.modifyInfo();
+                            this.updateMenu();
                         }
                         if (number == 5) {
-                            this.Init();
+                            Function.clearScreen();
                         }
                         if (number == 6) {
-                            this.writeFile();
-                        }
-                        if (number == 7) {
-                            this.clearList();
-                        }
-                        if (number == 8) {
-                            this.listItem();
-                        }
-                        if (number == 9) {
-                            this.findWater();
-                        }
-                        if (number == 10) {
-                            Function.clearScreen();
-                        }
-                        if (number == 11) {
-                            System.out.println("\tThoát chương trình thành công !");
-                            Function.clearScreen();
                             break;
                         }
                     } else {
-                        System.out.println("\tVui lòng chọn trong khoảng 1 đến 11 !");
+                        System.out.println("\tVui lòng chọn trong khoảng 1 đến 6 !");
                     }
                 } else {
                     System.out.println("\tVui lòng nhập số !");

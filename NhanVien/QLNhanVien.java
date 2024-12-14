@@ -350,10 +350,14 @@ public class QLNhanVien {
         Scanner sc = new Scanner(System.in);
         String str;
         while (true) {
-            System.out.println("\tBạn có chắc chắn muốn xoá toàn bộ danh sách không ?");
-            System.out.println("\t1. Có");
-            System.out.println("\t2. Không");
-            System.out.print("\tNhập lựa chọn: ");
+            Function.clearScreen();
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Bạn có chắc chắn muốn xoá toàn bộ danh sách không ?", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "Có");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "Không");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời bạn nhập lựa chọn: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không để trống !");
@@ -393,9 +397,16 @@ public class QLNhanVien {
                 nhanVienThuNgan++;
             }
         }
-        System.out.println("\tSố nhân viên đang làm việc: ");
-        System.out.println("\t1. Nhân viên thu nhân: " + nhanVienThuNgan);
-        System.out.println("\t2. Nhân viên pha chế: " + nhanVienPhaChe);
+        // System.out.println("\tc: ");
+        // System.out.println("\t1. Nhân viên thu ngân: " + nhanVienThuNgan);
+        // System.out.println("\t2. Nhân viên pha chế: " + nhanVienPhaChe);
+        Function.clearScreen();
+        System.out.println("\t============================================================================");
+        System.out.printf("\t| %-50s %-21s |%n", "Số nhân viên đang làm việc", "");
+        System.out.println("\t============================================================================");
+        System.out.printf("\t| %-30s %-41s |%n", "Số nhân viên thu ngân:", nhanVienThuNgan);
+        System.out.printf("\t| %-30s %-41s |%n", "Số nhân viên pha chế:", nhanVienPhaChe);
+        System.out.println("\t============================================================================");
     }
 
     // tìm nhân viên
@@ -579,10 +590,17 @@ public class QLNhanVien {
             for (Nhanvien nv : this.nhanVienList) {
                 nv.xuatThongTin();
             }
-            System.out.println("\tBạn có muốn xem chi tiết thông tin nhân viên?");
-            System.out.println("\t1. Xem tất cả");
-            System.out.println("\t2. Chọn nhân viên cụ thể");
-            System.out.println("\t3. Thoát");
+            // System.out.println("\tBạn có muốn xem chi tiết thông tin nhân viên?");
+            // System.out.println("\t1. Xem tất cả");
+            // System.out.println("\t2. Chọn nhân viên cụ thể");
+            // System.out.println("\t3. Thoát");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Bạn có muốn xem chi tiết thông tin nhân viên?", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "Xem tất cả");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "Chọn nhân viên cụ thể");
+            System.out.printf("\t| %-10s %-68s |%n", "3.", "Quay về trang trước");
+            System.out.println("\t===================================================================================");
             System.out.print("\t=> Mời nhập lựa chọn: ");
             str = sc.nextLine();
 
@@ -612,6 +630,7 @@ public class QLNhanVien {
                             danhSachQuanLy.add((NhanVienQuanLy) nhanvien);
                         }
                     }
+                    Function.clearScreen();
                     System.out.println("\tThông tin chi tiết tất cả nhân viên:");
                     System.out.println(
                             "\t+==========================================================================================================================================================================+");
@@ -679,10 +698,20 @@ public class QLNhanVien {
                 case 2:
                     while (true) {
                         Function.clearScreen();
-                        System.out.println("\tVui lòng chọn nhân viên theo số thứ tự:");
+                        // System.out.println("\tVui lòng chọn nhân viên theo số thứ tự:");
+                        // for (int i = 0; i < this.nhanVienList.size(); i++) {
+                        //     System.out.printf("\t%d. %s\n", i + 1, this.nhanVienList.get(i).getTenNhanVien());
+                        // }
+                        System.out.println("\t===================================================================================");
+                        System.out.printf("\t| %-60s %-18s |%n", "Vui lòng chọn nhân viên theo số thứ tự sau", "");
+                        System.out.println("\t===================================================================================");
+                        // System.out.printf("\t| %-10s %-68s |%n", "1.", "Xem tất cả");
+                        // System.out.printf("\t| %-10s %-68s |%n", "2.", "Chọn nhân viên cụ thể");
+                        // System.out.printf("\t| %-10s %-68s |%n", "3.", "Quay về trang trước");
                         for (int i = 0; i < this.nhanVienList.size(); i++) {
-                            System.out.printf("\t%d. %s\n", i + 1, this.nhanVienList.get(i).getTenNhanVien());
+                            System.out.printf("\t| %-10s %-68s |%n", i+1 + ".", this.nhanVienList.get(i).getTenNhanVien());
                         }
+                        System.out.println("\t===================================================================================");
                         System.out.print("\t=> Mời bạn nhập lựa chọn: ");
                         str = sc.nextLine();
 
@@ -714,6 +743,8 @@ public class QLNhanVien {
                                 System.out.println(
                                         "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
                                 (this.nhanVienList.get(selectedIndex)).thongTinChiTiet();
+                                System.out.println(
+                                        "\t+==========================================================================================================================================================================+");
                             } else if (this.nhanVienList.get(selectedIndex) instanceof NhanVienPhaChe) {
                                 System.out.println(
                                         "\t+==========================================================================================================================================================================+");
@@ -726,6 +757,8 @@ public class QLNhanVien {
                                 System.out.println(
                                         "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
                                 this.nhanVienList.get(selectedIndex).thongTinChiTiet();
+                                System.out.println(
+                                        "\t+==========================================================================================================================================================================+");
                             } else if (this.nhanVienList.get(selectedIndex) instanceof NhanVienQuanLy) {
                                 System.out.println(
                                         "\t+==========================================================================================================================================================================+");
@@ -738,6 +771,8 @@ public class QLNhanVien {
                                 System.out.println(
                                         "\t+--------------+-----------------------------+----------------------+-------------------+----------------------------------------------------------------------------------+");
                                 this.nhanVienList.get(selectedIndex).thongTinChiTiet();
+                                System.out.println(
+                                        "\t+==========================================================================================================================================================================+");
                             }
                             System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
@@ -764,11 +799,178 @@ public class QLNhanVien {
     public void inLuong() {
         Scanner sc = new Scanner(System.in);
         String str;
+        Function.clearScreen();
         for (Nhanvien nv : this.nhanVienList) {
             nv.tinhLuong();
         }
         System.out.print("\tEnter để tiếp tục!");
         str = sc.nextLine();
+    }
+
+    public void addRemoveModifyMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t============================[ Menu thêm/sửa/xóa ]===========================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Thêm một nhân viên (Tự động lưu vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Xoá một nhân viên (Tự động load vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Sửa thông tin nhân viên");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay lại menu chính");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                    this.addNewNhanVien();
+                    break;
+
+                case "2":
+                    this.removeNhanVien();
+                    break;
+
+                case "3":
+                    this.modifyInfo();
+                    break;
+
+                case "4":
+                    break;
+
+                default:
+                    System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
+                    System.out.println("\tEnter để tiếp tục!");
+                    str = sc.nextLine();
+                    continue;
+            }
+            break;
+        }
+    }
+
+    public void employeeFunctionMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t===============================[ Menu chức năng ]===========================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Tính lương nhân viên");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "In ra nhân viên từng loại");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Tìm kiếm nhân viên");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay lại menu chính");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.inLuong();
+                break;
+
+                case "2":
+                this.listItem();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                break;
+
+                case "3":
+                this.findNhanVien();
+                break;
+
+                case "4":
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            break;
+        }
+    }
+
+    public void updateMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t===============================[ Menu cập nhật ]============================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Cập nhật danh sách nhân viên vào File");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Cập nhật lại danh sách từ File");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Làm mới danh sách nhân viên (Reset dữ liệu)");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay về trang trước");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.writeFile();
+                break;
+
+                case "2":
+                this.Init();
+                break;
+
+                case "3":
+                this.clearList();
+                break;
+
+                case "4":
+                break;
+
+                default:
+                continue;
+            }
+
+            break;
+        }
     }
 
     public void menuQLNhanVien() {
@@ -789,18 +991,25 @@ public class QLNhanVien {
                     "\t|------|-------------------------------------------------------------------------------|");
 
             // In danh sách các lựa chọn
+            // System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách nhân viên");
+            // System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một nhân viên mới");
+            // System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một nhân viên");
+            // System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin nhân viên");
+            // System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại danh sách nhân viên vào File");
+            // System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại danh sách từ File");
+            // System.out.printf("\t| %-4s | %-77s |%n", "7", "Làm mới danh sách nhân viên (Reset dữ liệu)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "8", "Tìm kiếm nhân viên");
+            // System.out.printf("\t| %-4s | %-77s |%n", "9", "In ra số lượng nhân viên từng loại");
+            // System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
+            // System.out.printf("\t| %-4s | %-77s |%n", "11", "Tính lương nhân viên");
+            // System.out.printf("\t| %-4s | %-77s |%n", "12", "Thoát chương trình quản lý");
             System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách nhân viên");
-            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một nhân viên mới");
-            System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một nhân viên");
-            System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin nhân viên");
-            System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại danh sách nhân viên vào File");
-            System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại danh sách từ File");
-            System.out.printf("\t| %-4s | %-77s |%n", "7", "Làm mới danh sách nhân viên (Reset dữ liệu)");
-            System.out.printf("\t| %-4s | %-77s |%n", "8", "Tìm kiếm nhân viên");
-            System.out.printf("\t| %-4s | %-77s |%n", "9", "In ra số lượng nhân viên từng loại");
-            System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
-            System.out.printf("\t| %-4s | %-77s |%n", "11", "Tính lương nhân viên");
-            System.out.printf("\t| %-4s | %-77s |%n", "12", "Thoát chương trình quản lý");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Chức năng về nhân viên");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Thêm/sửa/xóa thông tin nhân viên");
+            System.out.printf("\t| %-4s | %-77s |%n", "4", "Cập nhật và làm mới danh sách");
+            System.out.printf("\t| %-4s | %-77s |%n", "5", "Làm mới màn hình");
+            System.out.printf("\t| %-4s | %-77s |%n", "6", "Thoát chương trình quản lý");
+
 
             // In dòng kẻ dưới cùng
             System.out.println(
@@ -812,47 +1021,29 @@ public class QLNhanVien {
             } else {
                 if (Function.isTrueNumber(str)) {
                     int number = Integer.parseInt(str);
-                    if (number >= 1 && number <= 11) {
+                    if (number >= 1 && number <= 6) {
                         if (number == 1) {
                             this.xuat();
                         }
                         if (number == 2) {
-                            this.addNewNhanVien();
+                            this.employeeFunctionMenu();
                         }
                         if (number == 3) {
-                            this.removeNhanVien();
+                            this.addRemoveModifyMenu();
                         }
                         if (number == 4) {
-                            this.modifyInfo();
+                            this.updateMenu();
                         }
                         if (number == 5) {
-                            this.Init();
-                        }
-                        if (number == 6) {
-                            this.writeFile();
-                        }
-                        if (number == 7) {
-                            this.clearList();
-                        }
-                        if (number == 8) {
-                            this.findNhanVien();
-                        }
-                        if (number == 9) {
-                            this.listItem();
-                        }
-                        if (number == 10) {
                             Function.clearScreen();
                         }
-                        if (number == 11) {
-                            this.inLuong();
-                        }
-                        if (number == 12) {
+                        if (number == 6) {
                             System.out.println("\tThoát chương trình thành công !");
                             Function.clearScreen();
                             break;
                         }
                     } else {
-                        System.out.println("\tVui lòng chọn trong khoảng 1 đến 11 !");
+                        System.out.println("\tVui lòng chọn trong khoảng 1 đến 6 !");
                     }
                 } else {
                     System.out.println("\tVui lòng nhập số !");

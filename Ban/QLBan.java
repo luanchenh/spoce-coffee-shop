@@ -298,14 +298,14 @@ public class QLBan implements IXuat {
         }
 
         if (isThereAnEmptyTable) {
-            System.out.println("\t==============================[Danh sách bàn trống]==============================");
-            System.out.printf("\t| %-25s %-25s %-25s |\n", "Mã bàn", "Số chỗ ngồi", "Tình trạng");
+            System.out.println("\t===========================================[Danh sách bàn trống]============================================");
+            System.out.printf("\t| %-20s | %-25s | %-25s | %-25s |\n", "Mã bàn", "Số chỗ ngồi", "Địa điểm", "Tình trạng");
             for (Ban ban : this.tableList) {
                 if (!ban.getTableStatus()) {
                     ban.printString();
                 }
             }
-            System.out.println("\t=================================================================================");
+            System.out.println("\t============================================================================================================");
         }
 
         return isThereAnEmptyTable;

@@ -386,7 +386,7 @@ public class Ban implements INhap, IXuat {
         } else {
             status = "Đã có người ngồi";
         }
-        System.out.printf("\t| %-20s | %-25s | %-25s | %-25s |\n", this.tableID, seats, status, this.tableView);
+        System.out.printf("\t| %-20s | %-25s | %-25s | %-25s |\n", this.tableID, seats, this.tableView, status);
     }
 
     // Phương thức dùng để tìm ra bàn phù hợp với số lượng khách đồng thời cập nhật

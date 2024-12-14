@@ -44,9 +44,7 @@ public abstract class NuocUong implements INhap, IXuat {
                     String value = parts[0].substring(0, 2).toUpperCase();
                     int number = Integer.parseInt(parts[0].substring(2));
                     if (value.equals("TS")) {
-                        if (totalTS > number) {
-                            totalTS = number;
-                        }
+                        totalTS++;
                     } else if (value.equals("CF")) {
                         totalCF++;
                     } else if (value.equals("ST")) {
@@ -556,6 +554,10 @@ public abstract class NuocUong implements INhap, IXuat {
                 case 2:
                     System.out.print(String.format("%-10s | ", keySet.get(i)));
                     break;
+
+                case 3:
+                    System.out.print(String.format("%-10s | ", keySet.get(i)));
+                    break;
             }
         }
         if (this.sizePrice.size() == 4) {
@@ -577,6 +579,10 @@ public abstract class NuocUong implements INhap, IXuat {
                     break;
 
                 case 2:
+                    System.out.print(String.format("%-10s | ", valueSet.get(i)));
+                    break;
+
+                case 3:
                     System.out.print(String.format("%-10s | ", valueSet.get(i)));
                     break;
             }

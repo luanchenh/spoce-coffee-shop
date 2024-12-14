@@ -5,9 +5,9 @@ import Utils.Function;
 import Utils.IXuat;
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
 
 @SuppressWarnings("resource")
 public class QLKhachHang implements IXuat {
@@ -403,10 +403,15 @@ public class QLKhachHang implements IXuat {
         String str;
 
         while (true) {
-            System.out.println("\tTìm kiếm khách hàng theo: ");
-            System.out.println("\t1. Tìm kiếm theo ID");
-            System.out.println("\t2. Tìm kiếm theo Tên");
-            System.out.println("\t3. Thoát");
+            Function.clearScreen();
+            System.out.println("\t============================[ Tìm kiếm khách hàng ]=========================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Tìm kiếm theo ID");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Tìm kiếm theo tên");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Quay về trang trước");
+            System.out.println("\t============================================================================");
             System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 
@@ -423,7 +428,7 @@ public class QLKhachHang implements IXuat {
             switch (str) {
                 case "1":
                     while (true) {
-                        System.out.print("\tNhập ID muốn tìm (bao gồm mã): ");
+                        System.out.print("\t=> Nhập ID muốn tìm (bao gồm mã): ");
                         str = sc.nextLine();
 
                         if (Function.isEmpty(str)) {
@@ -452,7 +457,7 @@ public class QLKhachHang implements IXuat {
 
                 case "2":
                     while (true) {
-                        System.out.print("\tNhập tên muốn tìm: ");
+                        System.out.print("\t=> Nhập tên muốn tìm: ");
                         str = sc.nextLine();
 
                         if (Function.isEmpty(str)) {
@@ -515,12 +520,6 @@ public class QLKhachHang implements IXuat {
                     "\t|------|-------------------------------------------------------------------------------|");
 
             // In danh sách các lựa chọn
-            System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách");
-            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm/sửa/xóa thông tin khách hàng");
-            System.out.printf("\t| %-4s | %-77s |%n", "3", "Cập nhật và làm mới danh sách");
-            System.out.printf("\t| %-4s | %-77s |%n", "4", "Tìm kiếm khách hàng");
-            System.out.printf("\t| %-4s | %-77s |%n", "5", "Làm mới màn hình");
-            System.out.printf("\t| %-4s | %-77s |%n", "6", "Thoát chương trình quản lý");
 
             // In dòng kẻ dưới cùng
             System.out.println(
@@ -532,61 +531,31 @@ public class QLKhachHang implements IXuat {
             } else {
                 if (Function.isTrueNumber(str)) {
                     int number = Integer.parseInt(str);
-                    if (number >= 1 && number <= 11) {
+                    if (number >= 1 && number <= 6) {
                         if (number == 1) {
                             this.xuatThongTin();
                             System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 2) {
-                            this.addCustomer();
+                            this.MenuChinhSua();
                             System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 3) {
-                            this.removeCustomer();
+                            this.capnhatChinhSua();
                             System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 4) {
-                            this.modifyCustomer();
-                            System.out.print("\tEnter để tiếp tục!");
-                            str = sc.nextLine();
-                        }
-                        if (number == 5) {
-                            this.customerList.clear();
-                            this.Init();
-                            System.out.print("\tEnter để tiếp tục!");
-                            str = sc.nextLine();
-                        }
-                        if (number == 6) {
-                            this.writeAll();
-                            System.out.print("\tEnter để tiếp tục!");
-                            str = sc.nextLine();
-                        }
-                        if (number == 7) {
-                            this.resetList();
-                            System.out.print("\tEnter để tiếp tục!");
-                            str = sc.nextLine();
-                        }
-                        if (number == 8) {
-                            this.listItem();
-                            System.out.print("\tEnter để tiếp tục!");
-                            str = sc.nextLine();
-                        }
-                        if (number == 9) {
                             this.findCustomer();
                             System.out.print("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
-                        if (number == 10) {
+                        if (number == 5) {
                             Function.clearScreen();
-                            System.out.print("\tEnter để tiếp tục!");
-                            str = sc.nextLine();
                         }
-                        if (number == 11) {
-                            System.out.println("\tThoát chương trình thành công !");
-                            Function.clearScreen();
+                        if (number == 6) {
                             break;
                         }
                     } else {
@@ -605,14 +574,14 @@ public class QLKhachHang implements IXuat {
         while (true) {
             Function.clearScreen();
             System.out.println("\t============================[ Menu thêm/sửa/xóa ]===========================");
-            System.out.printf("\t| %-4s | %-60s |%n", "STT", "Chức năng");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
             System.out.println(
-                    "\t|------|--------------------------------------------------------------|");
-            System.out.printf("\t| %-4s | %-77s |%n", "1", "Thêm một khách hàng (Tự động lưu vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "2", "Xoá một khách hàng (Tự động load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "3", "Sửa thông tin khách hàng");
-            System.out.printf("\t| %-4s | %-60s |%n", "4", "Quay lại menu chính");
-            System.out.println("\t=======================================================================");
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Thêm một khách hàng (Tự động lưu vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Xoá một khách hàng (Tự động load vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Sửa thông tin khách hàng");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay lại menu chính");
+            System.out.println("\t============================================================================");
             System.out.print("\t[Làm mới] Nhập lựa chọn: ");
             String str = sc.nextLine();
 

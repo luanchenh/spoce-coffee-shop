@@ -1,5 +1,9 @@
-TS1|Trà sữa khúc bạch|true|false|false|true|15000,30000,20000|TP1,TP2
-TS2|Trà sữa thần sầu|true|false|false|true|20000,28000,25000|TP1,TP5
-TC1|Nước cam|true|false|false|true|12000,18000,15000|
+TS1|Trà sữa khúc bạch|true|false|false|true|15000,20000,30000|TP1,TP2
+TS2|Trà sữa thần sầu|true|false|false|true|20000,25000,28000|TP1,TP5
+TC1|Nước cam|true|false|false|true|12000,15000,18000|
 ST1|Sinh tố bơ|true|false|true|false|30000,35000,40000|
 TC2|Trà tắc|true|false|false|true|10000,12000,15000,20000|
+TC3|Nuoc Tao|true|false|false|true|10000,20000,15000|
+TS3|Tra Sua Tran Chau Duong Den|true|true|false|true|25000,30000,27000|TP6
+TS4|Sua Tuoi Tran Chau Duong Den|true|true|true|true|20000,40000,30000|TP1,TP2,TP3,TP4
+CF1|Ca Phe Sua Da|true|true|true|false|10000,30000,20000|
