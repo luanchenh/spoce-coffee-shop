@@ -4,3 +4,4 @@ TP3|Trân châu hoàng kim|5000
 TP4|Trứng nướng|5000
 TP5|Caramel|3000
 TP6|Thạch Phô Mai|10000
+TP7|Thach Dau|4000

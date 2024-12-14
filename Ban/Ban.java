@@ -74,22 +74,36 @@ public class Ban implements INhap, IXuat {
         Scanner sc = new Scanner(System.in);
         String str;
 
-        System.out.println("\tNhập thông tin bàn có ID: " + this.tableID);
+        
         while (true) {
-            System.out.println("\n\tSố chỗ ngồi của bàn");
-            System.out.println("\t1. 2 chỗ");
-            System.out.println("\t2. 4 chỗ");
-            System.out.println("\t3. 8 chỗ");
-            System.out.print("\t=> Nhập lựa chọn: ");
+            Function.clearScreen();
+            System.out.println("\tNhập thông tin bàn có ID: " + this.tableID);
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Số chỗ ngồi của bàn", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "2 chỗ");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "4 chỗ");
+            System.out.printf("\t| %-10s %-68s |%n", "3.", "8 chỗ");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời bạn nhập lựa chọn: ");
+            // System.out.println("\n\tSố chỗ ngồi của bàn");
+            // System.out.println("\t1. 2 chỗ");
+            // System.out.println("\t2. 4 chỗ");
+            // System.out.println("\t3. 8 chỗ");
+            // System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
                 System.out.println("\tLựa chọn không được rỗng!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
             }
 
             if (!Function.isTrueNumber(str)) {
                 System.out.println("\tLựa chọn phải là số!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
             }
 
@@ -108,6 +122,8 @@ public class Ban implements INhap, IXuat {
 
                 default:
                     System.out.println("\tLựa chọn không hợp lệ!");
+                    System.out.println("\tEnter để tiếp tục!");
+                    str = sc.nextLine();
                     continue;
             }
 
@@ -115,19 +131,31 @@ public class Ban implements INhap, IXuat {
         }
 
         while (true) {
-            System.out.println("\n\tTình trạng của bàn");
-            System.out.println("\t1. Đang trống");
-            System.out.println("\t2. Đã có người ngồi");
-            System.out.print("\t=> Nhập lựa chọn: ");
+            Function.clearScreen();
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Tình trạng của bàn", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "Đang trống");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "Đã có người ngồi");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời bạn nhập lựa chọn: ");
+            // System.out.println("\n\tTình trạng của bàn");
+            // System.out.println("\t1. Đang trống");
+            // System.out.println("\t2. Đã có người ngồi");
+            // System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
                 System.out.println("\tLựa chọn không được rỗng!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
             }
 
             if (!Function.isTrueNumber(str)) {
                 System.out.println("\tLựa chọn phải là số!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
             }
 
@@ -142,24 +170,39 @@ public class Ban implements INhap, IXuat {
 
                 default:
                     System.out.println("\tLựa chọn không hợp lệ!");
+                    System.out.println("\tEnter để tiếp tục!");
+                    str = sc.nextLine();
                     continue;
             }
             break;
         }
 
         while (true) {
-            System.out.println("\n\tChọn view của bàn");
-            System.out.println("\t1. View ban công");
-            System.out.println("\t2. View trong nhà");
-            System.out.println("\t3. View thư viện");
-            System.out.print("\t=> Nhập lựa chọn: ");
+            Function.clearScreen();
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Chọn view của bàn", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "View ban công");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "View trong nhà");
+            System.out.printf("\t| %-10s %-68s |%n", "3.", "View thư viện");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời bạn nhập lựa chọn: ");
+            // System.out.println("\n\tChọn view của bàn");
+            // System.out.println("\t1. View ban công");
+            // System.out.println("\t2. View trong nhà");
+            // System.out.println("\t3. View thư viện");
+            // System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("\tLựa chọn không được rỗng!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
             }
             if (!Function.isTrueNumber(str)) {
                 System.out.println("\tLựa chọn phải là số!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
             }
             switch (Integer.parseInt(str)) {
@@ -174,8 +217,11 @@ public class Ban implements INhap, IXuat {
                     break;
                 default:
                     System.out.println("\tLựa chọn không hợp lệ!");
+                    System.out.println("\tEnter để tiếp tục!");
+                    str = sc.nextLine();
                     continue;
             }
+            break;
         }
     }
 

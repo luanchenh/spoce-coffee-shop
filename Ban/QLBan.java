@@ -126,7 +126,7 @@ public class QLBan implements IXuat {
     public void printTableList() {
         Function.clearScreen();
         System.out.println("\t=============================================[Danh sách bàn]================================================");
-        System.out.printf("\t| %-20s | %-25s | %-25s | %-25s |\n", " Mã bàn", " Số chỗ ngồi", " Tình trạng", " View");
+        System.out.printf("\t| %-20s | %-25s | %-25s | %-25s |\n", " Mã bàn", " Số chỗ ngồi", " View", " Tình trạng");
         System.out.println("\t|----------------------|---------------------------|---------------------------|---------------------------|");
         for (Ban table : this.tableList) {
             table.printString();
@@ -182,19 +182,30 @@ public class QLBan implements IXuat {
         String str;
 
         while (true) {
-            System.out.println("\n\tBạn có chắc chắn muốn xoá toàn bộ danh sách không?");
-            System.out.println("\t1. Có");
-            System.out.println("\t2. Không");
-            System.out.print("\t=> Nhập lựa chọn: ");
+            // System.out.println("\n\tBạn có chắc chắn muốn xoá toàn bộ danh sách không?");
+            // System.out.println("\t1. Có");
+            // System.out.println("\t2. Không");
+            // System.out.print("\t=> Nhập lựa chọn: ");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Bạn có chắc chắn muốn xoá toàn bộ danh sách không ?", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "Có");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "Không");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời nhập lựa chọn: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
                 System.out.println("\tLựa chọn không được rỗng!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
             }
 
             if (!Function.isTrueNumber(str)) {
                 System.out.println("\tLựa chọn phải là số!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
                 continue;
             }
 
@@ -239,10 +250,20 @@ public class QLBan implements IXuat {
             }
         }
 
-        System.out.println("\tTổng số lượng bàn: " + this.tableList.size());
-        System.out.printf("\t%-5s %-10s%n", "", "Số lượng bàn 2 chỗ: " + twoSeatTable);
-        System.out.printf("\t%-5s %-10s%n", "", "Số lượng bàn 4 chỗ: " + fourSeatTable);
-        System.out.printf("\t%-5s %-10s%n", "", "Số lượng bàn 8 chỗ: " + eightSeatTable);
+        // System.out.println("\tTổng số lượng bàn: " + this.tableList.size());
+        // System.out.printf("\t%-5s %-10s%n", "", "Số lượng bàn 2 chỗ: " + twoSeatTable);
+        // System.out.printf("\t%-5s %-10s%n", "", "Số lượng bàn 4 chỗ: " + fourSeatTable);
+        // System.out.printf("\t%-5s %-10s%n", "", "Số lượng bàn 8 chỗ: " + eightSeatTable);
+
+        Function.clearScreen();
+        System.out.println("\t============================================================================");
+        System.out.printf("\t| %-50s %-21s |%n", "Số lượng bàn", "");
+        System.out.println("\t============================================================================");
+        System.out.printf("\t| %-30s %-41s |%n", "Tổng số lượng bàn:", this.tableList.size());
+        System.out.printf("\t| %-30s %-41s |%n", "Bàn 2 chỗ", twoSeatTable);
+        System.out.printf("\t| %-30s %-41s |%n", "Bàn 4 chỗ", fourSeatTable);
+        System.out.printf("\t| %-30s %-41s |%n", "Bàn 8 chỗ", eightSeatTable);
+        System.out.println("\t============================================================================");
     }
 
     // Phương thức để tìm bàn và in ra thông tin
@@ -311,6 +332,169 @@ public class QLBan implements IXuat {
         return isThereAnEmptyTable;
     }
 
+    public void tableFunctionMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t===============================[ Menu chức năng ]===========================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Tìm kiếm bàn");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "In ra số lượng bàn trong quán");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Quay về menu chính");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.findTable();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                break;
+
+                case "2":
+                this.countTable();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                break;
+
+                case "3":
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            break;
+        }
+    }
+
+    public void addRemoveModifyMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t============================[ Menu thêm/sửa/xóa ]===========================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Thêm một bàn (Tự động lưu vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Xoá một bàn (Tự động load vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Sửa thông tin bàn");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay lại menu chính");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                    this.addTable();
+                    break;
+
+                case "2":
+                    this.removeTable();
+                    break;
+
+                case "3":
+                    this.modifyTable();
+                    break;
+
+                case "4":
+                    break;
+
+                default:
+                    System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
+                    System.out.println("\tEnter để tiếp tục!");
+                    str = sc.nextLine();
+                    continue;
+            }
+            break;
+        }
+    }
+
+    public void updateMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t===============================[ Menu cập nhật ]============================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Cập nhật danh sách topping vào File");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Cập nhật lại danh sách topping từ File");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Làm mới danh sách topping (Reset dữ liệu)");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay về trang trước");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.writeAll();
+                break;
+
+                case "2":
+                this.Init();
+                break;
+
+                case "3":
+                this.resetList();
+                break;
+
+                case "4":
+                break;
+
+                default:
+                continue;
+            }
+
+            break;
+        }
+    }
+
     public void menuQLBan() {
         Function.clearScreen();
         this.Init();
@@ -328,17 +512,24 @@ public class QLBan implements IXuat {
                     "\t|------|-------------------------------------------------------------------------------|");
 
             // In danh sách các lựa chọn
+            // System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách bàn");
+            // System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một bàn (Tự động lưu vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một bàn (Tự động load vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin bàn");
+            // System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại bàn vào File từ danh sách");
+            // System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại bàn vào danh sách từ File");
+            // System.out.printf("\t| %-4s | %-77s |%n", "7", "Làm mới danh sách bàn (Reset dữ liệu nhưng không load vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "8", "In ra số lượng bàn trong quán");
+            // System.out.printf("\t| %-4s | %-77s |%n", "9", "Tìm kiếm bàn");
+            // System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
+            // System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản lý");
+
             System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách bàn");
-            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một bàn (Tự động lưu vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một bàn (Tự động load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin bàn");
-            System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại bàn vào File từ danh sách");
-            System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại bàn vào danh sách từ File");
-            System.out.printf("\t| %-4s | %-77s |%n", "7", "Làm mới danh sách bàn (Reset dữ liệu nhưng không load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "8", "In ra số lượng bàn trong quán");
-            System.out.printf("\t| %-4s | %-77s |%n", "9", "Tìm kiếm bàn");
-            System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
-            System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản lý");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Chức năng về bàn");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Thêm/sửa/xóa thông tin bàn");
+            System.out.printf("\t| %-4s | %-77s |%n", "4", "Cập nhật và làm mới danh sách bàn");
+            System.out.printf("\t| %-4s | %-77s |%n", "5", "Làm mới màn hình");
+            System.out.printf("\t| %-4s | %-77s |%n", "6", "Thoát chương trình quản lý");
 
             // In dòng kẻ dưới cùng
             System.out.println("\t========================================================================================");
@@ -363,47 +554,22 @@ public class QLBan implements IXuat {
                 continue;
 
                 case "2":
-                this.addTable();
+                this.tableFunctionMenu();
                 continue;
 
                 case "3":
-                this.removeTable();
+                this.addRemoveModifyMenu();
                 continue;
 
                 case "4":
-                this.modifyTable();
+                this.updateMenu();
                 continue;
 
                 case "5":
-                this.writeAll();
+                Function.clearScreen();
                 continue;
 
                 case "6":
-                this.Init();
-                continue;
-
-                case "7":
-                this.resetList();
-                continue;
-
-                case "8":
-                this.countTable();
-                System.out.println("\tEnter để tiếp tục!");
-                str = sc.nextLine();
-                continue;
-
-                case "9":
-                this.findTable();
-                System.out.println("\tEnter để tiếp tục!");
-                str = sc.nextLine();
-                continue;
-
-                case "10":
-                Function.clearScreen();
-                continue;
-
-                case "11":
-                Function.clearScreen();
                 break;
 
                 default:

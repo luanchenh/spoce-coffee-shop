@@ -284,10 +284,17 @@ public class QLNuocUong {
         Scanner sc = new Scanner(System.in);
         String str;
         while (true) {
-            System.out.println("\tBạn có chắc chắn muốn xoá toàn bộ danh sách không ?");
-            System.out.println("\t1. Có");
-            System.out.println("\t2. Không");
-            System.out.print("\tNhập lựa chọn: ");
+            // System.out.println("\tBạn có chắc chắn muốn xoá toàn bộ danh sách không ?");
+            // System.out.println("\t1. Có");
+            // System.out.println("\t2. Không");
+            // System.out.print("\tNhập lựa chọn: ");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Bạn có chắc chắn muốn xoá toàn bộ danh sách không ?", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "Có");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "Không");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời nhập lựa chọn: ");
             str = sc.nextLine();
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không để trống !");

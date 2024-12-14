@@ -143,6 +143,7 @@ public class QLHoaDon {
         for (HoaDon hd : this.billList) {
             tongDoanhThu += hd.getTongTien();
         }
+        Function.clearScreen();
         System.out.println(
                 "\t======================================================================================================");
         System.out.println(
@@ -243,6 +244,7 @@ public class QLHoaDon {
                     tongHoadon++;
                 }
             }
+            Function.clearScreen();
             if (tongHoadon == 0) {
                 System.out.println("\tKhông có hóa đơn nào trong tháng " + monthSelect + " năm " + yearSelect + "!");
             } else {
@@ -730,6 +732,7 @@ public class QLHoaDon {
     public void menuQLHoaDon() {
         Scanner sc = new Scanner(System.in);
         String str;
+        this.Init();
     
         while (true) {
             Function.clearScreen();

@@ -133,6 +133,47 @@ public class QLTopping implements IXuat{
         }
     }
 
+    public void clearList() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            // System.out.println("\tBạn có chắc chắn muốn xoá toàn bộ danh sách không ?");
+            // System.out.println("\t1. Có");
+            // System.out.println("\t2. Không");
+            // System.out.print("\tNhập lựa chọn: ");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Bạn có chắc chắn muốn xoá toàn bộ danh sách không ?", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "Có");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "Không");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời nhập lựa chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống !");
+            } else {
+                if (Function.isTrueNumber(str)) {
+                    int number = Integer.parseInt(str);
+                    if (number >= 1 && number <= 2) {
+                        if (number == 1) {
+                            this.toppingList.clear();
+                            System.out.println("\tXoá danh sách thành công !");
+                            break;
+                        }
+                        if (number == 2) {
+                            System.out.println("\tHủy bỏ xoá danh sách !");
+                            break;
+                        }
+                    } else {
+                        System.out.println("\tVui lòng chọn trong khoảng 1 đến 2 !");
+                    }
+                } else {
+                    System.out.println("\tVui lòng nhập số !");
+                }
+            }
+        }
+    }
+
     public void addTopping() {
         Topping tp = new Topping();
         tp.nhapThongTin();
@@ -246,10 +287,17 @@ public class QLTopping implements IXuat{
         String str;
 
         while (true) {
-            System.out.println("\n\tBạn có chắc chắn muốn xoá toàn bộ danh sách không?");
-            System.out.println("\t1. Có");
-            System.out.println("\t2. Không");
-            System.out.print("\t=> Nhập lựa chọn: ");
+            // System.out.println("\n\tBạn có chắc chắn muốn xoá toàn bộ danh sách không?");
+            // System.out.println("\t1. Có");
+            // System.out.println("\t2. Không");
+            // System.out.print("\t=> Nhập lựa chọn: ");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-60s %-18s |%n", "Bạn có chắc chắn muốn xoá toàn bộ danh sách không ?", "");
+            System.out.println("\t===================================================================================");
+            System.out.printf("\t| %-10s %-68s |%n", "1.", "Có");
+            System.out.printf("\t| %-10s %-68s |%n", "2.", "Không");
+            System.out.println("\t===================================================================================");
+            System.out.print("\t=> Mời nhập lựa chọn: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
@@ -281,6 +329,162 @@ public class QLTopping implements IXuat{
         }
     }
 
+    public void toppingFunctionMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t===============================[ Menu chức năng ]===========================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Tìm kiếm topping");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Quay về menu chính");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.findTopping();
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                break;
+
+                case "2":
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            break;
+        }
+    }
+
+    public void addRemoveModifyMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t============================[ Menu thêm/sửa/xóa ]===========================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Thêm một topping (Tự động lưu vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Xoá một topping (Tự động load vào File)");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Sửa thông tin topping");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay lại menu chính");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                    this.addTopping();
+                    break;
+
+                case "2":
+                    this.removeATopping();
+                    break;
+
+                case "3":
+                    this.modifyTopping();
+                    break;
+
+                case "4":
+                    break;
+
+                default:
+                    System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
+                    System.out.println("\tEnter để tiếp tục!");
+                    str = sc.nextLine();
+                    continue;
+            }
+            break;
+        }
+    }
+
+    public void updateMenu() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t===============================[ Menu cập nhật ]============================");
+            System.out.printf("\t| %-4s | %-65s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------|");
+            System.out.printf("\t| %-4s | %-65s |%n", "1", "Cập nhật danh sách topping vào File");
+            System.out.printf("\t| %-4s | %-65s |%n", "2", "Cập nhật lại danh sách topping từ File");
+            System.out.printf("\t| %-4s | %-65s |%n", "3", "Làm mới danh sách topping (Reset dữ liệu)");
+            System.out.printf("\t| %-4s | %-65s |%n", "4", "Quay về trang trước");
+            System.out.println("\t============================================================================");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được trống!");
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+
+            switch (str) {
+                case "1":
+                this.writeAll();
+                break;
+
+                case "2":
+                this.Init();
+                break;
+
+                case "3":
+                this.resetList();
+                break;
+
+                case "4":
+                break;
+
+                default:
+                continue;
+            }
+
+            break;
+        }
+    }
+ 
     // ========================================[Menu topping table]========================================
     public void menuTable() {
         Function.clearScreen();
@@ -312,7 +516,7 @@ public class QLTopping implements IXuat{
             // In tiêu đề
             Function.clearScreen();
             System.out.println(
-                    "\t===============================[ Menu Quản Lý Nước Uống ]===============================");
+                    "\t=================================[ Menu Quản Lý Topping ]===============================");
 
             // In tiêu đề các cột
             System.out.printf("\t| %-4s | %-77s |%n", "STT", "Chức năng");
@@ -320,16 +524,23 @@ public class QLTopping implements IXuat{
                     "\t|------|-------------------------------------------------------------------------------|");
 
             // In danh sách các lựa chọn
+            // System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách topping");
+            // System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một topping (Tự động lưu vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một topping (Tự động load vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin topping");
+            // System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại topping vào File từ danh sách");
+            // System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại topping vào danh sách từ File");
+            // System.out.printf("\t| %-4s | %-77s |%n", "7", "Làm mới danh sách topping (Reset dữ liệu nhưng không load vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "8", "Tìm kiếm sản phẩm");
+            // System.out.printf("\t| %-4s | %-77s |%n", "9", "Làm mới màn hình");
+            // System.out.printf("\t| %-4s | %-77s |%n", "10", "Thoát chương trình quản lý");
+
             System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách topping");
-            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một topping (Tự động lưu vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một topping (Tự động load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin topping");
-            System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại topping vào File từ danh sách");
-            System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại topping vào danh sách từ File");
-            System.out.printf("\t| %-4s | %-77s |%n", "7", "Làm mới danh sách topping (Reset dữ liệu nhưng không load vào File)");
-            System.out.printf("\t| %-4s | %-77s |%n", "8", "Tìm kiếm sản phẩm");
-            System.out.printf("\t| %-4s | %-77s |%n", "9", "Làm mới màn hình");
-            System.out.printf("\t| %-4s | %-77s |%n", "10", "Thoát chương trình quản lý");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Chức năng về topping");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Thêm/sửa/xóa thông tin topping");
+            System.out.printf("\t| %-4s | %-77s |%n", "4", "Cập nhật và làm mới danh sách topping");
+            System.out.printf("\t| %-4s | %-77s |%n", "5", "Làm mới màn hình");
+            System.out.printf("\t| %-4s | %-77s |%n", "6", "Thoát chương trình quản lý");
 
             // In dòng kẻ dưới cùng
             System.out.println(
@@ -341,42 +552,25 @@ public class QLTopping implements IXuat{
             } else {
                 if (Function.isTrueNumber(str)) {
                     int number = Integer.parseInt(str);
-                    if (number >= 1 && number <= 11) {
+                    if (number >= 1 && number <= 6) {
                         if (number == 1) {
                             this.menuTable();
                             System.out.println("\tEnter để tiếp tục!");
                             str = sc.nextLine();
                         }
                         if (number == 2) {
-                            this.addTopping();
+                            this.toppingFunctionMenu();
                         }
                         if (number == 3) {
-                            this.removeATopping();
+                            this.addRemoveModifyMenu();
                         }
                         if (number == 4) {
-                            this.modifyTopping();
+                            this.updateMenu();
                         }
                         if (number == 5) {
-                            this.toppingList.clear();
-                            this.Init();
+                            Function.clearScreen();
                         }
                         if (number == 6) {
-                            this.writeAll();
-                        }
-                        if (number == 7) {
-                            this.resetList();
-                        }
-                        if (number == 8) {
-                            this.findTopping();
-                            System.out.println("\tEnter để tiếp tục!");
-                            str = sc.nextLine();
-                        }
-                        if (number == 9) {
-                            Function.clearScreen();
-                        }
-                        if (number == 10) {
-                            System.out.println("\tThoát chương trình thành công !");
-                            Function.clearScreen();
                             break;
                         }
                     } else {
