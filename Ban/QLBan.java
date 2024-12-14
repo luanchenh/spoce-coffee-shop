@@ -5,6 +5,8 @@ import Utils.IXuat;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 
@@ -28,14 +30,14 @@ public class QLBan implements IXuat {
                 String str = sc.nextLine();
                 String[] arr = str.split("\\|");
                 Ban ban = null;
-                if (arr.length == 3) {
+                if (arr.length == 4) {
                     boolean status;
                     if (arr[2].compareTo("0") == 0) {
                         status = false;
                     } else {
                         status = true;
                     }
-                    ban = new Ban(arr[0], Integer.parseInt(arr[1]), status);
+                    ban = new Ban(arr[0], Integer.parseInt(arr[1]), status, arr[3]);
                     this.tableList.add(ban);
                 }
             }
@@ -43,6 +45,15 @@ public class QLBan implements IXuat {
         } catch (Exception e) {
             System.out.println("Lỗi " + e.getMessage());
         }
+
+        // Collision Sort bàn
+        Collections.sort(this.tableList, new Comparator<Ban>() {
+            @Override
+            public int compare(Ban o1, Ban o2) {
+                // Sắp xếp từ bé đến lớn theo numOfCustomersOfTable
+                return o1.getCustomerPerTable() - o2.getCustomerPerTable();
+            }
+        });
     }
 
     // Phương thức dùng để ghi tất cả đối tượng Bàn trong Array List vào file
@@ -114,12 +125,13 @@ public class QLBan implements IXuat {
     // Phương thức dùng để in ra danh sách bàn
     public void printTableList() {
         Function.clearScreen();
-        System.out.println("\t=================================[Danh sách bàn]=================================");
-        System.out.printf("\t| %-25s %-25s %-25s |\n", "Mã bàn", "Số chỗ ngồi", "Tình trạng");
+        System.out.println("\t=============================================[Danh sách bàn]================================================");
+        System.out.printf("\t| %-20s | %-25s | %-25s | %-25s |\n", " Mã bàn", " Số chỗ ngồi", " Tình trạng", " View");
+        System.out.println("\t|----------------------|---------------------------|---------------------------|---------------------------|");
         for (Ban table : this.tableList) {
             table.printString();
         }
-        System.out.println("\t=================================================================================");
+        System.out.println("\t============================================================================================================");
     }
 
     @Override
@@ -346,7 +358,7 @@ public class QLBan implements IXuat {
             switch (str) {
                 case "1":
                 this.printTableList();
-                System.out.println("\tEnter để tiếp tục!");
+                System.out.print("\tEnter để tiếp tục!");
                 str = sc.nextLine();
                 continue;
 

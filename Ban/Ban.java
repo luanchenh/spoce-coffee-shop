@@ -6,17 +6,18 @@ import Utils.IXuat;
 import java.io.File;
 import java.util.Scanner;
 
-
 @SuppressWarnings("resource")
 public class Ban implements INhap, IXuat {
     private String tableID; // ID của bàn (B1, B2, B3)
     private int numOfCustomersOfTable; // Số lượng người bàn có thể chứa (2,4,8 chỗ)
     private boolean status; // Tình trạng bàn: true là có người ngồi, false là chưa có người ngồi
+    private String tableView;
 
     public static int numOfTables = readNumberOfTablesFromFile(); // Số lượng bàn trong quán sẽ được đọc từ file
 
     // Phương thức khởi tạo phi tham số
-    // ID của bàn sẽ được gán tự động và tình trạng bàn mặc định sẽ là chưa có người ngồi (false)
+    // ID của bàn sẽ được gán tự động và tình trạng bàn mặc định sẽ là chưa có người
+    // ngồi (false)
     public Ban() {
         this.tableID = makeTableID();
         this.status = false;
@@ -30,10 +31,11 @@ public class Ban implements INhap, IXuat {
     }
 
     // Phương thức khởi tạo dùng lúc đọc từ file
-    public Ban(String tableID, int numOfCustomersOfTable, boolean status) {
+    public Ban(String tableID, int numOfCustomersOfTable, boolean status, String tableView) {
         this.tableID = tableID;
         this.numOfCustomersOfTable = numOfCustomersOfTable;
         this.status = status;
+        this.tableView = tableView;
     }
 
     // Getter
@@ -49,6 +51,10 @@ public class Ban implements INhap, IXuat {
         return this.status;
     }
 
+    public String getTableView() {
+        return this.tableView;
+    }
+
     // Setter
     public void setCustomerPerTable(int numOfCustomersOfTable) {
         this.numOfCustomersOfTable = numOfCustomersOfTable;
@@ -56,6 +62,10 @@ public class Ban implements INhap, IXuat {
 
     public void setTableStatus(boolean status) {
         this.status = status;
+    }
+
+    public void setTableView(String tableView) {
+        this.tableView = tableView;
     }
 
     // Phương thức nhập thông tin bàn
@@ -85,20 +95,20 @@ public class Ban implements INhap, IXuat {
 
             switch (Integer.parseInt(str)) {
                 case 1:
-                this.numOfCustomersOfTable = 2;
-                break;
+                    this.numOfCustomersOfTable = 2;
+                    break;
 
                 case 2:
-                this.numOfCustomersOfTable = 4;
-                break;
+                    this.numOfCustomersOfTable = 4;
+                    break;
 
                 case 3:
-                this.numOfCustomersOfTable = 8;
-                break;
+                    this.numOfCustomersOfTable = 8;
+                    break;
 
                 default:
-                System.out.println("\tLựa chọn không hợp lệ!");
-                continue;
+                    System.out.println("\tLựa chọn không hợp lệ!");
+                    continue;
             }
 
             break;
@@ -123,18 +133,49 @@ public class Ban implements INhap, IXuat {
 
             switch (Integer.parseInt(str)) {
                 case 1:
-                this.status = false;
-                break;
+                    this.status = false;
+                    break;
 
                 case 2:
-                this.status = true;
-                break;
+                    this.status = true;
+                    break;
 
                 default:
-                System.out.println("\tLựa chọn không hợp lệ!");
-                continue;
+                    System.out.println("\tLựa chọn không hợp lệ!");
+                    continue;
             }
             break;
+        }
+
+        while (true) {
+            System.out.println("\n\tChọn view của bàn");
+            System.out.println("\t1. View ban công");
+            System.out.println("\t2. View trong nhà");
+            System.out.println("\t3. View thư viện");
+            System.out.print("\t=> Nhập lựa chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tLựa chọn không được rỗng!");
+                continue;
+            }
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                continue;
+            }
+            switch (Integer.parseInt(str)) {
+                case 1:
+                    this.tableView = "Ban công";
+                    break;
+                case 2:
+                    this.tableView = "Trong nhà";
+                    break;
+                case 3:
+                    this.tableView = "Thư viện";
+                    break;
+                default:
+                    System.out.println("\tLựa chọn không hợp lệ!");
+                    continue;
+            }
         }
     }
 
@@ -142,25 +183,29 @@ public class Ban implements INhap, IXuat {
     @Override
     public void xuatThongTin() {
         // System.out.println("Thông tin bàn");
-        // System.out.println("    ID của bàn: " + this.tableID);
-        // System.out.println("    Số lượng chỗ ngồi: " + this.numOfCustomersOfTable);
+        // System.out.println(" ID của bàn: " + this.tableID);
+        // System.out.println(" Số lượng chỗ ngồi: " + this.numOfCustomersOfTable);
         // String tableStatus = this.status ? "Đã có người ngồi" : "Đang trống";
-        // System.out.println("    Tình trạng: " + tableStatus);
+        // System.out.println(" Tình trạng: " + tableStatus);
 
         System.out.printf("\t| %-23s %-93s |%n", "Thông tin bàn", "");
         System.out.printf("\t|     %-19s %-93s |%n", "ID của bàn:", this.tableID);
         System.out.printf("\t|     %-19s %-93s |%n", "Số lượng chỗ ngồi:", this.numOfCustomersOfTable);
         String tableStatus = this.status ? "Đã có người ngồi" : "Đang trống";
         System.out.printf("\t|     %-19s %-93s |%n", "Tình trạng:", tableStatus);
+        System.out.printf("\t|     %-19s %-93s |%n", "View của bàn:", this.tableView);
     }
 
     public void xuatThongTin1Ban() {
-        System.out.println("\t=========================================================================================================================");
+        System.out.println(
+                "\t=========================================================================================================================");
         System.out.printf("\t| %-23s %-93s |%n", "ID của bàn:", this.tableID);
         System.out.printf("\t| %-23s %-93s |%n", "Số lượng chỗ ngồi:", this.numOfCustomersOfTable);
         String tableStatus = this.status ? "Đã có người ngồi" : "Đang trống";
         System.out.printf("\t| %-23s %-93s |%n", "Tình trạng:", tableStatus);
-        System.out.println("\t=========================================================================================================================");
+        System.out.printf("\t| %-23s %-93s |%n", "View của bàn:", this.tableView);
+        System.out.println(
+                "\t=========================================================================================================================");
     }
 
     // Phương thức để sửa thông tin của bàn
@@ -172,7 +217,8 @@ public class Ban implements INhap, IXuat {
             System.out.println("\n\tSửa thông tin bàn có ID: " + this.tableID);
             System.out.println("\t1. Số lượng chỗ ngồi");
             System.out.println("\t2. Tình trạng");
-            System.out.println("\t3. Quay lại");
+            System.out.println("\t3. View của bàn");
+            System.out.println("\t4. Quay lại");
             System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 
@@ -188,86 +234,120 @@ public class Ban implements INhap, IXuat {
 
             switch (Integer.parseInt(str)) {
                 case 2:
-                while (true) {
-                    System.out.println("\n\tTình trạng bàn:");
-                    System.out.println("\t1. Đang trống");
-                    System.out.println("\t2. Đã có người ngồi");
-                    System.out.print("\t=> Nhập lựa chọn: ");
-                    str = sc.nextLine();
+                    while (true) {
+                        System.out.println("\n\tTình trạng bàn:");
+                        System.out.println("\t1. Đang trống");
+                        System.out.println("\t2. Đã có người ngồi");
+                        System.out.print("\t=> Nhập lựa chọn: ");
+                        str = sc.nextLine();
 
-                    if (Function.isEmpty(str)) {
-                        System.out.println("\tLựa chọn không được rỗng!");
-                        continue;
-                    }
+                        if (Function.isEmpty(str)) {
+                            System.out.println("\tLựa chọn không được rỗng!");
+                            continue;
+                        }
 
-                    if (!Function.isTrueNumber(str)) {
-                        System.out.println("\tLựa chọn phải là số!");
-                        continue;
-                    }
+                        if (!Function.isTrueNumber(str)) {
+                            System.out.println("\tLựa chọn phải là số!");
+                            continue;
+                        }
 
-                    switch (Integer.parseInt(str)) {
-                        case 1:
-                        this.status = false;
+                        switch (Integer.parseInt(str)) {
+                            case 1:
+                                this.status = false;
+                                break;
+
+                            case 2:
+                                this.status = true;
+                                break;
+
+                            default:
+                                System.out.println("\tLựa chọn không hợp lệ");
+                                continue;
+                        }
                         break;
-
-                        case 2:
-                        this.status = true;
-                        break;
-
-                        default:
-                        System.out.println("\tLựa chọn không hợp lệ");
-                        continue;
                     }
                     break;
-                }
-                break;
 
                 case 1:
-                while (true) {
-                    System.out.println("\n\tSố chỗ ngồi:");
-                    System.out.println("\t1. 2 chỗ");
-                    System.out.println("\t2. 4 chỗ");
-                    System.out.println("\t3. 8 chỗ");
-                    System.out.print("\t=> Nhập lựa chọn: ");
-                    str = sc.nextLine();
+                    while (true) {
+                        System.out.println("\n\tSố chỗ ngồi:");
+                        System.out.println("\t1. 2 chỗ");
+                        System.out.println("\t2. 4 chỗ");
+                        System.out.println("\t3. 8 chỗ");
+                        System.out.print("\t=> Nhập lựa chọn: ");
+                        str = sc.nextLine();
 
-                    if (Function.isEmpty(str)) {
-                        System.out.println("\tLựa chọn không được rỗng!");
-                        continue;
-                    }
+                        if (Function.isEmpty(str)) {
+                            System.out.println("\tLựa chọn không được rỗng!");
+                            continue;
+                        }
 
-                    if (!Function.isTrueNumber(str)) {
-                        System.out.println("\tLựa chọn phải là số!");
-                        continue;
-                    }
+                        if (!Function.isTrueNumber(str)) {
+                            System.out.println("\tLựa chọn phải là số!");
+                            continue;
+                        }
 
-                    switch (Integer.parseInt(str)) {
-                        case 1:
-                        this.numOfCustomersOfTable = 2;
+                        switch (Integer.parseInt(str)) {
+                            case 1:
+                                this.numOfCustomersOfTable = 2;
+                                break;
+
+                            case 2:
+                                this.numOfCustomersOfTable = 4;
+                                break;
+
+                            case 3:
+                                this.numOfCustomersOfTable = 8;
+                                break;
+
+                            default:
+                                System.out.println("\tLựa chọn không hợp lệ");
+                                continue;
+                        }
                         break;
-
-                        case 2:
-                        this.numOfCustomersOfTable = 4;
-                        break;
-
-                        case 3:
-                        this.numOfCustomersOfTable = 8;
-                        break;
-
-                        default:
-                        System.out.println("\tLựa chọn không hợp lệ");
-                        continue;
                     }
                     break;
-                }
-                break;
 
                 case 3:
-                break;
+                    while (true) {
+                        System.out.println("\n\tChọn view của bàn");
+                        System.out.println("\t1. View ban công");
+                        System.out.println("\t2. View trong nhà");
+                        System.out.println("\t3. View thư viện");
+                        System.out.print("\t=> Nhập lựa chọn: ");
+                        str = sc.nextLine();
+                        if (Function.isEmpty(str)) {
+                            System.out.println("\tLựa chọn không được rỗng!");
+                            continue;
+                        }
+                        if (!Function.isTrueNumber(str)) {
+                            System.out.println("\tLựa chọn phải là số!");
+                            continue;
+                        }
+                        switch (Integer.parseInt(str)) {
+                            case 1:
+                                this.tableView = "Ban công";
+                                break;
+                            case 2:
+                                this.tableView = "Trong nhà";
+                                break;
+                            case 3:
+                                this.tableView = "Thư viện";
+                                break;
+                            default:
+                                System.out.println("\tLựa chọn không hợp lệ!");
+                                continue;
+                        }
+                        break;
+                    }
+                    break;
+
+                case 4:
+                    break;
 
                 default:
-                System.out.println("Lựa chọn không hợp lệ!");
-                continue;
+                    System.out.println("Lựa chọn không hợp lệ!");
+                    continue;
             }
 
             break; // while
@@ -277,7 +357,7 @@ public class Ban implements INhap, IXuat {
     // Phương thức dùng để tạo chuỗi đúng định dạng để ghi vào file
     public String makeString() {
         String status = this.status ? "1" : "0";
-        return this.tableID + "|" + this.numOfCustomersOfTable + "|" + status;
+        return this.tableID + "|" + this.numOfCustomersOfTable + "|" + status + "|" + this.tableView;
     }
 
     // Phương thức dùng để đọc số bàn có trong file
@@ -306,10 +386,11 @@ public class Ban implements INhap, IXuat {
         } else {
             status = "Đã có người ngồi";
         }
-        System.out.printf("\t| %-25s %-25s %-25s |\n", this.tableID, seats, status);
+        System.out.printf("\t| %-20s | %-25s | %-25s | %-25s |\n", this.tableID, seats, status, this.tableView);
     }
 
-    // Phương thức dùng để tìm ra bàn phù hợp với số lượng khách đồng thời cập nhật vào file
+    // Phương thức dùng để tìm ra bàn phù hợp với số lượng khách đồng thời cập nhật
+    // vào file
     public static Ban findTable(int numOfCustomers) {
         Ban table = null;
         QLBan ql = new QLBan();
@@ -375,7 +456,8 @@ public class Ban implements INhap, IXuat {
         return table;
     }
 
-    // Phương thức dùng để hủy 1 bàn (chuyển trạng thái từ "đang được sử dụng" sang "trống") và cập nhật vào file
+    // Phương thức dùng để hủy 1 bàn (chuyển trạng thái từ "đang được sử dụng" sang
+    // "trống") và cập nhật vào file
     public void cancelTable() {
         QLBan ql = new QLBan();
         ql.Init();
@@ -412,4 +494,3 @@ public class Ban implements INhap, IXuat {
         return "B" + idNumber;
     }
 }
-
