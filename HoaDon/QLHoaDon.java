@@ -90,10 +90,19 @@ public class QLHoaDon {
                     }
                     order.getDanhSachTopping().add(tpList);
 
-                    ArrayList<Boolean> ttList = new ArrayList<>();
+                    ArrayList<String> ttList = new ArrayList<>();
                     for (String s : waterStatus) {
-                        Boolean flag = s.equals("1");
-                        ttList.add(flag);
+                        String statusStr = new String();
+                        if (s.equals("0")) {
+                            statusStr = "Không";
+                        } else if (s.equals("1")) {
+                            statusStr = "Ít";
+                        } else if (s.equals("2")) {
+                            statusStr = "Bình thường";
+                        } else if (s.equals("3")) {
+                            statusStr = "Nhiều";
+                        }
+                        ttList.add(statusStr);
                     }
                     order.getTrangThaiNuocUong().add(ttList);
                 }

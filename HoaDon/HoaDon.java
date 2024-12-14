@@ -243,9 +243,33 @@ public class HoaDon implements IXuat {
 
             for (int j = 0; j < this.thucDon.getTrangThaiNuocUong().get(i).size(); j++) {
                 if (j == 3) {
-                    str.append(this.thucDon.getTrangThaiNuocUong().get(i).get(j) ? "1" : "0").append("|");
+                    // str.append(this.thucDon.getTrangThaiNuocUong().get(i).get(j) ? "1" : "0").append("|");
+                    if (this.thucDon.getTrangThaiNuocUong().get(i).get(j).equals("Không")) {
+                        str.append("0").append("|");
+                    }
+                    if (this.thucDon.getTrangThaiNuocUong().get(i).get(j).equals("Ít")) {
+                        str.append("1").append("|");
+                    }
+                    if (this.thucDon.getTrangThaiNuocUong().get(i).get(j).equals("Bình thường")) {
+                        str.append("2").append("|");
+                    }
+                    if (this.thucDon.getTrangThaiNuocUong().get(i).get(j).equals("Nhiều")) {
+                        str.append("3").append("|");
+                    }
                 } else {
-                    str.append(this.thucDon.getTrangThaiNuocUong().get(i).get(j) ? "1" : "0").append(";");
+                    // str.append(this.thucDon.getTrangThaiNuocUong().get(i).get(j) ? "1" : "0").append(";");
+                    if (this.thucDon.getTrangThaiNuocUong().get(i).get(j).equals("Không")) {
+                        str.append("0").append(";");
+                    }
+                    if (this.thucDon.getTrangThaiNuocUong().get(i).get(j).equals("Ít")) {
+                        str.append("1").append(";");
+                    }
+                    if (this.thucDon.getTrangThaiNuocUong().get(i).get(j).equals("Bình thường")) {
+                        str.append("2").append(";");
+                    }
+                    if (this.thucDon.getTrangThaiNuocUong().get(i).get(j).equals("Nhiều")) {
+                        str.append("3").append(";");
+                    }
                 }
             }
         }

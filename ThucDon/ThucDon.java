@@ -7,7 +7,7 @@ public class ThucDon implements IXuat {
 
     private ArrayList<NuocUong> danhSachNuocUong;
     private ArrayList<String> size;
-    private ArrayList<ArrayList<Boolean>> trangThaiNuocUong;
+    private ArrayList<ArrayList<String>> trangThaiNuocUong;
     private ArrayList<ArrayList<Topping>> danhSachTopping;
 
     public ThucDon() {
@@ -29,7 +29,7 @@ public class ThucDon implements IXuat {
         return this.size;
     }
 
-    public ArrayList<ArrayList<Boolean>> getTrangThaiNuocUong() {
+    public ArrayList<ArrayList<String>> getTrangThaiNuocUong() {
         return this.trangThaiNuocUong;
     }
 
@@ -49,10 +49,10 @@ public class ThucDon implements IXuat {
             // System.out.println("\t| Có sữa: "+ this.trangThaiNuocUong.get(i).get(3));
             System.out.printf("\t| %-20s %-37s |%n", "Nước uống:", this.danhSachNuocUong.get(i).getName());
             System.out.printf("\t| %-20s %-37s |%n", "Size:", this.size.get(i));
-            System.out.printf("\t| %-20s %-37s |%n", "Uống đá:", this.trangThaiNuocUong.get(i).get(0) ? "Có" : "Không");
-            System.out.printf("\t| %-20s %-37s |%n", "Uống nóng:", this.trangThaiNuocUong.get(i).get(1) ? "Có" : "Không");
-            System.out.printf("\t| %-20s %-37s |%n", "Có đường:", this.trangThaiNuocUong.get(i).get(2) ? "Có" : "Không");
-            System.out.printf("\t| %-20s %-37s |%n", "Có sữa:", this.trangThaiNuocUong.get(i).get(3) ? "Có" : "Không");
+            System.out.printf("\t| %-20s %-37s |%n", "Uống đá:", this.trangThaiNuocUong.get(i).get(0));
+            System.out.printf("\t| %-20s %-37s |%n", "Uống nóng:", this.trangThaiNuocUong.get(i).get(1));
+            System.out.printf("\t| %-20s %-37s |%n", "Có đường:", this.trangThaiNuocUong.get(i).get(2));
+            System.out.printf("\t| %-20s %-37s |%n", "Có sữa:", this.trangThaiNuocUong.get(i).get(3));
             if (!this.danhSachTopping.get(i).isEmpty()) {
                 System.out.println("\t| Topping:                                                   |");
                 for (int j = 0; j < this.danhSachTopping.get(i).size(); j++) {
