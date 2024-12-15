@@ -202,7 +202,7 @@ public class TraBan {
                 case "2":
                     sectionTwo();
                     continue;
-                case "8":
+                case "3":
                     break;
 
                 default:
