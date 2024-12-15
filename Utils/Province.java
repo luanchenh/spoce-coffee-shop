@@ -20,7 +20,7 @@ public class Province {
     public Province(String provinceCode) {
         this.provinceCode = provinceCode;
         // Get tên từ file
-        File cityFile = new File("../File/tinhthanh.txt");
+        File cityFile = new File("./File/tinhthanh.txt");
         try(Scanner rd = new Scanner(cityFile)) {
             while (rd.hasNextLine()) {
                 String line = rd.nextLine();
@@ -55,7 +55,7 @@ public class Province {
     }
 
     public void printInfoProvince() {
-        File cityFile = new File("../File/tinhthanh.txt");
+        File cityFile = new File("./File/tinhthanh.txt");
         try (BufferedReader reader = new BufferedReader(new FileReader(cityFile))) {
             int breakLine = 0;
             String line;
@@ -79,7 +79,7 @@ public class Province {
         }
     }
     public String getInfoProvince(int number) {
-        File cityFile = new File("../File/tinhthanh.txt");
+        File cityFile = new File("./File/tinhthanh.txt");
         String result = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(cityFile))) {
             String line = "";
@@ -128,7 +128,7 @@ public class Province {
 
     public static String getProvinceNameFromID(String provinceID) {
         String result = null;
-        File cityFile = new File("../File/tinhthanh.txt");
+        File cityFile = new File("./File/tinhthanh.txt");
         try (Scanner sc = new Scanner(cityFile)) {
             while (sc.hasNextLine()) {
                 String str = sc.nextLine();

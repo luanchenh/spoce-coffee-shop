@@ -19,7 +19,7 @@ public class MemberCard implements INhap, IXuat {
 
     public static int getNumberOfMemberFromFile() {
         int count = 0;
-        File customerFile = new File("../File/customer.txt");
+        File customerFile = new File("./File/customer.txt");
         try (Scanner sc = new Scanner(customerFile)) {
             while (sc.hasNextLine()) {
                 String str = sc.nextLine();

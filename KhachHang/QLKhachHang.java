@@ -25,7 +25,7 @@ public class QLKhachHang implements IXuat {
 
     // Phương thức để nhập dữ liệu từ file vào Array List
     public void Init() {
-        File customerFile = new File("../File/customer.txt");
+        File customerFile = new File("./File/customer.txt");
         try (Scanner sc = new Scanner(customerFile)) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -65,7 +65,7 @@ public class QLKhachHang implements IXuat {
 
     // Phương thức để ghi dữ liệu từ mảng vào file
     public void writeAll() {
-        try (FileWriter writer = new FileWriter("../File/customer.txt", false)) {
+        try (FileWriter writer = new FileWriter("./File/customer.txt", false)) {
             for (KhachHang kh : this.customerList) {
                 writer.write(kh.makeString() + "\n");
             }
@@ -520,6 +520,13 @@ public class QLKhachHang implements IXuat {
                     "\t|------|-------------------------------------------------------------------------------|");
 
             // In danh sách các lựa chọn
+            System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách khách hàng");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm/sửa/xóa thông tin khách hàng");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Cập nhật và làm mới danh sách");
+            System.out.printf("\t| %-4s | %-77s |%n", "4", "Tìm kiếm");
+            System.out.printf("\t| %-4s | %-77s |%n", "5", "Làm mới màn hình");
+
+            System.out.printf("\t| %-4s | %-77s |%n", "6", "Thoát chương trình quản lý");
 
             // In dòng kẻ dưới cùng
             System.out.println(
