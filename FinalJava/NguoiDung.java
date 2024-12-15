@@ -30,7 +30,7 @@ import java.util.Scanner;
  *
  */
 
-@SuppressWarnings("resource")
+@SuppressWarnings({"resource", "unused"})
 public class NguoiDung {
 
     public static String IDLink = "";
@@ -89,7 +89,6 @@ public class NguoiDung {
 
     }
 
-    @SuppressWarnings("unused")
     public static void selectOne() {
         Scanner sc = new Scanner(System.in);
         String str;
@@ -167,6 +166,7 @@ public class NguoiDung {
                                         }
 
                                         tmp = qlBan.getTableByID(str);
+                                        tmp.changeTableStatus();
                                         if (tmp == null) {
                                             System.out.println("\tID không đúng, vui lòng nhập lại!");
                                             continue;
@@ -222,6 +222,7 @@ public class NguoiDung {
                                     }
 
                                     tmp = qlBan.getTableByID(str);
+                                    tmp.changeTableStatus();
                                     if (tmp == null) {
                                         System.out.println("\tID không đúng, vui lòng nhập lại!");
                                         continue;
@@ -276,6 +277,7 @@ public class NguoiDung {
                                         }
 
                                         tmp = qlBan.getTableByID(str);
+                                        tmp.changeTableStatus();
                                         if (tmp == null) {
                                             System.out.println("\tID không đúng, vui lòng nhập lại!");
                                             continue;
@@ -829,7 +831,7 @@ public class NguoiDung {
                                 switch (str) {
                                     case "1":
                                     if (optionList.get(1).equals("Đá")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -877,7 +879,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(1).equals("Nóng")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -925,7 +927,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(1).equals("Đường")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -973,7 +975,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(1).equals("Sữa")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1025,7 +1027,7 @@ public class NguoiDung {
 
                                     case "2":
                                     if (optionList.get(2).equals("Đá")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1073,7 +1075,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(2).equals("Nóng")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1121,7 +1123,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(2).equals("Đường")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1169,7 +1171,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(2).equals("Sữa")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1223,7 +1225,7 @@ public class NguoiDung {
 
                                     case "3":
                                     if (optionList.get(3).equals("Đá")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1271,7 +1273,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(3).equals("Nóng")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1319,7 +1321,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(3).equals("Đường")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1367,7 +1369,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(3).equals("Sữa")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1421,7 +1423,7 @@ public class NguoiDung {
 
                                     case "4":
                                     if (optionList.get(4).equals("Đá")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1469,7 +1471,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(4).equals("Nóng")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1517,7 +1519,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(4).equals("Đường")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -1565,7 +1567,7 @@ public class NguoiDung {
                                             break;
                                         }
                                     } else if (optionList.get(4).equals("Sữa")) {
-                                        while (true) { 
+                                        while (true) {
                                             Function.clearScreen();
                                             System.out.println(
                                                 "\t=============================[Chức năng người Dùng tại chỗ]===============================");

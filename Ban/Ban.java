@@ -6,7 +6,7 @@ import Utils.IXuat;
 import java.io.File;
 import java.util.Scanner;
 
-@SuppressWarnings("resource")
+@SuppressWarnings({"unused", "resource"})
 public class Ban implements INhap, IXuat {
     private String tableID; // ID của bàn (B1, B2, B3)
     private int numOfCustomersOfTable; // Số lượng người bàn có thể chứa (2,4,8 chỗ)
@@ -74,7 +74,7 @@ public class Ban implements INhap, IXuat {
         Scanner sc = new Scanner(System.in);
         String str;
 
-        
+
         while (true) {
             Function.clearScreen();
             System.out.println("\tNhập thông tin bàn có ID: " + this.tableID);
@@ -538,5 +538,20 @@ public class Ban implements INhap, IXuat {
         }
 
         return "B" + idNumber;
+    }
+
+    public void changeTableStatus() {
+        Scanner sc = new Scanner(System.in);
+        String str;
+        if (this.status) {
+            // Đang có người ngồi
+            this.status = false;
+            System.out.println("\tĐã thay đổi từ 'Đang có người ngồi' thành 'Trống'");
+        }
+        else {
+            // Đang trống
+            this.status = true;
+            System.out.println("\tĐã thay đổi từ 'Trống' thành 'Đang có người ngồi'");
+        }
     }
 }

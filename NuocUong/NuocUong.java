@@ -44,13 +44,13 @@ public abstract class NuocUong implements INhap, IXuat {
                     String value = parts[0].substring(0, 2).toUpperCase();
                     int number = Integer.parseInt(parts[0].substring(2));
                     if (value.equals("TS")) {
-                        totalTS++;
+                        totalTS = Math.max(totalTS, number);
                     } else if (value.equals("CF")) {
-                        totalCF++;
+                        totalCF = Math.max(totalCF, number);
                     } else if (value.equals("ST")) {
-                        totalST++;
+                        totalST = Math.max(totalST, number);
                     } else if (value.equals("TC")) {
-                        totalTC++;
+                        totalTC = Math.max(totalTC, number);
                     }
                 }
             }

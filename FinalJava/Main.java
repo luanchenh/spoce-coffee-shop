@@ -26,7 +26,8 @@ public class Main {
             System.out.printf("\t| %-87s |%n", "Chọn chức năng:");
             System.out.printf("\t| %-5s %-81s |%n", "1.", "Người dùng (Khách hàng)");
             System.out.printf("\t| %-5s %-81s |%n", "2.", "Quản trị viên (Admin)");
-            System.out.printf("\t| %-5s %-81s |%n", "3.", "Thoát chương trình");
+            System.out.printf("\t| %-5s %-81s |%n", "3.", "Trả bàn và trả món");
+            System.out.printf("\t| %-5s %-81s |%n", "4.", "Thoát chương trình");
 
             // Đóng bảng
             System.out.println(
@@ -46,86 +47,90 @@ public class Main {
 
             switch (str) {
                 case "1":
-                NguoiDung.Menu();
-                continue;
+                    NguoiDung.Menu();
+                    continue;
 
                 case "2":
-                String username;
-                String password;
-                while (true) {
+                    String username;
+                    String password;
                     while (true) {
-                        System.out.print("\t=> Mời bạn nhập tài khoản: ");
-                        username = sc.nextLine();
+                        while (true) {
+                            System.out.print("\t=> Mời bạn nhập tài khoản: ");
+                            username = sc.nextLine();
 
-                        if (Function.isEmpty(username)) {
-                            System.out.println("\tTài khoản không được rỗng!");
-                            continue;
+                            if (Function.isEmpty(username)) {
+                                System.out.println("\tTài khoản không được rỗng!");
+                                continue;
+                            }
+
+                            break;
                         }
 
-                        break;
-                    }
+                        while (true) {
+                            System.out.print("\t=> Mời bạn nhập mật khẩu: ");
+                            password = sc.nextLine();
 
-                    while (true) {
-                        System.out.print("\t=> Mời bạn nhập mật khẩu: ");
-                        password = sc.nextLine();
+                            if (Function.isEmpty(password)) {
+                                System.out.println("\tMật khẩu không được rỗng!");
+                                continue;
+                            }
 
-                        if (Function.isEmpty(password)) {
-                            System.out.println("\tMật khẩu không được rỗng!");
-                            continue;
+                            break;
                         }
 
-                        break;
-                    }
-
-                    File accountFile = new File("./File/accounts.txt");
-                    boolean isFound = false;
-                    try (Scanner sf = new Scanner(accountFile)) {
-                        while (sf.hasNextLine()) {
-                            str = sf.nextLine();
-                            String[] arr = str.split("\\|");
-                            if (username.equals(arr[0]) && password.equals(arr[1])) {
-                                isFound = true;
-                                if (arr[2].equals("2")) {
-                                    System.out.println("\tĐăng nhập thành công!");
-                                    try {
-                                        Thread.sleep(1500);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
+                        File accountFile = new File("./File/accounts.txt");
+                        boolean isFound = false;
+                        try (Scanner sf = new Scanner(accountFile)) {
+                            while (sf.hasNextLine()) {
+                                str = sf.nextLine();
+                                String[] arr = str.split("\\|");
+                                if (username.equals(arr[0]) && password.equals(arr[1])) {
+                                    isFound = true;
+                                    if (arr[2].equals("2")) {
+                                        System.out.println("\tĐăng nhập thành công!");
+                                        try {
+                                            Thread.sleep(1500);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        Admin.Menu();
+                                        break;
+                                    } else {
+                                        System.out.println("\tTài khoản không có quyền quản trị!");
+                                        try {
+                                            Thread.sleep(1500);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        break;
                                     }
-                                    Admin.Menu();
-                                    break;
-                                } else {
-                                    System.out.println("\tTài khoản không có quyền quản trị!");
-                                    try {
-                                        Thread.sleep(1500);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    break;
                                 }
                             }
+                            if (!isFound) {
+                                System.out.println("\tTài khoản hoặc mật khẩu không đúng!");
+                            }
+                            try {
+                                Thread.sleep(1500);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Lỗi: " + e.getMessage());
                         }
-                        if (!isFound) {
-                            System.out.println("\tTài khoản hoặc mật khẩu không đúng!");
-                        }
-                        try {
-                            Thread.sleep(1500);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Lỗi: " + e.getMessage());
+                        break;
                     }
-                    break;
-                }
-                continue;
+                    continue;
 
                 case "3":
-                break;
+                    TraBan.Menu();
+                    break;
+
+                case "4":
+                    break;
 
                 default:
-                System.out.println("\tVui lòng nhập từ 1 đến 3!");
-                continue;
+                    System.out.println("\tVui lòng nhập từ 1 đến 4!");
+                    continue;
             }
             break;
         }
