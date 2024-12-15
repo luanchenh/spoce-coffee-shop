@@ -71,12 +71,12 @@ public class TraBan {
                                     sc.nextLine();
                                     break;
                                 }
-                                else {
-                                    System.out.println("\tKhông tìm thấy mã bàn!");
-                                    System.out.print("\tNhấn Enter để tiếp tục...");
-                                    sc.nextLine();
-                                    continue;
-                                }
+                            }
+                            if (!isExist) {
+                                System.out.println("\tKhông tìm thấy mã bàn!");
+                                System.out.print("\tNhấn Enter để tiếp tục...");
+                                sc.nextLine();
+                                continue;
                             }
                             break;
                         }
