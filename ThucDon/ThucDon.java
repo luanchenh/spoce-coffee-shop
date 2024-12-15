@@ -68,6 +68,37 @@ public class ThucDon implements IXuat {
         }
     }
 
+    public String makeStringFile() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < this.danhSachNuocUong.size(); i++) {
+            str.append("\t+--------------------------------------------------------------------------+\n");
+            str.append(String.format("\t| Món thức uống thứ %-54d |\n", (i + 1)));
+            str.append("\t+--------------------------------------------------------------------------+\n");
+            str.append(String.format("\t| Nước uống     : %-56s |\n", this.danhSachNuocUong.get(i).getName()));
+            str.append(String.format("\t| Size          : %-56s |\n", this.size.get(i)));
+            str.append(String.format("\t| Uống đá       : %-56s |\n", this.trangThaiNuocUong.get(i).get(0)));
+            str.append(String.format("\t| Uống nóng     : %-56s |\n", this.trangThaiNuocUong.get(i).get(1)));
+            str.append(String.format("\t| Có đường      : %-56s |\n", this.trangThaiNuocUong.get(i).get(2)));
+            str.append(String.format("\t| Có sữa        : %-56s |\n", this.trangThaiNuocUong.get(i).get(3)));
+
+            // Xử lý topping
+            if (!this.danhSachTopping.get(i).isEmpty()) {
+                str.append("\t| Topping       :                                                          |\n");
+                for (int j = 0; j < this.danhSachTopping.get(i).size(); j++) {
+                    str.append(String.format("\t|   - %-68s |\n", this.danhSachTopping.get(i).get(j).getName()));
+                }
+            } else {
+                str.append(String.format("\t| %-58s |\n", "Không có topping"));
+            }
+
+            // Kết thúc món uống
+            str.append("\t+--------------------------------------------------------------------------+\n");
+        }
+
+        return str.toString();
+    }
+
+
     public String makeString() {
         StringBuilder str = new StringBuilder();
         // ID, Name, isHot, isCold, isSugar, isMilk, topping1; topping2; ... | ID, Name, isHot, isCold, isSugar, isMilk, topping1, topping2, ...

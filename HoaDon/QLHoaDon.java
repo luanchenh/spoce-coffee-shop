@@ -10,6 +10,7 @@ import NuocUong.QLNuocUong;
 import ThucDon.ThucDon;
 import Topping.QLTopping;
 import Topping.Topping;
+import Utils.CreateTXT;
 import Utils.Date;
 import Utils.Function;
 import java.io.File;
@@ -27,6 +28,14 @@ public class QLHoaDon {
     }
 
     public QLHoaDon(ArrayList<HoaDon> billList) {
+        this.billList = billList;
+    }
+
+    public ArrayList<HoaDon> getBillList() {
+        return billList;
+    }
+
+    public void setBillList(ArrayList<HoaDon> billList) {
         this.billList = billList;
     }
 
@@ -286,6 +295,74 @@ public class QLHoaDon {
                         "\t======================================================================================================");
             }
             break;
+        }
+    }
+
+    public void printHoaDon() {
+        this.Init();
+        Scanner sc = new Scanner(System.in);
+        String str;
+        String valString;
+        while (true) {
+            Function.clearScreen();
+            System.out.println("\t+------------------------------+----------+------------------------------+");
+            System.out.println("\t|                         CHƯƠNG TRÌNH IN HOÁ ĐƠN                        |");
+            System.out.println("\t+------------------------------+----------+------------------------------+");
+            System.out.println("\t| 1. In hoá đơn theo mã                                                  |");
+            System.out.println("\t| 2. In toàn bộ hoá đơn                                                  |");
+            System.out.println("\t| 3. Quay lại                                                            |");
+            System.out.println("\t+------------------------------------------------------------------------+");
+            System.out.print("\tMời bạn chọn: ");
+            str = sc.nextLine();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tVui lòng không để trống!");
+                continue;
+            }
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tVui lòng nhập số!");
+                continue;
+            }
+            switch (str) {
+                case "1":
+                    while (true) {
+                        System.out.print("\tNhập mã hoá đơn muốn in: ");
+                        valString = sc.nextLine();
+                        if (Function.isEmpty(valString)) {
+                            System.out.println("\tVui lòng không để trống!");
+                            continue;
+                        }
+                        else {
+                            boolean isExist = false;
+                            for (HoaDon hd : this.billList) {
+                                if (hd.getMaHoaDon().equals(valString)) {
+                                    CreateTXT.createTextFile(hd);
+                                    System.out.println("\tHoá đơn đã được in!");
+                                    System.out.print("\tEnter để tiếp tục...");
+                                    sc.nextLine();
+                                    isExist = true;
+                                    break;
+                                }
+                            }
+                            if (!isExist) {
+                                System.out.println("\tKhông tìm thấy hoá đơn có mã " + valString + "!");
+                                System.out.print("\tEnter để tiếp tục...");
+                                sc.nextLine();
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                case "2":
+                    for (HoaDon hd : this.billList) {
+                        CreateTXT.createTextFile(hd);
+                    }
+                    break;
+                case "3":
+                    return;
+                default:
+                    System.out.println("\tVui lòng chọn từ 1 đến 3!");
+                    break;
+            }
         }
     }
 

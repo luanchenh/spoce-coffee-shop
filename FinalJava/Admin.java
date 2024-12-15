@@ -39,7 +39,8 @@ public class Admin {
             System.out.printf("\t| %-5s %-81s |%n", "5.", "Quản lý bàn");
             System.out.printf("\t| %-5s %-81s |%n", "6.", "Quản lý hóa đơn");
             System.out.printf("\t| %-5s %-81s |%n", "7.", "Quản lý các tài khoản");
-            System.out.printf("\t| %-5s %-81s |%n", "8.", "Quay về trang trước");
+            System.out.printf("\t| %-5s %-81s |%n", "8.", "In hóa đơn");
+            System.out.printf("\t| %-5s %-81s |%n", "9.", "Quay về trang trước");
             System.out.println(
                     "\t===========================================================================================");
             System.out.print("\tNhập lựa chọn của bạn: ");
@@ -57,40 +58,42 @@ public class Admin {
 
             switch (str) {
                 case "1":
-                qlKhachHang.menuQLKhachHang();
-                continue;
+                    qlKhachHang.menuQLKhachHang();
+                    continue;
 
                 case "2":
-                qlNhanVien.menuQLNhanVien();
-                continue;
+                    qlNhanVien.menuQLNhanVien();
+                    continue;
 
                 case "3":
-                qlNuocUong.menuQLNuocUong();
-                continue;
+                    qlNuocUong.menuQLNuocUong();
+                    continue;
 
                 case "4":
-                qlTopping.menuQLTopping();
-                continue;
+                    qlTopping.menuQLTopping();
+                    continue;
 
                 case "5":
-                qlBan.menuQLBan();
-                continue;
+                    qlBan.menuQLBan();
+                    continue;
 
                 case "6":
-                qlHoaDon.menuQLHoaDon();
-                continue;
+                    qlHoaDon.menuQLHoaDon();
+                    continue;
 
                 case "7":
-                qlAccount.Menu();
-                continue;
-
+                    qlAccount.Menu();
+                    continue;
                 case "8":
-                break;
+                    qlHoaDon.printHoaDon();
+                    continue;
 
+                case "9":
+                    break;
 
                 default:
-                System.out.println("\tVui lòng chọn từ 1 đến 8");
-                continue;
+                    System.out.println("\tVui lòng chọn từ 1 đến 9");
+                    continue;
             }
             break;
         }

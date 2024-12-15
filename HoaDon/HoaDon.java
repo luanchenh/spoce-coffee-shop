@@ -187,7 +187,9 @@ public class HoaDon implements IXuat {
     // public double getTongTien(){
     // return 1;
     // }
-
+    public KhachHang getKhachHang() {
+        return khachHang;
+    }
     @Override
     public void xuatThongTin() {
         System.out.println("\t+============================================================+");
