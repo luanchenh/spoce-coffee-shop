@@ -123,7 +123,7 @@ public class Main {
 
                 case "3":
                     TraBan.Menu();
-                    break;
+                    continue;
 
                 case "4":
                     break;
