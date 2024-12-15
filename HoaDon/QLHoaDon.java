@@ -41,7 +41,7 @@ public class QLHoaDon {
         qlNuocUong.Init();
         qlTopping.Init();
 
-        File billFile = new File("./File/hoadon.txt");
+        File billFile = new File("../File/hoadon.txt");
         try (Scanner sc = new Scanner(billFile)) {
             while (sc.hasNextLine()) {
                 String str = sc.nextLine();
@@ -118,7 +118,7 @@ public class QLHoaDon {
 
     // Phương thức dùng để ghi toàn bộ hóa đơn vào file
     public void writeAll() {
-        try (FileWriter writer = new FileWriter("./File/hoadon.txt", false)) {
+        try (FileWriter writer = new FileWriter("../File/hoadon.txt", false)) {
             for (HoaDon bill : this.billList) {
                 writer.write(bill.makeString() + "\n");
             }

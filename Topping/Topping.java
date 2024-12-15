@@ -19,7 +19,7 @@ public class Topping implements INhap, IXuat{
     public static int readIDTopping() {
         int result = 0;
         String lastLine = "";
-        File toppingFile = new File("./File/topping.txt");
+        File toppingFile = new File("../File/topping.txt");
         try(Scanner rd = new Scanner(toppingFile)) {
             while(rd.hasNextLine()) {
                 lastLine = rd.nextLine();

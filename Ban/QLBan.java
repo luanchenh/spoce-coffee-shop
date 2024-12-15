@@ -24,7 +24,7 @@ public class QLBan implements IXuat {
 
     // Phương thức dùng để đọc dữ liệu bàn từ tập tin và ghi vào mảng quản lí bàn
     public void Init() {
-        File tableFile = new File("./File/table.txt");
+        File tableFile = new File("../File/table.txt");
         try (Scanner sc = new Scanner(tableFile)) {
             while (sc.hasNextLine()) {
                 String str = sc.nextLine();

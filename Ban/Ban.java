@@ -408,7 +408,7 @@ public class Ban implements INhap, IXuat {
 
     // Phương thức dùng để đọc số bàn có trong file
     public static int readNumberOfTablesFromFile() {
-        File tableFile = new File("./File/table.txt");
+        File tableFile = new File("../File/table.txt");
         String str = null;
         try (Scanner sc = new Scanner(tableFile)) {
             while (sc.hasNextLine()) {

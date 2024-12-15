@@ -31,7 +31,7 @@ public abstract class NuocUong implements INhap, IXuat {
         int totalST = 0;
         int totalTC = 0;
 
-        File waterFile = new File("./File/water.txt");
+        File waterFile = new File("../File/water.txt");
         try (Scanner rd = new Scanner(waterFile)) {
             while (rd.hasNextLine()) { // Đọc từng dòng trong file
                 String line = rd.nextLine();
@@ -439,7 +439,7 @@ public abstract class NuocUong implements INhap, IXuat {
                     if (Function.isTrueNumber(str)) {
                         number = Integer.parseInt(str);
                         // Lấy số lượng topping hiện có trong file
-                        File file = new File("./File/topping.txt");
+                        File file = new File("../File/topping.txt");
                         int count = 0;
                         try (Scanner rd = new Scanner(file)) {
                             while (rd.hasNextLine()) {

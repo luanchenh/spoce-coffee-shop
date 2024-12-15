@@ -13,3 +13,19 @@
 1|KH13|Nguyễn Văn Nam|0|null
 0|KH14|Nguyễn Văn Tân|0|null
 1|KH15|Truong Chung|0|null
+0|KH1|Nguyen Nam Duong|0|null
+0|KH2|Nguyen Hong Anh|1|MB1|14|2|2005|8|12|2024|8|12|2025|0
+0|KH3|Nguyen Van Lam|0|null
+0|KH4|Chenh Tien Lu|1|MB2|2|4|2005|8|12|2024|8|12|2025|18
+0|KH5|Chenh Tien Luan|0|null
+0|KH6|Chenh Tien Loc|0|null
+1|KH7|Lam Vinh Dat|1|MB3|1|1|2005|10|12|2024|10|12|2025|0
+1|KH8|Luong Vinh Thuan|0|null
+1|KH9|Truong Thu Nhan|1|MB4|12|12|2005|13|12|2024|13|12|2025|0
+1|KH10|Truong Luc Nhuong|0|null
+1|KH11|Trieu Phu Quan|0|null
+0|KH12|Nguyen Nam Duong|0|null
+1|KH13|Nguyễn Văn Nam|0|null
+0|KH14|Nguyễn Văn Tân|0|null
+1|KH15|Truong Chung|0|null
+0|KH16|Nguyen Thanh Hoai Anh|0|null
