@@ -166,7 +166,14 @@ public class NguoiDung {
                                         }
 
                                         tmp = qlBan.getTableByID(str);
-                                        tmp.changeTableStatus();
+
+                                        for (Ban ban : qlBan.tableList) {
+                                            if (ban.getTableID().equals(tmp.getTableID())) {
+                                                ban.changeTableStatus();
+                                                qlBan.writeAll();
+                                                break;
+                                            }
+                                        }
                                         if (tmp == null) {
                                             System.out.println("\tID không đúng, vui lòng nhập lại!");
                                             continue;
@@ -222,7 +229,13 @@ public class NguoiDung {
                                     }
 
                                     tmp = qlBan.getTableByID(str);
-                                    tmp.changeTableStatus();
+                                    for (Ban ban : qlBan.tableList) {
+                                        if (ban.getTableID().equals(tmp.getTableID())) {
+                                            ban.changeTableStatus();
+                                            qlBan.writeAll();
+                                            break;
+                                        }
+                                    }
                                     if (tmp == null) {
                                         System.out.println("\tID không đúng, vui lòng nhập lại!");
                                         continue;
@@ -277,7 +290,14 @@ public class NguoiDung {
                                         }
 
                                         tmp = qlBan.getTableByID(str);
-                                        tmp.changeTableStatus();
+                                        for (Ban ban : qlBan.tableList) {
+                                            if (ban.getTableID().equals(tmp.getTableID())) {
+                                                ban.changeTableStatus();
+                                                qlBan.writeAll();
+                                                break;
+                                            }
+                                        }
+                                        
                                         if (tmp == null) {
                                             System.out.println("\tID không đúng, vui lòng nhập lại!");
                                             continue;
