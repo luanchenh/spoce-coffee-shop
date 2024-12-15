@@ -23,7 +23,7 @@ public class TraBan {
         qlHoaDon.Init();
     }
 
-    public void sectionOne() {
+    public static void sectionOne() {
         Function.clearScreen();
         Scanner sc = new Scanner(System.in);
         String str;
@@ -52,6 +52,7 @@ public class TraBan {
             switch (str) {
                 case "1":
                     while (true) {
+                        qlBan.printTableList();
                         System.out.print("\tNhập mã bàn: ");
                         String value = sc.nextLine();
                         if (Function.isEmpty(value)) {
@@ -94,7 +95,7 @@ public class TraBan {
 
     }
 
-    public void sectionTwo() {
+    public static void sectionTwo() {
         Scanner sc = new Scanner(System.in);
         String str;
         String value;
@@ -123,6 +124,7 @@ public class TraBan {
             switch (str) {
                 case "1":
                     while (true) {
+                        qlHoaDon.printHoaDonList();
                         System.out.print("\tNhập mã hoá đơn: ");
                         value = sc.nextLine();
                         if (Function.isEmpty(value)) {
@@ -194,11 +196,11 @@ public class TraBan {
 
             switch (str) {
                 case "1":
-                    new TraBan().sectionOne();
+                    sectionOne();
                     continue;
 
                 case "2":
-                    new TraBan().sectionTwo();
+                    sectionTwo();
                     continue;
                 case "8":
                     break;

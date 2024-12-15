@@ -58,7 +58,7 @@ public class QLBan implements IXuat {
 
     // Phương thức dùng để ghi tất cả đối tượng Bàn trong Array List vào file
     public void writeAll() {
-        try (FileWriter writer = new FileWriter("./File/table.txt", false)) {
+        try (FileWriter writer = new FileWriter("../File/table.txt", false)) {
             for (Ban ban : this.tableList) {
                 writer.write(ban.makeString() + "\n");
             }

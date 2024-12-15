@@ -733,18 +733,18 @@ public class QLHoaDon {
         Scanner sc = new Scanner(System.in);
         String str;
         this.Init();
-    
+
         while (true) {
             Function.clearScreen();
             // In tiêu đề
             System.out.println(
                     "\t==================================[ Menu Quản Lý Hóa Đơn ]==============================");
-    
+
             // In tiêu đề các cột
             System.out.printf("\t| %-4s | %-77s |%n", "STT", "Chức năng");
             System.out.println(
                     "\t|------|-------------------------------------------------------------------------------|");
-    
+
             // In danh sách các nhóm chức năng
             System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách hóa đơn");
             System.out.printf("\t| %-4s | %-77s |%n", "2.", "Thống kê");
@@ -752,39 +752,39 @@ public class QLHoaDon {
             System.out.printf("\t| %-4s | %-77s |%n", "4.", "Tìm kiếm");
             System.out.printf("\t| %-4s | %-77s |%n", "5.", "Làm mới dữ liệu và màn hình");
             System.out.printf("\t| %-4s | %-77s |%n", "6.", "Thoát chương trình");
-    
+
             // In dòng kẻ dưới cùng
             System.out.println(
                     "\t========================================================================================");
             System.out.print("\t[Manage] Nhập lựa chọn: ");
             str = sc.nextLine();
-    
+
             switch (str) {
                 case "1":
                     this.printBill();
                     pause(sc);
                     break;
-    
+
                 case "2":
                     this.menuThongKe(sc);
                     break;
-    
+
                 case "3":
                     this.menuChuyenTrangThaiCapNhat(sc);
                     break;
-    
+
                 case "4":
                     this.findBill();
                     pause(sc);
                     break;
-    
+
                 case "5":
                     this.menuLamMoi(sc);
                     break;
-    
+
                 case "6":
                     return;
-    
+
                 default:
                     System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
                     pause(sc);
@@ -792,7 +792,7 @@ public class QLHoaDon {
             }
         }
     }
-    
+
     // Hiển thị menu thống kê
     private void menuThongKe(Scanner sc) {
         while (true) {
@@ -801,28 +801,28 @@ public class QLHoaDon {
             System.out.printf("\t| %-4s | %-77s |%n", "STT", "Chức năng");
             System.out.println(
                     "\t|------|-------------------------------------------------------------------------------|");
-    
+
             System.out.printf("\t| %-4s | %-77s |%n", "1", "Thống kê toàn bộ doanh thu");
             System.out.printf("\t| %-4s | %-77s |%n", "2", "Thống kê doanh thu theo thời gian");
             System.out.printf("\t| %-4s | %-77s |%n", "3", "Quay lại menu chính");
             System.out.println("\t========================================================================================");
             System.out.print("\t[Thống kê] Nhập lựa chọn: ");
             String str = sc.nextLine();
-    
+
             switch (str) {
                 case "1":
                     this.thongKeDoanhThuAll();
                     pause(sc);
                     break;
-    
+
                 case "2":
                     this.thongKeDoanhThuTheoThoiGian();
                     pause(sc);
                     break;
-    
+
                 case "3":
                     return;
-    
+
                 default:
                     System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
                     pause(sc);
@@ -830,7 +830,7 @@ public class QLHoaDon {
             }
         }
     }
-    
+
     // Hiển thị menu chuyển trạng thái và cập nhật hóa đơn
     private void menuChuyenTrangThaiCapNhat(Scanner sc) {
         while (true) {
@@ -847,27 +847,27 @@ public class QLHoaDon {
 
     System.out.print("\t[Chuyển trạng thái] Nhập lựa chọn: ");
             String str = sc.nextLine();
-    
+
             switch (str) {
                 case "1":
                     this.chuyenTrangThaiHoaDon();
                     pause(sc);
                     break;
-    
+
                 case "2":
                     this.writeAll();
                     pause(sc);
                     break;
-    
+
                 case "3":
                     this.billList.clear();
                     this.Init();
                     pause(sc);
                     break;
-    
+
                 case "4":
                     return;
-    
+
                 default:
                     System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
                     pause(sc);
@@ -875,7 +875,7 @@ public class QLHoaDon {
             }
         }
     }
-    
+
     // Hiển thị menu làm mới dữ liệu và màn hình
     private void menuLamMoi(Scanner sc) {
         while (true) {
@@ -891,20 +891,20 @@ System.out.println("\t==========================================================
 System.out.print("\t[Làm mới] Nhập lựa chọn: ");
 String str = sc.nextLine();
 
-    
+
             switch (str) {
                 case "1":
                     this.resetList();
                     pause(sc);
                     break;
-    
+
                 case "2":
                     Function.clearScreen();
                     break;
-    
+
                 case "3":
                     return;
-    
+
                 default:
                     System.out.println("\tLựa chọn không hợp lệ! Hãy thử lại.");
                     pause(sc);
@@ -912,7 +912,7 @@ String str = sc.nextLine();
             }
         }
     }
-    
+
     // Dừng màn hình để người dùng đọc kết quả
     private void pause(Scanner sc) {
         System.out.print("\tNhấn Enter để tiếp tục...");
@@ -922,4 +922,13 @@ String str = sc.nextLine();
     //     QLHoaDon hd = new QLHoaDon();
     //     hd.menuQLHoaDon();
     // }
+    public void printHoaDonList() {
+        System.out.println("\t+--------------------+------------------------------+");
+        System.out.println("\t|     Mã Hóa Đơn     |    Trạng Thái Hóa Đơn        |");
+        System.out.println("\t+--------------------+------------------------------+");
+        for (HoaDon hoaDon : billList) {
+            System.out.printf("\t| %-18s | %-28s |\n", hoaDon.getMaHoaDon(), hoaDon.getTrangThaiHoaDon());
+            System.out.println("\t+--------------------+------------------------------+");
+        }
+    }
 }
