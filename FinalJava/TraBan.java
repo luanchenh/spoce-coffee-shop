@@ -72,7 +72,7 @@ public class TraBan {
                                     break;
                                 }
                             }
-                            if (!isExist) {
+                            if (isExist == false) {
                                 System.out.println("\tKhông tìm thấy mã bàn!");
                                 System.out.print("\tNhấn Enter để tiếp tục...");
                                 sc.nextLine();
@@ -144,7 +144,7 @@ public class TraBan {
                                     break;
                                 }
                             }
-                            if (!isExist) {
+                            if (isExist == false) {
                                 System.out.println("\tKhông tìm thấy mã hoá đơn!");
                                 System.out.print("\tNhấn Enter để tiếp tục...");
                                 sc.nextLine();
