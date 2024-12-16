@@ -1,31 +1,16 @@
-0|KH1|Nguyen Nam Duong|0|null
-0|KH2|Nguyen Hong Anh|1|MB1|14|2|2005|8|12|2024|8|12|2025|0
-0|KH3|Nguyen Van Lam|0|null
-0|KH4|Chenh Tien Lu|1|MB2|2|4|2005|8|12|2024|8|12|2025|18
-0|KH5|Chenh Tien Luan|0|null
-0|KH6|Chenh Tien Loc|0|null
-1|KH7|Lam Vinh Dat|1|MB3|1|1|2005|10|12|2024|10|12|2025|0
-1|KH8|Luong Vinh Thuan|0|null
-1|KH9|Truong Thu Nhan|1|MB4|12|12|2005|13|12|2024|13|12|2025|0
-1|KH10|Truong Luc Nhuong|0|null
-1|KH11|Trieu Phu Quan|0|null
-0|KH12|Nguyen Nam Duong|0|null
+0|KH1|Nguyễn Nam Dương|0|null
+0|KH2|Nguyễn Hồng Ánh|1|MB1|17|12|2005|8|12|2024|8|12|2025|20000
+0|KH3|Nguyễn Văn Lâm|0|null
+0|KH4|Chênh Tiên Luân|1|MB2|2|4|2005|8|12|2024|8|12|2025|18
+0|KH5|Chênh Tiên Luân|0|null
+0|KH6|Chênh Tiên Lộc|0|null
+1|KH7|Lâm Vinh Đạt|1|MB3|1|1|2005|10|12|2024|10|12|2025|0
+1|KH8|Lương Vinh Thuận|0|null
+1|KH9|Trương Quốc Đạt|1|MB4|17|12|2005|13|12|2024|13|12|2025|12000
+1|KH10|Trương Lực Nhung|0|null
+1|KH11|Triệu Phú Quân|0|null
+0|KH12|Nguyễn Nam Dương|0|null
 1|KH13|Nguyễn Văn Nam|0|null
 0|KH14|Nguyễn Văn Tân|0|null
-1|KH15|Truong Chung|0|null
-0|KH1|Nguyen Nam Duong|0|null
-0|KH2|Nguyen Hong Anh|1|MB1|14|2|2005|8|12|2024|8|12|2025|0
-0|KH3|Nguyen Van Lam|0|null
-0|KH4|Chenh Tien Lu|1|MB2|2|4|2005|8|12|2024|8|12|2025|18
-0|KH5|Chenh Tien Luan|0|null
-0|KH6|Chenh Tien Loc|0|null
-1|KH7|Lam Vinh Dat|1|MB3|1|1|2005|10|12|2024|10|12|2025|0
-1|KH8|Luong Vinh Thuan|0|null
-1|KH9|Truong Thu Nhan|1|MB4|12|12|2005|13|12|2024|13|12|2025|0
-1|KH10|Truong Luc Nhuong|0|null
-1|KH11|Trieu Phu Quan|0|null
-0|KH12|Nguyen Nam Duong|0|null
-1|KH13|Nguyễn Văn Nam|0|null
-0|KH14|Nguyễn Văn Tân|0|null
-1|KH15|Truong Chung|0|null
-0|KH16|Nguyen Thanh Hoai Anh|0|null
+1|KH15|Trường Chung|0|null
+0|KH16|Nguyễn Thanh Hoài An|0|null

@@ -623,16 +623,16 @@ public class QLKhachHang implements IXuat {
         Scanner sc = new Scanner(System.in);
         while (true) {
             Function.clearScreen();
-            System.out.println("\t============================[ Menu cập nhật và làm mới ]===========================");
-            System.out.printf("\t| %-4s | %-60s |%n", "STT", "Chức năng");
+            System.out.println("\t==============================[ Menu cập nhật và làm mới ]==============================");
+            System.out.printf("\t| %-4s | %-77s |%n", "STT", "Chức năng");
             System.out.println(
-                    "\t|------|--------------------------------------------------------------|");
+                    "\t|------|-------------------------------------------------------------------------------|");
             System.out.printf("\t| %-4s | %-77s |%n", "1", "Cập nhật lại khách hàng vào File từ danh sách");
             System.out.printf("\t| %-4s | %-77s |%n", "2", "Cập nhật lại khách hàng vào danh sách từ File");
             System.out.printf("\t| %-4s | %-77s |%n", "3",
                     "Làm mới danh sách khách hàng (Reset dữ liệu nhưng không load vào File)");
-            System.out.printf("\t| %-4s | %-60s |%n", "4", "Quay lại menu chính");
-            System.out.println("\t=======================================================================");
+            System.out.printf("\t| %-4s | %-77s |%n", "4", "Quay lại menu chính");
+            System.out.println("\t========================================================================================");
             System.out.print("\t[Làm mới] Nhập lựa chọn: ");
             String str = sc.nextLine();
 

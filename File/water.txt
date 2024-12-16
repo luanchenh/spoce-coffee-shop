@@ -3,7 +3,17 @@ TS2|Trà sữa thần sầu|true|false|false|true|20000,25000,28000|TP1,TP5
 TC1|Nước cam|true|false|false|true|12000,15000,18000|
 ST1|Sinh tố bơ|true|false|true|false|30000,35000,40000|
 TC2|Trà tắc|true|false|false|true|10000,12000,15000,20000|
-TC3|Nuoc Tao|true|false|false|true|10000,20000,15000|
-TS3|Tra Sua Tran Chau Duong Den|true|true|false|true|25000,30000,27000|TP6
-TS4|Sua Tuoi Tran Chau Duong Den|true|true|true|true|20000,40000,30000|TP1,TP2,TP3,TP4
-CF1|Ca Phe Sua Da|true|true|true|false|10000,30000,20000|
+TC3|Nước táo|true|false|false|true|10000,20000,15000|
+TS3|Trà sữa chân châu đường đen|true|true|false|true|25000,30000,27000|TP6
+TS4|Sữa tươi chân châu đường đen|true|true|true|true|20000,40000,30000|TP1,TP2,TP3,TP4
+CF1|Cà phê sữa đá|true|true|true|false|10000,30000,20000|
+ST2|Sinh Tố Việt Quốc|true|false|false|false|20000,22000,25000|TP1,TP3
+ST3|Sinh Tố Cam|true|false|false|false|13000,15000,18000,20000|TP7
+CF2|Cà Phê Chồn|true|true|true|true|20000,22000,25000,30000|
+CF3|Cà Phê Phin|false|true|false|true|13000,15000,18000|
+TS5|Trà Sữa Lá|true|false|false|true|20000,22000,25000|TP1,TP3
+TC4|Nước Ổi Ép|true|false|false|true|14000,17000,20000|TP6
+CF4|Cà Phê Bá Vương|true|true|true|true|13000,15000,20000,22000|
+CF5|Cà Phê Sầu Riêng|false|true|false|false|20000,25000,28000|
+ST4|Sinh Tố Sầu Riêng|true|false|true|true|25000,28000,30000|
+TC5|Hồng Trà|true|false|false|false|18000,19000,20000|

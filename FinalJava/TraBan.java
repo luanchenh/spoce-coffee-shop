@@ -52,7 +52,7 @@ public class TraBan {
             switch (str) {
                 case "1":
                     while (true) {
-                        qlBan.printTableList();
+                        qlBan.printEmptyTableList();
                         System.out.print("\tNhập mã bàn: ");
                         String value = sc.nextLine();
                         if (Function.isEmpty(value)) {
