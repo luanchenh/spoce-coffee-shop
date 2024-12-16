@@ -134,6 +134,19 @@ public class QLBan implements IXuat {
         System.out.println("\t============================================================================================================");
     }
 
+    public void printEmptyTableList() {
+        Function.clearScreen();
+        System.out.println("\t=============================================[Danh sách bàn]================================================");
+        System.out.printf("\t| %-20s | %-25s | %-25s | %-25s |\n", " Mã bàn", " Số chỗ ngồi", " View", " Tình trạng");
+        System.out.println("\t|----------------------|---------------------------|---------------------------|---------------------------|");
+        for (Ban table : this.tableList) {
+            if (table.getTableStatus() == true) {
+                table.printString();
+            }
+        }
+        System.out.println("\t============================================================================================================");
+    }
+
     @Override
     public void xuatThongTin() {
         for (Ban table : this.tableList) {
