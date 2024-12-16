@@ -30,7 +30,7 @@ import java.util.Scanner;
  *
  */
 
-@SuppressWarnings({ "resource", "unused" })
+@SuppressWarnings({"resource", "unused"})
 public class NguoiDung {
 
     public static String IDLink = "";
@@ -261,128 +261,110 @@ public class NguoiDung {
                         }
                         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
                         else if (number == 3) {
-                            while (true) {
-                                System.out.println(
-                                        "\t+--------------------------------------------------------------------------------+");
-                                System.out.println(
-                                        "\t|                   Bạn muốn dùng thẻ thành viên khoản không ?                   |");
-                                System.out.println(
-                                        "\t+--------------------------------------------------------------------------------+");
-                                System.out.println(
-                                        "\t| 1. Có                                                                          |");
-                                System.out.println(
-                                        "\t| 2. Không                                                                       |");
-                                System.out.println(
-                                        "\t| 3. Quay lại trang trước                                                        |");
-                                System.out.println(
-                                        "\t+--------------------------------------------------------------------------------+");
-                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                valString = sc.nextLine();
-                                if (Function.isEmpty(valString)) {
-                                    System.out.println("\tVui lòng không để trống !");
-                                    try {
-                                        Thread.sleep(1500);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
+                                loopback:while (true) {
+                                    System.out.println("\t+--------------------------------------------------------------------------------+");
+                                    System.out.println("\t|                   Bạn muốn dùng thẻ thành viên khoản không ?                   |");
+                                    System.out.println("\t+--------------------------------------------------------------------------------+");
+                                    System.out.println("\t| 1. Có                                                                          |");
+                                    System.out.println("\t| 2. Không                                                                       |");
+                                    System.out.println("\t| 3. Quay lại trang trước                                                        |");
+                                    System.out.println("\t+--------------------------------------------------------------------------------+");
+                                    System.out.print("\tNhập lựa chọn của bạn: ");
+                                    valString = sc.nextLine();
+                                    if (Function.isEmpty(valString)) {
+                                        System.out.println("\tVui lòng không để trống !");
+                                        try {
+                                            Thread.sleep(1500);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        continue;
                                     }
-                                    continue;
-                                }
-                                if (!Function.isTrueNumber(valString)) {
-                                    System.out.println("\tVui lòng nhập số !");
-                                    try {
-                                        Thread.sleep(1500);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
+                                    if (!Function.isTrueNumber(valString)) {
+                                        System.out.println("\tVui lòng nhập số !");
+                                        try {
+                                            Thread.sleep(1500);
+                                        } catch (InterruptedException e) {
+                                            e.printStackTrace();
+                                        }
+                                        continue;
                                     }
-                                    continue;
-                                }
-                                if (Function.isTrueNumber(valString)) {
-                                    number = Integer.parseInt(valString);
-                                    if (number >= 1 && number <= 3) {
-                                        KhachHang temp = null;
-                                        if (number == 1) {
-                                            while (true) {
-                                                System.out.print("\tNhập mã khách hàng của bạn: ");
-                                                str = sc.nextLine();
-                                                for (KhachHang kh : qlKhachHang.customerList) {
-                                                    if (kh.getCustomerID().equals(str) && kh instanceof KHTaiCho) {
-                                                        temp = kh;
-                                                        Function.clearScreen();
-                                                        temp.xuatThongTin();
-                                                        System.out.print("\tEnter để tiếp tục!");
-                                                        str = sc.nextLine();
-
-                                                        boolean isDone = qlBan.printEmptyTable();
-                                                        Ban tmp = null;
-                                                        if (isDone) {
-                                                            while (true) {
-                                                                System.out.print("\tNhập ID bàn bạn muốn chọn: ");
-                                                                str = sc.nextLine();
-
-                                                                if (Function.isEmpty(str)) {
-                                                                    System.out.println("\tVui lòng không để trống !");
-                                                                    continue;
-                                                                }
-
-                                                                tmp = qlBan.getTableByID(str);
-                                                                for (Ban ban : qlBan.tableList) {
-                                                                    if (ban.getTableID().equals(tmp.getTableID())) {
-                                                                        ban.changeTableStatus();
-                                                                        qlBan.writeAll();
-                                                                        break;
-                                                                    }
-                                                                }
-                                                                if (tmp == null) {
-                                                                    System.out.println(
-                                                                            "\tID không đúng, vui lòng nhập lại!");
-                                                                    continue;
-                                                                }
-                                                                break;
-                                                            }
-
-                                                            order(temp);
-                                                        } else {
-                                                            System.out.println("\tKhông còn bàn trống!");
-                                                            try {
-                                                                Thread.sleep(1500);
-                                                            } catch (InterruptedException e) {
-                                                                e.printStackTrace();
-                                                            }
+                                    if (Function.isTrueNumber(valString)) {
+                                        number = Integer.parseInt(valString);
+                                        if (number >= 1 && number <= 3) {
+                                            KhachHang temp = null;
+                                            if (number == 1) {
+                                                while (true) {
+                                                    System.out.print("\tNhập mã khách hàng của bạn: ");
+                                                    str = sc.nextLine();
+                                                    for (KhachHang kh : qlKhachHang.customerList) {
+                                                        if (kh.getCustomerID().equals(str) && kh instanceof KHTaiCho) {
+                                                            temp = kh;
+                                                            break;
                                                         }
+                                                    }
+                                                    break;
+                                                }
+
+                                                if (temp == null) {
+                                                    System.out.println("\tKhông tìm thấy khách hàng!");
+                                                    try {
+                                                        Thread.sleep(1500);
+                                                    } catch (InterruptedException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    continue loopback;
+                                                }
+                                                else {
+                                                    Function.clearScreen();
+                                                    temp.xuatThongTin();
+                                                    System.out.print("\tEnter để tiếp tục!");
+                                                    str = sc.nextLine();
+                                                    boolean isDone = qlBan.printEmptyTable();
+                                                    Ban tmp = null;
+                                                    if (isDone) {
+                                                        while (true) {
+                                                            System.out.print("\tNhập ID bàn bạn muốn chọn: ");
+                                                            str = sc.nextLine();
+
+                                                            if (Function.isEmpty(str)) {
+                                                                System.out.println("\tVui lòng không để trống !");
+                                                                continue;
+                                                            }
+
+                                                            tmp = qlBan.getTableByID(str);
+                                                            for (Ban ban : qlBan.tableList) {
+                                                                if (ban.getTableID().equals(tmp.getTableID())) {
+                                                                    ban.changeTableStatus();
+                                                                    qlBan.writeAll();
+                                                                    break;
+                                                                }
+                                                            }
+                                                            if (tmp == null) {
+                                                                System.out.println("\tID không đúng, vui lòng nhập lại!");
+                                                                continue;
+                                                            }
+                                                            break;
+                                                        }
+
                                                         order(temp);
-                                                        break;
+                                                    } else {
+                                                        System.out.println("\tKhông còn bàn trống!");
+                                                        try {
+                                                            Thread.sleep(1500);
+                                                        } catch (InterruptedException e) {
+                                                            e.printStackTrace();
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
-                                        if (number == 2) {
-                                            temp = new KHTaiCho("KH1", "Không có tên", false, null, 0);
-                                            Function.clearScreen();
-                                            temp.xuatThongTin();
+                                            if (number == 2) {
+                                                temp = new KHTaiCho("KH1", "Không có tên", false, null, 0);
+                                                Function.clearScreen();
+                                                temp.xuatThongTin();
 
-                                            while (true) {
-                                                System.out.print("\tNhập số lượng khách: ");
-                                                str = sc.nextLine();
-
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                ((KHTaiCho) temp).setNumberOfCustomer(Integer.parseInt(str));
-                                                break;
-                                            }
-
-                                            boolean isDone = qlBan.printEmptyTable();
-                                            Ban tmp = null;
-                                            if (isDone) {
                                                 while (true) {
-                                                    System.out.print("\tNhập ID bàn bạn muốn chọn: ");
+                                                    System.out.print("\tNhập số lượng khách: ");
                                                     str = sc.nextLine();
 
                                                     if (Function.isEmpty(str)) {
@@ -390,72 +372,72 @@ public class NguoiDung {
                                                         continue;
                                                     }
 
-                                                    tmp = qlBan.getTableByID(str);
-                                                    for (Ban ban : qlBan.tableList) {
-                                                        if (ban.getTableID().equals(tmp.getTableID())) {
-                                                            ban.changeTableStatus();
-                                                            qlBan.writeAll();
-                                                            break;
-                                                        }
-                                                    }
-                                                    if (tmp == null) {
-                                                        System.out.println("\tID không đúng, vui lòng nhập lại!");
+                                                    if (!Function.isTrueNumber(str)) {
+                                                        System.out.println("\tVui lòng nhập số !");
                                                         continue;
                                                     }
+
+                                                    ((KHTaiCho) temp).setNumberOfCustomer(Integer.parseInt(str));
                                                     break;
                                                 }
 
-                                                order(temp);
-                                            } else {
-                                                System.out.println("\tKhông còn bàn trống!");
-                                                try {
-                                                    Thread.sleep(1500);
-                                                } catch (InterruptedException e) {
-                                                    e.printStackTrace();
+                                                boolean isDone = qlBan.printEmptyTable();
+                                                Ban tmp = null;
+                                                if (isDone) {
+                                                    while (true) {
+                                                        System.out.print("\tNhập ID bàn bạn muốn chọn: ");
+                                                        str = sc.nextLine();
+
+                                                        if (Function.isEmpty(str)) {
+                                                            System.out.println("\tVui lòng không để trống !");
+                                                            continue;
+                                                        }
+
+                                                        tmp = qlBan.getTableByID(str);
+                                                        for (Ban ban : qlBan.tableList) {
+                                                            if (ban.getTableID().equals(tmp.getTableID())) {
+                                                                ban.changeTableStatus();
+                                                                qlBan.writeAll();
+                                                                break;
+                                                            }
+                                                        }
+                                                        if (tmp == null) {
+                                                            System.out.println("\tID không đúng, vui lòng nhập lại!");
+                                                            continue;
+                                                        }
+                                                        break;
+                                                    }
+
+                                                    order(temp);
+                                                } else {
+                                                    System.out.println("\tKhông còn bàn trống!");
+                                                    try {
+                                                        Thread.sleep(1500);
+                                                    } catch (InterruptedException e) {
+                                                        e.printStackTrace();
+                                                    }
                                                 }
                                             }
-                                        }
-                                        if (number == 3) {
-                                            return;
-                                        }
-                                        break;
-                                    } else {
-                                        System.out.println("\tVui lòng chọn từ 1 đến 3 !");
-                                        try {
-                                            Thread.sleep(1500);
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
+                                            if (number == 3) {
+                                                return;
+                                            }
+                                            break;
+                                        } else {
+                                            System.out.println("\tVui lòng chọn từ 1 đến 3 !");
+                                            try {
+                                                Thread.sleep(1500);
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            KhachHang temp = new KHTaiCho("KH1", "Không có tên", false, null, 0);
-                            Function.clearScreen();
-                            temp.xuatThongTin();
+                                KhachHang temp = new KHTaiCho("KH1", "Không có tên", false, null, 0);
+                                Function.clearScreen();
+                                temp.xuatThongTin();
 
-                            while (true) {
-                                System.out.print("\tNhập số lượng khách: ");
-                                str = sc.nextLine();
-
-                                if (Function.isEmpty(str)) {
-                                    System.out.println("\tVui lòng không để trống !");
-                                    continue;
-                                }
-
-                                if (!Function.isTrueNumber(str)) {
-                                    System.out.println("\tVui lòng nhập số !");
-                                    continue;
-                                }
-
-                                ((KHTaiCho) temp).setNumberOfCustomer(Integer.parseInt(str));
-                                break;
-                            }
-
-                            boolean isDone = qlBan.printEmptyTable();
-                            Ban tmp = null;
-                            if (isDone) {
                                 while (true) {
-                                    System.out.print("\tNhập ID bàn bạn muốn chọn: ");
+                                    System.out.print("\tNhập số lượng khách: ");
                                     str = sc.nextLine();
 
                                     if (Function.isEmpty(str)) {
@@ -463,31 +445,52 @@ public class NguoiDung {
                                         continue;
                                     }
 
-                                    tmp = qlBan.getTableByID(str);
-                                    for (Ban ban : qlBan.tableList) {
-                                        if (ban.getTableID().equals(tmp.getTableID())) {
-                                            ban.changeTableStatus();
-                                            qlBan.writeAll();
-                                            break;
-                                        }
-                                    }
-
-                                    if (tmp == null) {
-                                        System.out.println("\tID không đúng, vui lòng nhập lại!");
+                                    if (!Function.isTrueNumber(str)) {
+                                        System.out.println("\tVui lòng nhập số !");
                                         continue;
                                     }
+
+                                    ((KHTaiCho)temp).setNumberOfCustomer(Integer.parseInt(str));
                                     break;
                                 }
 
-                                order(temp);
-                            } else {
-                                System.out.println("\tKhông còn bàn trống!");
-                                try {
-                                    Thread.sleep(1500);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
+                                boolean isDone = qlBan.printEmptyTable();
+                                Ban tmp = null;
+                                if (isDone) {
+                                    while (true) {
+                                        System.out.print("\tNhập ID bàn bạn muốn chọn: ");
+                                        str = sc.nextLine();
+
+                                        if (Function.isEmpty(str)) {
+                                            System.out.println("\tVui lòng không để trống !");
+                                            continue;
+                                        }
+
+                                        tmp = qlBan.getTableByID(str);
+                                        for (Ban ban : qlBan.tableList) {
+                                            if (ban.getTableID().equals(tmp.getTableID())) {
+                                                ban.changeTableStatus();
+                                                qlBan.writeAll();
+                                                break;
+                                            }
+                                        }
+
+                                        if (tmp == null) {
+                                            System.out.println("\tID không đúng, vui lòng nhập lại!");
+                                            continue;
+                                        }
+                                        break;
+                                    }
+
+                                    order(temp);
+                                } else {
+                                    System.out.println("\tKhông còn bàn trống!");
+                                    try {
+                                        Thread.sleep(1500);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
                         }
                         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
                         else if (number == 4) {
@@ -729,6 +732,7 @@ public class NguoiDung {
                                                 acc.nhapThongTin();
                                                 temp = acc.getCustomer();
 
+
                                                 Function.clearScreen();
                                                 temp.xuatThongTin();
 
@@ -926,7 +930,7 @@ public class NguoiDung {
 
                 // yêu cầu nóng, đá, sữa, đường
                 ArrayList<String> trangThai = new ArrayList<>(); // mảng lưu trạng thái của
-                                                                 // món nước hiện tại
+                                                                  // món nước hiện tại
                 trangThai.add("Không"); // đá
                 trangThai.add("Không"); // nóng
                 trangThai.add("Không"); // đường
@@ -982,7 +986,7 @@ public class NguoiDung {
                                 // System.out.printf("\t| %-5s %-81s |%n", "3.", "Đường");
                                 // System.out.printf("\t| %-5s %-81s |%n", "4.", "Sữa");
                                 // System.out.printf("\t| %-5s %-81s |%n", "5.",
-                                // "Quay về trang trước");
+                                //         "Quay về trang trước");
                                 if (nuocuong.isCold()) {
                                     System.out.printf("\t| %-5s %-81s |%n", countChangeOption + ".", "Đá");
                                     optionList.set(countChangeOption, "Đá");
@@ -1023,794 +1027,794 @@ public class NguoiDung {
 
                                 switch (str) {
                                     case "1":
-                                        if (optionList.get(1).equals("Đá")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức đá nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Đá bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Đá nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
+                                    if (optionList.get(1).equals("Đá")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức đá nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Đá bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Đá nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(0, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(0, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(0, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
-                                                break;
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
                                             }
-                                        } else if (optionList.get(1).equals("Nóng")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức nóng nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Nóng ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Nóng nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(1, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(1, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(1, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
-                                                break;
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
                                             }
-                                        } else if (optionList.get(1).equals("Đường")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức đường nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Đường ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Đường bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Đường nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(2, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(2, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(2, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(0, "Ít");
                                                 break;
-                                            }
-                                        } else if (optionList.get(1).equals("Sữa")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức sữa nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Sữa ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Sữa bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Sữa nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(3, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(3, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(3, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
+                                                case "2":
+                                                trangThai.set(0, "Bình thường");
                                                 break;
+
+                                                case "3":
+                                                trangThai.set(0, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
                                             }
+                                            break;
                                         }
-                                        break;
+                                    } else if (optionList.get(1).equals("Nóng")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức nóng nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Nóng ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Nóng nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(1, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(1, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(1, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(1).equals("Đường")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức đường nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Đường ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Đường bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Đường nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(2, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(2, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(2, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(1).equals("Sữa")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức sữa nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Sữa ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Sữa bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Sữa nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(3, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(3, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(3, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    break;
 
                                     case "2":
-                                        if (optionList.get(2).equals("Đá")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức đá nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Đá bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Đá nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
+                                    if (optionList.get(2).equals("Đá")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức đá nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Đá bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Đá nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(0, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(0, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(0, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
-                                                break;
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
                                             }
-                                        } else if (optionList.get(2).equals("Nóng")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức nóng nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Nóng ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Nóng nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(1, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(1, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(1, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
-                                                break;
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
                                             }
-                                        } else if (optionList.get(2).equals("Đường")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức đường nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Đường ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Đường bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Đường nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(2, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(2, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(2, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(0, "Ít");
                                                 break;
-                                            }
-                                        } else if (optionList.get(2).equals("Sữa")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức sữa nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Sữa ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Sữa bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Sữa nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(3, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(3, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(3, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
+                                                case "2":
+                                                trangThai.set(0, "Bình thường");
                                                 break;
+
+                                                case "3":
+                                                trangThai.set(0, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
                                             }
-                                        } else if (optionList.get(2).equals("Q")) {
                                             break;
                                         }
+                                    } else if (optionList.get(2).equals("Nóng")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức nóng nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Nóng ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Nóng nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(1, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(1, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(1, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(2).equals("Đường")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức đường nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Đường ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Đường bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Đường nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(2, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(2, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(2, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(2).equals("Sữa")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức sữa nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Sữa ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Sữa bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Sữa nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(3, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(3, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(3, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(2).equals("Q")) {
                                         break;
+                                    }
+                                    break;
 
                                     case "3":
-                                        if (optionList.get(3).equals("Đá")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức đá nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Đá bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Đá nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
+                                    if (optionList.get(3).equals("Đá")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức đá nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Đá bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Đá nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(0, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(0, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(0, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
-                                                break;
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
                                             }
-                                        } else if (optionList.get(3).equals("Nóng")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức nóng nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Nóng ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Nóng nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(1, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(1, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(1, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
-                                                break;
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
                                             }
-                                        } else if (optionList.get(3).equals("Đường")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức đường nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Đường ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Đường bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Đường nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(2, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(2, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(2, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(0, "Ít");
                                                 break;
-                                            }
-                                        } else if (optionList.get(3).equals("Sữa")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức sữa nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Sữa ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Sữa bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Sữa nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(3, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(3, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(3, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
+                                                case "2":
+                                                trangThai.set(0, "Bình thường");
                                                 break;
+
+                                                case "3":
+                                                trangThai.set(0, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
                                             }
-                                        } else if (optionList.get(3).equals("Q")) {
                                             break;
                                         }
+                                    } else if (optionList.get(3).equals("Nóng")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức nóng nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Nóng ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Nóng nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(1, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(1, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(1, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(3).equals("Đường")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức đường nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Đường ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Đường bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Đường nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(2, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(2, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(2, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(3).equals("Sữa")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức sữa nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Sữa ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Sữa bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Sữa nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(3, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(3, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(3, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(3).equals("Q")) {
                                         break;
+                                    }
+                                    break;
 
                                     case "4":
-                                        if (optionList.get(4).equals("Đá")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức đá nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Đá bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Đá nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
+                                    if (optionList.get(4).equals("Đá")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức đá nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Đá ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Đá bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Đá nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(0, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(0, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(0, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
-                                                break;
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
                                             }
-                                        } else if (optionList.get(4).equals("Nóng")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức nóng nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Nóng ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Nóng nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(1, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(1, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(1, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
-                                                break;
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
                                             }
-                                        } else if (optionList.get(4).equals("Đường")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức đường nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Đường ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Đường bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Đường nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(2, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(2, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(2, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(0, "Ít");
                                                 break;
-                                            }
-                                        } else if (optionList.get(4).equals("Sữa")) {
-                                            while (true) {
-                                                Function.clearScreen();
-                                                System.out.println(
-                                                        "\t=============================[Chức năng người Dùng tại chỗ]===============================");
-                                                System.out.printf("\t| %-87s |%n",
-                                                        "Bạn muốn chọn mức sữa nào cho món nước "
-                                                                + nuocuong.getId() + "?");
-                                                System.out.printf("\t| %-5s %-81s |%n", "1.", "Sữa ít");
-                                                System.out.printf("\t| %-5s %-81s |%n", "2.", "Sữa bình thường");
-                                                System.out.printf("\t| %-5s %-81s |%n", "3.", "Sữa nhiều");
-                                                System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
-                                                System.out.println(
-                                                        "\t==========================================================================================");
-                                                System.out.print("\tNhập lựa chọn của bạn: ");
-                                                str = sc.nextLine();
 
-                                                if (Function.isEmpty(str)) {
-                                                    System.out.println("\tVui lòng không để trống !");
-                                                    continue;
-                                                }
-
-                                                if (!Function.isTrueNumber(str)) {
-                                                    System.out.println("\tVui lòng nhập số !");
-                                                    continue;
-                                                }
-
-                                                switch (str) {
-                                                    case "1":
-                                                        trangThai.set(3, "Ít");
-                                                        break;
-
-                                                    case "2":
-                                                        trangThai.set(3, "Bình thường");
-                                                        break;
-
-                                                    case "3":
-                                                        trangThai.set(3, "Nhiều");
-                                                        break;
-
-                                                    case "4":
-                                                        continue loop1;
-
-                                                    default:
-                                                        continue;
-                                                }
+                                                case "2":
+                                                trangThai.set(0, "Bình thường");
                                                 break;
+
+                                                case "3":
+                                                trangThai.set(0, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
                                             }
-                                        } else if (optionList.get(4).equals("Q")) {
                                             break;
                                         }
+                                    } else if (optionList.get(4).equals("Nóng")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức nóng nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Nóng ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Nóng bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Nóng nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(1, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(1, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(1, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(4).equals("Đường")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức đường nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Đường ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Đường bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Đường nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(2, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(2, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(2, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(4).equals("Sữa")) {
+                                        while (true) {
+                                            Function.clearScreen();
+                                            System.out.println(
+                                                "\t=============================[Chức năng người Dùng tại chỗ]===============================");
+                                            System.out.printf("\t| %-87s |%n",
+                                                    "Bạn muốn chọn mức sữa nào cho món nước "
+                                                            + nuocuong.getId() + "?");
+                                            System.out.printf("\t| %-5s %-81s |%n", "1.", "Sữa ít");
+                                            System.out.printf("\t| %-5s %-81s |%n", "2.", "Sữa bình thường");
+                                            System.out.printf("\t| %-5s %-81s |%n", "3.", "Sữa nhiều");
+                                            System.out.printf("\t| %-5s %-81s |%n", "4.", "Quay về trang trước");
+                                            System.out.println(
+                                                    "\t==========================================================================================");
+                                            System.out.print("\tNhập lựa chọn của bạn: ");
+                                            str = sc.nextLine();
+
+                                            if (Function.isEmpty(str)) {
+                                                System.out.println("\tVui lòng không để trống !");
+                                                continue;
+                                            }
+
+                                            if (!Function.isTrueNumber(str)) {
+                                                System.out.println("\tVui lòng nhập số !");
+                                                continue;
+                                            }
+
+                                            switch (str) {
+                                                case "1":
+                                                trangThai.set(3, "Ít");
+                                                break;
+
+                                                case "2":
+                                                trangThai.set(3, "Bình thường");
+                                                break;
+
+                                                case "3":
+                                                trangThai.set(3, "Nhiều");
+                                                break;
+
+                                                case "4":
+                                                continue loop1;
+
+                                                default:
+                                                continue;
+                                            }
+                                            break;
+                                        }
+                                    } else if (optionList.get(4).equals("Q")) {
                                         break;
+                                    }
+                                    break;
 
                                     case "5":
                                         continue loop;
