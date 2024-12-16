@@ -51,7 +51,7 @@ public class CreateTXT {
             writer.write(String.format("\t| %-30s: %-40s |\n", "Tiền thối lại: ", Function.formatMoney(hoaDon.getTienThua() +"")));
 
             writer.write("\t+-----------------+--------------------------------------+-----------------+\n");
-            System.out.println("File hoá đơn đã được tạo: " + fileName);
+            System.out.println("\tFile hoá đơn đã được tạo: " + fileName);
         } catch (Exception e) {
             System.out.println("\tLỗi: " + e.getMessage());
         }

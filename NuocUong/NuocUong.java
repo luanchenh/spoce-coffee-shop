@@ -474,7 +474,7 @@ public abstract class NuocUong implements INhap, IXuat {
                 boolean idFound = false; // Biến kiểm tra nếu ID đã được tìm thấy
                 while (true) {
                     list.menuTable();
-                    System.out.println("\tNhập ID topping thứ " + (i + 1) + "(Nhập số): ");
+                    System.out.print("\tNhập ID topping thứ " + (i + 1) + "(Nhập số): ");
                     str = sc.nextLine();
                     if (Function.isEmpty(str)) {
                         System.out.println("\tVui lòng không để trống !");

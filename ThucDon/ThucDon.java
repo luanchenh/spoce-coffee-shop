@@ -88,7 +88,7 @@ public class ThucDon implements IXuat {
                     str.append(String.format("\t|   - %-68s |\n", this.danhSachTopping.get(i).get(j).getName()));
                 }
             } else {
-                str.append(String.format("\t| %-58s |\n", "Không có topping"));
+                str.append(String.format("\t| %-72s |\n", "Không có topping"));
             }
 
             // Kết thúc món uống

@@ -449,21 +449,24 @@ public class QLNuocUong {
                         }
                         // Tìm kiếm theo loại
                         if (number == 4) {
-                            while (true) { 
-                                                            // System.out.println("\tCác loại nước uống: ");
-                            // System.out.println("\t1. Coffee mã loại [CF]");
-                            // System.out.println("\t2. Trà sữa mã loại [TS]");
-                            // System.out.println("\t3. Sinh tố mã loại [ST]");
-                            // System.out.println("\t4. Nước trái cây mã loại [TC]");
+                            while (true) {
+                                // System.out.println("\tCác loại nước uống: ");
+                                // System.out.println("\t1. Coffee mã loại [CF]");
+                                // System.out.println("\t2. Trà sữa mã loại [TS]");
+                                // System.out.println("\t3. Sinh tố mã loại [ST]");
+                                // System.out.println("\t4. Nước trái cây mã loại [TC]");
                                 Function.clearScreen();
-                                System.out.println("\t===================================================================================");
+                                System.out.println(
+                                        "\t===================================================================================");
                                 System.out.printf("\t| %-60s %-18s |%n", "Các loại nước uống", "");
-                                System.out.println("\t===================================================================================");
+                                System.out.println(
+                                        "\t===================================================================================");
                                 System.out.printf("\t| %-10s %-68s |%n", "1.", "Coffee mã loại [CF]");
                                 System.out.printf("\t| %-10s %-68s |%n", "2.", "Trà sữa mã loại [TS]");
                                 System.out.printf("\t| %-10s %-68s |%n", "3.", "Sinh tố mã loại [ST]");
                                 System.out.printf("\t| %-10s %-68s |%n", "4.", "Nước trái cây mã loại [TC]");
-                                System.out.println("\t===================================================================================");
+                                System.out.println(
+                                        "\t===================================================================================");
                                 System.out.print("\t=> Nhập loại muốn tìm: ");
                                 str = sc.nextLine();
 
@@ -486,7 +489,7 @@ public class QLNuocUong {
                                     case "1":
                                         type = "CF";
                                         break;
-                                    
+
                                     case "2":
                                         type = "TS";
                                         break;
@@ -581,6 +584,7 @@ public class QLNuocUong {
             System.out.println("\t| 2. Trà sữa                                                                     |");
             System.out.println("\t| 3. Sinh tố                                                                     |");
             System.out.println("\t| 4. Nước trái cây                                                               |");
+            System.out.println("\t| 5. In tất cả                                                                   |");
             System.out.println("\t+--------------------------------------------------------------------------------+");
             System.out.print("\tChọn loại nước uống: ");
             str = sc.nextLine();
@@ -664,8 +668,23 @@ public class QLNuocUong {
                         System.out.println("\tKhông có sản phẩm nào !");
                     }
                     break;
+                case "5":
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    System.out.printf("\t| %-10s | %-30s | %-20s | %-20s | %-20s | %-20s |\n",
+                            "ID", "Tên", "Size S", "Size M", "Size L", "Size XL");
+                    System.out.println(
+                            "\t+------------+--------------------------------+----------------------+----------------------+----------------------+----------------------+");
+                    for (NuocUong nu : this.waterList) {
+                        nu.menuTable();
+                        count++;
+                    }
+                    if (count == 0) {
+                        System.out.println("\tKhông có sản phẩm nào !");
+                    }
+                    break;
                 default:
-                    System.out.println("\tVui lòng chọn trong khoảng 1 đến 4 !");
+                    System.out.println("\tVui lòng chọn trong khoảng 1 đến 5 !");
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -710,23 +729,23 @@ public class QLNuocUong {
 
             switch (str) {
                 case "1":
-                this.findWater();
-                break;
+                    this.findWater();
+                    break;
 
                 case "2":
-                this.listItem();
-                System.out.println("\tEnter để tiếp tục!");
-                str = sc.nextLine();
-                break;
+                    this.listItem();
+                    System.out.println("\tEnter để tiếp tục!");
+                    str = sc.nextLine();
+                    break;
 
                 case "3":
-                break;
+                    break;
 
                 default:
-                System.out.println("\tLựa chọn không hợp lệ!");
-                System.out.println("\tEnter để tiếp tục!");
-                str = sc.nextLine();
-                continue;
+                    System.out.println("\tLựa chọn không hợp lệ!");
+                    System.out.println("\tEnter để tiếp tục!");
+                    str = sc.nextLine();
+                    continue;
             }
 
             break;
@@ -816,22 +835,22 @@ public class QLNuocUong {
 
             switch (str) {
                 case "1":
-                this.writeFile();
-                break;
+                    this.writeFile();
+                    break;
 
                 case "2":
-                this.Init();
-                break;
+                    this.Init();
+                    break;
 
                 case "3":
-                this.clearList();
-                break;
+                    this.clearList();
+                    break;
 
                 case "4":
-                break;
+                    break;
 
                 default:
-                continue;
+                    continue;
             }
 
             break;
@@ -857,18 +876,24 @@ public class QLNuocUong {
 
             // In danh sách các lựa chọn
             // System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách nước uống");
-            // System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một sản phẩm nước uống (Tự động lưu vào File)");
-            // System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một sản phẩm nước uống (Tự động load vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "2", "Thêm một sản phẩm nước uống
+            // (Tự động lưu vào File)");
+            // System.out.printf("\t| %-4s | %-77s |%n", "3", "Xoá một sản phẩm nước uống
+            // (Tự động load vào File)");
             // System.out.printf("\t| %-4s | %-77s |%n", "4", "Sửa thông tin nước uống");
-            // System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại sản phẩm vào File từ danh sách");
-            // System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại sản phẩm vào danh sách từ File");
+            // System.out.printf("\t| %-4s | %-77s |%n", "5", "Cập nhật lại sản phẩm vào
+            // File từ danh sách");
+            // System.out.printf("\t| %-4s | %-77s |%n", "6", "Cập nhật lại sản phẩm vào
+            // danh sách từ File");
             // System.out.printf("\t| %-4s | %-77s |%n", "7",
-            //         "Làm mới danh sách nước uống (Reset dữ liệu nhưng không load vào File)");
+            // "Làm mới danh sách nước uống (Reset dữ liệu nhưng không load vào File)");
             // System.out.printf("\t| %-4s | %-77s |%n", "8",
-            //         "In ra số sản phẩm từng loại (Kiểm tra số loại sản phẩm có trong danh sách)");
+            // "In ra số sản phẩm từng loại (Kiểm tra số loại sản phẩm có trong danh
+            // sách)");
             // System.out.printf("\t| %-4s | %-77s |%n", "9", "Tìm kiếm sản phẩm");
             // System.out.printf("\t| %-4s | %-77s |%n", "10", "Làm mới màn hình");
-            // System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản lý");
+            // System.out.printf("\t| %-4s | %-77s |%n", "11", "Thoát chương trình quản
+            // lý");
 
             System.out.printf("\t| %-4s | %-77s |%n", "1", "In danh sách nước uống");
             System.out.printf("\t| %-4s | %-77s |%n", "2", "Chức năng về nước uống");
