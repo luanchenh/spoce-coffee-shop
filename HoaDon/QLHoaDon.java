@@ -376,7 +376,7 @@ public class QLHoaDon {
         ngay = today.getDayOfMonth();
         thang = today.getMonthValue();
         nam = today.getYear();
-
+        Function.clearScreen();
         System.out.println("\n\t=== Thống kê doanh thu trong một ngày ===");
 
         // Nhập ngày nếu muốn
@@ -476,6 +476,31 @@ public class QLHoaDon {
             System.out.printf("\t| %-30s %-67s |%n", "Thời gian thống kê:", ngay + "/" + thang + "/" + nam);
             System.out.printf("\t| %-30s %-67s |%n", "Tổng đơn hàng bán được:", tongHoaDon);
             System.out.printf("\t| %-30s %-67s |%n", "Tổng doanh thu:", Function.formatMoney((int) tongDoanhThu + ""));
+            System.out.println(
+                    "\t======================================================================================================");
+            QLNuocUong qlNuocUong = new QLNuocUong();
+            this.billList.clear();
+            this.Init();
+            qlNuocUong.Init();
+
+            System.out.println(
+                    "\t|                           Tổng số lượng nước đã bán ra theo mặt hàng                               |");
+            System.out.println(
+                    "\t======================================================================================================");
+            System.out.printf("\t| %-16s | %-56s | %-20s |%n", "Mã nước", "Tên nước", "Số lượng");
+            for (NuocUong nu : qlNuocUong.getWaterList()) {
+                int count = 0;
+                for (HoaDon hd : this.billList) {
+                    if (hd.checkDayAndMonthAndYear(ngay, thang, nam)) {
+                        for (NuocUong nuHoaDon : hd.getThucDon().getDanhSachNuocUong()) {
+                            if (nuHoaDon.getId().equals(nu.getId())) {
+                                count++;
+                            }
+                        }
+                    }
+                }
+                System.out.printf("\t| %-16s | %-56s | %-20s |%n", nu.getId(), nu.getName(), count);
+            }
             System.out.println(
                     "\t======================================================================================================");
         }
@@ -610,16 +635,61 @@ public class QLHoaDon {
     ///
     public void thongKeDoanhThuTheoThoiGian() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("\n\t=== Thống kê doanh thu theo thời gian ===");
-        System.out.println("\t1. Tính theo ngày");
-        System.out.println("\t2. Tính theo tháng");
-        System.out.print("\t=> Chọn kiểu thống kê: ");
-        String choice = sc.nextLine().trim();
-        if (choice.equals("1")) {
-            this.thongKeDoanhThuTrongMotNgay();
-        }
-        if (choice.equals("2")) {
-            this.thongKeDoanhThuTheoThang();
+        while (true) { 
+            // System.out.println("\n\t=== Thống kê doanh thu theo thời gian ===");
+            // System.out.println("\t1. Tính theo ngày");
+            // System.out.println("\t2. Tính theo tháng");
+            // System.out.print("\t=> Chọn kiểu thống kê: ");
+            Function.clearScreen();
+            System.out.println("\t==================================[ Menu Thống Kê ]=====================================");
+            System.out.printf("\t| %-4s | %-77s |%n", "STT", "Chức năng");
+            System.out.println(
+                    "\t|------|-------------------------------------------------------------------------------|");
+
+            System.out.printf("\t| %-4s | %-77s |%n", "1", "Thống kê theo ngày");
+            System.out.printf("\t| %-4s | %-77s |%n", "2", "Thống kê theo tháng");
+            System.out.printf("\t| %-4s | %-77s |%n", "3", "Quay lại menu chính");
+            System.out.println("\t========================================================================================");
+            System.out.print("\t=> Mời nhập lựa chọn: ");
+            String choice = sc.nextLine().trim();
+            // if (choice.equals("1")) {
+            //     this.thongKeDoanhThuTrongMotNgay();
+            // }
+            // if (choice.equals("2")) {
+            //     this.thongKeDoanhThuTheoThang();
+            // }
+            if (Function.isEmpty(choice)) {
+                System.out.println("\tLựa chọn không được rỗng!");
+                pause(sc);
+                continue;
+            }
+
+            if (!Function.isTrueNumber(choice)) {
+                System.out.println("\tLựa chọn phải là số!");
+                pause(sc);
+                continue;
+            }
+
+            switch (choice) {
+                case "1":
+                this.thongKeDoanhThuTrongMotNgay();
+                pause(sc);
+                break;
+
+                case "2":
+                this.thongKeDoanhThuTheoThang();
+                pause(sc);
+                break;
+
+                case "3":
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                pause(sc);
+                continue;
+            }
+            break;
         }
     }
     ///
@@ -889,12 +959,10 @@ public class QLHoaDon {
             switch (str) {
                 case "1":
                     this.thongKeDoanhThuAll();
-                    pause(sc);
                     break;
 
                 case "2":
                     this.thongKeDoanhThuTheoThoiGian();
-                    pause(sc);
                     break;
 
                 case "3":
