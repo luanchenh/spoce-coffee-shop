@@ -1,4 +1,4 @@
-B1|2|1|Ban công
+B1|2|0|Ban công
 B4|2|1|Thư viện
 B7|2|1|Ban công
 B13|2|1|Trong nhà

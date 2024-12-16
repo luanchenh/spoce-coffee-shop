@@ -78,7 +78,7 @@ public class Main {
                             break;
                         }
 
-                        File accountFile = new File("./File/accounts.txt");
+                        File accountFile = new File("../File/accounts.txt");
                         boolean isFound = false;
                         try (Scanner sf = new Scanner(accountFile)) {
                             while (sf.hasNextLine()) {
