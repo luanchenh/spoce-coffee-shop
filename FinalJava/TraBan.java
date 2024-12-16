@@ -30,7 +30,7 @@ public class TraBan {
 
         while (true) {
             System.out.println(
-                    "\t======================================[Trả Bàn]========================================");
+                    "\t======================================[Trả Bàn]============================================");
             System.out.printf("\t| %-87s |%n", "Bạn muốn chức năng gì gì ?");
             System.out.printf("\t| %-5s %-81s |%n", "1.", "Nhập mã bàn");
             System.out.printf("\t| %-5s %-81s |%n", "2.", "Quay về trang trước");
@@ -102,7 +102,7 @@ public class TraBan {
         while (true) {
             Function.clearScreen();
             System.out.println(
-                    "\t======================================[Trả món]========================================");
+                    "\t======================================[Trả món]============================================");
             System.out.printf("\t| %-87s |%n", "Bạn muốn chức năng gì gì ?");
             System.out.printf("\t| %-5s %-81s |%n", "1.", "Nhập mã hoá đơn");
             System.out.printf("\t| %-5s %-81s |%n", "2.", "Quay về trang trước");
