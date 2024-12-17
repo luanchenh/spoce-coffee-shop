@@ -129,7 +129,7 @@ public class Function {
         return Integer.parseInt(str);
     }
 
-    public boolean isTrueNumberPhone(String numberPhone) {
+    public static boolean isTrueNumberPhone(String numberPhone) {
         boolean result = false;
 
         // Kiểm tra số điện thoại chỉ chứa 10 chữ số

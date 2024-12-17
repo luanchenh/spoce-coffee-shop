@@ -852,26 +852,111 @@ public class QLHoaDon {
         HoaDon hoaDon = null;
 
         while (true) {
+            // Function.clearScreen();
+            // System.out.print("\t=> Mời bạn nhập ID hóa đơn muốn tìm: ");
             Function.clearScreen();
-            System.out.print("\t=> Mời bạn nhập ID hóa đơn muốn tìm: ");
+            System.out.println("\t+------------------------------+----------+------------------------------+");
+            System.out.println("\t|                               TÌM HOÁ ĐƠN                              |");
+            System.out.println("\t+------------------------------+----------+------------------------------+");
+            System.out.println("\t| 1. Tìm hóa đơn theo mã hóa đơn                                         |");
+            System.out.println("\t| 2. Tìm hóa đơn theo số điện thoại                                      |");
+            System.out.println("\t| 3. Quay lại                                                            |");
+            System.out.println("\t+------------------------------------------------------------------------+");
+            System.out.print("\t=> Mời bạn chọn: ");
             str = sc.nextLine();
 
             if (Function.isEmpty(str)) {
                 System.out.println("\tVui lòng không bỏ trống!");
+                pause(sc);
                 continue;
             }
 
-            for (HoaDon hd : this.billList) {
-                if (hd.getMaHoaDon().equals(str)) {
-                    hoaDon = hd;
-                }
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tLựa chọn phải là số!");
+                pause(sc);
+                continue;
             }
 
-            if (hoaDon == null) {
-                System.out.println("\tKhông tìm thấy hóa đơn có ID " + str);
-            } else {
-                hoaDon.xuatThongTin();
+            switch (str) {
+                case "1":
+                while (true) { 
+                    Function.clearScreen();
+                    System.out.print("\t=> Mời bạn nhập mã hóa đơn: ");
+                    str = sc.nextLine().trim();
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("\tVui lòng không bỏ trống!");
+                        pause(sc);
+                        continue;
+                    }
+
+                    for (HoaDon hd : this.billList) {
+                        if (hd.getMaHoaDon().equals(str)) {
+                            hoaDon = hd;
+                        }
+                    }
+
+                    if (hoaDon != null) {
+                        System.out.println("\tKhông tìm thấy hóa đơn có ID " + str);
+                    } else {
+                        hoaDon.xuatThongTin();
+                    }
+                    break;
+                }
+                break;
+
+                case "2":
+                while (true) { 
+                    Function.clearScreen();
+                    System.out.print("\t=> Mời bạn nhập số điện thoại: ");
+                    str = sc.nextLine().trim();
+
+                    if (Function.isEmpty(str)) {
+                        System.out.println("\tSố điện thoại không được bỏ trống!");
+                        pause(sc);
+                        continue;
+                    }
+
+                    if (!Function.isTrueNumberPhone(str)) {
+                        System.out.println("\tSố điện thoại không đúng định dạng!");
+                        pause(sc);
+                        continue;
+                    }
+
+                    for (HoaDon hd : this.billList) {
+                        if (hd.getKhachHang().IsMember() && hd.getKhachHang().getMemberCard().getNumberPhone().equals(str)) {
+                            hoaDon = hd;
+                            hd.xuatThongTin();
+                        }
+                    }
+
+                    if (hoaDon == null) {
+                        System.out.println("\tSố điện thoại này không có hóa đơn nào!");
+                    }
+                    break;
+                }
+                break;
+
+                case "3":
+                break;
+
+                default:
+                System.out.println("\tLựa chọn không hợp lệ!");
+                pause(sc);
+                continue;
             }
+
+            // for (HoaDon hd : this.billList) {
+            //     if (hd.getMaHoaDon().equals(str)) {
+            //         hoaDon = hd;
+            //     }
+            // }
+
+            // if (hoaDon == null) {
+            //     System.out.println("\tKhông tìm thấy hóa đơn có ID " + str);
+            // } else {
+            //     hoaDon.xuatThongTin();
+            // }
             break;
         }
     }

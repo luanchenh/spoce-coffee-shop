@@ -34,13 +34,13 @@ public class QLKhachHang implements IXuat {
                 MemberCard card = null;
                 boolean status = false;
                 if (parts[3].equals("1")) {
-                    Date ngayHetHanThe = new Date(parts[11], parts[12], parts[13]); // 12/13/2024
+                    Date ngayHetHanThe = new Date(parts[12], parts[13], parts[14]); // 12/13/2024
                     LocalDate localDate = LocalDate.now();
                     String currentDate = localDate.getDayOfMonth() + "/" + localDate.getMonthValue() + "/"
                             + localDate.getYear();
-                    card = new MemberCard(parts[4], new Date(parts[5], parts[6], parts[7]),
-                            new Date(parts[8], parts[9], parts[10]),
-                            new Date(parts[11], parts[12], parts[13]), Integer.parseInt(parts[14]));
+                    card = new MemberCard(parts[4], parts[5], new Date(parts[6], parts[7], parts[8]),
+                            new Date(parts[9], parts[10], parts[11]),
+                            new Date(parts[12], parts[13], parts[14]), Integer.parseInt(parts[15]));
 
                     if (ngayHetHanThe.toString().equals(currentDate)) {
                         card.setPoint(0);
@@ -88,7 +88,7 @@ public class QLKhachHang implements IXuat {
             System.out.printf("\t| %-5s %-81s |%n", "1.", "Khách hàng mang đi");
             System.out.printf("\t| %-5s %-81s |%n", "2.", "Khách hàng dùng tại chỗ");
             System.out.println(
-                    "\t==========================================================================================");
+                    "\t============================================================================================");
             System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 
@@ -142,7 +142,7 @@ public class QLKhachHang implements IXuat {
             System.out.printf("\t| %-5s %-81s |%n", "1.", "ID");
             System.out.printf("\t| %-5s %-81s |%n", "2.", "Tên khách hàng");
             System.out.println(
-                    "\t==========================================================================================");
+                    "\t============================================================================================");
             System.out.print("\t=> Nhập lựa chọn: ");
             str = sc.nextLine();
 

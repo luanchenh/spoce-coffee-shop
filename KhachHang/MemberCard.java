@@ -10,6 +10,7 @@ import java.util.Scanner;
 @SuppressWarnings("resource")
 public class MemberCard implements INhap, IXuat {
     private String cardID;
+    private String numberPhone;
     private Date birthday;
     private Date startDate;
     private Date endDate;
@@ -52,8 +53,22 @@ public class MemberCard implements INhap, IXuat {
         this.point = point;
     }
 
+    
+    public MemberCard(String cardID, String numberPhone, Date birthday, Date startDate, Date endDate, int point) {
+        this.cardID = cardID;
+        this.numberPhone = numberPhone;
+        this.birthday = birthday;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.point = point;
+    }
+
     public String getCardID() {
         return this.cardID;
+    }
+
+    public String getNumberPhone() {
+        return this.numberPhone;
     }
 
     public Date getBirthDay() {
@@ -70,6 +85,10 @@ public class MemberCard implements INhap, IXuat {
 
     public int getPoint() {
         return this.point;
+    }
+
+    public void setNumberPhone(String numberPhone) {
+        this.numberPhone = numberPhone;
     }
 
     public void setBirthDay(Date birthday) {
@@ -102,13 +121,13 @@ public class MemberCard implements INhap, IXuat {
         String str;
         System.out.println("\n\t[Notice] Thông tin thành viên");
 
-
-
         loop:
         while (true) {
+            Function.clearScreen();
             System.out.println("\tThông tin ngày sinh của khách hàng");
             loop1:
             while (true) {
+                Function.clearScreen();
                 System.out.print("\t=> Mời nhập ngày: ");
                 str = sc.nextLine();
 
@@ -128,7 +147,8 @@ public class MemberCard implements INhap, IXuat {
 
             loop1:
             while (true) {
-                System.out.print("\n\t=> Mời nhập tháng: ");
+                Function.clearScreen();
+                System.out.print("\t=> Mời nhập tháng: ");
                 str = sc.nextLine();
 
                 if (Function.isEmpty(str)) {
@@ -147,7 +167,8 @@ public class MemberCard implements INhap, IXuat {
 
             loop1:
             while (true) {
-                System.out.print("\n\t=> Mời nhập năm: ");
+                Function.clearScreen();
+                System.out.print("\t=> Mời nhập năm: ");
                 str = sc.nextLine();
 
                 if (Function.isEmpty(str)) {
@@ -172,6 +193,36 @@ public class MemberCard implements INhap, IXuat {
             }
         }
 
+        // nhập số điện thoại của khách hàng
+        while (true) {
+            Function.clearScreen();
+            System.out.print("\t=> Mời nhập số điện thoại của khách hàng: ");
+            str = sc.nextLine().trim();
+            if (Function.isEmpty(str)) {
+                System.out.println("\tSố điện thoại không được rỗng!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            if (!Function.isTrueNumber(str)) {
+                System.out.println("\tSố điện thoại phải là số!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            if (!Function.isTrueNumberPhone(str)) {
+                System.out.println("\tSố điện thoại không đúng định dạng!");
+                System.out.println("\tEnter để tiếp tục!");
+                str = sc.nextLine();
+                continue;
+            }
+
+            this.numberPhone = str;
+            break;
+        }
+
         this.point = 0; // Khởi tạo điểm tích luỹ bằng 0
     }
 
@@ -188,6 +239,7 @@ public class MemberCard implements INhap, IXuat {
         // System.out.println("Điểm tích lũy: " + this.point);
         // System.out.println("Thời hạn đổi điểm: " + this.startDate.toString() + " - " + this.endDate.toString());
         System.out.printf("\t| %-23s %-93s |%n", "Mã thành viên:", this.cardID);
+        System.out.printf("\t| %-23s %-93s |%n", "Số điện thoại:", this.numberPhone);
         System.out.printf("\t| %-23s %-93s |%n", "Ngày sinh:", this.birthday.toString());
         System.out.printf("\t| %-23s %-93s |%n", "Điểm tích lũy:", this.point);
         System.out.printf("\t| %-23s %-93s |%n", "Thời hạn đổi điểm:", this.startDate.toString() + " - " + this.endDate.toString());
@@ -195,7 +247,7 @@ public class MemberCard implements INhap, IXuat {
 
     // Phương thức tạo chuỗi để ghi vào file
     public String makeString() {
-        return this.cardID + "|" + this.birthday.getDay() + "|" + this.birthday.getMonth() + "|" + this.birthday.getYear() + "|" + this.startDate.getDay() + "|" + this.startDate.getMonth() + "|" + this.startDate.getYear() + "|" + this.endDate.getDay() + "|" + this.endDate.getMonth() + "|" + this.endDate.getYear() + "|" + this.point;
+        return this.cardID + "|" + this.numberPhone + "|" + this.birthday.getDay() + "|" + this.birthday.getMonth() + "|" + this.birthday.getYear() + "|" + this.startDate.getDay() + "|" + this.startDate.getMonth() + "|" + this.startDate.getYear() + "|" + this.endDate.getDay() + "|" + this.endDate.getMonth() + "|" + this.endDate.getYear() + "|" + this.point;
     }
 
     public static String makeMemberID() {
