@@ -7,7 +7,7 @@ B17|2|1|Ban công
 B5|4|1|Trong nhà
 B6|4|1|Trong nhà
 B8|4|1|Ban công
-B9|4|0|Thư viện
+B9|4|1|Thư viện
 B11|4|0|Thư viện
 B16|4|0|Thư viện
 B2|8|0|Thư viện

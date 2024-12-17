@@ -1924,8 +1924,12 @@ public class NguoiDung {
                 }
                 order.getTrangThaiNuocUong().add(trangThai);
 
-                boolean isWantTopping;
-                while (true) {
+                boolean isWantTopping = false;
+                boolean askTopping = true;
+                if (nuocuong.getTopping().size() == 0) {
+                    askTopping = false;
+                }
+                while (true && askTopping) {
                     Function.clearScreen();
                     System.out.println(
                             "\t=============================[Chức năng người Dùng tại chỗ]===============================");

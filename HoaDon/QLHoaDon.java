@@ -635,7 +635,7 @@ public class QLHoaDon {
     ///
     public void thongKeDoanhThuTheoThoiGian() {
         Scanner sc = new Scanner(System.in);
-        while (true) { 
+        while (true) {
             // System.out.println("\n\t=== Thống kê doanh thu theo thời gian ===");
             // System.out.println("\t1. Tính theo ngày");
             // System.out.println("\t2. Tính theo tháng");
@@ -852,8 +852,6 @@ public class QLHoaDon {
         HoaDon hoaDon = null;
 
         while (true) {
-            // Function.clearScreen();
-            // System.out.print("\t=> Mời bạn nhập ID hóa đơn muốn tìm: ");
             Function.clearScreen();
             System.out.println("\t+------------------------------+----------+------------------------------+");
             System.out.println("\t|                               TÌM HOÁ ĐƠN                              |");
@@ -879,7 +877,7 @@ public class QLHoaDon {
 
             switch (str) {
                 case "1":
-                while (true) { 
+                while (true) {
                     Function.clearScreen();
                     System.out.print("\t=> Mời bạn nhập mã hóa đơn: ");
                     str = sc.nextLine().trim();
@@ -897,16 +895,16 @@ public class QLHoaDon {
                     }
 
                     if (hoaDon != null) {
-                        System.out.println("\tKhông tìm thấy hóa đơn có ID " + str);
-                    } else {
                         hoaDon.xuatThongTin();
+                    } else {
+                        System.out.println("\tKhông tìm thấy hóa đơn có ID " + str);
                     }
                     break;
                 }
                 break;
 
                 case "2":
-                while (true) { 
+                while (true) {
                     Function.clearScreen();
                     System.out.print("\t=> Mời bạn nhập số điện thoại: ");
                     str = sc.nextLine().trim();
@@ -927,6 +925,7 @@ public class QLHoaDon {
                         if (hd.getKhachHang().IsMember() && hd.getKhachHang().getMemberCard().getNumberPhone().equals(str)) {
                             hoaDon = hd;
                             hd.xuatThongTin();
+                            System.out.println();
                         }
                     }
 

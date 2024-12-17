@@ -43,6 +43,7 @@ public class MemberCard implements INhap, IXuat {
         this.startDate = new Date();
         this.startDate.getLocalDate();
         this.endDate = new Date(this.startDate.getDay(), this.startDate.getMonth(), Integer.toString(Integer.parseInt(this.startDate.getYear()) + 1));
+        this.numberPhone = "";
     }
 
     public MemberCard(String cardID, Date birthday, Date startDate, Date endDate, int point) {
@@ -53,7 +54,7 @@ public class MemberCard implements INhap, IXuat {
         this.point = point;
     }
 
-    
+
     public MemberCard(String cardID, String numberPhone, Date birthday, Date startDate, Date endDate, int point) {
         this.cardID = cardID;
         this.numberPhone = numberPhone;
@@ -231,7 +232,6 @@ public class MemberCard implements INhap, IXuat {
         int points = money / 1000;
         this.point += points;
     }
-
     @Override
     public void xuatThongTin() {
         // System.out.println("Mã thành viên: " + this.cardID);

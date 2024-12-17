@@ -200,6 +200,12 @@ public class HoaDon implements IXuat {
         System.out.printf("\t| %-18s : %-37s |%n", "Ngày tạo hóa đơn", this.ngayTaoHoaDon);
         System.out.printf("\t| %-18s : %-37s |%n", "Trạng thái hóa đơn", this.trangThaiHoaDon);
         System.out.printf("\t| %-18s : %-37s |%n", "Tên khách hàng", this.khachHang.getCustomerName());
+        if (this.khachHang.IsMember()) {
+            System.out.printf("\t| %-18s : %-37s |%n", "Số điện thoại", this.khachHang.getMemberCard().getNumberPhone());
+        }
+        else {
+            System.out.printf("\t| %-18s : %-37s |%n", "Số điện thoại", "Không có");
+        }
         System.out.println("\t+------------------------------------------------------------+");
         System.out.println("\t|                     CHI TIẾT THỰC ĐƠN                      |");
         System.out.println("\t+------------------------------------------------------------+");
