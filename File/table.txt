@@ -14,4 +14,4 @@ B2|8|0|Thư viện
 B3|8|0|Ban công
 B10|8|0|Ban công
 B12|8|0|Thư viện
-B15|8|0|Thư viện
+B15|8|1|Thư viện

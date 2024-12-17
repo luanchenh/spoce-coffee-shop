@@ -549,7 +549,8 @@ public class Ban implements INhap, IXuat {
             System.out.println("\tĐã thay đổi từ 'Đang có người ngồi' thành 'Trống'");
         }
         else {
-            System.out.println("\tKhông thể thay đổi trạng thái bàn khi khách còn ngồi !");
+            this.status = true;
+            System.out.println("\tĐã thay đổi từ 'Trống' thành 'Đang có người ngồi'");
         }
     }
 }

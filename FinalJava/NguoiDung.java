@@ -23,6 +23,8 @@ import Utils.Function;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -96,7 +98,7 @@ public class NguoiDung {
         int soluongkhach = 0;
         String valString;
 
-        while (true) {
+        loppMain:while (true) {
             Function.clearScreen();
             System.out.println(
                     "\t=============================[Chức năng người Dùng tại chỗ]===============================");
@@ -136,8 +138,6 @@ public class NguoiDung {
                                 Function.clearScreen();
 
                                 temp.xuatThongTin();
-                                System.out.print("\tEnter để tiếp tục!");
-                                str = sc.nextLine();
 
                                 while (true) {
                                     System.out.print("\tNhập số lượng khách: ");
@@ -186,6 +186,7 @@ public class NguoiDung {
                                     }
 
                                     order(temp);
+                                    continue loppMain;
                                 } else {
                                     System.out.println("\tKhông còn bàn trống!");
                                     try {
@@ -193,6 +194,7 @@ public class NguoiDung {
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
+                                    continue loppMain;
                                 }
                             } else {
                                 System.out.println("\tĐăng nhập thất bại, đăng nhập lại ! !");
@@ -201,6 +203,7 @@ public class NguoiDung {
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
+                                continue loppMain;
                             }
                         }
                         // ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -250,6 +253,7 @@ public class NguoiDung {
                                 }
 
                                 order(temp);
+                                continue loppMain;
                             } else {
                                 System.out.println("\tKhông còn bàn trống!");
                                 try {
@@ -257,6 +261,7 @@ public class NguoiDung {
                                 } catch (InterruptedException e) {
                                     e.printStackTrace();
                                 }
+                                continue loppMain;
                             }
                         }
                         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -319,8 +324,24 @@ public class NguoiDung {
                                                 else {
                                                     Function.clearScreen();
                                                     temp.xuatThongTin();
-                                                    System.out.print("\tEnter để tiếp tục!");
-                                                    str = sc.nextLine();
+
+                                                    while (true) {
+                                                        System.out.print("\tNhập số lượng khách: ");
+                                                        str = sc.nextLine();
+
+                                                        if (Function.isEmpty(str)) {
+                                                            System.out.println("\tVui lòng không để trống !");
+                                                            continue;
+                                                        }
+
+                                                        if (!Function.isTrueNumber(str)) {
+                                                            System.out.println("\tVui lòng nhập số !");
+                                                            continue;
+                                                        }
+
+                                                        ((KHTaiCho) temp).setNumberOfCustomer(Integer.parseInt(str));
+                                                        break;
+                                                    }
                                                     boolean isDone = qlBan.printEmptyTable();
                                                     Ban tmp = null;
                                                     if (isDone) {
@@ -349,6 +370,7 @@ public class NguoiDung {
                                                         }
 
                                                         order(temp);
+                                                        continue loppMain;
                                                     } else {
                                                         System.out.println("\tKhông còn bàn trống!");
                                                         try {
@@ -356,6 +378,7 @@ public class NguoiDung {
                                                         } catch (InterruptedException e) {
                                                             e.printStackTrace();
                                                         }
+                                                        continue loppMain;
                                                     }
                                                 }
                                             }
@@ -410,6 +433,7 @@ public class NguoiDung {
                                                     }
 
                                                     order(temp);
+                                                    continue loppMain;
                                                 } else {
                                                     System.out.println("\tKhông còn bàn trống!");
                                                     try {
@@ -417,6 +441,7 @@ public class NguoiDung {
                                                     } catch (InterruptedException e) {
                                                         e.printStackTrace();
                                                     }
+                                                    continue loppMain;
                                                 }
                                             }
                                             if (number == 3) {
@@ -484,6 +509,7 @@ public class NguoiDung {
                                     }
 
                                     order(temp);
+                                    continue loppMain;
                                 } else {
                                     System.out.println("\tKhông còn bàn trống!");
                                     try {
@@ -491,6 +517,7 @@ public class NguoiDung {
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }
+                                    continue loppMain;
                                 }
                         }
                         // ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -867,9 +894,15 @@ public class NguoiDung {
                             "\t=============================[Chức năng người Dùng tại chỗ]===============================");
                     System.out.printf("\t| %-87s |%n",
                             "Mời bạn chọn size cho món nước " + nuocuong.getId());
+                    // ArrayList<String> sizeList = new ArrayList<>(nuocuong.getSizePrice().keySet());
+                    // Collections.sort(sizeList);
+                    // for (String key : sizeList) {
+                    //     System.out.printf("\t| %-5s %-81s |%n", countOption++ + ".", key);
+                    // }
                     for (String key : nuocuong.getSizePrice().keySet()) {
                         System.out.printf("\t| %-5s %-81s |%n", countOption++ + ".", key);
                     }
+                    // System.out.printf("\t| ");
                     System.out.println(
                             "\t==========================================================================================");
                     System.out.print("\tNhập lựa chọn của bạn: ");
@@ -2107,7 +2140,9 @@ public class NguoiDung {
                                     switch (str) {
                                         case "1":
                                             tongTien -= tongTien * 0.1;
-                                            temp.getMemberCard().subPoint((int) (tongTien / 1000));
+                                            temp.getMemberCard().subPoint((int) (tongTien / 100));
+                                            System.out.println(
+                                                    "\tĐã giảm 10% tổng hóa đơn !");
                                             break;
 
                                         case "2":
@@ -2177,8 +2212,9 @@ public class NguoiDung {
                         nvtmp.setTongTienDaXuLy(nvtmp.getTongTienDaXuLy() + tongTien);
                         nvpc.setSoDonDaPhaChe(nvpc.getSoDonDaPhaChe() + 1);
                         if (temp.IsMember()) {
-                            temp.getMemberCard().point((int) tongTien);
+                            temp.getMemberCard().point((int) tongTien / 1000);
                         }
+
                         break;
 
                     case "2":
