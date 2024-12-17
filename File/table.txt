@@ -1,11 +1,11 @@
-B1|2|0|Ban công
+B1|2|1|Ban công
 B4|2|1|Thư viện
-B7|2|1|Ban công
+B7|2|0|Ban công
 B13|2|1|Trong nhà
 B14|2|1|Trong nhà
 B17|2|1|Ban công
 B5|4|1|Trong nhà
-B6|4|0|Trong nhà
+B6|4|1|Trong nhà
 B8|4|0|Ban công
 B9|4|0|Thư viện
 B11|4|0|Thư viện
@@ -14,4 +14,7 @@ B2|8|0|Thư viện
 B3|8|0|Ban công
 B10|8|0|Ban công
 B12|8|0|Thư viện
-B15|8|1|Thư viện
+B15|8|0|Thư viện
+B26|10|0|Thư viện
+B27|10|0|Thư viện
+B28|12|0|Thư viện

@@ -16,6 +16,7 @@ public class Function {
         String value = number.trim();
         return value.matches("[0-9]+");
     }
+
     public static boolean isDoubleNumber(String number) {
         String value = number.trim();
         return value.matches("-?\\d+(\\.\\d+)?");
@@ -100,7 +101,7 @@ public class Function {
     }
 
     public static String formatMoney(String money) {
-        String value = (int)Double.parseDouble(money.trim()) + "";
+        String value = (int) Double.parseDouble(money.trim()) + "";
         String result = "";
         int count = 0;
         for (int i = value.length() - 1; i >= 0; i--) {
@@ -127,4 +128,31 @@ public class Function {
         String str = customerID.substring(1);
         return Integer.parseInt(str);
     }
+
+    public boolean isTrueNumberPhone(String numberPhone) {
+        boolean result = false;
+
+        // Kiểm tra số điện thoại chỉ chứa 10 chữ số
+        String regex = "^[0-9]{10}$";
+        if (!numberPhone.matches(regex)) {
+            return false;
+        }
+
+        // Danh sách đầu số hợp lệ
+        String[] validPrefixes = {"032", "033", "034", "035", "036", "037", "038", "039", "096", "097", "098", "086",
+                                  "083", "084", "085", "081", "082", "088", "091", "094",
+                                  "070", "079", "077", "076", "078", "090", "093", "089",
+                                  "056", "058", "092"};
+
+        // Kiểm tra xem số điện thoại có bắt đầu bằng đầu số hợp lệ không
+        for (String prefix : validPrefixes) {
+            if (numberPhone.startsWith(prefix)) {
+                result = true;
+                break;
+            }
+        }
+
+        return result;
+    }
+
 }

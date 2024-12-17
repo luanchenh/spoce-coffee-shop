@@ -18,6 +18,7 @@ import NuocUong.QLNuocUong;
 import ThucDon.ThucDon;
 import Topping.QLTopping;
 import Topping.Topping;
+import Utils.CreateTXT;
 import Utils.Date;
 import Utils.Function;
 import java.io.File;
@@ -2236,6 +2237,16 @@ public class NguoiDung {
         }
         Function.clearScreen();
         hd.xuatThongTin();
+        System.out.print("\t Bạn muốn in hoá đơn không ?");
+        System.out.print("\t 1. Có");
+        System.out.print("\t 2. Không");
+        str = sc.nextLine();
+        if (str.equals("1")) {
+            CreateTXT.createTextFile(hd);
+        }
+        else if (str.equals("2")) {
+            System.out.println("\tCảm ơn bạn đã sử dụng dịch vụ của chúng tôi !");
+        }
         qlHoaDon.billList.add(hd);
         qlHoaDon.writeAll();
         qlNhanVien.writeFile();
